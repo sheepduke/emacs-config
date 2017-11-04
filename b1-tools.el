@@ -1,0 +1,132 @@
+;;; Package --- Summary
+;;;
+;;; Commentary:
+;;; This file contains small tools that makes Emacs smarter.
+;;;
+;;; Code:
+
+;; This is built-in in Emacs 24 or something.
+;; Used to automatically pair brackets.
+;; 
+(use-package electric
+  :config
+  (electric-pair-mode))
+
+;; Ebuild mode, for Gentoo users.
+;;
+(use-package ebuild-mode
+  :mode "\\.use\\'"
+  :mode "\\.mask\\'"
+  :mode "\\.unmask\\'")
+
+;; Make undo like a tree.
+;; 
+(use-package undo-tree
+  :init
+  ;; Show diffs when browsing through the undo tree
+  (setq undo-tree-visualizer-diff t)
+  ;; Don't show relative times in the undo tree visualizer
+  (setq undo-tree-visualizer-timestamps nil)
+  ;; Don't save history to a file
+  (setq undo-tree-auto-save-history nil)
+
+  :bind
+  ("C-/" . undo-tree-undo)
+  ("C-?" . undo-tree-redo)
+  ("C-x u" . undo-tree-visualize)
+
+  :config (global-undo-tree-mode))
+
+
+;; Replace the original doc-view for PDF files.
+;; 
+(use-package pdf-tools
+  :config (pdf-tools-install))
+
+
+;; Edit multiple places at the same time.
+;; 
+(use-package multiple-cursors
+  :bind
+  ("C-x r e" . mc/edit-lines))
+
+
+;; It's Magit! Git inside Emacs.
+;; 
+(use-package magit
+  :bind ("C-x v" . magit-status)
+  :config
+  (add-hook 'git-commit-mode-hook 'flyspell-mode))
+
+
+;; Jump to character from 2 leading chars.
+;; 
+(use-package avy
+  :bind
+  ("M-g M-a" . avy-goto-char-2))
+
+
+;; Automatically compile Emacs Lisp libraries
+;; 
+(use-package auto-compile
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
+
+
+;; Execute asynchronous commands.
+;; 
+(use-package async
+  :config
+  (dired-async-mode 1))
+
+
+;; Provides more features.
+;; 
+(use-package dired+
+  :config
+  ;; Show image thumb in tooltip.
+  (setq diredp-image-preview-in-tooltip 300)
+  ;; Just show me all the information.
+  (setq diredp-hide-details-initially-flag nil)
+  (setq diredp-hide-details-propagate-flag nil))
+
+
+;; Built-in input method.
+;; 
+(use-package pyim
+  :init
+  (require 'pyim)
+  
+  (defconst pyim-dict-dir
+	(concat *data-path* "pyim-dicts/"))
+
+  :config
+  (use-package pyim-basedict
+	:config
+	(pyim-basedict-enable))
+
+  ;; 设定默认输入法
+  (setq default-input-method "pyim")
+  ;; 使用小鹤双拼
+  (setq pyim-default-scheme 'xiaohe-shuangpin)
+  ;; 中文使用全角标点，英文使用半角标点。
+  (setq pyim-punctuation-translate-p '(auto yes no))
+
+  ;; 设定词库文件
+  (defun pyim-get-all-dicts ()
+	(mapcar (lambda (file)
+			  `(:file ,file))
+			(directory-files pyim-dict-dir t "\.pyim$")))
+  
+  (setq pyim-dicts (pyim-get-all-dicts))
+
+  (add-hook 'emacs-startup-hook 'pyim-restart-1)
+
+  :bind
+  ("C-`" . toggle-input-method)
+  ("C-c i a" . pyim-create-word-from-selection)
+  ("C-c i d" . pyim-delete-word))
+
+;;; b1-tools.el ends here
+
