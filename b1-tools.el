@@ -98,9 +98,6 @@
   :init
   (require 'pyim)
   
-  (defconst pyim-dict-dir
-	(concat *data-path* "pyim-dicts/"))
-
   :config
   (use-package pyim-basedict
 	:config
@@ -108,20 +105,14 @@
 
   ;; 设定默认输入法
   (setq default-input-method "pyim")
-  ;; 使用小鹤双拼
-  (setq pyim-default-scheme 'xiaohe-shuangpin)
+  ;; 使用五笔
+  (require 'pyim-wbdict)
+  (setq pyim-default-scheme 'wubi)
   ;; 中文使用全角标点，英文使用半角标点。
   (setq pyim-punctuation-translate-p '(auto yes no))
 
   ;; 设定词库文件
-  (defun pyim-get-all-dicts ()
-	(mapcar (lambda (file)
-			  `(:file ,file))
-			(directory-files pyim-dict-dir t "\.pyim$")))
-  
-  (setq pyim-dicts (pyim-get-all-dicts))
-
-  (add-hook 'emacs-startup-hook 'pyim-restart-1)
+  (pyim-wbdict-gbk-enable)
 
   :bind
   ("C-`" . toggle-input-method)
@@ -129,4 +120,3 @@
   ("C-c i d" . pyim-delete-word))
 
 ;;; b1-tools.el ends here
-
