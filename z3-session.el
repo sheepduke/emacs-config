@@ -1,7 +1,7 @@
 (use-package desktop
   :init
-  ;; Don't ask me!
-  (setq desktop-save t)
+  ;; No automatic save.
+  (setq desktop-save nil)
   ;; Don't ask me about PID etc.
   (setq desktop-load-locked-desktop t)
   ;; Set files.
@@ -11,8 +11,7 @@
   (setq desktop-files-not-to-save "")
   (setq desktop-restore-frames nil)
 
-  :config (desktop-save-mode)
-
+  :config
   ;; Save theme setting.
   (defun desktop-load-theme ()
   	(dolist (theme custom-enabled-themes)
