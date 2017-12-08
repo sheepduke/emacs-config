@@ -113,24 +113,21 @@
 ;;                             shell                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package esh-mode
-  :config
-  ;; List files after cd into a directory.
-  (setq eshell-list-files-after-cd t)
+(setq eshell-list-files-after-cd t)
 
-  (defun eshell-clear-buffer ()
-    "Clear the buffer and delete everything. Handy if you have too much
+(defun eshell-clear-buffer ()
+  "Clear the buffer and delete everything. Handy if you have too much
 output."
-    (interactive)
-    (let ((inhibit-read-only t))
-      (erase-buffer)
-      (eshell-send-input)))
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
 
-  (defun eshell-mode-setup ()
-    (setq pcomplete-cycle-completions nil)
-    (local-set-key (kbd "C-l") 'eshell-clear-buffer)
-    (setenv "PAGER" "/bin/cat"))
-  (add-hook 'eshell-mode-hook 'eshell-mode-setup))
+(defun eshell-mode-setup ()
+  (setq pcomplete-cycle-completions nil)
+  (local-set-key (kbd "C-l") 'eshell-clear-buffer)
+  (setenv "PAGER" "/bin/cat"))
+(add-hook 'eshell-mode-hook 'eshell-mode-setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                            Dired                                 ;;
