@@ -91,7 +91,8 @@
 ;; Automatically revert modified buffer
 (global-auto-revert-mode)
 ;; Save cursor place of file after exiting Emacs
-(save-place-mode 1)
+(when (fboundp 'save-place-mode)
+  (save-place-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                             Time                                 ;;
@@ -193,4 +194,4 @@ then change the permission back. This works like Vim 'w!'"
 ;; auto fill
 (global-set-key (kbd "M-q") 'fill-region)
 
-;;; b0-customize.el ends here
+;;; a2-customize.el ends here

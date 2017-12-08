@@ -39,4 +39,4 @@ Otherwise, call `comment-dwin'."
 	  (indent-new-comment-line)
 	(newline-and-indent)))
 
-;;; a1-function.el ends here
+;;; a1-functions.el ends here
