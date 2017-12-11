@@ -104,7 +104,7 @@ completion."
     (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)))
 
 
-(use-package company-quickhelp-mode
+(use-package company-quickhelp
   :init
   (setq company-quickhelp-delay 0)
 
@@ -177,7 +177,7 @@ completion."
 
 (use-package fill-column-indicator
   :config
-  (setq-default fill-column 80)
+  (setq-default fill-column 78)
   (add-hook 'prog-mode-hook 'fci-mode))
 
 ;;; d0-dev-common.el ends here
