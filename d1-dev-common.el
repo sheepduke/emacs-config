@@ -149,7 +149,7 @@ completion."
 
 (use-package flyspell
   :config
-  (add-hook 'prog-mode-hook 'flyspell-mode))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
