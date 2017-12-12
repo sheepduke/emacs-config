@@ -103,7 +103,7 @@
 
 (use-package rust-mode)
 
-(use-package cargo-mode
+(use-package cargo
   :init
   (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
@@ -320,3 +320,8 @@
 	;; Disable idle completion.
 	(set (make-local-variable 'company-idle-delay) nil))
   (add-hook 'LaTeX-mode-hook 'LaTeX-mode-setup-company))
+
+(use-package markdown-mode
+  :config
+  (add-hook 'markdown-mode-hook 'flyspell-mode)
+  (add-hook 'markdown-mode-hook 'toggle-word-wrap))
