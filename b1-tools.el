@@ -119,4 +119,9 @@
   ("C-c i a" . pyim-create-word-from-selection)
   ("C-c i d" . pyim-delete-word))
 
+(use-package nyan-mode
+  :config
+  (nyan-mode 1)
+  (setq nyan-bar-length 20))
+
 ;;; b1-tools.el ends here
