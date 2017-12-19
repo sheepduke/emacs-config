@@ -174,7 +174,10 @@
   ;; Set racket to be the only implementation.
   (setq geiser-active-implementations '(racket))
   ;; Don't record duplicated command in history.
-  (setq geiser-repl-history-no-dups-p t))
+  (setq geiser-repl-history-no-dups-p t)
+
+  :config
+  (add-hook 'geiser-mode-hook 'disable-company-quickhelp-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Web                                ;;

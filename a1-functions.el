@@ -32,6 +32,10 @@ Otherwise, call `comment-dwin'."
 	(comment-or-uncomment-region (line-beginning-position)
 								 (line-end-position))))
 
+(defun disable-company-quickhelp-mode ()
+  "Disable quickhelp-mode of company-mode."
+  (company-quickhelp-mode -1))
+
 (defun newline-smart-comment ()
   "Insert comment to next line if current line is commented."
   (interactive)
