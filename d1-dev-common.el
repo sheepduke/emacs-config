@@ -180,4 +180,19 @@ completion."
   (setq-default fill-column 78)
   (add-hook 'prog-mode-hook 'fci-mode))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                           HS Mode                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package hideshow
+  :config
+  (add-hook 'prog-mode-hook 'hs-minor-mode)
+  :bind
+  (:map hs-minor-mode-map
+        ("C-c i s" . hs-show-all)
+        ("C-c i h" . hs-hide-all)
+        ("C-c i i" . hs-toggle-hiding)))
+
+
 ;;; d0-dev-common.el ends here

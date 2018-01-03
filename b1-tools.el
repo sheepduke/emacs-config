@@ -115,9 +115,7 @@
   (pyim-wbdict-gbk-enable)
 
   :bind
-  ("C-`" . toggle-input-method)
-  ("C-c i a" . pyim-create-word-from-selection)
-  ("C-c i d" . pyim-delete-word))
+  ("C-`" . toggle-input-method))
 
 (use-package nyan-mode
   :config
