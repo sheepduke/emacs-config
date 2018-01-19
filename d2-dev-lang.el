@@ -177,7 +177,8 @@
   (setq geiser-repl-history-no-dups-p t)
 
   :config
-  (add-hook 'geiser-mode-hook 'disable-company-quickhelp-mode))
+  (add-hook 'geiser-mode-hook 'disable-company-quickhelp-mode)
+  (add-hook 'scheme-mode 'geiser-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Web                                ;;
