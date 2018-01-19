@@ -121,6 +121,9 @@
 ;;                              Export                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Enable Markdown export.
+(require 'ox-md)
+
 (defun org-inline-style-file (exporter)
   "Embed CSS file indicated by INLINE_STYLE into generated HTML file.
 EXPORTER is provided by Org Mode."
