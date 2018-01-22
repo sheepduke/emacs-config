@@ -34,7 +34,7 @@ Otherwise, call `comment-dwin'."
 
 (defun disable-company-quickhelp-mode ()
   "Disable quickhelp-mode of company-mode."
-  (company-quickhelp-mode -1))
+  (company-quickhelp-local-mode 0))
 
 (defun newline-smart-comment ()
   "Insert comment to next line if current line is commented."

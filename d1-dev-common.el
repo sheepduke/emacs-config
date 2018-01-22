@@ -185,6 +185,7 @@ completion."
 ;;                           HS Mode                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'hideshow)
 (use-package hideshow
   :config
   (add-hook 'prog-mode-hook 'hs-minor-mode)
