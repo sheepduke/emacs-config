@@ -126,7 +126,7 @@ output."
 
 (defun eshell-mode-setup ()
   (setq pcomplete-cycle-completions nil)
-  (local-set-key (kbd "C-l") 'eshell-clear-buffer)
+  (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
   (setenv "PAGER" "/bin/cat"))
 (add-hook 'eshell-mode-hook 'eshell-mode-setup)
 
