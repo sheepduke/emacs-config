@@ -64,26 +64,26 @@
 (when (executable-find "w3m")
   (use-package w3m
 	:init
-	(setq w3m-home-page "about://bookmark"
-		  ;; Images
-		  w3m-toggle-inline-images-permanently t
-		  w3m-default-display-inline-images t
-		  ;; Cookies
-		  w3m-use-cookies t
-		  w3m-cookie-accept-bad-cookies t
-		  ;; Sessions
-		  w3m-session-load-last-sessions t
-		  w3m-new-session-in-background nil
-		  w3m-session-time-format "%Y-%m-%d %A %H:%M"
-		  ;; Cache
-		  w3m-favicon-use-cache-file t
-		  w3m-keep-arrived-urls 5000
-		  w3m-keep-cache-size 1000
-		  ;; Don't ask me if I'm leaving secure page.
-		  w3m-confirm-leaving-secure-page nil
-		  ;; Storage
-		  w3m-default-save-directory (concat *data-path* "w3m/saved/")
-		  w3m-bookmark-file (concat *data-path* "w3m/bookmark.html"))
+	(setq w3m-home-page "about://bookmark/")
+    ;; Images
+    (setq w3m-toggle-inline-images-permanently t)
+    (setq w3m-default-display-inline-images t)
+    ;; Cookies
+    (setq w3m-use-cookies t)
+    (setq w3m-cookie-accept-bad-cookies t)
+    ;; Sessions
+    (setq w3m-session-load-last-sessions t)
+    (setq w3m-new-session-in-background nil)
+    (setq w3m-session-time-format "%Y-%m-%d %A %H:%M")
+    ;; Cache
+    (setq w3m-favicon-use-cache-file t)
+    (setq w3m-keep-arrived-urls 5000)
+    (setq w3m-keep-cache-size 1000)
+    ;; Don't ask me if I'm leaving secure page.
+    (setq w3m-confirm-leaving-secure-page nil)
+    ;; Storage
+    (setq w3m-default-save-directory (concat *data-path* "w3m/saved/"))
+    (setq w3m-bookmark-file (concat *data-path* "w3m/bookmark.html"))
 
 	:bind (("C-c 3" . w3m)
 		   :map w3m-mode-map

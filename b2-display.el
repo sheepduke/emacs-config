@@ -30,8 +30,10 @@
 (defconst font-english "DejaVu Sans Mono")
 ;; Chinese font
 (defconst font-chinese "文泉驿等宽微米黑")
-;; Set font.
-(set-font font-english font-chinese font-size-pair)
+
+;; Set font if X window is in use.
+(when window-system
+  (set-font font-english font-chinese font-size-pair))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Window                             ;;
