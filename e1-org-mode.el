@@ -23,17 +23,6 @@
 ;; default table size
 (setq org-table-default-size "2x2")
 
-;; Mobile Org
-(setq org-agenda-files '(*notes-path*))
-(setq org-directory *notes-path*)
-(setq org-mobile-directory (org-file-path "mobile"))
-(setq org-mobile-inbox-for-pull (org-file-path "mobile.org"))
-
-;; Automatically sync with mobile org.
-(use-package org-mobile
-  :config
-  (org-mobile-sync-mode 1))
-
 (defun org-mode-hook-function ()
   "Setup."
   (toggle-word-wrap 1)
