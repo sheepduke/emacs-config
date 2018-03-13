@@ -43,4 +43,12 @@ Otherwise, call `comment-dwin'."
 	  (indent-new-comment-line)
 	(newline-and-indent)))
 
+(defun get-available-font (font-list)
+  "Return the first font in the list that is available in the system.
+If no one was found, NIL is returned."
+  (catch 'found
+    (dolist (font font-list)
+      (when (font-exist-p font)
+        (throw 'found font)))))
+
 ;;; a1-functions.el ends here

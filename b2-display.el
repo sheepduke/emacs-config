@@ -15,25 +15,28 @@
       nil
     (if (not (x-list-fonts fontname)) nil t)))
 
-(defun set-font (english chinese size-pair)
-  "Setup Emacs ENGLISH and CHINESE font on x window system, with given SIZE-PAIR."
-  (if (font-exist-p english)
-      (set-frame-font (format "%s:pixelsize=%d" english (car size-pair)) t))
-  (if (font-exist-p chinese)
-      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-        (set-fontset-font (frame-parameter nil 'font) charset
-                          (font-spec :family chinese :size (cdr size-pair))))))
+(defun set-font (english-font-list chinese-font-list size-pair)
+  "Setup Emacs ENGLISH and CHINESE font on x window system, with given
+SIZE-PAIR."
+  (let ((english-font (get-available-font english-font-list))
+        (chinese-font (get-available-font chinese-font-list)))
+    (if english-font
+        (set-frame-font
+         (format "%s:pixelsize=%d" english-font (car size-pair)) t)
+      (warn "No available English font."))
 
-;; Fontset and Chinese support
-(defconst font-size-pair '(12 . 14))
-;; English font
-(defconst font-english "DejaVu Sans Mono")
-;; Chinese font
-(defconst font-chinese "文泉驿等宽微米黑")
+    (if chinese-font
+        (dolist (charset '(kana han symbol cjk-misc bopomofo))
+          (set-fontset-font (frame-parameter nil 'font) charset
+                            (font-spec :family chinese-font
+                                       :size (cdr size-pair))))
+      (warn "No available Chinese font."))))
 
 ;; Set font if X window is in use.
 (when window-system
-  (set-font font-english font-chinese font-size-pair))
+  (set-font '("DejaVu Sans Mono")
+            '("文泉驿等宽微米黑" "WenQuanYi Micro Hei")
+            '(12 . 14)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Window                             ;;

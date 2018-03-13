@@ -176,6 +176,8 @@
     (interactive)
     (cider-eval-region (point-min) (point-max)))
 
+  (add-hook 'clojure-mode-hook 'cider-mode)
+
   :bind
   (:map cider-mode-map
         ("C-c b" . cider-eval-buffer-content)))
@@ -357,3 +359,5 @@
   :config
   (add-hook 'markdown-mode-hook 'flyspell-mode)
   (add-hook 'markdown-mode-hook 'toggle-word-wrap))
+
+(provide 'd2-dev-lang) ;;; d2-dev-lang.el ends here
