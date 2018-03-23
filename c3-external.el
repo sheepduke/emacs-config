@@ -84,6 +84,8 @@
     ;; Storage
     (setq w3m-default-save-directory (concat *data-path* "w3m/saved/"))
     (setq w3m-bookmark-file (concat *data-path* "w3m/bookmark.html"))
+    ;; Set w3m as the default browser inside Emacs.
+    (setq browse-url-browser-function 'w3m-goto-url-new-session)
 
 	:bind (("C-c 3" . w3m)
 		   :map w3m-mode-map
