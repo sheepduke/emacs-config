@@ -139,6 +139,10 @@
   (setq inferior-lisp-program "ros run")
   (require 'slime-autoloads)
 
+  ;; Set the location of HyperSpec.
+  (setq common-lisp-hyperspec-root
+        (expand-file-name "~/documents/manuals/lisp/HyperSpec/"))
+
   :bind
   (:map slime-mode-map
 		("C-c b" . slime-eval-buffer)
