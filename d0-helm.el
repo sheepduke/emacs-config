@@ -11,18 +11,10 @@
 
 (use-package helm
   :init
-  ;; (add-hook 'after-init-hook #'helm-setup)
-  ;; Just use THIS window!
-  (setq helm-split-window-in-side-p t)
-  ;; Use follow mode from now!
-  (setq helm-follow-mode-persistent t)
-  ;; Load it.
-  (defun helm-setup ()
-    (require 'helm-config)
-	(message "Loading helm")
-    (helm-mode 1))
-  (add-hook 'after-init-hook #'helm-setup)
-  (add-hook 'after-load-theme-hook #'helm-setup)
+  (require 'helm-config)
+
+  (add-hook 'after-init-hook 'helm-mode)
+  (add-hook 'after-load-theme-hook 'helm-mode)
   
   :bind
   (("M-x" . helm-M-x)
@@ -43,7 +35,12 @@
   (defun helm-mode-setup-handlers ()
 	(add-to-list 'helm-completing-read-handlers-alist
 				 '(bbdb-create . nil)))
-  (add-hook 'helm-mode-hook 'helm-mode-setup-handlers))
+  (add-hook 'helm-mode-hook 'helm-mode-setup-handlers)
+
+  ;; Just use THIS window!
+  (setq helm-split-window-in-side-p t)
+  ;; Use follow mode from now!
+  (setq helm-follow-mode-persistent t))
 
 ;; Use helm to describe variables and functions.
 (use-package helm-descbinds
