@@ -31,6 +31,7 @@
    ("C-x b" . helm-mini)
    ("C-x r i" . helm-register)
    ("C-x c ," . helm-calcul-expression)
+   ("C-x c t" . helm-themes)
    ("M-i" . helm-show-kill-ring)
    
    :map helm-map

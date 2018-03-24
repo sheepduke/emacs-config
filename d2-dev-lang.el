@@ -216,7 +216,11 @@
 	(make-local-variable 'company-backends)
 	(setq company-backends
 		  '(company-web-html :with 'company-yasnippet)))
-  (add-hook 'web-mode-hook 'web-mode-setup-company))
+  (add-hook 'web-mode-hook 'web-mode-setup-company)
+
+  (use-package rainbow-mode
+    :init
+    (add-hook 'web-mode-hook 'rainbow-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -231,8 +235,7 @@
     :init
     (add-hook 'js2-mode-hook 'skewer-mode)
     (add-hook 'css-mode-hook 'skewer-css-mode)
-    (add-hook 'html-mode-hook 'skewer-css-mode)
-    (add-hook 'web-mode-hook 'skewer-html-mode)))
+    (add-hook 'html-mode-hook 'skewer-html-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
