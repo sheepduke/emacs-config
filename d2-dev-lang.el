@@ -225,15 +225,6 @@
 
 (use-package python)
 
-;; (use-package elpy
-;;   :init
-;;   (elpy-enable)
-;;   ;; Use jedi instead of rope.
-;;   (setq elpy-rpc-backend "jedi")
-
-;;   :config
-;;   (add-hook 'python-mode-hook 'elpy-mode))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Ruby                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -287,11 +278,6 @@
 
   :config
   (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode))
-
-;; (use-package robe
-;;   :config
-;;   (add-hook 'ruby-mode-hook 'robe-mode)
-;;   (add-to-list 'company-backends 'company-robe))
 
 (use-package company-inf-ruby
   :config
