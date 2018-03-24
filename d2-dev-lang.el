@@ -94,8 +94,8 @@
 
 (use-package company-erlang
   :init
-  (add-hook 'erlang-mode-hook #'company-mode)
-  (add-hook 'erlang-mode-hook #'company-erlang-init))
+  (add-hook 'erlang-mode-hook 'company-mode)
+  (add-hook 'erlang-mode-hook 'company-erlang-init))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Rust                                ;;
@@ -117,7 +117,7 @@
 
 (use-package flycheck-rust
   :init
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+  (add-hook 'flycheck-mode-hook 'flycheck-rust-setup))
 
 
 (use-package company-racer
@@ -145,9 +145,9 @@
 
   :bind
   (:map slime-mode-map
-		("C-c b" . slime-eval-buffer)
-		("C-c c" . slime-compile-file)
-		("C-c r" . slime-eval-region))
+        ("C-c b" . slime-eval-buffer)
+        ("C-c c" . slime-compile-file)
+        ("C-c r" . slime-eval-region))
 
   :config
   (slime-setup '(slime-fancy slime-company))
@@ -217,6 +217,22 @@
 	(setq company-backends
 		  '(company-web-html :with 'company-yasnippet)))
   (add-hook 'web-mode-hook 'web-mode-setup-company))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                          Javascript                              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+
+  :config
+  (use-package skewer-mode
+    :init
+    (add-hook 'js2-mode-hook 'skewer-mode)
+    (add-hook 'css-mode-hook 'skewer-css-mode)
+    (add-hook 'html-mode-hook 'skewer-css-mode)
+    (add-hook 'web-mode-hook 'skewer-html-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
