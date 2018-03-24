@@ -122,4 +122,8 @@
   (nyan-mode 1)
   (setq nyan-bar-length 20))
 
+(use-package zone
+  :config
+  (zone-when-idle 10))
+
 ;;; b1-tools.el ends here
