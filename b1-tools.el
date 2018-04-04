@@ -124,6 +124,6 @@
 
 (use-package zone
   :config
-  (zone-when-idle 10))
+  (zone-when-idle 120))
 
 ;;; b1-tools.el ends here
