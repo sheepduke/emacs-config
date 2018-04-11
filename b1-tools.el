@@ -110,6 +110,8 @@
   (setq pyim-default-scheme 'wubi)
   ;; 中文使用全角标点，英文使用半角标点。
   (setq pyim-punctuation-translate-p '(auto yes no))
+  ;; 作为五笔用户，我觉得自己完全不需要选词框
+  (setq pyim-page-tooltip 'minibuffer)
 
   ;; 设定词库文件
   (pyim-wbdict-gbk-enable)
