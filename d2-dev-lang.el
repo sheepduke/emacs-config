@@ -225,9 +225,9 @@
     (add-hook 'web-mode-hook 'rainbow-mode)))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                          Javascript                              ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package simple-httpd
+  :init
+  (setq httpd-port (+ 10000 (random 1000))))
 
 (use-package js2-mode
   :mode "\\.js\\'"
