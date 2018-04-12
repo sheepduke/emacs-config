@@ -210,13 +210,15 @@
 (use-package web-mode
   :mode "\\.html\\'"
   :mode "\\.css\\'"
+  :mode "\\.jsp\\'"
 
   :config
-  (defun web-mode-setup-company ()
+  (defun web-mode-setup ()
 	(make-local-variable 'company-backends)
 	(setq company-backends
-		  '(company-web-html :with 'company-yasnippet)))
-  (add-hook 'web-mode-hook 'web-mode-setup-company)
+		  '(company-web-html :with 'company-yasnippet))
+    (fci-mode 0))
+  (add-hook 'web-mode-hook 'web-mode-setup)
 
   (use-package rainbow-mode
     :init

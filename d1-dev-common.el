@@ -125,7 +125,7 @@ completion."
 
 (use-package yasnippet
   :init
-  (setq yas-snippet-dirs (concat *data-path* "yasnippets"))
+  (setq yas-snippet-dirs (list (concat *data-path* "yasnippets")))
 
   :bind
   (:map yas-keymap
