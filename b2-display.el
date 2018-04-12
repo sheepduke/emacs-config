@@ -88,7 +88,8 @@ A dedicated window can't be switched or modified by some commands."
 		  ("*Completions*" :select nil :inhibit-window-quit nil)
 		  ("*Calendar*" :select t :inhibit-window-quit nil :size 0.3 :align below)
 		  ("*Bookmark List*" :select t :inhibit-window-quit t :same t)
-		  ("*toc*" :select t :inhibit-window-quit t :same t :size 0.5)))
+		  ("*toc*" :select t :inhibit-window-quit t :same t :size 0.5)
+          ("*slime-description*" :select t :inhibit-window-quit t :same t)))
 
   :config (shackle-mode))
 
