@@ -51,11 +51,6 @@
   ("C-c e n" . emms-next)
   ("C-c e p" . emms-previous))
 
-(when (executable-find "mpv")
-  (use-package emms-player-mpv
-    :after emms
-    :config
-    (add-to-list 'emms-player-list 'emms-player-mpv)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               w3m                                ;;
