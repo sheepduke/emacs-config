@@ -107,7 +107,7 @@
 (setq org-startup-indented t)
 ;; Enable bold, italic etc inside Chinese context.
 (setf (nth 0 org-emphasis-regexp-components) " \t('\"{[:multibyte:]")
-(setf (nth 1 org-emphasis-regexp-components) " \t\r\n('\"{[:multibyte:],.")
+(setf (nth 1 org-emphasis-regexp-components) " \t\r\n('\"{[:multibyte:],.)")
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
