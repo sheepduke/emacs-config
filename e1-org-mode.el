@@ -32,8 +32,12 @@
   (setq company-backends '((company-dabbrev :with company-yasnippet)))
 
   (make-local-variable 'company-idle-delay)
-  (setq company-idle-delay 0.5))
+  (setq company-idle-delay 0.5)
+
+  (setq fill-column 80))
 (add-hook 'org-mode-hook 'org-mode-hook-function)
+(add-hook 'org-mode-hook 'auto-fill-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                         Localization                             ;;
