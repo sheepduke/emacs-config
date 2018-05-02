@@ -369,6 +369,15 @@
 (use-package markdown-mode
   :config
   (add-hook 'markdown-mode-hook 'flyspell-mode)
-  (add-hook 'markdown-mode-hook 'toggle-word-wrap))
+  (add-hook 'markdown-mode-hook 'auto-fill-mode))
+
+(use-package flymd
+  :after markdown-mode)
+
+(use-package markdown-toc
+  :after markdown-mode
+  :bind
+  (:map markdown-mode-map
+        ("C-c =" . markdown-toc-generate-or-refresh-toc)))
 
 (provide 'd2-dev-lang) ;;; d2-dev-lang.el ends here
