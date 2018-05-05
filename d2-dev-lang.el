@@ -150,7 +150,8 @@
         ("C-c r" . slime-eval-region))
 
   :config
-  (slime-setup '(slime-fancy slime-company))
+  (when (fboundp 'slime-setup)
+    (slime-setup '(slime-fancy slime-company)))
 
   (add-hook 'slime-repl-mode-hook 'company-mode))
 
@@ -280,7 +281,8 @@
 	  ;; If ruby buffer does not exist, just start a new one.
 	  (unless (and inf-ruby-buffer
 				   (buffer-name inf-ruby-buffer))
-		(inf-ruby)
+        (when (fboundp 'inf-ruby)
+          (inf-ruby))
 		(throw 'return nil))
 	  ;; If ruby buffer exists, kill current ruby process and
 	  ;; start a new one in same window position.
@@ -288,7 +290,8 @@
 		(kill-buffer inf-ruby-buffer)
 		(setq inf-ruby-buffer nil)
 		(let ((config (current-window-configuration)))
-		  (inf-ruby)
+          (when (fboundp 'inf-ruby)
+            (inf-ruby))
 		  (set-window-configuration config))
 		(switch-to-buffer inf-ruby-buffer)))
 	(message "inf-ruby process restarted. Happy hacking!"))
@@ -304,6 +307,34 @@
   :config
   (add-to-list 'company-backends 'company-inf-ruby)
   (add-hook 'inf-ruby-mode-hook 'company-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                Go                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package go-mode
+  :init
+  (defun optimize-and-save ()
+    (interactive)
+    (when (fboundp 'gofmt)
+      (gofmt))
+    (save-buffer-readonly)
+    (when (fboundp 'go-remove-unused-imports)
+      (go-remove-unused-imports nil))
+    (save-buffer-readonly))
+
+  :bind
+  (:map go-mode-map
+        ("C-x C-s" . optimize-and-save)))
+
+(use-package go-eldoc
+  :after go-mode
+  :config
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+(use-package company-go
+  :after go-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              LaTeX                               ;;
