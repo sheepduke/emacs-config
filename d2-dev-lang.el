@@ -240,6 +240,13 @@
     (add-hook 'css-mode-hook 'skewer-css-mode)
     (add-hook 'html-mode-hook 'skewer-html-mode)))
 
+(use-package vue-mode
+  :init
+  (defun setup-vue-mode ()
+    (setq tab-width 2))
+
+  :config
+  (add-hook 'vue-mode-hook 'setup-vue-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;
@@ -397,13 +404,21 @@
 	(set (make-local-variable 'company-idle-delay) nil))
   (add-hook 'LaTeX-mode-hook 'LaTeX-mode-setup-company))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                             Markdown                             ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package markdown-mode
   :config
   (add-hook 'markdown-mode-hook 'flyspell-mode)
-  (add-hook 'markdown-mode-hook 'auto-fill-mode))
+  (add-hook 'markdown-mode-hook 'toggle-word-wrap))
 
 (use-package flymd
-  :after markdown-mode)
+  :after markdown-mode
+
+  :config
+  (setq flymd-output-directory "/tmp/"))
 
 (use-package markdown-toc
   :after markdown-mode
