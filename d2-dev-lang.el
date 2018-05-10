@@ -234,11 +234,15 @@
   :mode "\\.js\\'"
 
   :config
-  (use-package skewer-mode
-    :init
-    (add-hook 'js2-mode-hook 'skewer-mode)
-    (add-hook 'css-mode-hook 'skewer-css-mode)
-    (add-hook 'html-mode-hook 'skewer-html-mode)))
+  (setq js-indent-level 2))
+
+(use-package skewer-mode
+  :after js2-mode
+
+  :init
+  (add-hook 'js2-mode-hook 'skewer-mode)
+  (add-hook 'css-mode-hook 'skewer-css-mode)
+  (add-hook 'html-mode-hook 'skewer-html-mode))
 
 (use-package vue-mode
   :init
