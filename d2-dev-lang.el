@@ -98,6 +98,29 @@
   (add-hook 'erlang-mode-hook 'company-erlang-init))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                            Elixir                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package alchemist
+  :init
+  (defun alchemist-iex-send-buffer ()
+    "Send current buffer."
+    (interactive)
+    (alchemist-iex-send-region (point-min) (point-max)))
+
+  :bind
+  (:map alchemist-mode-map
+        ("C-c b" . alchemist-iex-send-buffer)
+        ("C-c r" . alchemist-iex-send-region)
+        ("C-x C-e" . alchemist-iex-send-last-sexp)
+        ("M-N" . nil)
+        ("C-c a" . nil))
+
+  :config
+  (add-hook 'elixir-mode-hook 'alchemist-mode)
+  (add-hook 'alchemist-mode-hook 'company-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Rust                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -179,7 +202,8 @@
   (defun cider-eval-buffer-content ()
     "Eval buffer content without having to save it."
     (interactive)
-    (cider-eval-region (point-min) (point-max)))
+    (when (fboundp 'cider-eval-region)
+      (cider-eval-region (point-min) (point-max))))
 
   (add-hook 'clojure-mode-hook 'cider-mode)
 
