@@ -218,6 +218,12 @@ EXPORTER is provided by Org Mode."
         ("k" "Capture" entry (file "capture.org") "* %?")
         ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d"))))))
 
+(setq org-agenda-sorting-strategy
+      '((category-keep agenda habit-down time-up priority-down)
+        (category-keep todo priority-down)
+        (category-keep tags priority-down)
+        (search category-keep)))
+
 (setq org-agenda-custom-commands
       '(("n" "Agenda"
          ((agenda "" nil)
