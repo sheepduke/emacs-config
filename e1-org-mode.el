@@ -2,10 +2,6 @@
 ;;                        Common Settings                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun org-file-path (filename)
-  "Return the full path to given org file FILENAME."
-  (concat *notes-path* filename))
-
 ;; Habit tracking
 (require 'org-habit)
 ;; Do not spam my timeline with it.
@@ -19,7 +15,7 @@
 
 ;; Org modules loaded with org mode itself
 (setq org-modules
-      '(org-w3m org-bbdb org-habit org-bibtex org-docview org-gnus org-info))
+      '(org-w3m org-bbdb org-habit org-bibtex org-docview org-info))
 ;; default table size
 (setq org-table-default-size "2x2")
 
@@ -38,6 +34,10 @@
 (add-hook 'org-mode-hook 'org-mode-hook-function)
 (add-hook 'org-mode-hook 'auto-fill-mode)
 (add-hook 'org-mode-hook 'flyspell-mode)
+
+;; Some hot keys.
+(define-key org-mode-map (kbd "C-c C-,") 'org-promote-subtree)
+(define-key org-mode-map (kbd "C-c C-.") 'org-demote-subtree)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                         Localization                             ;;
@@ -86,29 +86,61 @@
 (global-set-key (kbd "C-c o") 'cfw:open-org-calendar)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                            Display                               ;;
+;;                        Customization                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; days to show in agenda view
+;; Set the default directory for all notes.
+(setq org-directory "~/notes")
+;; Days to show in agenda view.
 (setq org-agenda-span 'month)
-
+;; Always start on today in agenda.
+(setq org-agenda-start-on-weekday nil)
 ;; Display agenda in the other window.
 (setq org-agenda-window-setup 'current-window)
 ;; Restore the window config after displaying agenda.
 (setq org-agendaq-restore-windows-after-quit t)
+;; Do not show scheduled and deadline of finished items.
+(setq org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t)
+;; Do now show scheduled items in global TOOD list.
+(setq org-agenda-todo-ignore-deadlines t
+      org-agenda-todo-ignore-with-date t
+      org-agenda-todo-ignore-scheduled t)
 
-;; fontify code blocks
-(setq org-src-fontify-natively t)
-;; don't show all the leading stars
-(setq org-hide-leading-stars t)
+;; Get rid of the foot detail while generating HTML.
+(setq org-html-postamble nil)
 ;; show everything on startup
 (setq org-startup-folded nil)
 ;; do indenting
 (setq org-startup-indented t)
+;; fontify code blocks
+(setq org-src-fontify-natively t)
+;; don't show all the leading stars
+(setq org-hide-leading-stars t)
+
+;; Set the extra CSS for exported HTML files.
+(setq org-html-head-extra
+      "
+<style type=\"text/css\">
+:not(pre) > code {
+  background: #d4d3d3; border-radius: 2px; padding: 2px
+}​
+</style>
+")
+
 ;; Enable bold, italic etc inside Chinese context.
 (setf (nth 0 org-emphasis-regexp-components) " \t('\"{[:multibyte:]")
 (setf (nth 1 org-emphasis-regexp-components) " \t\r\n('\"{[:multibyte:],.)")
-(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+(org-set-emph-re 'org-emphasis-regexp-components
+                 org-emphasis-regexp-components)
+
+;; Always insert a new line before new item.
+(setq org-blank-before-new-entry '((heading . t)
+                                   (plain-list-item . t)))
+
+;; Just let me refile!
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-use-outline-path t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Export                              ;;
@@ -147,32 +179,54 @@ EXPORTER is provided by Org Mode."
 ;;                            Workflow                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; keep track of done things
+;; Keep track of done things.
 (setq org-log-done 'time)
-;; get rid of the foot detail while generating HTML
-(setq org-html-postamble nil)
+;; Keep the task dependency.
+(setq org-enforce-todo-dependencies t)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c k") 'org-capture)
+
+(setq org-todo-keywords
+      '((sequence "TODO(t!)" "Doing(o@/!)" "Pause(p@/!)" "|"
+                  "Done(d!)" "Cancel(c@/!)")))
+
+(setq org-todo-keyword-faces
+      '(("TODO" . org-todo)
+        ("PAUSE" :foreground "purple" :weight bold)
+        ("Doing" :foreground "cyan" :weight bold)
+        ("Done" :foreground "green" :weight bold)
+        ("CANCELED" :foreground "SlateGray4" :weight bold)))
+
+(setq org-refile-targets
+      '((nil :maxlevel . 4)
+        (org-agenda-files :maxlevel . 3)
+        ("todo.org" :level . 1)
+        ("event.org" :level . 1)
+        ("capture.org" :level . 1)))
 
 ;; Set templates:
 ;; (KEYS DESCRIPTION TYPE TARGET TEMPLATE PROPERTIES)
 ;; TYPE: entry item checkitem table-line plain
 ;; TARGET: file id file+headline
 (setq org-capture-templates
-      `(("t" "TODO" entry (file ,(org-file-path "todo.org")) "* TODO %?")
-		("s" "Schedule" entry (file ,(org-file-path "todo.org")) "* %?")
-		("r" "Reminder" entry (file ,(org-file-path "reminder.org")) "* REMINDER %?")
-        ("j" "Journal" plain (file ,(concat "~/private/journal/"
-                                            (today "%Y-%m-%d"))))))
+      `(("t" "TODO" entry (file "todo.org") "
+* TODO %?")
+		("s" "Schedule" entry (file+heading "event.org" "Schedule") "* %?")
+        ("e" "Event" entry (file+heading "event.org" "Event") "* %?")
+		("r" "Reminder" entry (file "reminder.org") "* REMINDER %?")
+        ("k" "Capture" entry (file "capture.org") "* %?")
+        ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d"))))))
 
 (setq org-agenda-custom-commands
       '(("n" "Agenda"
          ((agenda "" nil)
-		  (todo "PAUSE"
+		  (todo "Pause"
                 ((org-agenda-overriding-header "On Hold")))
+          (todo "Doing"
+                ((org-agenda-overriding-header "Doing")))
 		  (todo "TODO"
 				((org-agenda-overriding-header "TODO List")))
-		  (todo "REMINDER"
-				((org-agenda-overriding-header "Reminder")))
+          (tags "refile"
+               ((org-agenda-overriding-header "Refile")))
 		  nil))))

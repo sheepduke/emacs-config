@@ -194,4 +194,11 @@ then change the permission back. This works like Vim 'w!'"
 ;; auto fill
 (global-set-key (kbd "M-q") 'fill-region)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                              Misc                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq flycheck-temp-prefix "/tmp/flycheck")
+
+
 ;;; a2-customize.el ends here

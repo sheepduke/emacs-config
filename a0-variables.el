@@ -12,9 +12,6 @@
 (defvar *data-path* "~/.emacs.d/data/"
   "Location of Emacs data.")
 
-(defvar *notes-path* "~/notes/"
-  "Location for Org Mode notes.")
-
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
 
