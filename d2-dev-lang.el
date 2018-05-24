@@ -113,6 +113,7 @@
         ("C-c b" . alchemist-iex-send-buffer)
         ("C-c r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
+        ("C-c C-c" . alchemist-iex-send-current-line)
         ("M-N" . nil)
         ("C-c a" . nil))
 
