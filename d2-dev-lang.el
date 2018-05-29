@@ -114,6 +114,7 @@
         ("C-c r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
         ("C-c C-c" . alchemist-iex-send-current-line)
+        ("M-P" . nil)
         ("M-N" . nil)
         ("C-c a" . nil))
 
