@@ -103,6 +103,20 @@
 
 (use-package alchemist
   :init
+  (defun elixir-insert-end ()
+	"Insert `end' accordingly."
+	(interactive)
+	(let ((text (save-excursion
+				  (forward-line 0)
+				  (if (looking-at "^[ \t]*$")
+					  "end"
+					(if (looking-at ".*{[^}]*$")
+						"\n}"
+					  "\nend")))))
+	  (insert text)
+	  (indent-region (line-beginning-position)
+					 (line-end-position))))
+
   (defun alchemist-iex-send-buffer ()
     "Send current buffer."
     (interactive)
@@ -114,13 +128,15 @@
         ("C-c r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
         ("C-c C-c" . alchemist-iex-send-current-line)
+        ("C-c C-f" . elixir-insert-end)
         ("M-P" . nil)
         ("M-N" . nil)
         ("C-c a" . nil))
 
   :config
   (add-hook 'elixir-mode-hook 'alchemist-mode)
-  (add-hook 'alchemist-mode-hook 'company-mode))
+  (add-hook 'alchemist-mode-hook 'company-mode)
+  (add-hook 'alchemist-mode-hook 'flyspell-prog-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Rust                                ;;
