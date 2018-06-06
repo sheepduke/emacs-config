@@ -21,6 +21,7 @@
    ("M-s o" . helm-occur)
    ("C-x C-f" . helm-find-files)
    ("C-x b" . helm-mini)
+   ("C-x r b" . helm-bookmarks)
    ("C-x r i" . helm-register)
    ("C-x c ," . helm-calcul-expression)
    ("C-x c t" . helm-themes)

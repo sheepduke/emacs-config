@@ -128,4 +128,11 @@
   :config
   (zone-when-idle 600))
 
+(use-package so-long
+  :init
+  (add-to-list 'so-long-target-modes 'sql-mode)
+  :config
+  (so-long-enable))
+
+
 ;;; b1-tools.el ends here
