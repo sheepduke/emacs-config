@@ -257,11 +257,14 @@
   :mode "\\.jsp\\'"
 
   :config
+  (setq web-mode-code-indent-offset 2)
+
   (defun web-mode-setup ()
 	(make-local-variable 'company-backends)
 	(setq company-backends
 		  '(company-web-html :with 'company-yasnippet))
-    (fci-mode 0))
+    (fci-mode 0)
+    (setq fill-column 120))
   (add-hook 'web-mode-hook 'web-mode-setup)
 
   (use-package rainbow-mode

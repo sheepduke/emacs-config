@@ -51,7 +51,7 @@ completion."
 
   :config
   ;; Remove unused backends.
-  (dolist (target-backend '(company-dabbrev company-semantic company-clang))
+  (dolist (target-backend '(company-semantic company-clang))
 	(dolist (backend company-backends)
 	  (let ((main-backend (if (listp backend)
 							  (car backend)
