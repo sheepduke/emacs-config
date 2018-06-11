@@ -183,6 +183,8 @@ EXPORTER is provided by Org Mode."
 (setq org-log-done 'time)
 ;; Keep the task dependency.
 (setq org-enforce-todo-dependencies t)
+;; Archive to local file under 'Archived' tree with corresponding tag.
+(setq org-archive-location "::* Archived :ARCHIVE:")
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c k") 'org-capture)
