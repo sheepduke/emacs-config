@@ -124,6 +124,7 @@
 
   :bind
   (:map alchemist-mode-map
+        ("<return>" . newline-smart-comment)
         ("C-c b" . alchemist-iex-send-buffer)
         ("C-c r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
