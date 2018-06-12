@@ -275,10 +275,27 @@
   (setq httpd-port (+ 10000 (random 1000))))
 
 (use-package js2-mode
+  :init
+  ;; Indent after "switch".
+  (setq js-switch-indent-offset 2)
+  ;; Do not indent continuous function arguments.
+  (setq js-indent-align-list-continuation nil)
+
+  (defun setup-js2-mode ()
+    (setq fill-column 120))
+  (add-hook 'js2-mode-hook 'setup-js2-mode)
+  
   :mode "\\.js\\'"
 
   :config
   (setq js-indent-level 2))
+
+;; Mode for using closure package.
+(use-package closure-lint-mode
+  :after js2-mode
+
+  :init
+  (add-hook 'js2-mode-hook 'closure-lint-mode))
 
 (use-package skewer-mode
   :after js2-mode
