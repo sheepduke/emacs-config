@@ -40,11 +40,14 @@ Otherwise, call `comment-dwin'."
   "Insert comment to next line if current line is commented."
   (interactive)
   (if (line-in-comment?)
-      (if (string-match "//" (current-line))
-          (indent-new-comment-line)
-        (progn
-          (newline-and-indent)
-          (insert "* ")))
+      (let ((line (string-trim-left (current-line))))
+        (if (or (string-prefix-p "/*" line)
+                (string-prefix-p "* " line))
+            (progn (newline-and-indent)
+                   (insert "* ")
+                   (indent-region (line-beginning-position)
+                                  (line-end-position)))
+          (indent-new-comment-line)))
 	(newline-and-indent)))
 
 (defun get-available-font (font-list)

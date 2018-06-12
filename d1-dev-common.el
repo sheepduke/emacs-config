@@ -195,5 +195,14 @@ completion."
         ("C-c i h" . hs-hide-all)
         ("C-c i i" . hs-toggle-hiding)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                              Misc                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package prog-mode
+  :bind
+  (:map prog-mode-map
+        ("<return>" . newline-smart-comment)))
+
 
 ;;; d0-dev-common.el ends here

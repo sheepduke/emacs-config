@@ -41,11 +41,9 @@
 
   :bind
   (:map c++-mode-map
-		("<return>" . newline-smart-comment)
 		("<f5>" . recompile)
 		("C-<f5>" . compile)
 		:map c-mode-map
-		("<return>" . newline-smart-comment)
 		("<f5>" . recompile)
 		("C-<f5>" . compile))
 
@@ -87,7 +85,6 @@
 
   :bind
   (:map erlang-mode-map
-        ("<return>" . newline-smart-comment)
         ("<f5>" . recompile)
         ("C-<f5>" . compile)))
 
@@ -124,7 +121,6 @@
 
   :bind
   (:map alchemist-mode-map
-        ("<return>" . newline-smart-comment)
         ("C-c b" . alchemist-iex-send-buffer)
         ("C-c r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
@@ -205,8 +201,7 @@
 (use-package elisp-mode
   :bind
   (:map emacs-lisp-mode-map
-		("<f12>" . eval-buffer)
-		("<return>" . newline-smart-comment))
+		("<f12>" . eval-buffer))
 
   :config
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
@@ -330,8 +325,7 @@
   :bind
   (:map ruby-mode-map
 		("C-c C-f" . ruby-insert-end)
-		("C-c b" . ruby-send-buffer)
-		("<return>" . newline-smart-comment)))
+		("C-c b" . ruby-send-buffer)))
 
 (use-package inf-ruby
   :init
