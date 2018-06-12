@@ -257,7 +257,10 @@
   :mode "\\.jsp\\'"
 
   :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
+  (setq web-mode-indent-style 2)
 
   (defun web-mode-setup ()
 	(make-local-variable 'company-backends)
