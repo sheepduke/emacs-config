@@ -65,9 +65,13 @@ A dedicated window can't be switched or modified by some commands."
   ;; Don't display the tab on the top
   (setq elscreen-display-tab nil)
 
-  :config 
-  (elscreen-start))
+  :bind
+  ("C-z \"" . elscreen-goto)
+  ("C-z '" . elscreen-select-and-goto)
 
+  :config
+  (when (fboundp 'elscreen-start)
+    (elscreen-start)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                           Shackle                                ;;
@@ -91,7 +95,9 @@ A dedicated window can't be switched or modified by some commands."
 		  ("*toc*" :select t :inhibit-window-quit t :same t :size 0.5)
           ("*slime-description*" :select t :inhibit-window-quit t :same t)))
 
-  :config (shackle-mode))
+  :config
+  (when (fboundp 'shackle-mode)
+    (shackle-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -101,22 +107,24 @@ A dedicated window can't be switched or modified by some commands."
 (use-package delight
   :init
   ;; Disable auto-fill mode line.
-  (delight 'auto-fill-function "" t)
+  (when (fboundp 'delight)
+    (delight 'auto-fill-function "" t))
 
-  :config 
-  (delight '(;; Major modes
-			 (emacs-lisp-mode "ELisp" :major)
-			 ;; Globally enabled modes.
-			 (auto-revert-mode "" auto-revert)
-			 (company-mode " company" company)
-			 (flyspell-mode "" flyspell)
-			 (autopair-mode "" autopair)
-			 (undo-tree-mode "" undo-tree)
-			 (eldoc-mode "" eldoc)
-			 (yas-minor-mode "" yasnippet)
-			 ;; LaTeX ref, cite etc.
-			 (reftex-mode "" reftex)
-			 (latex-preview-pane-mode " Pane" latex-preview-pane))))
+  :config
+  (when (fboundp 'delight)
+    (delight '(;; Major modes
+			   (emacs-lisp-mode "ELisp" :major)
+			   ;; Globally enabled modes.
+			   (auto-revert-mode "" auto-revert)
+			   (company-mode " company" company)
+			   (flyspell-mode "" flyspell)
+			   (autopair-mode "" autopair)
+			   (undo-tree-mode "" undo-tree)
+			   (eldoc-mode "" eldoc)
+			   (yas-minor-mode "" yasnippet)
+			   ;; LaTeX ref, cite etc.
+			   (reftex-mode "" reftex)
+			   (latex-preview-pane-mode " Pane" latex-preview-pane)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                             Tools                                ;;
@@ -128,7 +136,9 @@ A dedicated window can't be switched or modified by some commands."
   ("C-c w p" . winner-undo)
   ("C-c w n" . winner-redo)
 
-  :config (winner-mode 1))
+  :config
+  (when (fboundp 'winner-mode)
+    (winner-mode 1)))
 
 
 ;; Fast switching frames
