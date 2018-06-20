@@ -24,7 +24,6 @@
    ("C-x r b" . helm-bookmarks)
    ("C-x r i" . helm-register)
    ("C-x c ," . helm-calcul-expression)
-   ("C-x c t" . helm-themes)
    ("M-i" . helm-show-kill-ring)
    
    :map helm-map
@@ -42,6 +41,11 @@
   (setq helm-split-window-in-side-p t)
   ;; Use follow mode from now!
   (setq helm-follow-mode-persistent t))
+
+(use-package helm-themes
+  :after helm
+  :bind
+  ("C-x c t" . helm-themes))
 
 ;; Use helm to describe variables and functions.
 (use-package helm-descbinds

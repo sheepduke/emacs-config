@@ -8,19 +8,47 @@ Place `.emacs` file to your `home` directory and others to `~/.emacs.d/`, then n
 This will compile `.el` files into byte code and thus can be loaded automatically by `~/.emacs` file.
 
 # Installed Packages
+You may `eval` the following snippet to install all packages at once.
 ```emacs lisp
-(rainbow-mode zone-nyan skewer-mode js2-mode cider mu4e-maildirs-extension
-geiser tangotango-theme pyim-wbdict markdown-mode flymd fill-column-indicator
-highlight-indent-guides sdcv calfw-org pyim company-racer racer flycheck-rust
-cargo rust-mode company-erlang erlang company-quickhelp highlight-blocks
-highlight dired+ flycheck nyan-mode robe auto-compile company-inf-ruby
-inf-ruby company-web web-mode use-package mu4e-alert slime-company slime
-helm-themes delight company-auctex company-c-headers helm-projectile
-projectile helm-descbinds helm-company company helm elscreen-persist pdf-tools
-shackle image-dired+ image+ magit cal-china-x yasnippet w3m undo-tree
-string-utils showtip pos-tip php-mode multiple-cursors latex-preview-pane
-htmlize gntp ggtags emms-player-mpv elscreen concurrent cmake-font-lock calfw
-bbdb auctex ace-window)
+(setq package-selected-packages
+      (list
+       ;; utility
+       'use-package 'elscreen 'auto-compile 'elscreen-persist
+       ;; display
+       'shackle 'delight
+       ;; window manipulation
+       'winner 'ace-window 'windmove
+       ;; cursor
+       'multiple-cursors 'avy
+       ;; editing
+       'undo-tree 'so-long
+       ;; file manipulation
+       'async 'dired+
+       ;; file viewing
+       'pdf-tools 'image+
+       ;; productivity
+       'helm 'helm-descbinds 'projectile 'helm-projectile 'sdcv
+       'youdao-dictionary 'magit 'htmlize 'calfw-org 'calfw 'cal-china-x
+       'helm-themes 'tangotango-theme
+       ;; development
+       'company 'fill-column-indicator 'company-quickhelp 'helm-company
+       'yasnippet 'yasnippet-snippets 'ggtags 'highlight-indent-guides
+       'fill-column-indicator 'hideshow 'arduino-mode 'cc-mode 'cmake-mode
+       'company-c-headers 'erlang 'company-erlang 'alchemist 'rust-mode 'cargo
+       'racer 'flycheck-rust 'company-racer 'slime 'elisp-mode 'cider 'geiser
+       'web-mode 'rainbow-mode 'simple-httpd 'js2-mode 'skewer-mode 'vue-mode
+       'python 'ruby-mode 'inf-ruby 'company-inf-ruby 'go-mode 'go-eldoc
+       'company-go 'latex 'latex-preview-pane 'reftex-toc 'company-auctex
+       'markdown-mode 'flymd 'markdown-toc
+       ;; input method
+       'pyim 'pyim-basedict 'pyim-wbdict
+       ;; multimedia
+       'emms 'w3m
+       ;; mail
+       'mu4e-alert 'bbdb 'mu4e 'mu4e-maildirs-extension 'mu4e-ext
+       ;; for fun
+       'nyan-mode 'zone))
+(package-install-selected-packages)
 ```
 
 You may customize the content of this list and install it by (for Emacs above 25.1):

@@ -83,7 +83,9 @@
     (setq browse-url-browser-function
           `(("HyperSpec" . w3m-goto-url-new-session)
             (".*" . browse-url-default-browser)))
-
+    ;; Set duckduckgo as the default search engine.
+    (setq w3m-search-default-engine "duckduckgo")
+    
 	:bind (("C-c 3" . w3m)
 		   :map w3m-mode-map
 		   ("C-M-h" . w3m-previous-buffer)
@@ -108,11 +110,7 @@
 			  (w3m-goto-url-new-session url))
 			(current-buffer)))))
 	(add-to-list 'desktop-buffer-mode-handlers '(w3m-mode . w3m-restore-desktop-buffer)))
-
-  (use-package w3m-search
-	:config
-	(setq w3m-search-default-engine "duckduckgo")))
-
+  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                           Dictionary                             ;;
