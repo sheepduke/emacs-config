@@ -99,6 +99,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package alchemist
+  :after elixir-mode
   :init
   (defun elixir-insert-end ()
 	"Insert `end' accordingly."
@@ -118,7 +119,10 @@
     "Send current buffer."
     (interactive)
     (alchemist-iex-send-region (point-min) (point-max)))
-
+  (add-hook 'elixir-mode-hook 'alchemist-mode)
+  (add-hook 'alchemist-mode-hook 'company-mode)
+  (add-hook 'alchemist-mode-hook 'flyspell-prog-mode)
+  
   :bind
   (:map alchemist-mode-map
         ("C-c b" . alchemist-iex-send-buffer)
@@ -126,14 +130,10 @@
         ("C-x C-e" . alchemist-iex-send-last-sexp)
         ("C-c C-c" . alchemist-iex-send-current-line)
         ("C-c C-f" . elixir-insert-end)
+        ("C-c C-p" . alchemist-iex-project-run)
         ("M-P" . nil)
         ("M-N" . nil)
-        ("C-c a" . nil))
-
-  :config
-  (add-hook 'elixir-mode-hook 'alchemist-mode)
-  (add-hook 'alchemist-mode-hook 'company-mode)
-  (add-hook 'alchemist-mode-hook 'flyspell-prog-mode))
+        ("C-c a" . nil)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Rust                                ;;
