@@ -65,13 +65,11 @@ A dedicated window can't be switched or modified by some commands."
   ;; Don't display the tab on the top
   (setq elscreen-display-tab nil)
 
-  :bind
-  ("C-z \"" . elscreen-goto)
-  ("C-z '" . elscreen-select-and-goto)
-
   :config
   (when (fboundp 'elscreen-start)
-    (elscreen-start)))
+    (elscreen-start)
+    (global-set-key (kbd "C-z \"") 'elscreen-goto)
+    (global-set-key (kbd "C-z '") 'elscreen-select-and-goto)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                           Shackle                                ;;

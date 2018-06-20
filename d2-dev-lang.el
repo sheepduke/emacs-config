@@ -276,6 +276,8 @@
 
 (use-package js2-mode
   :init
+  ;; Default indent level.
+  (setq js-indent-level 2)
   ;; Indent after "switch".
   (setq js-switch-indent-offset 2)
   ;; Do not indent continuous function arguments.
@@ -285,10 +287,7 @@
     (setq fill-column 120))
   (add-hook 'js2-mode-hook 'setup-js2-mode)
   
-  :mode "\\.js\\'"
-
-  :config
-  (setq js-indent-level 2))
+  :mode "\\.js\\'")
 
 ;; Mode for using closure package.
 (use-package closure-lint-mode
