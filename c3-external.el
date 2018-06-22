@@ -109,7 +109,8 @@
 				(w3m-find-file (substring url 7))
 			  (w3m-goto-url-new-session url))
 			(current-buffer)))))
-	(add-to-list 'desktop-buffer-mode-handlers '(w3m-mode . w3m-restore-desktop-buffer)))
+	(add-to-list 'desktop-buffer-mode-handlers
+                 '(w3m-mode . w3m-restore-desktop-buffer))))
   
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
