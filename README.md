@@ -1,8 +1,6 @@
 # emacs-settings
 This repository contains Emacs settings used by me.
 
-I am currently using mu4e for mail client. But the configuration contains some personal information so it is not included here.
-
 # How to Use
 Place `.emacs` file to your `home` directory and others to `~/.emacs.d/`, then navigate to `~/.emacs.d/settings/` and run `C-u 0 byte-recompile-directory`.
 This will compile `.el` files into byte code and thus can be loaded automatically by `~/.emacs` file.
@@ -85,6 +83,9 @@ Some common programming configuration.
 
 ## d2-dev-lang
 Configuration for each programming language.
+
+## f4-mail
+Configuration for email.
 
 ## e1-org-mode
 Org related settings.
