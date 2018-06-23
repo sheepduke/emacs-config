@@ -45,7 +45,8 @@ You may `eval` the following snippet to install all packages at once.
        ;; multimedia
        'emms 'w3m
        ;; mail
-       'mu4e-alert 'bbdb 'mu4e 'mu4e-maildirs-extension 'mu4e-ext
+       'bbdb 'notmuch
+       ;; 'mu4e-alert 'mu4e 'mu4e-maildirs-extension 'mu4e-ext
        ;; for fun
        'nyan-mode 'zone))
 (package-install-selected-packages)

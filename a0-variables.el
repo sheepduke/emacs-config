@@ -19,4 +19,7 @@
   "Run `after-load-theme-hook' to ensure that theme from last-time is loaded."
   (run-hooks 'after-load-theme-hook))
 
+(defvar *mailbox-dir* "~/mailbox/"
+  "Location of mail box.")
+
 ;;; a0-variables.el ends here
