@@ -27,7 +27,8 @@ You may `eval` the following snippet to install all packages at once.
        ;; productivity
        'helm 'helm-descbinds 'projectile 'helm-projectile 'sdcv
        'youdao-dictionary 'magit 'htmlize 'calfw-org 'calfw 'cal-china-x
-       'helm-themes 'tangotango-theme
+       ;; themes
+       'helm-themes 'tangotango-theme 'spacemacs-theme
        ;; development
        'company 'fill-column-indicator 'company-quickhelp 'helm-company
        'yasnippet 'yasnippet-snippets 'ggtags 'highlight-indent-guides
