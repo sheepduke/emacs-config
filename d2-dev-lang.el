@@ -88,7 +88,6 @@
         ("<f5>" . recompile)
         ("C-<f5>" . compile)))
 
-
 (use-package company-erlang
   :init
   (add-hook 'erlang-mode-hook 'company-mode)
@@ -288,13 +287,6 @@
   (add-hook 'js2-mode-hook 'setup-js2-mode)
   
   :mode "\\.js\\'")
-
-;; Mode for using closure package.
-(use-package closure-lint-mode
-  :after js2-mode
-
-  :init
-  (add-hook 'js2-mode-hook 'closure-lint-mode))
 
 (use-package skewer-mode
   :after js2-mode

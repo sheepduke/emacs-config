@@ -62,9 +62,9 @@
   (interactive)
   (save-excursion
     (message-goto-from)
-    (message-add-header (concat "Bcc: " (substring (current-line) 6)))))
+    (message-add-header (concat "Bcc: " (substring (current-line) 6) "\n"))))
 
-(remove-hook 'message-mode-hook  'message-bcc-sender)
+(add-hook 'message-send-hook 'message-bcc-sender)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -75,6 +75,9 @@
   :init
   ;; The number of recent searches to display.
   (setq notmuch-hello-recent-searches-max 10)
+
+  (defun notmuch-mark-all-as-read ()
+    )
 
   :bind
   ("C-c m" . notmuch)

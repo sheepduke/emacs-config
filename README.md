@@ -19,7 +19,7 @@ You may `eval` the following snippet to install all packages at once.
        ;; cursor
        'multiple-cursors 'avy
        ;; editing
-       'undo-tree 'so-long
+       'undo-tree
        ;; file manipulation
        'async 'dired+
        ;; file viewing
@@ -32,13 +32,13 @@ You may `eval` the following snippet to install all packages at once.
        ;; development
        'company 'fill-column-indicator 'company-quickhelp 'helm-company
        'yasnippet 'yasnippet-snippets 'ggtags 'highlight-indent-guides
-       'fill-column-indicator 'hideshow 'arduino-mode 'cc-mode 'cmake-mode
-       'company-c-headers 'erlang 'company-erlang 'alchemist 'rust-mode 'cargo
-       'racer 'flycheck-rust 'company-racer 'slime 'elisp-mode 'cider 'geiser
-       'web-mode 'rainbow-mode 'simple-httpd 'js2-mode 'skewer-mode 'vue-mode
-       'python 'ruby-mode 'inf-ruby 'company-inf-ruby 'go-mode 'go-eldoc
-       'company-go 'latex 'latex-preview-pane 'reftex-toc 'company-auctex
-       'markdown-mode 'flymd 'markdown-toc
+       'hideshow 'arduino-mode 'cmake-mode 'company-c-headers 'erlang
+       'company-erlang 'alchemist 'rust-mode 'cargo 'racer 'flycheck-rust
+       'company-racer 'slime 'slime-company 'cider 'geiser 'web-mode
+       'rainbow-mode 'simple-httpd 'js2-mode 'skewer-mode 'vue-mode 'python
+       'ruby-mode 'inf-ruby 'company-inf-ruby 'go-mode 'go-eldoc 'company-go
+       'latex-preview-pane 'reftex-toc 'company-auctex 'markdown-mode 'flymd
+       'markdown-toc
        ;; input method
        'pyim 'pyim-basedict 'pyim-wbdict
        ;; multimedia
@@ -48,7 +48,6 @@ You may `eval` the following snippet to install all packages at once.
        ;; 'mu4e-alert 'mu4e 'mu4e-maildirs-extension 'mu4e-ext
        ;; for fun
        'nyan-mode 'zone))
-(package-install-selected-packages)
 ```
 
 You may customize the content of this list and install it by (for Emacs above 25.1):
