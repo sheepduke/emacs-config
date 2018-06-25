@@ -88,8 +88,30 @@
     (notmuch-tag "tag:unread to:gentoo-user@lists.gentoo.org OR cc:gentoo-user@lists.gentoo.org"
                  '("+gentoo-user"))
     (notmuch-tag "tag:unread to:help-gnu-emacs@gnu.org OR cc:help-gnu-emacs@gnu.org"
-                 '("+gentoo-user")))
+                 '("+emacs-user")))
   (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-add-tags)
+
+  ;; Set the saved searchers.
+  (setq notmuch-saved-searches
+        '((:name "unread" :query "tag:unread" :key "u")
+          (:name "gmail" :query "tag:gmail" :key "g")
+          (:name "inbox" :query "tag:inbox" :key "i")
+          (:name "ecnu" :query "tag:ecnu" :key "e")
+          (:name "flagged" :query "tag:flagged" :key "f")
+          (:name "gentoo-user" :query "tag:gentoo-user" :key "n")
+          (:name "emacs-user" :query "tag:emacs-user" :key "m")
+          (:name "drafts" :query "tag:draft" :key "d")))
+
+  (defun notmuch-hello-init-cursor-position ()
+    "Move cursor place to the first position of saved searches."
+    (if (and (eq (point) (point-min))
+                       (search-forward "Saved searches:" nil t))
+                  (progn
+                    (forward-line)
+                    (widget-forward 1))
+                (if (eq (widget-type (widget-at)) 'editable-field)
+                    (beginning-of-line))))
+  (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-init-cursor-position)
 
   :bind
   ("C-c m" . notmuch)
