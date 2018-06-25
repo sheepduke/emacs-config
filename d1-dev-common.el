@@ -64,7 +64,7 @@ completion."
   (dolist (backend company-backends)
 	(when (and (listp backend)
 			   (eql 'company-dabbrev-code (car backend)))
-	  (let ((original-backends (copy-list backend)))
+	  (let ((original-backends (cl-copy-list backend)))
 		(setcar backend 'company-capf)
 		(setcdr backend original-backends))))
 
@@ -88,7 +88,7 @@ completion."
   ;; HACK fix the compatibility issue with fill-column-indicator.
   ;;
   (use-package fill-column-indicator
-    :config
+    :init
     (defvar-local company-fci-mode-on-p nil)
 
     (defun company-turn-off-fci (&rest ignore)

@@ -17,7 +17,6 @@
                      (> (length (directory-files dir)) 2))
             (unless *notification-sent*
               (setq *notification-sent* t)
-              (notmuch-poll)
               (notifications-notify :title "New mail"))
             (throw 'checked t)))))
     (setq *notification-sent* nil)
@@ -77,11 +76,29 @@
   (setq notmuch-hello-recent-searches-max 10)
 
   (defun notmuch-mark-all-as-read ()
-    )
+    "Mark all unread mails as read."
+    (interactive)
+    (notmuch-tag "tag:unread" '("-unread")))
+
+  (defun notmuch-hello-add-tags ()
+    "Add tags automatically."
+    (notmuch-tag "tag:unread me@sheepduke.com" '("+me"))
+    (notmuch-tag "tag:unread to:51141500055*ecnu" '("+ecnu"))
+    (notmuch-tag "tag:unread sheepduke@gmail.com" '("+gmail"))
+    (notmuch-tag "tag:unread to:gentoo-user@lists.gentoo.org OR cc:gentoo-user@lists.gentoo.org"
+                 '("+gentoo-user"))
+    (notmuch-tag "tag:unread to:help-gnu-emacs@gnu.org OR cc:help-gnu-emacs@gnu.org"
+                 '("+gentoo-user")))
+  (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-add-tags)
 
   :bind
   ("C-c m" . notmuch)
   (:map notmuch-hello-mode-map
-        ("g" . notmuch-refresh-this-buffer))
+        ("g" . notmuch-refresh-this-buffer)
+        ("M r" . notmuch-mark-all-as-read))
   (:map notmuch-search-mode-map
-        ("g" . notmuch-refresh-this-buffer)))
+        ("g" . notmuch-refresh-this-buffer)
+        ("M r" . notmuch-mark-all-as-read)))
+
+(provide 'f4-mail)
+;;; f4-mail.el ends here
