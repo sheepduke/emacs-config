@@ -15,6 +15,7 @@
         (let ((dir (concat *mailbox-dir* filename "/new/")))
           (when (and (file-exists-p dir)
                      (> (length (directory-files dir)) 2))
+            (notmuch-poll)
             (unless *notification-sent*
               (setq *notification-sent* t)
               (notifications-notify :title "New mail"))
@@ -50,6 +51,12 @@
 ;; use msmtp to send mail
 (setq message-send-mail-function 'message-send-mail-with-sendmail
 	  sendmail-program "msmtp")
+;; Use "From:" header as the sender.
+(setq message-sendmail-envelope-from 'header)
+;; Specify envelope-from information while sending message.
+(setq mail-specify-envelope-from t)
+;; Use "From:" header as envelope address.
+(setq mail-envelope-from 'header)
 
 ;; Set citation format.
 (setq message-citation-line-format "On %Y-%m-%d %H:%M, %f wrote:")
