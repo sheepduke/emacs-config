@@ -75,24 +75,10 @@
   ;; The number of recent searches to display.
   (setq notmuch-hello-recent-searches-max 10)
 
-  ;; Automatically poll new emails when entering the hello page.
-  (add-hook 'notmuch-hello-mode-hook 'notmuch-poll-and-refresh-this-buffer)
-
   (defun notmuch-mark-all-as-read ()
     "Mark all unread mails as read."
     (interactive)
     (notmuch-tag "tag:unread" '("-unread")))
-
-  (defun notmuch-hello-add-tags ()
-    "Add tags automatically."
-    (notmuch-tag "tag:unread me@sheepduke.com" '("+me"))
-    (notmuch-tag "tag:unread to:51141500055*ecnu" '("+ecnu"))
-    (notmuch-tag "tag:unread sheepduke@gmail.com" '("+gmail"))
-    (notmuch-tag "tag:unread to:gentoo-user@lists.gentoo.org OR cc:gentoo-user@lists.gentoo.org"
-                 '("+gentoo-user"))
-    (notmuch-tag "tag:unread to:help-gnu-emacs@gnu.org OR cc:help-gnu-emacs@gnu.org"
-                 '("+emacs-user")))
-  (add-hook 'notmuch-hello-mode-hook 'notmuch-hello-add-tags)
 
   ;; Set the saved searchers.
   (setq notmuch-saved-searches
@@ -109,12 +95,12 @@
   (defun notmuch-hello-init-cursor-position ()
     "Move cursor place to the first position of saved searches."
     (if (and (eq (point) (point-min))
-                       (search-forward "Saved searches:" nil t))
-                  (progn
-                    (forward-line)
-                    (widget-forward 1))
-                (if (eq (widget-type (widget-at)) 'editable-field)
-                    (beginning-of-line))))
+             (search-forward "Saved searches:" nil t))
+        (progn
+          (forward-line)
+          (widget-forward 1))))
+      ;; (if (eq (widget-type (widget-at)) 'editable-field)
+      ;;     (beginning-of-line))))
   (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-init-cursor-position)
 
   :bind
