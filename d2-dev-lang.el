@@ -121,6 +121,13 @@
   (add-hook 'elixir-mode-hook 'alchemist-mode)
   (add-hook 'alchemist-mode-hook 'company-mode)
   (add-hook 'alchemist-mode-hook 'flyspell-prog-mode)
+
+  (defun alchemist-run-iex-dwim ()
+    "Run iex with or without mix accordingly."
+    (interactive)
+    (let ((result (alchemist-iex-project-run)))
+      (unless (bufferp result)
+        (alchemist-iex-run))))
   
   :bind
   (:map alchemist-mode-map
@@ -129,7 +136,7 @@
         ("C-x C-e" . alchemist-iex-send-last-sexp)
         ("C-c C-c" . alchemist-iex-send-current-line)
         ("C-c C-f" . elixir-insert-end)
-        ("C-c C-p" . alchemist-iex-project-run)
+        ("C-c C-p" . alchemist-run-iex-dwim)
         ("M-P" . nil)
         ("M-N" . nil)
         ("C-c a" . nil)))
