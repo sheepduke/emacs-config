@@ -185,6 +185,9 @@ EXPORTER is provided by Org Mode."
 (setq org-enforce-todo-dependencies t)
 ;; Archive to local file under 'Archived' tree with corresponding tag.
 (setq org-archive-location "::* Archived :ARCHIVE:")
+;; Record clock information of both running and history clocks.
+(setq org-clock-persist t)
+(org-clock-persistence-insinuate)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c k") 'org-capture)

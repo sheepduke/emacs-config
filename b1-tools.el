@@ -130,6 +130,9 @@
 
 (use-package so-long
   :init
+  ;; Set the max columns that will trigger so-long mode.
+  (setq so-long-threshold 500)
+
   (add-to-list 'so-long-target-modes 'sql-mode)
   :config
   (so-long-enable))

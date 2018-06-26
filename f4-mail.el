@@ -75,6 +75,9 @@
   ;; The number of recent searches to display.
   (setq notmuch-hello-recent-searches-max 10)
 
+  ;; Automatically poll new emails when entering the hello page.
+  (add-hook 'notmuch-hello-mode-hook 'notmuch-poll-and-refresh-this-buffer)
+
   (defun notmuch-mark-all-as-read ()
     "Mark all unread mails as read."
     (interactive)
@@ -89,17 +92,18 @@
                  '("+gentoo-user"))
     (notmuch-tag "tag:unread to:help-gnu-emacs@gnu.org OR cc:help-gnu-emacs@gnu.org"
                  '("+emacs-user")))
-  (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-add-tags)
+  (add-hook 'notmuch-hello-mode-hook 'notmuch-hello-add-tags)
 
   ;; Set the saved searchers.
   (setq notmuch-saved-searches
         '((:name "unread" :query "tag:unread" :key "u")
           (:name "gmail" :query "tag:gmail" :key "g")
+          (:name "me" :query "tag:me" :key "m")
           (:name "inbox" :query "tag:inbox" :key "i")
           (:name "ecnu" :query "tag:ecnu" :key "e")
           (:name "flagged" :query "tag:flagged" :key "f")
           (:name "gentoo-user" :query "tag:gentoo-user" :key "n")
-          (:name "emacs-user" :query "tag:emacs-user" :key "m")
+          (:name "emacs-user" :query "tag:emacs-user" :key "a")
           (:name "drafts" :query "tag:draft" :key "d")))
 
   (defun notmuch-hello-init-cursor-position ()
