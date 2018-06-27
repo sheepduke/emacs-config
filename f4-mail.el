@@ -15,7 +15,8 @@
         (let ((dir (concat *mailbox-dir* filename "/new/")))
           (when (and (file-exists-p dir)
                      (> (length (directory-files dir)) 2))
-            (notmuch-poll)
+            (when (fboundp 'notmuch-poll)
+              (notmuch-poll))
             (unless *notification-sent*
               (setq *notification-sent* t)
               (notifications-notify :title "New mail"))
