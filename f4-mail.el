@@ -63,6 +63,9 @@
 (setq message-citation-line-format "On %Y-%m-%d %H:%M, %f wrote:")
 (setq message-citation-line-function 'message-insert-formatted-citation-line)
 
+;; Add spell checking.
+(add-hook 'message-mode-hook 'flyspell-mode)
+
 ;; Automatically Bcc myself.
 (defun message-bcc-sender ()
   "Find the sender (i.e. myself) and add him to Bcc list."
