@@ -32,7 +32,6 @@
 
   (setq fill-column 80))
 (add-hook 'org-mode-hook 'org-mode-hook-function)
-(add-hook 'org-mode-hook 'auto-fill-mode)
 (add-hook 'org-mode-hook 'flyspell-mode)
 
 ;; Some hot keys.
