@@ -488,4 +488,11 @@
   (:map markdown-mode-map
         ("C-c =" . markdown-toc-generate-or-refresh-toc)))
 
-(provide 'd2-dev-lang) ;;; d2-dev-lang.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                              Misc                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package yaml-mode)
+
+(provide 'd2-dev-lang)
+ ;;; d2-dev-lang.el ends here
