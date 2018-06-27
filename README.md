@@ -38,7 +38,7 @@ You may `eval` the following snippet to install all packages at once.
        'rainbow-mode 'simple-httpd 'js2-mode 'skewer-mode 'vue-mode 'python
        'ruby-mode 'inf-ruby 'company-inf-ruby 'go-mode 'go-eldoc 'company-go
        'latex-preview-pane 'reftex-toc 'company-auctex 'markdown-mode 'flymd
-       'markdown-toc
+       'markdown-toc 'yaml-mode
        ;; input method
        'pyim 'pyim-basedict 'pyim-wbdict
        ;; multimedia
