@@ -200,5 +200,7 @@ then change the permission back. This works like Vim 'w!'"
 
 (setq flycheck-temp-prefix "/tmp/flycheck")
 
+;; Do not use any GUI pinentry for GPG!
+(setq epa-pinentry-mode 'loopback)
 
 ;;; a2-customize.el ends here
