@@ -48,14 +48,8 @@ You may `eval` the following snippet to install all packages at once.
        ;; 'mu4e-alert 'mu4e 'mu4e-maildirs-extension 'mu4e-ext
        ;; for fun
        'nyan-mode 'zone))
-```
-
-You may customize the content of this list and install it by (for Emacs above 25.1):
-```emacs lisp
-(setq package-selected-packages the-list-above)
 (package-install-selected-packages)
 ```
-
 # Directory Hierarchy
 ## a0-variables
 Definition of global variables.
