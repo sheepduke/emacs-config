@@ -157,6 +157,9 @@ completion."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package ggtags
+  :init
+  (add-hook 'prog-mode-hook 'ggtags-mode)
+
   :bind
   ;; Stop messing up my key bindings!
   (:map ggtags-navigation-map
