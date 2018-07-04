@@ -88,6 +88,7 @@
     
 	:bind (("C-c 3" . w3m)
 		   :map w3m-mode-map
+           ("C-<return>" . w3m-view-this-url-new-session)
 		   ("C-M-h" . w3m-previous-buffer)
 		   ("C-M-l" . w3m-next-buffer)
 		   ("h" . w3m-db-history))
