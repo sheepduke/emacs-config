@@ -47,6 +47,8 @@
 ;; Edit multiple places at the same time.
 ;; 
 (use-package multiple-cursors
+  :init
+  (setq mc/always-run-for-all t)
   :bind
   ("C-x r e" . mc/edit-lines))
 
