@@ -38,6 +38,11 @@
 (define-key org-mode-map (kbd "C-c C-,") 'org-promote-subtree)
 (define-key org-mode-map (kbd "C-c C-.") 'org-demote-subtree)
 
+(use-package helm
+  :bind
+  (:map org-mode-map
+        ("C-c C-j" . helm-org-in-buffer-headings)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                         Localization                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
