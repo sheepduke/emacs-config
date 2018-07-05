@@ -203,4 +203,7 @@ then change the permission back. This works like Vim 'w!'"
 ;; Do not use any GUI pinentry for GPG!
 (setq epa-pinentry-mode 'loopback)
 
+(global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
+(global-set-key (kbd "C-c t d") 'toggle-debug-on-error)
+
 ;;; a2-customize.el ends here
