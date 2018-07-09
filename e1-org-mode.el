@@ -153,6 +153,9 @@
 ;; Enable Markdown export.
 (require 'ox-md)
 
+;; Read ATTR_* for images.
+(setq org-image-actual-width nil)
+
 (defun org-inline-style-file (exporter)
   "Embed CSS file indicated by INLINE_STYLE into generated HTML file.
 EXPORTER is provided by Org Mode."
