@@ -109,9 +109,7 @@
 (setq org-agenda-skip-scheduled-if-done t
       org-agenda-skip-deadline-if-done t)
 ;; Do now show scheduled items in global TOOD list.
-(setq org-agenda-todo-ignore-deadlines t
-      org-agenda-todo-ignore-with-date t
-      org-agenda-todo-ignore-scheduled t)
+(setq org-agenda-todo-ignore-scheduled t)
 
 ;; Get rid of the foot detail while generating HTML.
 (setq org-html-postamble nil)
