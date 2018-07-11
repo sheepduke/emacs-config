@@ -229,7 +229,9 @@
 
   :bind
   (:map cider-mode-map
-        ("C-c b" . cider-eval-buffer-content)))
+        ("C-c b" . cider-eval-buffer-content))
+  (:map cider-repl-mode-map
+        ("C-M-l" . cider-repl-clear-buffer)))
 
 
 
