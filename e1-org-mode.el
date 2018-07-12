@@ -37,7 +37,7 @@
 ;; Some hot keys.
 (define-key org-mode-map (kbd "C-c C-,") 'org-promote-subtree)
 (define-key org-mode-map (kbd "C-c C-.") 'org-demote-subtree)
-
+(define-key org-mode-map (kbd "C-c C-l") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "C-c C-i") 'org-mark-ring-goto)
 
 (use-package helm

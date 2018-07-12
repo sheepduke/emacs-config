@@ -85,6 +85,8 @@
   :init
   ;; The number of recent searches to display.
   (setq notmuch-hello-recent-searches-max 10)
+  ;; Do not save to "sent" file
+  (setq notmuch-fcc-dirs nil)
 
   (defun notmuch-mark-all-as-read ()
     "Mark all unread mails as read."
