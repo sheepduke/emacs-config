@@ -62,7 +62,7 @@
 (setq calendar-day-name-array
       ["日" "一" "二" "三" "四" "五" "六"])
 ;; Use Monday as the first day of week.
-(setq calendar-week-start-day 1)
+(setq calendar-week-start-day 0)
 
 ;; Holidays
 (setq calendar-holidays
