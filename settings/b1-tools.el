@@ -139,5 +139,8 @@
   :config
   (so-long-enable))
 
+(use-package toggle-window-split
+  :bind
+  ("C-c t s" . toggle-window-split))
 
 ;;; b1-tools.el ends here
