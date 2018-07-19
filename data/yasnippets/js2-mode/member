@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: member
+# key: member
+# --
+/**
+ * @type $1
+ * @private
+ */
+this.$2 = $3
