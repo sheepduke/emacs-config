@@ -145,7 +145,18 @@
 ;;                              Rust                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package rust-mode)
+(use-package rust-mode
+  :init
+  (defun rust-mode-setup ()
+    "Setup rust mode."
+    (set (make-local-variable 'compile-command)
+		 "cargo test"))
+  (add-hook 'rust-mode-hook 'rust-mode-setup)
+
+  :bind
+  (:map rust-mode-map
+        ("C-<f5>" . compile)
+        ("<f5>" . recompile)))
 
 (use-package cargo
   :init
@@ -153,9 +164,7 @@
 
 (use-package racer
   :init
-  (setq racer-rust-src-path "/home/sheep/software/rust-src/src/")
-
-  :config
+  (setq racer-rust-src-path "/home/sheep/software/rust/src/")
   (add-hook 'rust-mode-hook 'racer-activate)
   (add-hook 'rust-mode-hook 'racer-turn-on-eldoc))
 
