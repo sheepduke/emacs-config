@@ -123,7 +123,9 @@
         ("M r" . notmuch-mark-all-as-read))
   (:map notmuch-search-mode-map
         ("g" . notmuch-refresh-this-buffer)
-        ("M r" . notmuch-mark-all-as-read)))
+        ("M r" . notmuch-mark-all-as-read))
+  (:map notmuch-show-mode-map
+        ("C-c C-o" . browse-url-at-point)))
 
 (provide 'f4-mail)
 ;;; f4-mail.el ends here
