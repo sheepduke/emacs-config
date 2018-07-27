@@ -198,7 +198,11 @@ then change the permission back. This works like Vim 'w!'"
 ;;                              Misc                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Set the temporary directory.
 (setq flycheck-temp-prefix "/tmp/flycheck")
+;; Set the personal dictionary.
+(setq ispell-personal-dictionary
+      (concat *data-path* "aspell.en.pws"))
 
 ;; Do not use any GUI pinentry for GPG!
 (setq epa-pinentry-mode 'loopback)
