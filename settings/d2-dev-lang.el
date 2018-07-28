@@ -188,6 +188,11 @@
 
 (use-package slime
   :init
+  (defun setup-slime-mode ()
+    ;; Set the line length to 100.
+    (setq fill-column 100))
+  (add-hook 'slime-mode-hook 'setup-slime-mode)
+  
   ;; set common lisp REPL
   (setq inferior-lisp-program "ros run")
   (require 'slime-autoloads)
