@@ -205,7 +205,8 @@
   (:map slime-mode-map
         ("C-c b" . slime-eval-buffer)
         ("C-c c" . slime-compile-file)
-        ("C-c r" . slime-eval-region))
+        ("C-c r" . slime-eval-region)
+        ("C-c C-d d" . hyperspec-lookup))
 
   :config
   (when (fboundp 'slime-setup)
