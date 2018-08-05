@@ -2,8 +2,8 @@
 **Table of Contents**
 
 - [emacs-settings](#emacs-settings)
-- [How to Use](#how-to-use)
-- [Installed Packages](#installed-packages)
+- [How to use](#how-to-use)
+- [Recover package installation](#recover-package-installation)
 - [Directory Hierarchy](#directory-hierarchy)
     - [settings](#settings)
         - [a0-variables](#a0-variables)
@@ -19,65 +19,34 @@
         - [e1-org-mode](#e1-org-mode)
         - [.emacs](#emacs)
     - [data](#data)
+        - [yasnippets](#yasnippets)
 
 <!-- markdown-toc end -->
+
 # emacs-settings
 
 This repository contains Emacs settings used by me.
 
-# How to Use
+# How to use
 
 Place `settings/.emacs` file to your `home` directory and others to `~/.emacs.d/`, then navigate to `~/.emacs.d/settings/` and run `C-u 0 byte-recompile-directory`.
-This will compile `.el` files into byte code and thus can be loaded automatically by `~/.emacs` file.
+This will compile `.el` files into byte code (`.elc` files) and thus can be loaded automatically by `~/.emacs` file.
 
-# Installed Packages
+# Recover package installation
+
+Emacs uses variable `package-selected-packages` to store a list of packages installed by the user.
 
 You may `eval` the following snippet to install all packages at once.
 
 ```emacs lisp
+;; Copy this snippet from `.emacs` file.
 (setq package-selected-packages
-      (list
+      (list 
        ;; utility
-       'use-package 'elscreen 'auto-compile 'elscreen-persist
-       ;; display
-       'shackle 'delight
-       ;; window manipulation
-       'winner 'ace-window 'windmove
-       ;; cursor
-       'multiple-cursors 'avy
-       ;; editing
-       'undo-tree
-       ;; file manipulation
-       'async 'dired+
-       ;; file viewing
-       'pdf-tools 'image+
-       ;; productivity
-       'helm 'helm-descbinds 'projectile 'helm-projectile 'sdcv
-       'youdao-dictionary 'magit 'htmlize 'calfw-org 'calfw 'cal-china-x
-       ;; themes
-       'helm-themes 'tangotango-theme 'spacemacs-theme
-       ;; development
-       'company 'fill-column-indicator 'company-quickhelp 'helm-company
-       'yasnippet 'yasnippet-snippets 'ggtags 'highlight-indent-guides
-       'hideshow 'arduino-mode 'cmake-mode 'company-c-headers 'erlang
-       'company-erlang 'alchemist 'rust-mode 'cargo 'racer 'flycheck-rust
-       'company-racer 'slime 'slime-company 'cider 'geiser 'web-mode
-       'rainbow-mode 'simple-httpd 'js2-mode 'skewer-mode 'vue-mode 'python
-       'ruby-mode 'inf-ruby 'company-inf-ruby 'go-mode 'go-eldoc 'company-go
-       'latex-preview-pane 'reftex-toc 'company-auctex 'markdown-mode 'flymd
-       'markdown-toc 'yaml-mode
-       ;; input method
-       'pyim 'pyim-basedict 'pyim-wbdict
-       ;; multimedia
-       'emms 'w3m
-       ;; mail
-       'bbdb 'notmuch
-       ;; 'mu4e-alert 'mu4e 'mu4e-maildirs-extension 'mu4e-ext
-       ;; for fun
-       'nyan-mode 'zone))
+       'use-package 'elscreen 'auto-compile 'elscreen-persist))
 (package-install-selected-packages)
 ```
-# Directory Hierarchy
+# Directory hierarchy
 
 ## settings
 
