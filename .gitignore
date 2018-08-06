@@ -9,3 +9,4 @@
 !data
 data/*
 !data/yasnippets
+!data/aspell.en.pws
