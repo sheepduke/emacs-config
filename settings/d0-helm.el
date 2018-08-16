@@ -72,6 +72,10 @@
 			  ""
 			(format " [%s]"
 					(projectile-project-name)))))
+
+  :bind
+  ("C-c p h" . helm-projectile)
+
   :config 
   ;; Enable helm-projectile!
   (helm-projectile-on))
