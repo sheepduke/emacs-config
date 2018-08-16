@@ -210,7 +210,7 @@
 
   :config
   (when (fboundp 'slime-setup)
-    (slime-setup '(slime-fancy slime-company)))
+    (slime-setup '(slime-fancy slime-company slime-repl-ansi-color)))
 
   (add-hook 'slime-repl-mode-hook 'company-mode))
 
