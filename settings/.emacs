@@ -1,8 +1,7 @@
 ;; setup packages installed by MELPA
 (require 'package)
 (setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
+      '(("melpa" . "https://melpa.org/packages/")))
 (setq package-enable-at-startup nil)
 (package-initialize)
 (setq load-prefer-newer t)
