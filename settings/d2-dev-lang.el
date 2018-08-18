@@ -249,7 +249,6 @@
         ("C-M-l" . cider-repl-clear-buffer)))
 
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Racket                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -264,6 +263,30 @@
   :config
   (add-hook 'geiser-mode-hook 'disable-company-quickhelp-mode)
   (add-hook 'scheme-mode 'geiser-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                               Julia                              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package julia-mode)
+
+(use-package julia-repl
+  :init
+  (defun julia-repl-send-buffer ()
+    "Send buffer to julia repl."
+    (interactive)
+    (save-excursion
+      (beginning-of-buffer)
+      (set-mark-command nil)
+      (end-of-buffer)
+      (julia-repl-send-region-or-line)))
+  
+  :after julia-mode
+  :bind
+  (:map julia-mode-map
+        ("C-c r" . julia-repl-send-region-or-line)
+        ("C-c b" . julia-repl-send-buffer)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Web                                ;;
