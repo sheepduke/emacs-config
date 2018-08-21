@@ -273,7 +273,7 @@
 
 (use-package julia-repl
   :init
-  (defun julia-repl-send-buffer ()
+  (defun julia-repl-send-buffer-content ()
     "Send buffer to julia repl."
     (interactive)
     (save-excursion
@@ -286,7 +286,7 @@
   :bind
   (:map julia-mode-map
         ("C-c r" . julia-repl-send-region-or-line)
-        ("C-c b" . julia-repl-send-buffer)))
+        ("C-c b" . julia-repl-send-buffer-content)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Web                                ;;
