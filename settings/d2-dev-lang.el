@@ -535,4 +535,4 @@
 (use-package yaml-mode)
 
 (provide 'd2-dev-lang)
- ;;; d2-dev-lang.el ends here
+;;; d2-dev-lang.el ends here
