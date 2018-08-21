@@ -21,9 +21,9 @@
 
 (defun org-mode-hook-function ()
   "Setup."
-  (toggle-word-wrap 1)
+  ;; Auto fill normal text but not table.
   (auto-fill-mode 1)
-  (setq truncate-lines nil)
+  (setq truncate-lines t)
 
   (make-local-variable 'company-backends)
   (setq company-backends '((company-dabbrev :with company-yasnippet)))

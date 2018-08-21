@@ -1,6 +1,7 @@
-personal_ws-1.1 en 34 
+personal_ws-1.1 en 41 
 UI
 IP
+UTF
 Wubi
 REPL
 NaN
@@ -11,11 +12,14 @@ VM
 WebSocket
 Nginx
 API
+tmux
 livelock
 Telecom
 Erlang
+comparator
 Morphling
 SLI
+bitwise
 Bitwise
 STW
 GitBook
@@ -29,7 +33,10 @@ CSS
 Zabbix
 JSON
 GitLab
+comparators
+SRC
 hostname
 Regex
 transactional
 QoS
+unary
