@@ -286,7 +286,8 @@
   :bind
   (:map julia-mode-map
         ("C-c r" . julia-repl-send-region-or-line)
-        ("C-c b" . julia-repl-send-buffer-content)))
+        ("C-c b" . julia-repl-send-buffer-content)
+        ("C-c C-c" . julia-repl-send-line)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Web                                ;;
