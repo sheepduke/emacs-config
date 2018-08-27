@@ -1,12 +1,15 @@
-personal_ws-1.1 en 41 
+personal_ws-1.1 en 46 
 UI
 IP
+structs
 UTF
 Wubi
 REPL
 NaN
+polymorphism
 AWS
 AppDynamics
+struct
 PDF
 VM
 WebSocket
@@ -20,16 +23,18 @@ comparator
 Morphling
 SLI
 bitwise
-Bitwise
 STW
 GitBook
 Kubernetes
 JMX
 runtime
+OO
 GC
 uptime
 Grafana
+aggregator
 CSS
+Daian
 Zabbix
 JSON
 GitLab

@@ -73,6 +73,15 @@
 (use-package company-c-headers)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                              Java                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun java-mode-setup ()
+  "Setup Java mode."
+  (setq fill-column 120))
+(add-hook 'java-mode-hook 'java-mode-setup)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Erlang                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -101,7 +110,7 @@
   :after elixir-mode
   :init
   (defun elixir-insert-end ()
-	"Insert `end' accordingly."
+	"Insert END accordingly."
 	(interactive)
 	(let ((text (save-excursion
 				  (forward-line 0)
