@@ -1,4 +1,4 @@
-personal_ws-1.1 en 60 
+personal_ws-1.1 en 61 
 comparator
 refactoring
 timestamps
@@ -42,6 +42,7 @@ Zabbix
 bitwise
 CSS
 Wubi
+boolean
 Regex
 broadcasted
 struct
