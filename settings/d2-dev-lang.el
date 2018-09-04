@@ -292,13 +292,18 @@
       (set-mark-command nil)
       (end-of-buffer)
       (julia-repl-send-region-or-line)))
+
+  (defun julia-repl-send-line-content ()
+    (interactive)
+    (save-excursion
+      (julia-repl-send-line)))
   
   :after julia-mode
   :bind
   (:map julia-mode-map
         ("C-c r" . julia-repl-send-region-or-line)
         ("C-c b" . julia-repl-send-buffer-content)
-        ("C-c C-c" . julia-repl-send-line)))
+        ("C-c C-c" . julia-repl-send-line-content)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Web                                ;;
