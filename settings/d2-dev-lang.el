@@ -278,8 +278,10 @@
 ;;                               Julia                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package julia-mode)
-
+(use-package julia-mode
+  :init
+  (setq julia-indent-offset 2))
+  
 (use-package julia-repl
   :init
   (defun julia-repl-send-buffer-content ()
