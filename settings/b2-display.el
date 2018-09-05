@@ -36,7 +36,7 @@ SIZE-PAIR."
 (when window-system
   (set-font '("DejaVu Sans Mono")
             '("文泉驿等宽微米黑" "WenQuanYi Micro Hei")
-            '(14 . 16)))
+            '(14 . 14)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Window                             ;;
