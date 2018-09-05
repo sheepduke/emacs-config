@@ -551,5 +551,10 @@
 
 (use-package yaml-mode)
 
+(use-package conf-mode
+  :bind
+  (:map conf-mode-map
+        ("<return>" . newline-smart-comment)))
+
 (provide 'd2-dev-lang)
 ;;; d2-dev-lang.el ends here
