@@ -38,7 +38,7 @@
   (add-hook 'helm-mode-hook 'helm-mode-setup-handlers)
 
   ;; Just use THIS window!
-  (setq helm-split-window-in-side-p t)
+  (setq helm-split-window-inside-p t)
   ;; Use follow mode from now!
   (setq helm-follow-mode-persistent t))
 
@@ -50,7 +50,7 @@
 ;; Use helm to describe variables and functions.
 (use-package helm-descbinds
   :config
-  (helm-descbinds-mode 1))
+  (call-when-defined 'helm-descbinds-mode 1))
 
 (use-package projectile
   :init
@@ -58,7 +58,7 @@
   (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
 
   :config
-  (projectile-mode 1))
+  (call-when-defined 'projectile-mode 1))
 
 (use-package helm-projectile
   :after (helm projectile)
@@ -78,6 +78,6 @@
 
   :config 
   ;; Enable helm-projectile!
-  (helm-projectile-on))
+  (call-when-defined 'helm-projectile-on))
 
 ;;; d0-completion.el ends here

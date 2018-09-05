@@ -22,4 +22,8 @@
 (defvar *mailbox-dir* "~/mailbox/"
   "Location of mail box.")
 
+(defvar-local company-fci-mode-on-p nil
+  "Used by hack between company-mode and fci-mode inside dev-common.el")
+
+
 ;;; a0-variables.el ends here

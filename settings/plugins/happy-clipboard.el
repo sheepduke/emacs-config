@@ -25,17 +25,11 @@
 (defvar happy-clipboard-mode-map (make-sparse-keymap))
 (defvar happy-clipboard-mode-empty-map (make-sparse-keymap))
 
-(defun happy-clipboard-get-clipboard-contents ()
-  "Return the value of the clipboard contents as a string."
-  (let ((x-select-enable-clipboard t))
-    (or (x-cut-buffer-or-selection-value)
-        x-last-selected-text-clipboard)))
-
 (defun happy-clipboard-paste ()
   "Yank the content from X clipboard into current position.
 This function will not modify the Emacs kill ring."
   (interactive)
-  (insert (happy-clipboard-get-clipboard-contents)))
+  (insert (gui-selection-value)))
 
 (defun happy-clipboard-copy ()
   "Copy string in the currently selected region into the X clipboard.
@@ -43,8 +37,8 @@ This function does not modify the Emacs kill ring."
   (interactive)
   (if (not (use-region-p))
       (message "No active region selected.")
-    (let ((x-select-enable-clipboard t))
-      (x-select-text (buffer-substring (region-beginning) (region-end)))
+    (let ((select-enable-clipboard t))
+      (gui-select-text (buffer-substring (region-beginning) (region-end)))
       (message "Text copied to X clipboard."))))
 
 (defun happy-clipboard-cut ()

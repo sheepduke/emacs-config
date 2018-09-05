@@ -25,10 +25,10 @@
 	"Variable to hold elscreen-persist data.")
   (defun desktop-prepare-data-elscreen! ()
 	(setq desktop-data-elscreen
-		  (elscreen-persist-get-data)))
+		  (call-when-defined 'elscreen-persist-get-data)))
   (defun desktop-evaluate-data-elscreen! ()
 	(when desktop-data-elscreen
-	  (elscreen-persist-set-data desktop-data-elscreen)))
+	  (call-when-defined 'elscreen-persist-set-data desktop-data-elscreen)))
 
   :config
   (add-to-list 'desktop-globals-to-save 'desktop-data-elscreen)

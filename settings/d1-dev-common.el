@@ -38,8 +38,8 @@ completion."
 	  (yas-next-field))
 	 ;; When it is possible to complete, do it.
 	 ((and (string-match-p company-begin-regex (char-to-string (char-before)))
-		   (company-manual-begin))
-	  (company-complete-common))
+		   (call-when-defined 'company-manual-begin))
+	  (call-when-defined 'company-complete-common))
 	 (t (indent-for-tab-command))))
     
   :bind (:map company-active-map
@@ -89,15 +89,13 @@ completion."
   ;;
   (use-package fill-column-indicator
     :init
-    (defvar-local company-fci-mode-on-p nil)
-
     (defun company-turn-off-fci (&rest ignore)
       (when (boundp 'fci-mode)
         (setq company-fci-mode-on-p fci-mode)
-        (when fci-mode (fci-mode -1))))
+        (when fci-mode (call-when-defined fci-mode -1))))
 
     (defun company-maybe-turn-on-fci (&rest ignore)
-      (when company-fci-mode-on-p (fci-mode 1)))
+      (when company-fci-mode-on-p (call-when-defined fci-mode 1)))
 
     (add-hook 'company-completion-started-hook 'company-turn-off-fci)
     (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
@@ -109,15 +107,17 @@ completion."
   (setq company-quickhelp-delay 0)
 
   :config
-  (company-quickhelp-mode 1))
+  (call-when-defined 'company-quickhelp-mode 1))
 
 
 (use-package helm-company
   :after company
-  :config
-  (define-key company-mode-map (kbd "C-:") #'helm-company)
-  (define-key company-active-map (kbd "C-:") #'helm-company))
-
+  
+  :bind
+  (:map company-mode-map
+        ("C-:" . helm-company))
+  (:map company-active-map
+        ("C-:" . helm-company)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                            Yasnippet                             ;;
@@ -131,7 +131,8 @@ completion."
   (:map yas-keymap
         ("<tab>" . nil))
 
-  :config (yas-global-mode 1))
+  :config
+  (call-when-defined 'yas-global-mode 1))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -140,7 +141,7 @@ completion."
 
 (use-package flycheck
   :config
-  (global-flycheck-mode))
+  (call-when-defined 'global-flycheck-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

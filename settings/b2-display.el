@@ -66,10 +66,9 @@ A dedicated window can't be switched or modified by some commands."
   (setq elscreen-display-tab nil)
 
   :config
-  (when (fboundp 'elscreen-start)
-    (elscreen-start)
-    (global-set-key (kbd "C-z \"") 'elscreen-goto)
-    (global-set-key (kbd "C-z '") 'elscreen-select-and-goto)))
+  (call-when-defined 'elscreen-start)
+  (global-set-key (kbd "C-z \"") 'elscreen-goto)
+  (global-set-key (kbd "C-z '") 'elscreen-select-and-goto))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                           Shackle                                ;;
@@ -94,8 +93,7 @@ A dedicated window can't be switched or modified by some commands."
           ("*slime-description*" :select t :inhibit-window-quit t :same t)))
 
   :config
-  (when (fboundp 'shackle-mode)
-    (shackle-mode)))
+  (call-when-defined 'shackle-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -105,24 +103,24 @@ A dedicated window can't be switched or modified by some commands."
 (use-package delight
   :init
   ;; Disable auto-fill mode line.
-  (when (fboundp 'delight)
-    (delight 'auto-fill-function "" t))
+  (call-when-defined 'delight 'auto-fill-function "" t)
 
   :config
-  (when (fboundp 'delight)
-    (delight '(;; Major modes
-			   (emacs-lisp-mode "ELisp" :major)
-			   ;; Globally enabled modes.
-			   (auto-revert-mode "" auto-revert)
-			   (company-mode " company" company)
-			   (flyspell-mode "" flyspell)
-			   (autopair-mode "" autopair)
-			   (undo-tree-mode "" undo-tree)
-			   (eldoc-mode "" eldoc)
-			   (yas-minor-mode "" yasnippet)
-			   ;; LaTeX ref, cite etc.
-			   (reftex-mode "" reftex)
-			   (latex-preview-pane-mode " Pane" latex-preview-pane)))))
+  (call-when-defined
+   'delight
+   '(;; Major modes
+	 (emacs-lisp-mode "ELisp" :major)
+	 ;; Globally enabled modes.
+	 (auto-revert-mode "" auto-revert)
+	 (company-mode " company" company)
+	 (flyspell-mode "" flyspell)
+	 (autopair-mode "" autopair)
+	 (undo-tree-mode "" undo-tree)
+	 (eldoc-mode "" eldoc)
+	 (yas-minor-mode "" yasnippet)
+	 ;; LaTeX ref, cite etc.
+	 (reftex-mode "" reftex)
+	 (latex-preview-pane-mode " Pane" latex-preview-pane))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                             Tools                                ;;
@@ -135,8 +133,7 @@ A dedicated window can't be switched or modified by some commands."
   ("C-c w n" . winner-redo)
 
   :config
-  (when (fboundp 'winner-mode)
-    (winner-mode 1)))
+  (call-when-defined 'winner-mode 1))
 
 
 ;; Fast switching frames

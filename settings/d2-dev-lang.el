@@ -218,8 +218,7 @@
         ("C-c C-d d" . hyperspec-lookup))
 
   :config
-  (when (fboundp 'slime-setup)
-    (slime-setup '(slime-fancy slime-company slime-repl-ansi-color)))
+  (call-when-defined 'slime-setup '(slime-fancy slime-company slime-repl-ansi-color))
 
   (add-hook 'slime-repl-mode-hook 'company-mode))
 
@@ -246,8 +245,7 @@
   (defun cider-eval-buffer-content ()
     "Eval buffer content without having to save it."
     (interactive)
-    (when (fboundp 'cider-eval-region)
-      (cider-eval-region (point-min) (point-max))))
+    (call-when-defined 'cider-eval-region (point-min) (point-max)))
 
   (add-hook 'clojure-mode-hook 'cider-mode)
 
@@ -288,15 +286,15 @@
     "Send buffer to julia repl."
     (interactive)
     (save-excursion
-      (beginning-of-buffer)
+      (goto-char (point-min))
       (set-mark-command nil)
-      (end-of-buffer)
+      (goto-char (point-max))
       (julia-repl-send-region-or-line)))
 
   (defun julia-repl-send-line-content ()
     (interactive)
     (save-excursion
-      (julia-repl-send-line)))
+      (call-when-defined 'julia-repl-send-line)))
   
   :after julia-mode
   :bind
@@ -407,8 +405,7 @@
 	  ;; If ruby buffer does not exist, just start a new one.
 	  (unless (and inf-ruby-buffer
 				   (buffer-name inf-ruby-buffer))
-        (when (fboundp 'inf-ruby)
-          (inf-ruby))
+        (call-when-defined 'inf-ruby)
 		(throw 'return nil))
 	  ;; If ruby buffer exists, kill current ruby process and
 	  ;; start a new one in same window position.
@@ -416,8 +413,7 @@
 		(kill-buffer inf-ruby-buffer)
 		(setq inf-ruby-buffer nil)
 		(let ((config (current-window-configuration)))
-          (when (fboundp 'inf-ruby)
-            (inf-ruby))
+          (call-when-defined 'inf-ruby)
 		  (set-window-configuration config))
 		(switch-to-buffer inf-ruby-buffer)))
 	(message "inf-ruby process restarted. Happy hacking!"))
@@ -443,11 +439,9 @@
   :init
   (defun optimize-and-save ()
     (interactive)
-    (when (fboundp 'gofmt)
-      (gofmt))
+    (call-when-defined 'gofmt)
     (save-buffer-readonly)
-    (when (fboundp 'go-remove-unused-imports)
-      (go-remove-unused-imports nil))
+    (call-when-defined 'go-remove-unused-imports nil)
     (save-buffer-readonly))
 
   :bind

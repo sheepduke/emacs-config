@@ -91,8 +91,7 @@
 ;; Automatically revert modified buffer
 (global-auto-revert-mode)
 ;; Save cursor place of file after exiting Emacs
-(when (fboundp 'save-place-mode)
-  (save-place-mode 1))
+(save-place-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                             Time                                 ;;
@@ -114,21 +113,25 @@
 ;;                             shell                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq eshell-list-files-after-cd t)
+(use-package eshell
+  :init
+  ;; List content of directory after cd.
+  (setq eshell-list-files-after-cd t)
 
-(defun eshell-clear-buffer ()
-  "Clear the buffer and delete everything. Handy if you have too much
+  (defun eshell-clear-buffer ()
+    "Clear the buffer and delete everything. Handy if you have too much
 output."
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)
-    (eshell-send-input)))
+    (interactive)
+    (let ((inhibit-read-only t))
+      (erase-buffer)
+      (eshell-send-input)))
 
-(defun eshell-mode-setup ()
-  (setq pcomplete-cycle-completions nil)
-  (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
-  (setenv "PAGER" "/bin/cat"))
-(add-hook 'eshell-mode-hook 'eshell-mode-setup)
+  (defun eshell-mode-setup ()
+    (setq pcomplete-cycle-completions nil)
+    (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
+    (setenv "PAGER" "/bin/cat"))
+
+  (add-hook 'eshell-mode-hook 'eshell-mode-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                            Dired                                 ;;
@@ -205,7 +208,7 @@ then change the permission back. This works like Vim 'w!'"
       (concat *data-path* "aspell.en.pws"))
 
 ;; Do not use any GUI pinentry for GPG!
-(setq epa-pinentry-mode 'loopback)
+(setq epg-pinentry-mode 'loopback)
 
 ;; Set the default method of tramp.
 (setq tramp-default-method "ssh")

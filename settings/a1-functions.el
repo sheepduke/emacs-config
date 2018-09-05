@@ -58,4 +58,11 @@ If no one was found, NIL is returned."
       (when (font-exist-p font)
         (throw 'found font)))))
 
+(defun call-when-defined (func &rest args)
+  "Call function FUNC when it is bound. If QUIETP is NIL, a warning is given
+when function is not defined."
+  (if (fboundp func)
+      (apply func args)
+    (warn "Function %s not defined" func)))
+
 ;;; a1-functions.el ends here

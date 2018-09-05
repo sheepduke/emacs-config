@@ -35,13 +35,14 @@
   ("C-?" . undo-tree-redo)
   ("C-x u" . undo-tree-visualize)
 
-  :config (global-undo-tree-mode))
-
+  :config
+  (call-when-defined 'global-undo-tree-mode))
 
 ;; Replace the original doc-view for PDF files.
-;; 
+;;
 (use-package pdf-tools
-  :config (pdf-tools-install))
+  :config
+  (call-when-defined 'pdf-tools-install))
 
 
 ;; Edit multiple places at the same time.
@@ -72,8 +73,8 @@
 ;; 
 (use-package auto-compile
   :config
-  (auto-compile-on-load-mode)
-  (auto-compile-on-save-mode))
+  (call-when-defined 'auto-compile-on-load-mode)
+  (call-when-defined 'auto-compile-on-save-mode))
 
 
 ;; Execute asynchronous commands.
@@ -103,7 +104,7 @@
   :config
   (use-package pyim-basedict
 	:config
-	(pyim-basedict-enable))
+	(call-when-defined 'pyim-basedict-enable))
 
   ;; 设定默认输入法
   (setq default-input-method "pyim")
@@ -122,13 +123,15 @@
   ("C-`" . toggle-input-method))
 
 (use-package nyan-mode
+  :init
+  (setq nyan-bar-length 20)
+  
   :config
-  (nyan-mode 1)
-  (setq nyan-bar-length 20))
+  (call-when-defined 'nyan-mode 1))
 
 (use-package zone
   :config
-  (zone-when-idle 600))
+  (call-when-defined 'zone-when-idle 600))
 
 (use-package so-long
   :init

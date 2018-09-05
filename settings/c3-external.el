@@ -93,6 +93,9 @@
 		   ("C-M-l" . w3m-next-buffer)
 		   ("h" . w3m-db-history))
 
+    :defines
+    (desktop-buffer-major-mode)
+
 	:config
 	;; Save session.
 	(defun w3m-register-desktop-save ()
@@ -107,8 +110,8 @@
 		  (when url
 			(require 'w3m)
 			(if (string-match "^file" url)
-				(w3m-find-file (substring url 7))
-			  (w3m-goto-url-new-session url))
+                (call-when-defined 'w3m-find-file (substring url 7))
+			  (call-when-defined 'w3m-goto-url-new-session url))
 			(current-buffer)))))
 	(add-to-list 'desktop-buffer-mode-handlers
                  '(w3m-mode . w3m-restore-desktop-buffer))))

@@ -15,8 +15,7 @@
         (let ((dir (concat *mailbox-dir* filename "/new/")))
           (when (and (file-exists-p dir)
                      (> (length (directory-files dir)) 2))
-            (when (fboundp 'notmuch-poll)
-              (notmuch-poll))
+            (call-when-defined 'notmuch-poll)
             (unless *notification-sent*
               (setq *notification-sent* t)
               (notifications-notify :title "New mail"))
@@ -41,8 +40,7 @@
 		bbdb-completion-display-record nil)
   
   :config
-  (when (fboundp 'bbdb-initialize)
-    (bbdb-initialize 'message)))
+  (call-when-defined 'bbdb-initialize 'message))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -71,8 +69,8 @@
   "Find the sender (i.e. myself) and add him to Bcc list."
   (interactive)
   (save-excursion
-    (message-goto-from)
-    (message-add-header (concat "Bcc: " (substring (current-line) 6) "\n"))))
+    (call-when-defined 'message-goto-from)
+    (call-when-defined 'message-add-header (concat "Bcc: " (substring (current-line) 6) "\n"))))
 
 (add-hook 'message-send-hook 'message-bcc-sender)
 
