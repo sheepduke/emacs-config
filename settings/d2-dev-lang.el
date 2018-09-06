@@ -295,10 +295,21 @@
     (interactive)
     (save-excursion
       (call-when-defined 'julia-repl-send-line)))
+
+  (defun julia-newline-with-end ()
+    "Insert an end keyword and move cursor to the next line."
+    (interactive)
+    (newline-and-indent)
+    (newline)
+    (insert "end")
+    (indent-region (line-beginning-position) (line-end-position))
+    (forward-line -1)
+    (end-of-line))
   
   :after julia-mode
   :bind
   (:map julia-mode-map
+        ("C-<return>" . julia-newline-with-end)
         ("C-c r" . julia-repl-send-region-or-line)
         ("C-c b" . julia-repl-send-buffer-content)
         ("C-c C-c" . julia-repl-send-line-content)))
