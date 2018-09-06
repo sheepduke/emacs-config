@@ -38,7 +38,7 @@ completion."
 	  (yas-next-field))
 	 ;; When it is possible to complete, do it.
 	 ((and (string-match-p company-begin-regex (char-to-string (char-before)))
-		   (call-when-defined 'company-manual-begin))
+           (call-when-defined 'company-manual-begin))
 	  (call-when-defined 'company-complete-common))
 	 (t (indent-for-tab-command))))
     
@@ -92,10 +92,10 @@ completion."
     (defun company-turn-off-fci (&rest ignore)
       (when (boundp 'fci-mode)
         (setq company-fci-mode-on-p fci-mode)
-        (when fci-mode (call-when-defined fci-mode -1))))
+        (when fci-mode (call-when-defined 'fci-mode -1))))
 
     (defun company-maybe-turn-on-fci (&rest ignore)
-      (when company-fci-mode-on-p (call-when-defined fci-mode 1)))
+      (when company-fci-mode-on-p (call-when-defined 'fci-mode 1)))
 
     (add-hook 'company-completion-started-hook 'company-turn-off-fci)
     (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
