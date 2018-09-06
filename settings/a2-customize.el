@@ -208,7 +208,10 @@ then change the permission back. This works like Vim 'w!'"
       (concat *data-path* "aspell.en.pws"))
 
 ;; Do not use any GUI pinentry for GPG!
-(setq epg-pinentry-mode 'loopback)
+
+(if (< (emacs-version-main) 27)
+    (setq epa-pinentry-mode 'loopback)
+  (setq epg-pinentry-mode 'loopback))
 
 ;; Set the default method of tramp.
 (setq tramp-default-method "ssh")

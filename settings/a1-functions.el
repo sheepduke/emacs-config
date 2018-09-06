@@ -65,4 +65,10 @@ when function is not defined."
       (apply func args)
     (warn "Function %s not defined" func)))
 
+(defun emacs-version-main ()
+  "Extract main version number of running Emacs."
+  (let* ((version (emacs-version))
+         (start (string-match "[0-9]\\{2\\}" version)))
+    (string-to-number (substring version start (+ 2 start)))))
+
 ;;; a1-functions.el ends here
