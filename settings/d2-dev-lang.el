@@ -305,7 +305,13 @@
     (indent-region (line-beginning-position) (line-end-position))
     (forward-line -1)
     (end-of-line))
-  
+
+  (defun julia-mode-setup ()
+    (make-local-variable 'company-backends)
+	(setq company-backends
+		  '(company-dabbrev :with 'company-yasnippet)))
+  (add-hook 'julia-mode-hook 'julia-mode-setup)
+
   :after julia-mode
   :bind
   (:map julia-mode-map
