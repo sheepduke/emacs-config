@@ -7,6 +7,9 @@
 (defvar *notification-sent* nil
   "Record whether or not the desktop notification has been sent.")
 
+(defvar mail-update-function 'notmuch-poll
+  "Function to update/index mail database.")
+
 (defun check-new-mail ()
   (catch 'checked
     (dolist (filename (directory-files *mailbox-dir*))
@@ -15,7 +18,8 @@
         (let ((dir (concat *mailbox-dir* filename "/new/")))
           (when (and (file-exists-p dir)
                      (> (length (directory-files dir)) 2))
-            (call-when-defined 'notmuch-poll)
+            (when (fboundp mail-update-function)
+              (funcall mail-update-function))
             (unless *notification-sent*
               (setq *notification-sent* t)
               (notifications-notify :title "New mail"))
