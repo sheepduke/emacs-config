@@ -94,7 +94,10 @@
   ;; Turn on follow mode that file under cursor will be opened instantly.
   (setq helm-follow-mode-persistent t)
   ;; Use PPCRE instead of Emacs regex.
-  (setq helm-ag-use-emacs-lisp-regexp nil))
+  (setq helm-ag-use-emacs-lisp-regexp nil)
+
+  :bind
+  ("C-x c a" . helm-ag))
 
 
 ;;; d0-completion.el ends here
