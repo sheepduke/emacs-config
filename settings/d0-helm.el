@@ -52,6 +52,10 @@
   :config
   (call-when-defined 'helm-descbinds-mode 1))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                           projectile                             ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package projectile
   :init
   ;; Offline SVN.
@@ -79,5 +83,18 @@
   :config 
   ;; Enable helm-projectile!
   (call-when-defined 'helm-projectile-on))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                             helm-ag                              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package helm-ag
+  :init
+  ;; Turn on follow mode that file under cursor will be opened instantly.
+  (setq helm-follow-mode-persistent t)
+  ;; Use PPCRE instead of Emacs regex.
+  (setq helm-ag-use-emacs-lisp-regexp nil))
+
 
 ;;; d0-completion.el ends here

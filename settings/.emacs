@@ -29,7 +29,7 @@
        ;; file viewing
        'pdf-tools 'image+
        ;; productivity
-       'helm 'helm-descbinds 'projectile 'helm-projectile 'sdcv
+       'helm 'helm-descbinds 'projectile 'helm-projectile 'helm-ag 'sdcv
        'youdao-dictionary 'magit 'htmlize 'calfw-org 'calfw 'cal-china-x
        ;; themes
        'helm-themes 'tangotango-theme 'spacemacs-theme
