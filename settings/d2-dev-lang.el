@@ -278,7 +278,16 @@
 
 (use-package julia-mode
   :init
-  (setq julia-indent-offset 2))
+  (setq julia-indent-offset 4)
+
+  (defun julia-mode-setup ()
+    ;; Set fill column.
+    (setq fill-column 92)
+    ;; Set company source.
+    (make-local-variable 'company-backends)
+	(setq company-backends
+		  '(company-dabbrev :with 'company-yasnippet)))
+  (add-hook 'julia-mode-hook 'julia-mode-setup))
   
 (use-package julia-repl
   :init
@@ -305,12 +314,6 @@
     (indent-region (line-beginning-position) (line-end-position))
     (forward-line -1)
     (end-of-line))
-
-  (defun julia-mode-setup ()
-    (make-local-variable 'company-backends)
-	(setq company-backends
-		  '(company-dabbrev :with 'company-yasnippet)))
-  (add-hook 'julia-mode-hook 'julia-mode-setup)
 
   :after julia-mode
   :bind

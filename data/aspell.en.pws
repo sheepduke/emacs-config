@@ -1,8 +1,9 @@
-personal_ws-1.1 en 63 
+personal_ws-1.1 en 64 
 comparator
 refactoring
 timestamps
 QoS
+Redis
 PDF
 polymorphism
 JSON
@@ -10,8 +11,8 @@ namespace
 UI
 Elasticsearch
 RESTful
-GitLab
 GitHub
+GitLab
 JMX
 comparators
 uptime
