@@ -8,5 +8,6 @@
 
 !data
 data/*
+!data/eshell-alias
 !data/yasnippets
 !data/aspell.en.pws

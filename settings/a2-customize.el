@@ -115,8 +115,7 @@
 
 (use-package eshell
   :init
-  ;; List content of directory after cd.
-  (setq eshell-list-files-after-cd t)
+  (setq eshell-aliases-file (concat *data-path* "eshell-alias"))
 
   (defun eshell-clear-buffer ()
     "Clear the buffer and delete everything. Handy if you have too much

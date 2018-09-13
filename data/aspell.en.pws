@@ -1,4 +1,4 @@
-personal_ws-1.1 en 64 
+personal_ws-1.1 en 65 
 comparator
 refactoring
 timestamps
@@ -11,8 +11,8 @@ namespace
 UI
 Elasticsearch
 RESTful
-GitHub
 GitLab
+GitHub
 JMX
 comparators
 uptime
@@ -48,6 +48,7 @@ boolean
 Regex
 broadcasted
 struct
+Thinkpad
 runtime
 unary
 namespaces
