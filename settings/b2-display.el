@@ -33,10 +33,12 @@ SIZE-PAIR."
       (warn "No available Chinese font."))))
 
 ;; Set font if X window is in use.
+;; Note that Chinese font size must be 2 larger than English font for
+;; alignment.
 (when window-system
   (set-font '("DejaVu Sans Mono")
             '("文泉驿等宽微米黑" "WenQuanYi Micro Hei")
-            '(14 . 14)))
+            '(14 . 16)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Window                             ;;

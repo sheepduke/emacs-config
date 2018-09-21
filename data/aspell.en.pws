@@ -1,12 +1,15 @@
-personal_ws-1.1 en 65 
+personal_ws-1.1 en 70 
 comparator
 refactoring
 timestamps
 QoS
+resize
+LVM
 Redis
 PDF
 polymorphism
 JSON
+middleware
 namespace
 UI
 Elasticsearch
@@ -19,6 +22,7 @@ uptime
 UTF
 VM
 Morphling
+EBS
 Grafana
 SLI
 Erlang
@@ -55,6 +59,7 @@ namespaces
 WebSocket
 hostname
 refactor
+resizing
 ZooKeeper
 Telecom
 REPL

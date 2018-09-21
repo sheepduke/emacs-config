@@ -144,6 +144,6 @@
 
 (use-package toggle-window-split
   :bind
-  ("C-c t s" . toggle-window-split))
+  ("C-c w s" . toggle-window-split))
 
 ;;; b1-tools.el ends here
