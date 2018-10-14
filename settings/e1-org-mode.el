@@ -97,7 +97,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Set the default directory for all notes.
-(setq org-directory "~/notes")
+(setq org-directory "~/notes/")
 ;; Days to show in agenda view.
 (setq org-agenda-span 'month)
 ;; Always start on today in agenda.
