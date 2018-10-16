@@ -563,7 +563,10 @@
 ;;                              Misc                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package yaml-mode)
+(use-package yaml-mode
+  :bind
+  (:map yaml-mode-map
+        ("<return>" . newline-smart-comment)))
 
 (use-package conf-mode
   :bind
