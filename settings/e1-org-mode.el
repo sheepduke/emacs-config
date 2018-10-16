@@ -269,7 +269,6 @@ EXPORTER is provided by Org Mode."
       `(("t" "TODO" entry (file "todo.org") "
 * TODO %?")
 		("s" "Schedule" entry (file+headline "event.org" "Schedule") "* %?")
-        ("e" "Event" entry (file+headline "event.org" "Event") "* %?")
 		("r" "Reminder" entry (file "reminder.org") "* REMINDER %?")
         ("k" "Capture" entry (file "capture.org") "* %?")
         ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d"))))))
