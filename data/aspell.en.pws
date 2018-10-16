@@ -1,4 +1,4 @@
-personal_ws-1.1 en 72 
+personal_ws-1.1 en 73 
 comparator
 refactoring
 timestamps
@@ -6,6 +6,7 @@ QoS
 resize
 LVM
 Redis
+PostgreSQL
 PDF
 polymorphism
 JSON
@@ -14,8 +15,8 @@ namespace
 UI
 Elasticsearch
 RESTful
-GitHub
 GitLab
+GitHub
 JMX
 comparators
 uptime
