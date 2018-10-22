@@ -1,4 +1,4 @@
-personal_ws-1.1 en 73 
+personal_ws-1.1 en 75 
 comparator
 refactoring
 timestamps
@@ -15,8 +15,8 @@ namespace
 UI
 Elasticsearch
 RESTful
-GitLab
 GitHub
+GitLab
 JMX
 comparators
 uptime
@@ -39,6 +39,7 @@ livelock
 Daian
 SRC
 RDB
+SRE
 aggregator
 timestamp
 Lucene
@@ -72,3 +73,4 @@ Hadoop
 IOPS
 Kubernetes
 Ansible
+TBD

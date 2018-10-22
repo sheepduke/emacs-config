@@ -268,10 +268,10 @@ EXPORTER is provided by Org Mode."
 (setq org-capture-templates
       `(("t" "TODO" entry (file "todo.org") "
 * TODO %?")
-		("s" "Schedule" entry (file+headline "event.org" "Schedule") "* %?")
+		("s" "Schedule" entry (file "todo.org") "* %?")
 		("r" "Reminder" entry (file "reminder.org") "* REMINDER %?")
         ("k" "Capture" entry (file "capture.org") "* %?")
-        ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d"))))))
+        ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d") ".org")))))
 
 (setq org-agenda-sorting-strategy
       '((category-keep agenda habit-down time-up priority-down)
