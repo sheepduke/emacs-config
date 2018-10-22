@@ -198,8 +198,8 @@
 (use-package slime
   :init
   (defun setup-slime-mode ()
-    ;; Set the line length to 100.
-    (setq fill-column 100))
+    ;; Set the line length to 80.
+    (setq fill-column 80))
   (add-hook 'slime-mode-hook 'setup-slime-mode)
   
   ;; set common lisp REPL
