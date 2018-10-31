@@ -244,7 +244,7 @@ EXPORTER is provided by Org Mode."
 (global-set-key (kbd "C-c k") 'org-capture)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t@)" "Doing(o!)" "Pause(p@/!)" "|"
+      '((sequence "TODO(t)" "Doing(o!)" "Pause(p@/!)" "|"
                   "Done(d@/!)" "Cancel(c@/!)")))
 
 (setq org-todo-keyword-faces
