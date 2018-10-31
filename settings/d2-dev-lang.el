@@ -378,13 +378,6 @@
   (add-hook 'css-mode-hook 'skewer-css-mode)
   (add-hook 'html-mode-hook 'skewer-html-mode))
 
-(use-package vue-mode
-  :init
-  (defun setup-vue-mode ()
-    (setq tab-width 2))
-
-  :config
-  (add-hook 'vue-mode-hook 'setup-vue-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;
