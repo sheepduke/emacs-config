@@ -1,4 +1,4 @@
-personal_ws-1.1 en 76 
+personal_ws-1.1 en 77 
 comparator
 refactoring
 timestamps
@@ -9,14 +9,15 @@ Redis
 PostgreSQL
 PDF
 polymorphism
+Quicklisp
 JSON
 middleware
 namespace
 UI
 Elasticsearch
 RESTful
-GitLab
 GitHub
+GitLab
 JMX
 comparators
 uptime
