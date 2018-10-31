@@ -29,7 +29,9 @@
        ;; file viewing
        'pdf-tools 'image+
        ;; productivity
-       'helm 'helm-descbinds 'projectile 'helm-projectile 'helm-ag 'sdcv
+       ;; 'helm 'helm-descbinds 'projectile 'helm-projectile 'helm-ag
+       'ivy 'flx
+       'sdcv
        'youdao-dictionary 'magit 'htmlize 'calfw-org 'calfw 'cal-china-x
        ;; themes
        'helm-themes 'tangotango-theme 'spacemacs-theme
@@ -49,6 +51,5 @@
        'emms 'w3m
        ;; mail
        'bbdb 'notmuch
-       ;; 'mu4e-alert 'mu4e 'mu4e-maildirs-extension 'mu4e-ext
        ;; for fun
        'nyan-mode 'zone))

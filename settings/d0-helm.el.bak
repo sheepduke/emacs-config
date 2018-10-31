@@ -18,8 +18,10 @@
   
   :bind
   (("M-x" . helm-M-x)
+   ("M-x" . execute-extended-command)
    ("M-s o" . helm-occur)
    ("C-x C-f" . helm-find-files)
+   ("C-x C-f" . counsel-find-file)
    ("C-x b" . helm-mini)
    ("C-x r b" . helm-bookmarks)
    ("C-x r i" . helm-register)
