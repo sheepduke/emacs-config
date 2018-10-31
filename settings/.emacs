@@ -29,14 +29,13 @@
        ;; file viewing
        'pdf-tools 'image+
        ;; productivity
-       ;; 'helm 'helm-descbinds 'projectile 'helm-projectile 'helm-ag
        'ivy 'flx
        'sdcv
        'youdao-dictionary 'magit 'htmlize 'calfw-org 'calfw 'cal-china-x
        ;; themes
-       'helm-themes 'tangotango-theme 'spacemacs-theme
+       'tangotango-theme 'spacemacs-theme
        ;; development
-       'company 'fill-column-indicator 'company-quickhelp 'helm-company
+       'company 'fill-column-indicator 'company-quickhelp
        'yasnippet 'yasnippet-snippets 'ggtags 'highlight-indent-guides
        'hideshow 'arduino-mode 'cmake-mode 'company-c-headers 'erlang
        'company-erlang 'alchemist 'rust-mode 'cargo 'racer 'flycheck-rust
