@@ -12,6 +12,11 @@
   ;; Do not ignore VCS files.
   (setq counsel-ag-base-command "ag --nocolor --nogroup -U --ignore .git %s")
 
+  ;; Set regex engine for different scenario.
+  (setq ivy-re-builders-alist
+      '((ivy-switch-buffer . ivy--regex-plus)
+        (t . ivy--regex-fuzzy)))
+
   :bind
   (:map ivy-mode-map
         ("C-s" . swiper)
