@@ -23,6 +23,7 @@
         ("M-i" . counsel-yank-pop)
         ("C-:" . counsel-company)
         ;; Global
+        ("C-c c a" . counsel-ag)
         ("C-c c t" . counsel-load-theme)
         ;; Projectile
         ("C-c p p" . counsel-projectile-switch-project)

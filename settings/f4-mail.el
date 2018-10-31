@@ -74,7 +74,8 @@
   (interactive)
   (save-excursion
     (call-when-defined 'message-goto-from)
-    (call-when-defined 'message-add-header (concat "Bcc: " (substring (current-line) 6) "\n"))))
+    (call-when-defined 'message-add-header
+                       (concat "Bcc: " (substring (current-line-content) 6) "\n"))))
 
 (add-hook 'message-send-hook 'message-bcc-sender)
 
