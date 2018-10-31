@@ -99,11 +99,11 @@
   ;; Set the saved searchers.
   (setq notmuch-saved-searches
         '((:name "unread" :query "tag:unread" :key "u")
+          (:name "flagged" :query "tag:flagged" :key "f")
           (:name "gmail" :query "tag:gmail" :key "g")
           (:name "me" :query "tag:me" :key "m")
           (:name "inbox" :query "tag:inbox" :key "i")
           (:name "ecnu" :query "tag:ecnu" :key "e")
-          (:name "flagged" :query "tag:flagged" :key "f")
           (:name "gentoo-user" :query "tag:gentoo-user" :key "n")
           (:name "emacs-user" :query "tag:emacs-user" :key "a")
           (:name "drafts" :query "tag:draft" :key "d")))
