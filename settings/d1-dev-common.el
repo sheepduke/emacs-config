@@ -109,15 +109,17 @@ completion."
   :config
   (call-when-defined 'company-quickhelp-mode 1))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                           projectile                             ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package helm-company
-  :after company
-  
-  :bind
-  (:map company-mode-map
-        ("C-:" . helm-company))
-  (:map company-active-map
-        ("C-:" . helm-company)))
+(use-package projectile
+  :init
+  ;; Offline SVN.
+  (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
+
+  :config
+  (call-when-defined 'projectile-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                            Yasnippet                             ;;

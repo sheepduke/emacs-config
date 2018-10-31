@@ -13,21 +13,21 @@
   "Return T if current line is commented."
   (nth 4 (syntax-ppss)))
 
-(defun current-line ()
+(defun current-line-content ()
   "Return line content in string."
   (buffer-substring (line-beginning-position)
 					(line-end-position)))
 
 (defun line-empty? ()
   "Return T if line contains only spaces or nothing."
-  (string-empty-p (string-trim (current-line))))
+  (string-empty-p (string-trim (current-line-content))))
 
 (defun toggle-comment-in-line (&optional arg)
   "If there is no content after CHAR, delete the comment char.
 Otherwise, call `comment-dwin'."
   (interactive "*P")
   (if (or (use-region-p)
-		  (string-empty-p (string-trim (current-line))))
+		  (string-empty-p (string-trim (current-line-content))))
 	  (comment-dwim arg)
 	(comment-or-uncomment-region (line-beginning-position)
 								 (line-end-position))))
@@ -40,7 +40,7 @@ Otherwise, call `comment-dwin'."
   "Insert comment to next line if current line is commented."
   (interactive)
   (if (line-in-comment?)
-      (let ((line (string-trim-left (current-line))))
+      (let ((line (string-trim-left (current-line-content))))
         (if (or (string-prefix-p "/*" line)
                 (string-prefix-p "* " line))
             (progn (newline-and-indent)

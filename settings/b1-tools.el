@@ -66,7 +66,8 @@
 ;; 
 (use-package avy
   :bind
-  ("M-g M-a" . avy-goto-char-2))
+  ("M-g M-a" . avy-goto-char-2)
+  ("C-'" . avy-goto-line))
 
 
 ;; Automatically compile Emacs Lisp libraries

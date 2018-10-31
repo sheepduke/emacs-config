@@ -54,20 +54,19 @@
   :config
   (call-when-defined 'helm-descbinds-mode 1))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                           projectile                             ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package projectile
-  :init
-  ;; Offline SVN.
-  (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
-
-  :config
-  (call-when-defined 'projectile-mode 1))
+(use-package helm-company
+  :after (helm company)
+  
+  :bind
+  (:map company-mode-map
+        ("C-:" . helm-company))
+  (:map company-active-map
+        ("C-:" . helm-company)))
 
 (use-package helm-projectile
   :after (helm projectile)
+  
   :init
   ;; Use helm as completion system for projectile.
   (setq projectile-completion-system 'helm)
