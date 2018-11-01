@@ -266,10 +266,9 @@ EXPORTER is provided by Org Mode."
 ;; TYPE: entry item checkitem table-line plain
 ;; TARGET: file id file+headline
 (setq org-capture-templates
-      `(("t" "TODO" entry (file "todo.org") "
-* TODO %? :todo:")
+      `(("t" "TODO" entry (file "todo.org") "* TODO %? :todo:")
 		("s" "Schedule" entry (file "todo.org") "* %? :schedule:")
-		("r" "Reminder" entry (file "reminder.org") "* REMINDER %?")
+        ("b" "Bookmark" entry (file+headline "bookmark.org" "Bookmarks") "** %?")
         ("k" "Capture" entry (file "capture.org") "* %?")
         ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d") ".org")))))
 
@@ -280,7 +279,8 @@ EXPORTER is provided by Org Mode."
         (search category-keep)))
 
 (setq org-agenda-custom-commands
-      '(("n" "Agenda"
+      '(("b" "Bookmarks" tags "+bookmark")
+        ("n" "Agenda"
          ((agenda "" nil)
 		  (todo "Pause"
                 ((org-agenda-overriding-header "On Hold")))
