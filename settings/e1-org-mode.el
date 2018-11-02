@@ -266,8 +266,8 @@ EXPORTER is provided by Org Mode."
 ;; TYPE: entry item checkitem table-line plain
 ;; TARGET: file id file+headline
 (setq org-capture-templates
-      `(("t" "TODO" entry (file "todo.org") "* TODO %? :todo:")
-		("s" "Schedule" entry (file "todo.org") "* %? :schedule:")
+      `(("t" "TODO" entry (file+headline "todo.org" "TODOs") "* TODO %? :todo:")
+		("s" "Schedule" entry (file+headline "todo.org" "Schedule") "* %? :schedule:")
         ("b" "Bookmark" entry (file+headline "bookmarks.org" "Bookmarks") "** %?")
         ("k" "Capture" entry (file "capture.org") "* %?")
         ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d") ".org")))))
