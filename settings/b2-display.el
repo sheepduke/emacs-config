@@ -21,8 +21,8 @@ SIZE-PAIR."
   (let ((english-font (get-available-font english-font-list))
         (chinese-font (get-available-font chinese-font-list)))
     (if english-font
-        (set-frame-font
-         (format "%s:pixelsize=%d" english-font (car size-pair)) t)
+        (set-frame-font (font-spec :family english-font
+                                   :size (car size-pair)))
       (warn "No available English font."))
 
     (if chinese-font
@@ -31,6 +31,7 @@ SIZE-PAIR."
                             (font-spec :family chinese-font
                                        :size (cdr size-pair))))
       (warn "No available Chinese font."))))
+
 
 ;; Set font if X window is in use.
 ;; Note that Chinese font size must be 2 larger than English font for

@@ -268,7 +268,7 @@ EXPORTER is provided by Org Mode."
 (setq org-capture-templates
       `(("t" "TODO" entry (file "todo.org") "* TODO %? :todo:")
 		("s" "Schedule" entry (file "todo.org") "* %? :schedule:")
-        ("b" "Bookmark" entry (file+headline "bookmark.org" "Bookmarks") "** %?")
+        ("b" "Bookmark" entry (file+headline "bookmarks.org" "Bookmarks") "** %?")
         ("k" "Capture" entry (file "capture.org") "* %?")
         ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d") ".org")))))
 
