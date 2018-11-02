@@ -15,6 +15,7 @@
   ;; Set regex engine for different scenario.
   (setq ivy-re-builders-alist
         '((swiper . ivy--regex-plus)
+          (counsel-projectile . ivy--regex-plus)
           (ivy-switch-buffer . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
 
@@ -24,8 +25,8 @@
         ("M-i" . counsel-yank-pop)
         ("C-:" . counsel-company)
         ;; Global
-        ("C-c c a" . counsel-ag)
-        ("C-c c t" . counsel-load-theme)
+        ("C-x c a" . counsel-ag)
+        ("C-x c t" . counsel-load-theme)
         ;; Projectile
         ("C-c p p" . counsel-projectile-switch-project)
         ("C-c p h" . counsel-projectile)
