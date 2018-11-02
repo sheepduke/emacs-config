@@ -41,8 +41,8 @@
 ;; Don't use <TAB>
 (setq-default indent-tabs-mode nil)
 
-;; Enable recursive mini buffers.
-(setq enable-recursive-minibuffers t)
+;; Disable recursive mini buffers.
+(setq enable-recursive-minibuffers nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                            Backup                                ;;
