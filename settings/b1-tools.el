@@ -66,6 +66,7 @@
 ;; 
 (use-package avy
   :bind
+  ("M-g M-c" . avy-goto-char)
   ("M-g M-a" . avy-goto-char-2)
   ("M-g M-l" . avy-goto-line))
 
