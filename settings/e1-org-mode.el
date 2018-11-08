@@ -40,6 +40,10 @@
 (define-key org-mode-map (kbd "C-c C-.") 'org-demote-subtree)
 (define-key org-mode-map (kbd "C-c C-l") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "C-c C-i") 'org-mark-ring-goto)
+(define-key org-agenda-mode-map (kbd "w") 'org-agenda-week-view)
+(define-key org-agenda-mode-map (kbd "m") 'org-agenda-month-view)
+(define-key org-agenda-mode-map (kbd "y") 'org-agenda-year-view)
+(define-key org-agenda-mode-map (kbd "M") 'org-agenda-bulk-mark)
 
 (use-package helm
   :bind
@@ -99,7 +103,7 @@
 ;; Set the default directory for all notes.
 (setq org-directory "~/notes/")
 ;; Days to show in agenda view.
-(setq org-agenda-span 'month)
+(setq org-agenda-span 3)
 ;; Always start on today in agenda.
 (setq org-agenda-start-on-weekday nil)
 ;; Display agenda in the other window.
