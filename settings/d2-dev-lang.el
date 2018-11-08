@@ -216,6 +216,8 @@
         ("C-c c" . slime-compile-file)
         ("C-c r" . slime-eval-region)
         ("C-c C-d d" . hyperspec-lookup))
+  (:map slime-repl-mode-map
+        ("C-M-l" . slime-repl-clear-buffer))
 
   :config
   (call-when-defined 'slime-setup '(slime-fancy slime-company slime-repl-ansi-color))
