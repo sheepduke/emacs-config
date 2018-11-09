@@ -21,6 +21,15 @@
 
   :bind
   (:map ivy-mode-map
+        ;; Utilities
+        ("M-x" . counsel-M-x)
+        ("C-h b" . counsel-descbinds)
+        ("C-h f" . counsel-describe-function)
+        ("C-h v" . counsel-describe-variable)
+        ("C-h a" . counsel-apropos)
+        ("C-h S" . counsel-info-lookup-symbol)
+        ("C-x C-f" . counsel-find-file)
+        ("C-x r b" . counsel-bookmark)
         ("C-s" . swiper)
         ("M-i" . counsel-yank-pop)
         ("C-:" . counsel-company)
