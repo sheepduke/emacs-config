@@ -41,7 +41,8 @@
         ("C-c p h" . counsel-projectile)
         ("C-c p a" . counsel-projectile-ag)
         ;; Misc
-        ("C-h b" . counsel-descbinds))
+        ("C-h b" . counsel-descbinds)
+        ("C-c C-j" . counsel-outline))
   
   :config
   (ivy-mode 1))

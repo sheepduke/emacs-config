@@ -41,11 +41,6 @@
 (define-key org-mode-map (kbd "C-c C-l") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "C-c C-i") 'org-mark-ring-goto)
 
-(use-package helm
-  :bind
-  (:map org-mode-map
-        ("C-c C-j" . helm-org-in-buffer-headings)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                         Localization                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
