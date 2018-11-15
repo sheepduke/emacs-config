@@ -21,10 +21,10 @@
 
 (defun org-mode-hook-function ()
   "Setup."
-  ;; Auto fill normal text but not table.
-  (auto-fill-mode 1)
-  (setq truncate-lines t)
-
+  (auto-fill-mode 0)
+  (toggle-truncate-lines 0)
+  (toggle-word-wrap 1)
+  
   (make-local-variable 'company-backends)
   (setq company-backends '((company-dabbrev :with company-yasnippet)))
 
@@ -289,3 +289,4 @@ EXPORTER is provided by Org Mode."
           (tags "refile"
                ((org-agenda-overriding-header "Refile")))
 		  nil))))
+
