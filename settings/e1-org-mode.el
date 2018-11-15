@@ -225,6 +225,9 @@ EXPORTER is provided by Org Mode."
 ;;                            Workflow                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package org-depend
+  :after org)
+
 ;; Keep track of done things.
 (setq org-log-done 'time)
 ;; Keep the task dependency.
@@ -239,15 +242,14 @@ EXPORTER is provided by Org Mode."
 (global-set-key (kbd "C-c k") 'org-capture)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "Doing(o!)" "Pause(p@/!)" "|"
-                  "Done(d@/!)" "Cancel(c@/!)")))
+      '((sequence "TODO(t)" "HOLD(h@/!)" "|"
+                  "DONE(d@/!)" "STOP(c@/!)")))
 
 (setq org-todo-keyword-faces
       '(("TODO" . org-todo)
-        ("PAUSE" :foreground "purple" :weight bold)
-        ("Doing" :foreground "cyan" :weight bold)
-        ("Done" :foreground "green" :weight bold)
-        ("CANCELED" :foreground "SlateGray4" :weight bold)))
+        ("HOLD" :foreground "purple" :weight bold)
+        ("DONE" . org-done)
+        ("STOP" :foreground "DarkGreen" :weight bold)))
 
 (setq org-refile-targets
       '((nil :maxlevel . 4)
@@ -284,4 +286,3 @@ EXPORTER is provided by Org Mode."
           (tags "refile"
                ((org-agenda-overriding-header "Refile")))
 		  nil))))
-
