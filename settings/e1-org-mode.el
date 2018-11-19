@@ -222,6 +222,31 @@ EXPORTER is provided by Org Mode."
       (add-hook 'htmlize-after-hook #'modi/htmlize-after-hook-flyspell-enable-maybe))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                             Journal                              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package org-journal
+  :init
+  ;; Set root directory.
+  (setq org-journal-dir "~/private/journal/")
+  ;; Set file format.
+  (setq org-journal-file-format "%Y-%m-%d.org")
+  ;; Set format of title in each journal file.
+  (setq org-journal-date-format "%Y-%m-%d")
+  ;; Use find-file in order to open new journal file in current window.
+  (setq org-journal-find-file 'find-file)
+  ;; Automatically adds current and future journals to agenda.
+  (setq org-journal-enable-agenda-integration t)
+  ;; Automatically carry over TODO items.
+  (setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"HOLD\"")
+  
+  :bind
+  ("C-c j s" . org-journal-search)
+  ("C-c j j" . org-journal-new-entry)
+  ("C-c j s" . org-journal-new-scheduled-entry)
+  ("C-c j v" . org-journal-schedule-view))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                            Workflow                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -264,8 +289,7 @@ EXPORTER is provided by Org Mode."
 ;; TARGET: file id file+headline
 (setq org-capture-templates
       `(("b" "Bookmark" entry (file+headline "bookmarks.org" "Bookmarks") "** %?")
-        ("k" "Capture" entry (file "capture.org") "* %?")
-        ("j" "Journal" plain (file ,(concat "~/private/journal/" (today "%Y-%m-%d") ".org")))))
+        ("k" "Capture" entry (file "capture.org") "* %?")))
 
 (setq org-agenda-sorting-strategy
       '((category-keep agenda habit-down time-up priority-down)
