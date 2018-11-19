@@ -5,10 +5,6 @@
 ;;; 
 ;;; Code:
 
-(defun today (format)
-  "Get today's date ISO date FORMAT."
-  (format-time-string format (current-time)))
-
 (defun line-in-comment? ()
   "Return T if current line is commented."
   (nth 4 (syntax-ppss)))
