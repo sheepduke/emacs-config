@@ -34,7 +34,7 @@
        'pdf-tools 'image+
        ;; productivity
        'ivy 'flx 'counsel-projectile
-       'sdcv 'org 'org-plus-contrib
+       'sdcv 'org 'org-plus-contrib 'org-journal
        'youdao-dictionary 'magit 'htmlize 'calfw-org 'calfw 'cal-china-x
        ;; themes
        'tangotango-theme 'spacemacs-theme
