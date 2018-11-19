@@ -243,7 +243,7 @@ EXPORTER is provided by Org Mode."
   :bind
   ("C-c j s" . org-journal-search)
   ("C-c j j" . org-journal-new-entry)
-  ("C-c j s" . org-journal-new-scheduled-entry)
+  ("C-c j k" . org-journal-new-scheduled-entry)
   ("C-c j v" . org-journal-schedule-view))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -301,10 +301,8 @@ EXPORTER is provided by Org Mode."
       '(("b" "Bookmarks" tags "+bookmark")
         ("n" "Agenda"
          ((agenda "" nil)
-		  (todo "Pause"
+		  (todo "HOLD"
                 ((org-agenda-overriding-header "On Hold")))
-          (todo "Doing"
-                ((org-agenda-overriding-header "Doing")))
 		  (todo "TODO"
 				((org-agenda-overriding-header "TODO List")))
           (tags "refile"
