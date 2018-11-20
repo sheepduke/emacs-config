@@ -303,8 +303,10 @@ EXPORTER is provided by Org Mode."
          ((agenda "" nil)
 		  (todo "HOLD"
                 ((org-agenda-overriding-header "On Hold")))
-		  (todo "TODO"
+		  (tags-todo "-backlog-reminder"
 				((org-agenda-overriding-header "TODO List")))
+          (tags-todo "backlog"
+                     ((org-agenda-overriding-header "Backlog")))
           (tags "refile"
                ((org-agenda-overriding-header "Refile")))
 		  nil))))
