@@ -228,7 +228,8 @@ EXPORTER is provided by Org Mode."
 (use-package org-journal
   :init
   ;; Set root directory.
-  (setq org-journal-dir "~/private/journal/")
+  (setq org-journal-dir
+        (concat org-directory "journal/"))
   ;; Set file format.
   (setq org-journal-file-format "%Y-%m-%d.org")
   ;; Set format of title in each journal file.
