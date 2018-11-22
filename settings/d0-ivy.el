@@ -14,10 +14,7 @@
 
   ;; Set regex engine for different scenario.
   (setq ivy-re-builders-alist
-        '((swiper . ivy--regex-plus)
-          (counsel-projectile . ivy--regex-plus)
-          (ivy-switch-buffer . ivy--regex-plus)
-          (t . ivy--regex-fuzzy)))
+        '((t . ivy--regex-plus)))
 
   :bind
   (:map ivy-mode-map
