@@ -28,7 +28,8 @@
     nil))
 
 ;; Register mail checking function.
-(setq display-time-mail-function 'check-new-mail)
+(when (file-exists-p *mailbox-dir*)
+  (setq display-time-mail-function 'check-new-mail))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              BBDB                                ;;
