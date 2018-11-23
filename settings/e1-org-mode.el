@@ -269,7 +269,7 @@ EXPORTER is provided by Org Mode."
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "HOLD(h@/!)" "|"
-                  "DONE(d@/!)" "STOP(c@/!)")))
+                  "DONE(d@/!)" "STOP(s@/!)")))
 
 (setq org-todo-keyword-faces
       '(("TODO" . org-todo)
