@@ -94,8 +94,7 @@
 ;; Disable tool bar
 (tool-bar-mode 0)
 ;; Disable scroll bar
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode 0))
+(call-when-defined 'scroll-bar-mode 0)
 ;; Automatically revert modified buffer
 (global-auto-revert-mode)
 ;; Save cursor place of file after exiting Emacs
