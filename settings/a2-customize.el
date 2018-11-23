@@ -36,7 +36,11 @@
 (setq scroll-preserve-screen-position t)
 
 ;; Increase the warning threshold to 10M.
-(setq large-file-warning-threshold 100000000)
+(setq large-file-warning-threshold 10000000)
+
+;; Tune GC threshold to speed it up.
+(setq gc-cons-threshold (eval-when-compile (* 10 1024 1024)))
+(run-with-idle-timer 2 t (lambda () (garbage-collect)))
 
 ;; Don't use <TAB>
 (setq-default indent-tabs-mode nil)

@@ -1,3 +1,8 @@
+;; When smex is installed, ivy will behave differently.
+(use-package smex
+  :config
+  (smex-initialize))
+
 (use-package ivy
   :init
   ;; Add `recentf-mode' and bookmarks to `ivy-switch-buffer'.
