@@ -222,6 +222,7 @@ then change the permission back. This works like Vim 'w!'"
 ;; Set the default method of tramp.
 (setq tramp-default-method "ssh")
 
+(global-set-key (kbd "C-c t a") 'auto-fill-mode)
 (global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c t d") 'toggle-debug-on-error)
 (global-set-key (kbd "C-c t l") 'linum-mode)
