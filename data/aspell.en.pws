@@ -1,4 +1,4 @@
-personal_ws-1.1 en 78 
+personal_ws-1.1 en 79 
 comparator
 refactoring
 timestamps
@@ -16,8 +16,8 @@ namespace
 UI
 Elasticsearch
 RESTful
-GitLab
 GitHub
+GitLab
 JMX
 comparators
 uptime
@@ -42,10 +42,10 @@ SRC
 RDB
 SRE
 aggregator
+workflow
 timestamp
 Lucene
 IP
-workflow
 customizable
 structs
 Zabbix
@@ -74,6 +74,7 @@ API
 OO
 Hadoop
 IOPS
+Rennes
 Kubernetes
 Ansible
 TBD
