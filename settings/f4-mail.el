@@ -90,6 +90,8 @@
   (setq notmuch-hello-recent-searches-max 10)
   ;; Do not save to "sent" file
   (setq notmuch-fcc-dirs nil)
+  ;; Show new emails first.
+  (setq notmuch-search-oldest-first nil)
 
   (defun notmuch-mark-all-as-read ()
     "Mark all unread mails as read."
