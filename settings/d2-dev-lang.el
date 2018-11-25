@@ -387,6 +387,26 @@
 
 (use-package python)
 
+;; For setup elpy, run:
+;; pip install jedi flake8 autopep8
+(use-package elpy
+  :after python
+
+  :preface
+  (defun elpy-shell-send-current-line ()
+    "Send current line to Python shell."
+    (interactive)
+    (python-shell-send-string (thing-at-point 'line)))
+
+  :bind
+  (:map elpy-mode-map
+        ("C-c p" . run-python)
+        ("C-c b" . elpy-shell-send-region-or-buffer)
+        ("C-c C-c" . elpy-send-current-line))
+
+  :config
+  (add-hook 'python-mode-hook 'elpy-enable))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Ruby                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
