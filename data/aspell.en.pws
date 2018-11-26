@@ -1,16 +1,23 @@
+<<<<<<< Updated upstream
 personal_ws-1.1 en 79 
+=======
+personal_ws-1.1 en 83 
+>>>>>>> Stashed changes
 comparator
+login
 refactoring
 timestamps
 QoS
 resize
 LVM
+StumpWM
 Redis
 PostgreSQL
 PDF
 polymorphism
 Quicklisp
 JSON
+runnable
 middleware
 namespace
 UI
@@ -35,6 +42,7 @@ AppDynamics
 transactional
 APIs
 Nginx
+uncomment
 NaN
 livelock
 Daian
@@ -54,6 +62,7 @@ CSS
 Wubi
 synchronizer
 boolean
+SBCL
 Regex
 broadcasted
 struct
