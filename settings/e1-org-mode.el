@@ -21,7 +21,7 @@
 
 (defun org-mode-hook-function ()
   "Setup."
-  (auto-fill-mode 0)
+  (auto-fill-mode 1)
   (toggle-truncate-lines 0)
   (toggle-word-wrap 1)
   
