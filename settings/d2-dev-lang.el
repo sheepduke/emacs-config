@@ -212,9 +212,9 @@
 
   :bind
   (:map slime-mode-map
-        ("C-c b" . slime-eval-buffer)
-        ("C-c c" . slime-compile-file)
-        ("C-c r" . slime-eval-region)
+        ("C-c C-k" . slime-interrupt)
+        ("C-c C-b" . slime-eval-buffer)
+        ("C-c C-l" . slime-eval-defun)
         ("C-c C-d d" . hyperspec-lookup))
   (:map slime-repl-mode-map
         ("C-M-l" . slime-repl-clear-buffer))
