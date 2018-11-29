@@ -196,10 +196,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package slime
-  :init
+  :preface
   (defun setup-slime-mode ()
     ;; Set the line length to 80.
     (setq fill-column 80))
+
+  (defun slime-repl-clear-buffer-anywhere ()
+    "Clear Slime buffer from anywhere."
+    (interactive)
+    (with-current-buffer "*slime-repl sbcl*"
+      (slime-repl-clear-buffer)))
+
+  :init
   (add-hook 'slime-mode-hook 'setup-slime-mode)
   
   ;; set common lisp REPL
@@ -215,7 +223,8 @@
         ("C-c C-k" . slime-interrupt)
         ("C-c C-b" . slime-eval-buffer)
         ("C-c C-l" . slime-eval-defun)
-        ("C-c C-d d" . hyperspec-lookup))
+        ("C-c C-d d" . hyperspec-lookup)
+        ("C-M-l" . slime-repl-clear-buffer-anywhere))
   (:map slime-repl-mode-map
         ("C-M-l" . slime-repl-clear-buffer))
 
