@@ -199,7 +199,8 @@
   :preface
   (defun setup-slime-mode ()
     ;; Set the line length to 80.
-    (setq fill-column 80))
+    (setq fill-column 80)
+    (ggtags-mode 0))
 
   (defun slime-repl-clear-buffer-anywhere ()
     "Clear Slime buffer from anywhere."
@@ -229,7 +230,8 @@
         ("C-M-l" . slime-repl-clear-buffer))
 
   :config
-  (call-when-defined 'slime-setup '(slime-fancy slime-company slime-repl-ansi-color))
+  (call-when-defined 'slime-setup
+                     '(slime-fancy slime-company slime-repl-ansi-color))
 
   (add-hook 'slime-repl-mode-hook 'company-mode))
 
