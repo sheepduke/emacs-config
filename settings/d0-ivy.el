@@ -1,7 +1,7 @@
 ;; When smex is installed, ivy will behave differently.
 (use-package smex
   :config
-  (smex-initialize))
+  (call-when-defined 'smex-initialize))
 
 (use-package ivy
   :init
@@ -47,4 +47,4 @@
         ("C-c C-j" . counsel-outline))
   
   :config
-  (ivy-mode 1))
+  (call-when-defined 'ivy-mode 1))

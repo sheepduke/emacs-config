@@ -18,7 +18,7 @@
         (let ((dir (concat *mailbox-dir* filename "/new/")))
           (when (and (file-exists-p dir)
                      (> (length (directory-files dir)) 2))
-            (call-when-defined mail-update-function)
+            (call-when-defined 'mail-update-function :quietp t)
             (unless *notification-sent*
               (setq *notification-sent* t)
               (notifications-notify :title "New mail"))
@@ -85,6 +85,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package notmuch
+  :preface
+  (defun notmuch-mark-all-as-read ()
+    "Mark all unread mails as read."
+    (interactive)
+    (call-when-defined 'notmuch-tag "tag:unread" '("-unread")))
+
   :init
   ;; The number of recent searches to display.
   (setq notmuch-hello-recent-searches-max 10)
@@ -92,11 +98,6 @@
   (setq notmuch-fcc-dirs nil)
   ;; Show new emails first.
   (setq notmuch-search-oldest-first nil)
-
-  (defun notmuch-mark-all-as-read ()
-    "Mark all unread mails as read."
-    (interactive)
-    (notmuch-tag "tag:unread" '("-unread")))
 
   ;; Set the saved searchers.
   (setq notmuch-saved-searches

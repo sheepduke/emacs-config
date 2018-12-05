@@ -407,7 +407,7 @@
   (defun elpy-shell-send-current-line ()
     "Send current line to Python shell."
     (interactive)
-    (python-shell-send-string (thing-at-point 'line)))
+    (call-when-defined 'python-shell-send-string (thing-at-point 'line)))
 
   :bind
   (:map elpy-mode-map

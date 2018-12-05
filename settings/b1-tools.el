@@ -101,13 +101,6 @@
 ;; 
 (use-package pyim
   :init
-  (require 'pyim)
-  
-  :config
-  (use-package pyim-basedict
-	:config
-	(call-when-defined 'pyim-basedict-enable))
-
   ;; 设定默认输入法
   (setq default-input-method "pyim")
   ;; 使用五笔
@@ -119,7 +112,7 @@
   (setq pyim-page-tooltip 'minibuffer)
 
   ;; 设定词库文件
-  (pyim-wbdict-gbk-enable)
+  (pyim-wbdict-v98-enable)
 
   :bind
   ("C-`" . toggle-input-method))
