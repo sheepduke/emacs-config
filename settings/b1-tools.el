@@ -101,6 +101,7 @@
 ;; 
 (use-package pyim
   :init
+  (require 'pyim)
   ;; 设定默认输入法
   (setq default-input-method "pyim")
   ;; 使用五笔
