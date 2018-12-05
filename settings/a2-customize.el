@@ -54,7 +54,7 @@
 
 ;; Control where to put backup files.
 (setq backup-by-copying t)
-(setq backup-directory-alist '(("." . "/home/sheep/backup")))
+(setq backup-directory-alist `(("." . ,*backup-dir*)))
 ;; Don't delete the old version.
 (setq delete-old-versions t)
 (setq kept-new-versions 2)

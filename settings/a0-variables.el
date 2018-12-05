@@ -22,8 +22,13 @@
 (defvar *mailbox-dir* "~/mailbox/"
   "Location of mail box.")
 
+(defvar *rust-src-dir* "~/software/rust/src/"
+  "Path to Rust source directory.")
+
+(defvar *backup-dir* "~/backup/"
+  "Path to backup directory.")
+
 (defvar-local company-fci-mode-on-p nil
   "Used by hack between company-mode and fci-mode inside dev-common.el")
-
 
 ;;; a0-variables.el ends here
