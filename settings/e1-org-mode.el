@@ -233,7 +233,7 @@ EXPORTER is provided by Org Mode."
   ;; Set file format.
   (setq org-journal-file-format "%Y-%m-%d.org")
   ;; Set format of title in each journal file.
-  (setq org-journal-date-format "%Y-%m-%d")
+  (setq org-journal-date-format "%Y-%m-%d (%A)")
   ;; Use find-file in order to open new journal file in current window.
   (setq org-journal-find-file 'find-file)
   ;; Automatically adds current and future journals to agenda.
