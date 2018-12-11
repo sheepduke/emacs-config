@@ -396,7 +396,10 @@
 ;;                              Python                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package python)
+(use-package python
+  :init
+  (setq python-shell-interpreter "python3")
+  (setq flycheck-python-pycompile-executable "python3"))
 
 ;; For setup elpy, run:
 ;; pip install jedi flake8 autopep8
@@ -409,11 +412,15 @@
     (interactive)
     (call-when-defined 'python-shell-send-string (thing-at-point 'line)))
 
+  :init
+  (setq elpy-rpc-python-command "python3")
+
   :bind
   (:map elpy-mode-map
         ("C-c p" . run-python)
-        ("C-c b" . elpy-shell-send-region-or-buffer)
-        ("C-c C-c" . elpy-send-current-line))
+        ("C-c C-r" . 'elpy-shell-send-region-or-buffer)
+        ("C-c C-b" . elpy-shell-send-region-or-buffer)
+        ("C-c C-c" . elpy-shell-send-current-line))
 
   :config
   (add-hook 'python-mode-hook 'elpy-enable))

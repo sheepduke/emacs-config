@@ -91,6 +91,8 @@
            ("C-<return>" . w3m-view-this-url-new-session)
 		   ("C-M-h" . w3m-previous-buffer)
 		   ("C-M-l" . w3m-next-buffer)
+           ("H" . w3m-view-previous-page)
+           ("L" . w3m-view-next-page)
 		   ("h" . w3m-db-history))
 
     :defines
