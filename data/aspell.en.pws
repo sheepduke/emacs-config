@@ -1,4 +1,4 @@
-personal_ws-1.1 en 85 
+personal_ws-1.1 en 86 
 comparator
 login
 refactoring
@@ -19,14 +19,14 @@ namespace
 UI
 Elasticsearch
 RESTful
-GitLab
 GitHub
+GitLab
 JMX
 comparators
 uptime
 UTF
-VM
 CLISP
+VM
 Morphling
 EBS
 Grafana
@@ -74,6 +74,7 @@ resizing
 ZooKeeper
 Telecom
 REPL
+WAP
 STW
 tmux
 API
