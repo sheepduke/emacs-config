@@ -591,7 +591,8 @@
 
   (defun markdown-live-preview-w3m-reload ()
     "Reload generated HTML."
-    (when (get-buffer "*w3m*")
+    (when (and markdown-live-preview-mode
+               (get-buffer "*w3m*"))
       (w3m-reload-all-pages)))
 
   :init
