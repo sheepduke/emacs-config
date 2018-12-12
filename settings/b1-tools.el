@@ -125,10 +125,6 @@
   :config
   (call-when-defined 'nyan-mode 1))
 
-(use-package zone
-  :config
-  (call-when-defined 'zone-when-idle 600))
-
 (use-package so-long
   :init
   ;; Set the max columns that will trigger so-long mode.
