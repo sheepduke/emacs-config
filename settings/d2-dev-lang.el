@@ -363,34 +363,24 @@
     :init
     (add-hook 'web-mode-hook 'rainbow-mode)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                           JavaScript                             ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package simple-httpd
-  :init
-  (setq httpd-port (+ 10000 (random 1000))))
-
-(use-package js2-mode
-  :init
-  ;; Default indent level.
-  (setq js-indent-level 2)
-  ;; Indent after "switch".
-  (setq js-switch-indent-offset 2)
-  ;; Do not indent continuous function arguments.
-  (setq js-indent-align-list-continuation nil)
-
-  (defun setup-js2-mode ()
-    (setq fill-column 120))
-  (add-hook 'js2-mode-hook 'setup-js2-mode)
+(use-package indium
+  :preface
+  (defun indium-eval-current-line ()
+    "Send current line to REPL."
+    (interactive)
+    (indium-eval-region (line-beginning-position) (line-end-position)))
   
-  :mode "\\.js\\'")
-
-(use-package skewer-mode
-  :after js2-mode
-
-  :init
-  (add-hook 'js2-mode-hook 'skewer-mode)
-  (add-hook 'css-mode-hook 'skewer-css-mode)
-  (add-hook 'html-mode-hook 'skewer-html-mode))
-
+  :bind
+  (:map js-mode-map
+        ("C-c C-p" . indium-launch)
+        ("C-c C-l" . indium-eval-defun)
+        ("C-x C-e" . indium-eval-last-node)
+        ("C-c C-b" . indium-eval-buffer)
+        ("C-c C-c" . indium-eval-current-line)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;

@@ -44,7 +44,7 @@
        'hideshow 'arduino-mode 'cmake-mode 'company-c-headers 'erlang
        'company-erlang 'alchemist 'rust-mode 'cargo 'racer 'flycheck-rust
        'company-racer 'slime 'slime-company 'cider 'geiser 'web-mode
-       'rainbow-mode 'simple-httpd 'js2-mode 'skewer-mode 'vue-mode 'python
+       'rainbow-mode 'indium 'python
        'elpy 'ruby-mode 'inf-ruby 'company-inf-ruby 'go-mode 'go-eldoc
        'company-go 'latex-preview-pane 'reftex-toc 'company-auctex
        'markdown-mode 'flymd 'markdown-toc 'yaml-mode 'julia-mode 'julia-repl
