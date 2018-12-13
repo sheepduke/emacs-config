@@ -1,4 +1,4 @@
-personal_ws-1.1 en 86 
+personal_ws-1.1 en 87 
 comparator
 login
 refactoring
@@ -19,8 +19,8 @@ namespace
 UI
 Elasticsearch
 RESTful
-GitHub
 GitLab
+GitHub
 JMX
 comparators
 uptime
@@ -75,6 +75,7 @@ ZooKeeper
 Telecom
 REPL
 WAP
+Redmine
 STW
 tmux
 API

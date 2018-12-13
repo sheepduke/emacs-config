@@ -242,5 +242,7 @@ then change the permission back. This works like Vim 'w!'"
 (global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c t d") 'toggle-debug-on-error)
 (global-set-key (kbd "C-c t l") 'linum-mode)
+(global-set-key (kbd "C-c t m") 'master-mode)
+(define-key master-mode-map (kbd "C-c C-l") 'master-set-slave)
 
 ;;; a2-customize.el ends here
