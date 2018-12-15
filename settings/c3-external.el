@@ -141,6 +141,8 @@
   (use-package image+
 	:init
 	(add-hook 'after-init-hook 'imagex-global-sticky-mode)
+    ;; Stop showing annoying warnings.
+    (setq imagex-quiet-error t)
 
 	(defun image-rotate-original (degree)
 	  "Rotate original image file with given DEGREE."
