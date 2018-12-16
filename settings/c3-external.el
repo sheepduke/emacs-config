@@ -143,6 +143,8 @@
 	(add-hook 'after-init-hook 'imagex-global-sticky-mode)
     ;; Stop showing annoying warnings.
     (setq imagex-quiet-error t)
+    ;; Use feh to view image externally.
+    (setq image-dired-external-viewer "feh")
 
 	(defun image-rotate-original (degree)
 	  "Rotate original image file with given DEGREE."
