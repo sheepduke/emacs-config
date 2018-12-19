@@ -404,16 +404,14 @@
 
   :init
   (setq elpy-rpc-python-command "python3")
+  (call-when-defined 'elpy-enable)
 
   :bind
   (:map elpy-mode-map
         ("C-c p" . run-python)
         ("C-c C-r" . 'elpy-shell-send-region-or-buffer)
         ("C-c C-b" . elpy-shell-send-region-or-buffer)
-        ("C-c C-c" . elpy-shell-send-current-line))
-
-  :config
-  (add-hook 'python-mode-hook 'elpy-enable))
+        ("C-c C-c" . elpy-shell-send-current-line)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Ruby                               ;;
@@ -583,7 +581,7 @@
     "Reload generated HTML."
     (when (and markdown-live-preview-mode
                (get-buffer "*w3m*"))
-      (w3m-reload-all-pages)))
+      (call-when-defined 'w3m-reload-all-pages)))
 
   :init
   ;; Use pandoc as markdown generator.
