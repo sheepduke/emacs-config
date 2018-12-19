@@ -243,10 +243,11 @@ then change the permission back. This works like Vim 'w!'"
 (setq tramp-default-method "ssh")
 
 (global-set-key (kbd "C-c t a") 'auto-fill-mode)
-(global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c t d") 'toggle-debug-on-error)
+(global-set-key (kbd "C-c t i") 'auto-revert-tail-mode)
 (global-set-key (kbd "C-c t l") 'linum-mode)
 (global-set-key (kbd "C-c t m") 'master-mode)
+(global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
 
 (use-package master
   :bind
