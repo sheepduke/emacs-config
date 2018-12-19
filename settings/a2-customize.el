@@ -150,6 +150,10 @@ output."
 ;; dired guesses the target directory
 (setq dired-dwim-target t)
 
+(require 'dired-x)
+(setq dired-omit-files "^\\.?#\\|^\\.")
+(define-key dired-mode-map (kbd "h") 'dired-omit-mode)
+
 (defun sudo-find-file (file-name)
   "Like find file, but opens the file as root."
   (interactive "FSudo Find File: ")
