@@ -120,7 +120,7 @@
 
 (use-package nyan-mode
   :init
-  (setq nyan-bar-length 20)
+  (setq nyan-bar-length 10)
   
   :config
   (call-when-defined 'nyan-mode 1)

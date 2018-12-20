@@ -120,7 +120,17 @@ A dedicated window can't be switched or modified by some commands."
 	 (autopair-mode "" autopair)
 	 (undo-tree-mode "" undo-tree)
 	 (eldoc-mode "" eldoc)
+     (ivy-mode "" ivy)
 	 (yas-minor-mode "" yasnippet)
+     ;; Dired
+     (dired-async-mode "" dired-async)
+     ;; Programming
+     (hs-minor-mode "" hideshow)
+     (highlight-indent-guides-mode "" highlight-indent-guides)
+     (ggtags-mode "" ggtags)
+     (company-mode "" company)
+     (projectile-mode "" projectile)
+     (vc-mode "" vc)
 	 ;; LaTeX ref, cite etc.
 	 (reftex-mode "" reftex)
 	 (latex-preview-pane-mode " Pane" latex-preview-pane))))

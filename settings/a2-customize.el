@@ -83,22 +83,24 @@
 ;;                              Modes                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Show column number
+;; Show column number.
 (column-number-mode 1)
-;; Show line number
+;; Show line number.
 (line-number-mode 1)
-;; Show matched parenthesis
+;; Show matched parenthesis.
 (show-paren-mode 1)
-;; Disable menu bar
+;; Disable menu bar.
 (menu-bar-mode 0)
-;; Disable tool bar
+;; Disable tool bar.
 (tool-bar-mode 0)
-;; Disable scroll bar
+;; Disable scroll bar.
 (call-when-defined 'scroll-bar-mode 0)
-;; Automatically revert modified buffer
+;; Automatically revert modified buffer.
 (global-auto-revert-mode)
-;; Save cursor place of file after exiting Emacs
+;; Save cursor place of file after exiting Emacs.
 (save-place-mode 1)
+;; Disable vc-mode.
+(setq vc-handled-backends '())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                             Time                                 ;;
