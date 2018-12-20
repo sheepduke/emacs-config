@@ -345,42 +345,46 @@
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
 
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-indent-style 2)
-
+  :preface
   (defun web-mode-setup ()
 	(make-local-variable 'company-backends)
 	(setq company-backends
 		  '(company-web-html :with 'company-yasnippet))
     (fci-mode 0)
     (setq fill-column 120))
-  (add-hook 'web-mode-hook 'web-mode-setup)
 
-  (use-package rainbow-mode
-    :init
-    (add-hook 'web-mode-hook 'rainbow-mode)))
+  :init
+  ;; Set offset to 2.
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-indent-style 2)
+
+
+  :config
+  (add-hook 'web-mode-hook 'web-mode-setup))
+
+(use-package rainbow-mode
+  :after web-mode
+  :init
+  (add-hook 'web-mode-hook 'rainbow-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                           JavaScript                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package indium
+(use-package js2-mode
+  :init
+  (setq js-indent-level 2))
+
+(use-package tide
   :preface
-  (defun indium-eval-current-line ()
-    "Send current line to REPL."
-    (interactive)
-    (indium-eval-region (line-beginning-position) (line-end-position)))
-  
-  :bind
-  (:map js-mode-map
-        ("C-c C-p" . indium-launch)
-        ("C-c C-l" . indium-eval-defun)
-        ("C-x C-e" . indium-eval-last-node)
-        ("C-c C-b" . indium-eval-buffer)
-        ("C-c C-c" . indium-eval-current-line)))
+  (defun setup-tide-mode ()
+    (call-when-defined 'tide-setup)
+    (add-hook 'before-save-hook 'tide-format-before-save))
+
+  :config
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;

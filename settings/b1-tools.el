@@ -123,7 +123,8 @@
   (setq nyan-bar-length 20)
   
   :config
-  (call-when-defined 'nyan-mode 1))
+  (call-when-defined 'nyan-mode 1)
+  (call-when-defined 'nyan-start-animation))
 
 (use-package so-long
   :init
