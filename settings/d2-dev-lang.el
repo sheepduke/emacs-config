@@ -195,45 +195,35 @@
 ;;                         Common Lisp                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package slime
+(use-package sly
   :preface
-  (defun setup-slime-mode ()
-    ;; Set the line length to 80.
-    (setq fill-column 80)
-    (ggtags-mode 0))
-
-  (defun slime-repl-clear-buffer-anywhere ()
-    "Clear Slime buffer from anywhere."
+  (defun sly-repl-clear-buffer-anywhere ()
+    "Clear Sly buffer from anywhere."
     (interactive)
-    (with-current-buffer "*slime-repl sbcl*"
-      (slime-repl-clear-buffer)))
+    (with-current-buffer "*sly-mrepl for sbcl*"
+      (call-when-defined 'sly-mrepl-clear-repl)))
 
   :init
-  (add-hook 'slime-mode-hook 'setup-slime-mode)
-  
   ;; set common lisp REPL
   (setq inferior-lisp-program "ros run")
-  (require 'slime-autoloads)
+  ;; Use classic completion style.
+  (setq sly-complete-symbol-function 'sly-simple-completions)
 
   ;; Set the location of HyperSpec.
   (setq common-lisp-hyperspec-root
         (expand-file-name "~/documents/manuals/lisp/HyperSpec/"))
 
+  (add-hook 'lisp-mode-hook 'sly-editing-mode)
+  
   :bind
-  (:map slime-mode-map
-        ("C-c C-k" . slime-interrupt)
-        ("C-c C-b" . slime-eval-buffer)
-        ("C-c C-l" . slime-eval-defun)
+  (:map sly-mode-map
+        ("C-c C-k" . sly-interrupt)
+        ("C-c C-b" . sly-eval-buffer)
+        ("C-c C-l" . sly-eval-defun)
         ("C-c C-d d" . hyperspec-lookup)
-        ("C-M-l" . slime-repl-clear-buffer-anywhere))
-  (:map slime-repl-mode-map
-        ("C-M-l" . slime-repl-clear-buffer))
-
-  :config
-  (call-when-defined 'slime-setup
-                     '(slime-fancy slime-company slime-repl-ansi-color))
-
-  (add-hook 'slime-repl-mode-hook 'company-mode))
+        ("C-M-l" . sly-repl-clear-buffer-anywhere)))
+  ;; (:map sly-mrepl-mode-map
+  ;;       ("C-M-l" . sly-mrepl-clear-repl)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
