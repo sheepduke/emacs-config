@@ -412,7 +412,7 @@
 
   :bind
   (:map elpy-mode-map
-        ("C-c p" . run-python)
+        ("C-c C-p" . run-python)
         ("C-c C-r" . 'elpy-shell-send-region-or-buffer)
         ("C-c C-b" . elpy-shell-send-region-or-buffer)
         ("C-c C-c" . elpy-shell-send-current-line)))
