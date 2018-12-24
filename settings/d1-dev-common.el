@@ -207,6 +207,12 @@ completion."
 
 (use-package lsp)
 
+(use-package company-lsp
+  :after company
+  
+  :init
+  (push 'company-lsp company-backends))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Misc                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

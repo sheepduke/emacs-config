@@ -373,8 +373,16 @@
   (defun setup-tide-mode ()
     (call-when-defined 'tide-setup))
 
-  :config
-  )
+  :init
+  (add-hook 'js-mode-hook 'setup-tide-mode))
+
+(use-package vue-mode
+  :init
+  ;; Start lsp.
+  (add-hook 'vue-mode-hook 'lsp)
+
+  ;; Disable ugly background color in vue-mode.
+  (set-face-background 'mmm-default-submode-face nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;
