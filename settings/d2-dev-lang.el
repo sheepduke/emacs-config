@@ -196,6 +196,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package sly
+  :ensure
   :preface
   (defun sly-repl-clear-buffer-anywhere ()
     "Clear Sly buffer from anywhere."
@@ -349,7 +350,7 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-indent-style 2)
-
+  (setq css-indent-offset 2)
 
   :config
   (add-hook 'web-mode-hook 'web-mode-setup))
@@ -370,8 +371,7 @@
 (use-package tide
   :preface
   (defun setup-tide-mode ()
-    (call-when-defined 'tide-setup)
-    (add-hook 'before-save-hook 'tide-format-before-save))
+    (call-when-defined 'tide-setup))
 
   :config
   )
