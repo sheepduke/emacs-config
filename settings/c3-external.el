@@ -10,6 +10,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package emms
+  :ensure
   :init
   (require 'emms-setup)
 
@@ -58,6 +59,7 @@
 
 (when (executable-find "w3m")
   (use-package w3m
+    :ensure
 	:init
 	(setq w3m-home-page "about://bookmark/")
     ;; Images
@@ -138,6 +140,7 @@
 
 ;; Image processing
 (when (executable-find "convert")
+  :ensure
   (use-package image+
 	:init
 	(add-hook 'after-init-hook 'imagex-global-sticky-mode)

@@ -1,9 +1,11 @@
 ;; When smex is installed, ivy will behave differently.
 (use-package smex
+  :ensure
   :config
   (call-when-defined 'smex-initialize))
 
 (use-package ivy
+  :ensure
   :init
   ;; Add `recentf-mode' and bookmarks to `ivy-switch-buffer'.
   (setq ivy-use-virtual-buffers t)

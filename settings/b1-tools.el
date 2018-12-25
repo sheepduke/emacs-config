@@ -9,6 +9,7 @@
 ;; Used to automatically pair brackets.
 ;; 
 (use-package electric
+  :ensure
   :config
   (electric-pair-mode))
 
@@ -22,6 +23,7 @@
 ;; Make undo like a tree.
 ;; 
 (use-package undo-tree
+  :ensure
   :init
   ;; Show diffs when browsing through the undo tree
   (setq undo-tree-visualizer-diff t)
@@ -41,6 +43,7 @@
 ;; Replace the original doc-view for PDF files.
 ;;
 (use-package pdf-tools
+  :ensure
   :config
   (call-when-defined 'pdf-tools-install))
 
@@ -48,6 +51,7 @@
 ;; Edit multiple places at the same time.
 ;; 
 (use-package multiple-cursors
+  :ensure
   :init
   (setq mc/always-run-for-all t)
   :bind
@@ -57,6 +61,7 @@
 ;; It's Magit! Git inside Emacs.
 ;; 
 (use-package magit
+  :ensure
   :bind ("C-x v" . magit-status)
   :config
   (add-hook 'git-commit-mode-hook 'flyspell-mode))
@@ -65,6 +70,7 @@
 ;; Jump to character from 2 leading chars.
 ;; 
 (use-package avy
+  :ensure
   :bind
   ("M-g c" . avy-goto-char)
   ("M-g a" . avy-goto-char-2)
@@ -74,6 +80,7 @@
 ;; Automatically compile Emacs Lisp libraries
 ;; 
 (use-package auto-compile
+  :ensure
   :config
   (call-when-defined 'auto-compile-on-load-mode)
   (call-when-defined 'auto-compile-on-save-mode))
@@ -82,6 +89,7 @@
 ;; Execute asynchronous commands.
 ;; 
 (use-package async
+  :ensure
   :config
   (dired-async-mode 1))
 
@@ -89,6 +97,7 @@
 ;; Provides more features.
 ;; 
 (use-package dired+
+  :ensure
   :config
   ;; Show image thumb in tooltip.
   (setq diredp-image-preview-in-tooltip 300)
@@ -100,6 +109,7 @@
 ;; Built-in input method.
 ;; 
 (use-package pyim
+  :ensure
   :init
   (require 'pyim)
   ;; 设定默认输入法
@@ -119,6 +129,7 @@
   ("C-`" . toggle-input-method))
 
 (use-package nyan-mode
+  :ensure
   :init
   (setq nyan-bar-length 10)
   

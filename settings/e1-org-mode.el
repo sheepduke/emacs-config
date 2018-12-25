@@ -178,6 +178,7 @@ EXPORTER is provided by Org Mode."
 (add-hook 'org-export-before-processing-hook 'org-inline-style-file)
 
 (use-package htmlize
+  :ensure
   :defer t
   :config
   (progn
@@ -226,6 +227,7 @@ EXPORTER is provided by Org Mode."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-journal
+  :ensure
   :init
   ;; Set root directory.
   (setq org-journal-dir
@@ -251,8 +253,7 @@ EXPORTER is provided by Org Mode."
 ;;                            Workflow                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package org-depend
-  :after org)
+(require 'org-depend)
 
 ;; Keep track of done things.
 (setq org-log-done 'time)

@@ -387,7 +387,7 @@
 
 (use-package mmm-mode
   :ensure
-  :init
+  :config
   (set-face-background 'mmm-default-submode-face nil))
 
 (use-package vue-mode

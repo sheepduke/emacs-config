@@ -36,6 +36,7 @@
 
 ;; Contact database supporting Gnus contact completion.
 (use-package bbdb
+  :ensure
   :init
   ;; set bbdb database location.
   (setq bbdb-file (concat *data-path* "bbdb"))
@@ -85,6 +86,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package notmuch
+  :ensure
+
   :preface
   (defun notmuch-mark-all-as-read ()
     "Mark all unread mails as read."

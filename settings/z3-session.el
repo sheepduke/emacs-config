@@ -1,4 +1,5 @@
 (use-package desktop
+  :ensure
   :init
   ;; No automatic save.
   (setq desktop-save nil)
@@ -20,6 +21,7 @@
   (add-to-list 'desktop-globals-to-save 'custom-enabled-themes))
 
 (use-package elscreen-persist
+  :ensure
   :init
   (defvar desktop-data-elscreen nil
 	"Variable to hold elscreen-persist data.")

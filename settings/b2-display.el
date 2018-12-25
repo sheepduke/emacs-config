@@ -64,6 +64,7 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Provide GNU screen like screen facility in Emacs.
 (use-package elscreen
+  :ensure
   :init
   ;; Don't display the tab on the top
   (setq elscreen-display-tab nil)
@@ -79,6 +80,7 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Force window behavior.
 (use-package shackle
+  :ensure
   :init 
   ;; one of below, above, left, right
   (setq shackle-default-alignment 'below)
@@ -104,6 +106,7 @@ A dedicated window can't be switched or modified by some commands."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package delight
+  :ensure
   :init
   ;; Disable auto-fill mode line.
   (call-when-defined 'delight 'auto-fill-function "" t)
@@ -141,6 +144,7 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Redo or undo window configuration.
 (use-package winner
+  :ensure
   :bind
   ("C-c w p" . winner-undo)
   ("C-c w n" . winner-redo)
@@ -151,6 +155,7 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Fast switching frames
 (use-package ace-window
+  :ensure
   :init
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 
@@ -160,6 +165,7 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Quickly move between windows like a agility snake.
 (use-package windmove
+  :ensure
   :init
   (setq windmove-wrap-around t)
   
