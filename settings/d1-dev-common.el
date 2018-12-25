@@ -11,6 +11,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package company
+  :ensure
   :init
   ;; Make company mode complete immediately.
   (setq company-idle-delay 0)
@@ -103,6 +104,7 @@ completion."
 
 
 (use-package company-quickhelp
+  :ensure
   :init
   (setq company-quickhelp-delay 0)
 
@@ -114,6 +116,7 @@ completion."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package projectile
+  :ensure
   :init
   ;; Offline SVN.
   (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
@@ -126,6 +129,7 @@ completion."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yasnippet
+  :ensure
   :init
   (setq yas-snippet-dirs (list (concat *data-path* "yasnippets")))
 
@@ -142,6 +146,7 @@ completion."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package flycheck
+  :ensure
   :config
   (call-when-defined 'global-flycheck-mode))
 
@@ -151,6 +156,7 @@ completion."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package flyspell
+  :ensure
   :config
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
@@ -160,6 +166,7 @@ completion."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package ggtags
+  :ensure
   :init
   (add-hook 'prog-mode-hook 'ggtags-mode)
 
@@ -175,6 +182,7 @@ completion."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package highlight-indent-guides
+  :ensure
   :config
   (setq highlight-indent-guides-method 'character)
   ;; Set how obvious the indicator character is. Higher, more obvious.
@@ -182,6 +190,7 @@ completion."
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 
 (use-package fill-column-indicator
+  :ensure
   :config
   (setq-default fill-column 78)
   (add-hook 'prog-mode-hook 'fci-mode))
@@ -193,6 +202,7 @@ completion."
 
 (require 'hideshow)
 (use-package hideshow
+  :ensure
   :config
   (add-hook 'prog-mode-hook 'hs-minor-mode)
   :bind
@@ -205,9 +215,12 @@ completion."
 ;;                               lsp                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package lsp-mode
+  :ensure)
 (use-package lsp)
 
 (use-package company-lsp
+  :ensure
   :after company
   
   :init

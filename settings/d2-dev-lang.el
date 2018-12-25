@@ -35,6 +35,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package cc-mode
+  :ensure
   :init
   ;; Use 'gnu' coding style.
   (setq c-default-style "gnu")
@@ -66,6 +67,7 @@
   (add-hook 'c-mode-hook 'c/c++-mode-setup-company))
 
 (use-package cmake-mode
+  :ensure
   :mode "CMakeLists\\.txt\\'"
   :mode "\\.cmake\\'")
 
@@ -365,24 +367,34 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package js2-mode
+  :preface
+  (defun setup-js2-mode ()
+    (when (equal major-mode 'js-mode)
+      (call-when-defined 'js2-minor-mode)))
+
   :init
-  (setq js-indent-level 2))
+  (setq js-indent-level 2)
+  (add-hook 'js-mode-hook 'setup-js2-mode))
 
 (use-package tide
   :preface
   (defun setup-tide-mode ()
-    (call-when-defined 'tide-setup))
+    (when (equal major-mode 'js-mode)
+      (call-when-defined 'tide-setup)))
 
   :init
   (add-hook 'js-mode-hook 'setup-tide-mode))
 
+(use-package mmm-mode
+  :ensure
+  :init
+  (set-face-background 'mmm-default-submode-face nil))
+
 (use-package vue-mode
   :init
   ;; Start lsp.
-  (add-hook 'vue-mode-hook 'lsp)
+  (add-hook 'vue-mode-hook 'lsp))
 
-  ;; Disable ugly background color in vue-mode.
-  (set-face-background 'mmm-default-submode-face nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;
