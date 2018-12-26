@@ -93,19 +93,6 @@
   :config
   (dired-async-mode 1))
 
-
-;; Provides more features.
-;; 
-(use-package dired+
-  :ensure
-  :config
-  ;; Show image thumb in tooltip.
-  (setq diredp-image-preview-in-tooltip 300)
-  ;; Just show me all the information.
-  (setq diredp-hide-details-initially-flag nil)
-  (setq diredp-hide-details-propagate-flag nil))
-
-
 ;; Built-in input method.
 ;; 
 (use-package pyim
