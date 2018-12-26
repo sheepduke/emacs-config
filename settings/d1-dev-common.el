@@ -217,7 +217,7 @@ completion."
 
 (use-package lsp-mode
   :ensure)
-(use-package lsp)
+(require 'lsp)
 
 (use-package company-lsp
   :ensure

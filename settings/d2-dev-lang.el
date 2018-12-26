@@ -352,6 +352,10 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-indent-style 2)
+  ;; Set padding to 0.
+  (setq web-mode-script-padding 0)
+  (setq web-mode-part-padding 0)
+  (setq web-mode-style-padding 0)
   (setq css-indent-offset 2)
 
   :config
@@ -391,9 +395,15 @@
   (set-face-background 'mmm-default-submode-face nil))
 
 (use-package vue-mode
+  :ensure
+
+  :preface
+  (defun setup-vue-mode ()
+    (highlight-indent-guides-mode 1))
   :init
   ;; Start lsp.
-  (add-hook 'vue-mode-hook 'lsp))
+  (add-hook 'vue-mode-hook 'lsp)
+  (add-hook 'vue-mode-hook 'setup-vue-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
