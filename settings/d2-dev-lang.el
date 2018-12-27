@@ -389,7 +389,10 @@
       (call-when-defined 'js2-minor-mode)))
 
   :init
+  ;; Set indent to 2.
   (setq js-indent-level 2)
+  ;; Do not warn me for missing ';'.
+  (setq js2-strict-missing-semi-warning nil)
   (add-hook 'js-mode-hook 'setup-js2-mode))
 
 (use-package tide
