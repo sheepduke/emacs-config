@@ -343,18 +343,11 @@
   (defun web-mode-setup ()
 	(make-local-variable 'company-backends)
 	(setq company-backends
-		  '(company-web-html company-css :with 'company-yasnippet))
-    (fci-mode 0)
-    (setq fill-column 120))
-
-  (defun web-mode-lentic-split-vue ()
-    (interactive)
-    (when (string-match-p ".vue$" (buffer-file-name))
-      (message "Setup for Vue.js")
-      (lentic-mode-create-from-init)
-      (lentic-mode-split-window-right)
-      ;; Add function to narrow.
-      ))
+		  '((company-web-html :with company-yasnippet)
+            (company-css :with company-yasnippet)
+            (company-tern :with company-yasnippet)
+            (company-dabbrev :with company-yasnippet)))
+    (fci-mode 0))
 
   :init
   ;; Set offset to 2.
@@ -370,6 +363,9 @@
   (setq css-indent-offset 2)
 
   (add-hook 'web-mode-hook 'web-mode-setup))
+
+(use-package company-web
+  :ensure)
 
 (use-package rainbow-mode
   :after web-mode
@@ -395,6 +391,9 @@
 
   :init
   (add-hook 'js-mode-hook 'tern-mode))
+
+(use-package company-tern
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;
