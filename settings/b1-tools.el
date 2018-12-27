@@ -124,6 +124,11 @@
   (call-when-defined 'nyan-mode 1)
   (call-when-defined 'nyan-start-animation))
 
+(use-package lentic
+  :ensure
+  :init
+  (global-lentic-mode))
+
 (use-package so-long
   :init
   ;; Set the max columns that will trigger so-long mode.

@@ -337,14 +337,24 @@
   :mode "\\.html\\'"
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
+  :mode "\\.vue\\'"
 
   :preface
   (defun web-mode-setup ()
 	(make-local-variable 'company-backends)
 	(setq company-backends
-		  '(company-web-html :with 'company-yasnippet))
+		  '(company-web-html company-css :with 'company-yasnippet))
     (fci-mode 0)
     (setq fill-column 120))
+
+  (defun web-mode-lentic-split-vue ()
+    (interactive)
+    (when (string-match-p ".vue$" (buffer-file-name))
+      (message "Setup for Vue.js")
+      (lentic-mode-create-from-init)
+      (lentic-mode-split-window-right)
+      ;; Add function to narrow.
+      ))
 
   :init
   ;; Set offset to 2.
@@ -352,14 +362,15 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-indent-style 2)
+  
   ;; Set padding to 0.
   (setq web-mode-script-padding 0)
   (setq web-mode-part-padding 0)
   (setq web-mode-style-padding 0)
   (setq css-indent-offset 2)
 
-  :config
-  (add-hook 'web-mode-hook 'web-mode-setup))
+  (add-hook 'web-mode-hook 'web-mode-setup)
+  (add-hook 'web-mode-hook 'setup-vue-mode-conditionally))
 
 (use-package rainbow-mode
   :after web-mode
@@ -380,31 +391,11 @@
   (setq js-indent-level 2)
   (add-hook 'js-mode-hook 'setup-js2-mode))
 
-(use-package tide
-  :preface
-  (defun setup-tide-mode ()
-    (when (equal major-mode 'js-mode)
-      (call-when-defined 'tide-setup)))
-
-  :init
-  (add-hook 'js-mode-hook 'setup-tide-mode))
-
-(use-package mmm-mode
-  :ensure
-  :config
-  (set-face-background 'mmm-default-submode-face nil))
-
-(use-package vue-mode
+(use-package tern
   :ensure
 
-  :preface
-  (defun setup-vue-mode ()
-    (highlight-indent-guides-mode 1))
   :init
-  ;; Start lsp.
-  (add-hook 'vue-mode-hook 'lsp)
-  (add-hook 'vue-mode-hook 'setup-vue-mode))
-
+  (add-hook 'js-mode-hook 'tern-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;
