@@ -341,12 +341,13 @@
 
   :preface
   (defun web-mode-setup ()
-	(make-local-variable 'company-backends)
-	(setq company-backends
-		  '((company-web-html :with company-yasnippet)
-            (company-css :with company-yasnippet)
-            (company-tern :with company-yasnippet)
-            (company-dabbrev :with company-yasnippet)))
+	;; (make-local-variable 'company-backends)
+	;; (setq company-backends
+    ;;       '(company-web-html))
+		  ;; '((company-web-html :with company-yasnippet)
+          ;;   (company-css :with company-yasnippet)
+          ;;   (company-tern :with company-yasnippet)
+          ;;   (company-dabbrev :with company-yasnippet)))
     (fci-mode 0))
 
   :init
@@ -363,6 +364,11 @@
   (setq css-indent-offset 2)
 
   (add-hook 'web-mode-hook 'web-mode-setup))
+
+(use-package emmet-mode
+  :ensure
+  :init
+  (add-hook 'web-mode-hook 'emmet-mode))
 
 (use-package company-web
   :ensure)
@@ -386,11 +392,18 @@
   (setq js-indent-level 2)
   (add-hook 'js-mode-hook 'setup-js2-mode))
 
-(use-package tern
+(use-package tide
   :ensure
 
+  :preface
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (tide-hl-identifier-mode 1))
+
   :init
-  (add-hook 'js-mode-hook 'tern-mode))
+  (add-hook 'js-mode-hook 'setup-tide-mode))
 
 (use-package company-tern
   :ensure t)
