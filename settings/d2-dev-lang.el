@@ -369,8 +369,7 @@
   (setq web-mode-style-padding 0)
   (setq css-indent-offset 2)
 
-  (add-hook 'web-mode-hook 'web-mode-setup)
-  (add-hook 'web-mode-hook 'setup-vue-mode-conditionally))
+  (add-hook 'web-mode-hook 'web-mode-setup))
 
 (use-package rainbow-mode
   :after web-mode
