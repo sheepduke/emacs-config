@@ -363,6 +363,7 @@
   (setq web-mode-style-padding 0)
   (setq css-indent-offset 2)
 
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
   (add-hook 'web-mode-hook 'web-mode-setup))
 
 (use-package emmet-mode
@@ -393,6 +394,11 @@
   (setq js-indent-level 2)
   ;; Do not warn me for missing ';'.
   (setq js2-strict-missing-semi-warning nil)
+
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint json-jsonlist)))
+
   (add-hook 'js-mode-hook 'setup-js2-mode))
 
 (use-package tide
@@ -401,15 +407,31 @@
   :preface
   (defun setup-tide-mode ()
     (interactive)
-    (tide-setup)
-    (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (tide-hl-identifier-mode 1))
+    (call-when-defined 'tide-setup)
+    (setq flycheck-check-syntax-automatically '(save idle-change))
+    (call-when-defined 'tide-hl-identifier-mode 1))
 
   :init
   (add-hook 'js-mode-hook 'setup-tide-mode))
 
 (use-package company-tern
   :ensure t)
+
+(use-package flycheck
+
+  :preface
+  (defun flycheck-use-local-eslint ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (eslint (and root
+                        (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                          root))))
+      (when (and eslint (file-executable-p eslint))
+        (setq-local flycheck-javascript-eslint-executable eslint))))
+
+  :init
+  (add-hook 'flycheck-mode-hook 'flycheck-use-local-eslint))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Python                              ;;
