@@ -124,6 +124,9 @@
   (call-when-defined 'nyan-mode 1)
   (call-when-defined 'nyan-start-animation))
 
+(use-package cheat-sh
+  :ensure)
+
 (use-package so-long
   :init
   ;; Set the max columns that will trigger so-long mode.
