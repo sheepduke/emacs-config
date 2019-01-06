@@ -30,22 +30,18 @@ This repository contains Emacs settings used by me.
 # How to use
 
 Place `settings/.emacs` file to your `home` directory and others to `~/.emacs.d/`, then navigate to `~/.emacs.d/settings/` and run `C-u 0 byte-recompile-directory`.
-This will compile `.el` files into byte code (`.elc` files) and thus can be loaded automatically by `~/.emacs` file.
+This will install all required packages and compile `.el` files into byte code (`.elc` files).
 
 # Recover package installation
 
-Emacs uses variable `package-selected-packages` to store a list of packages installed by the user.
+`use-package` has an option `:ensure`, which will install the package from MELPA once provided.
 
-You may `eval` the following snippet to install all packages at once.
+When compiling the configuration files, the missing packages shall be installed automatically.
 
-```emacs lisp
-;; Copy this snippet from `.emacs` file.
-(setq package-selected-packages
-      (list 
-       ;; utility
-       'use-package 'elscreen 'auto-compile 'elscreen-persist))
-(package-install-selected-packages)
-```
+*Tip:*
+
+Emacs uses variable `package-selected-packages` to store a list of packages installed by the user. You may save this variable and later use function `(package-install-selected-packages)` to install them back later.
+
 # Directory hierarchy
 
 ## settings
@@ -55,7 +51,7 @@ The place where all configuration and custom plugin (outside elpa) goes.
 ### a0-variables
 Definition of global variables.
 
-### a1-function
+### a1-functions
 Definition of common functions.
 
 ### b0-customize
@@ -70,8 +66,8 @@ Customization related to buffer display, X window etc.
 ### c3-external
 Tools that relies on external programs.
 
-### d0-helm
-`Helm` configuration.
+### d0-ivy
+`Ivy/Counsel` configuration.
 
 ### d1-dev-common
 Some common programming configuration.
@@ -79,11 +75,11 @@ Some common programming configuration.
 ### d2-dev-lang
 Configuration for each programming language.
 
-### f4-mail
-Configuration for email.
-
 ### e1-org-mode
 Org related settings.
+
+### f4-mail
+Configuration for email.
 
 ### .emacs
 Backup for `~/.emacs` file.

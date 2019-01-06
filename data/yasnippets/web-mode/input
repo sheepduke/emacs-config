@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: input
-# --
-<input type="$1" id="$2" name="$2" />
