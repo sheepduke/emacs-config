@@ -47,6 +47,12 @@
   :config
   (call-when-defined 'pdf-tools-install))
 
+;; Open epub files.
+;; 
+(use-package nov
+  :ensure
+  :init
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
 ;; Edit multiple places at the same time.
 ;; 
