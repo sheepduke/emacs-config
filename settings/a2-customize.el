@@ -256,4 +256,12 @@ then change the permission back. This works like Vim 'w!'"
   (:map master-mode-map
         ("C-c C-l" . master-set-slave)))
 
+(use-package webjump
+  :init
+  (let ((webjump-file (concat *data-path* "webjump.el")))
+    (when (file-exists-p webjump-file)
+      (load webjump-file)))
+
+  (global-set-key (kbd "C-c 2") 'webjump))
+
 ;;; a2-customize.el ends here
