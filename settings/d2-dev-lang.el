@@ -341,13 +341,11 @@
 
   :preface
   (defun web-mode-setup ()
-	;; (make-local-variable 'company-backends)
-	;; (setq company-backends
-    ;;       '(company-web-html))
-		  ;; '((company-web-html :with company-yasnippet)
-          ;;   (company-css :with company-yasnippet)
-          ;;   (company-tern :with company-yasnippet)
-          ;;   (company-dabbrev :with company-yasnippet)))
+    (setq web-mode-comment-formats
+          '(("java" . "/*")
+            ("javascript" . "//")
+            ("php" . "/*")
+            ("css" . "/*")))
     (fci-mode 0))
 
   :init
@@ -575,7 +573,7 @@
 	;; Enable auto-fill.
 	(auto-fill-mode)
 	;; Disable flycheck mode.
-	(flycheck-mode -1)
+	(call-when-defined flycheck-mode -1)
 	;; Enable toc viewer.
 	(turn-on-reftex)
 	;; Stop using default completion.
