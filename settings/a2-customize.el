@@ -262,6 +262,6 @@ then change the permission back. This works like Vim 'w!'"
     (when (file-exists-p webjump-file)
       (load webjump-file)))
 
-  (global-set-key (kbd "C-c 2") 'webjump))
+  (global-set-key (kbd "C-c 1") 'webjump))
 
 ;;; a2-customize.el ends here
