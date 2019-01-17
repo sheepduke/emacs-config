@@ -661,6 +661,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yaml-mode
+  :mode "\\.yml\\'"
+  :mode "\\.yml.j2\\'"
+
   :bind
   (:map yaml-mode-map
         ("<return>" . newline-smart-comment)))
