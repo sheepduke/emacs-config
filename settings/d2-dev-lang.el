@@ -670,5 +670,8 @@
   (:map conf-mode-map
         ("<return>" . newline-smart-comment)))
 
+(use-package json-mode
+  :ensure)
+
 (provide 'd2-dev-lang)
 ;;; d2-dev-lang.el ends here
