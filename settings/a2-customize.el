@@ -258,10 +258,10 @@ then change the permission back. This works like Vim 'w!'"
 
 (use-package webjump
   :init
-  (let ((webjump-file (concat *data-path* "webjump.el")))
-    (when (file-exists-p webjump-file)
-      (load webjump-file)))
+  (setq webjump-file (concat *data-path* "webjump.el"))
+  (webjump-setup)
 
-  (global-set-key (kbd "C-c 1") 'webjump))
+  (global-set-key (kbd "C-c 1") 'webjump)
+  (global-set-key (kbd "C-c 2") 'webjump-add))
 
 ;;; a2-customize.el ends here
