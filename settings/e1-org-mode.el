@@ -290,8 +290,7 @@ EXPORTER is provided by Org Mode."
 ;; TYPE: entry item checkitem table-line plain
 ;; TARGET: file id file+headline
 (setq org-capture-templates
-      `(("b" "Bookmark" entry (file+headline "bookmarks.org" "Bookmarks") "** %?")
-        ("k" "Capture" entry (file "capture.org") "* %?")))
+      `(("k" "Capture" entry (file "capture.org") "* %?")))
 
 (setq org-agenda-sorting-strategy
       '((category-keep agenda habit-down time-up priority-down)
