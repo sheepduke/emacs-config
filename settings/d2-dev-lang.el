@@ -367,7 +367,12 @@
 (use-package emmet-mode
   :ensure
   :init
-  (add-hook 'web-mode-hook 'emmet-mode))
+  (add-hook 'web-mode-hook 'emmet-mode)
+
+  :bind
+  (:map emmet-mode-keymap
+        ("C-j" . emmet-expand-line)
+        ("C-M-j" . emmet-expand-yas)))
 
 (use-package company-web
   :ensure)
