@@ -35,8 +35,8 @@
 ;; Fix the position of cursor while scrolling window.
 (setq scroll-preserve-screen-position t)
 
-;; Increase the warning threshold to 10M.
-(setq large-file-warning-threshold 10000000)
+;; Increase the warning threshold to 15M.
+(setq large-file-warning-threshold 15000000)
 
 ;; Tune GC threshold to speed it up.
 (setq gc-cons-threshold (eval-when-compile (* 100 1024 1024)))
