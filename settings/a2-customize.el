@@ -258,6 +258,7 @@ then change the permission back. This works like Vim 'w!'"
 
 (use-package webjump
   :init
+  (require 'webjump-plus)
   (setq webjump-file (concat *data-path* "webjump.el"))
   (webjump-setup)
 
