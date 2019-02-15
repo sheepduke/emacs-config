@@ -175,14 +175,12 @@
 
 (use-package racer
   :init
-  (setq racer-rust-src-path *rust-src-dir*)
   (add-hook 'rust-mode-hook 'racer-activate)
   (add-hook 'rust-mode-hook 'racer-turn-on-eldoc))
 
 (use-package flycheck-rust
   :init
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup))
-
 
 (use-package company-racer
   :config

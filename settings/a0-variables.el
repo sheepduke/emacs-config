@@ -22,9 +22,6 @@
 (defvar *mailbox-dir* "~/mailbox/"
   "Location of mail box.")
 
-(defvar *rust-src-dir* "~/software/rust/src/"
-  "Path to Rust source directory.")
-
 (defvar *backup-dir* "~/backup/"
   "Path to backup directory.")
 
