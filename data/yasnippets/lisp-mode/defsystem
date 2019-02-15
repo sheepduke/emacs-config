@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: defsystem
+# key: defsystem
+# --
+(defsystem $1
+  :description "$2"
+  :author "$3"
+  :license "$4"
+  :version "0.0.1"
+  :depends-on ()
+  :components ((:module "src"
+                :components
+                ((:file "package")
+                 (:file "$1")))))
