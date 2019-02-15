@@ -15,6 +15,11 @@
   (let ((url (read-string "Link: "))
         (title (read-string "Title: ")))
     (webjump--add title url)
+    (setq webjump-sites
+          (sort webjump-sites
+                (lambda (a b)
+                  (string< (first a)
+                           (first b)))))
     (webjump-dump)))
 
 (defun webjump--add (new-title new-url)
