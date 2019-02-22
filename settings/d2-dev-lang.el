@@ -619,7 +619,6 @@
   :preface
   (defun markdown-mode-setup()
     "Setup markdown-mode."
-    (setq fill-column 80)
     (auto-fill-mode 1)
     (add-hook 'after-save-hook 'markdown-live-preview-w3m-reload t t))
 

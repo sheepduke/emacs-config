@@ -8,6 +8,7 @@ bitwise
 boolean
 broadcasted
 CLISP
+CloudWatch
 comparator
 comparators
 CSS
@@ -23,6 +24,7 @@ GitLab
 Grafana
 Hadoop
 hostname
+InfluxDB
 IOPS
 IP
 JMX
