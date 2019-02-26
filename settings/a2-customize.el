@@ -236,7 +236,7 @@ then change the permission back. This works like Vim 'w!'"
 
   :bind
   ("C-c 3 3" . eww)
-  ("C-c 3 b" . eww-list-bookmarks)
+  ("C-c 3 k" . eww-list-bookmarks)
   ("C-c 3 l" . eww-list-buffers))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
