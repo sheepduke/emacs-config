@@ -299,8 +299,7 @@ EXPORTER is provided by Org Mode."
         (search category-keep)))
 
 (setq org-agenda-custom-commands
-      '(("b" "Bookmarks" tags "+bookmark")
-        ("n" "Agenda"
+      '(("n" "Agenda"
          ((agenda "" nil)
 		  (todo "HOLD"
                 ((org-agenda-overriding-header "On Hold")))
