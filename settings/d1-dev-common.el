@@ -27,6 +27,7 @@ completion."
 	:safe t)
 
   ;; Bind company complete to <TAB> in a smart way.
+  ;; TODO Remove this snippet later...
   (defun complete-or-indent ()
 	"Complete using company-mode or indent current line by checking "
 	(interactive)
@@ -48,7 +49,7 @@ completion."
 			  ("C-p" . company-select-previous))
 
   :bind (:map company-mode-map
-  			  ("<tab>" . complete-or-indent))
+  			  ("<tab>" . company-indent-or-complete-common))
 
   :config
   ;; Remove unused backends.
