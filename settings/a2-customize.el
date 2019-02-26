@@ -226,6 +226,20 @@ then change the permission back. This works like Vim 'w!'"
 (setq ediff-split-window-function 'split-window-horizontally)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                               eww                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package eww
+  :init
+  (setq eww-download-directory "~/downloads/")
+  (setq eww-bookmarks-directory (concat *data-path* "eww/"))
+
+  :bind
+  ("C-c 3 3" . eww)
+  ("C-c 3 b" . eww-list-bookmarks)
+  ("C-c 3 l" . eww-list-buffers))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Misc                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
