@@ -135,6 +135,13 @@
 (use-package cheat-sh
   :ensure)
 
+(use-package eshell-prompt-extras
+  :ensure
+  :init
+  ;; Setup prompt.
+  (setq eshell-highlight-prompt t
+        eshell-prompt-function 'epe-theme-lambda))
+
 (use-package so-long
   :init
   ;; Set the max columns that will trigger so-long mode.
