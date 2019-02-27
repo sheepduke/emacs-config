@@ -180,7 +180,8 @@ output."
 (enable-command 'dired-find-alternate-file
                 'upcase-region
                 'downcase-region
-                'scroll-left)
+                'scroll-left
+                'narrow-to-region)
 
 (defun save-buffer-readonly ()
   "If current buffer is read-only, change its permission and write to it,
