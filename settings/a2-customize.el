@@ -235,10 +235,11 @@ then change the permission back. This works like Vim 'w!'"
   (setq eww-download-directory "~/downloads/")
   (setq eww-bookmarks-directory (concat *data-path* "eww/"))
 
-  :bind
-  ("C-c 3 3" . eww)
-  ("C-c 3 k" . eww-list-bookmarks)
-  ("C-c 3 l" . eww-list-buffers))
+  ;; :bind
+  ;; ("C-c 3 3" . eww)
+  ;; ("C-c 3 k" . eww-list-bookmarks)
+  ;; ("C-c 3 l" . eww-list-buffers)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Misc                                ;;

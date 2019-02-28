@@ -88,7 +88,7 @@
     ;; Set duckduckgo as the default search engine.
     (setq w3m-search-default-engine "duckduckgo")
     
-	:bind (;; ("C-c 3" . w3m)
+	:bind (("C-c 3" . w3m)
 		   :map w3m-mode-map
            ("C-<return>" . w3m-view-this-url-new-session)
 		   ("C-M-h" . w3m-previous-buffer)
