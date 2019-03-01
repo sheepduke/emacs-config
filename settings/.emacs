@@ -11,7 +11,10 @@
 (mapc 'load (directory-files "~/.emacs.d/settings/plugins/" t "^[a-zA-Z0-9].*.elc$"))
 (mapc 'load (directory-files "~/.emacs.d/settings/" t "^[a-zA-Z0-9].*.elc$"))
 
+;; Start Emacs server.
 (server-start)
+;; Start sly.
+(sly)
 
-(load-theme 'spacemacs-light t)
+(load-theme 'ample t)
 (message "All system online.")
