@@ -221,6 +221,7 @@
         ("C-c C-k" . sly-interrupt)
         ("C-c C-b" . sly-eval-buffer)
         ("C-c C-l" . sly-eval-defun)
+        ("C-c C-p" . sly-eval-print-last-expression)
         ("C-c C-d d" . hyperspec-lookup)
         ("C-M-l" . sly-repl-clear-buffer-anywhere)))
   ;; (:map sly-mrepl-mode-map
