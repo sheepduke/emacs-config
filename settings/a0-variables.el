@@ -1,5 +1,4 @@
-;;; Package --- Summary
-;;; This contains global variables.
+;;; Package --- Global variables
 
 ;;; Commentary:
 

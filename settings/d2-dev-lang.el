@@ -1,12 +1,8 @@
-;;; Package --- Summary
-;;;
+;;; Package --- Settings for each programming language
+
 ;;; Commentary:
-;;; This file contains settings for each programming language, divided by
-;;; section.
-;;;
+
 ;;; Code:
-;;;
-;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                              Arduino                             ;;
@@ -15,7 +11,7 @@
 (use-package arduino-mode
   :mode "\\.ino"
   
-  :config 
+  :config
   (defun arduino-mode-hook-function ()
 	(semantic-mode 0)
 	(set (make-local-variable 'compile-command)
@@ -333,6 +329,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package web-mode
+  :ensure
   :mode "\\.html\\'"
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
@@ -680,5 +677,5 @@
 (use-package json-mode
   :ensure)
 
-(provide 'd2-dev-lang)
+
 ;;; d2-dev-lang.el ends here

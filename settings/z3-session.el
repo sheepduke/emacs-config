@@ -1,3 +1,9 @@
+;;; Package --- Session management
+
+;;; Commentary:
+
+;;; Code:
+
 (use-package desktop
   :ensure
   :init
@@ -19,3 +25,5 @@
   	  (load-theme theme)))
   (add-hook 'desktop-after-read-hook 'desktop-load-theme)
   (add-to-list 'desktop-globals-to-save 'custom-enabled-themes))
+
+;;; z3-session.el ends here

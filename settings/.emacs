@@ -1,3 +1,9 @@
+;;; Package --- Init file for Emacs
+
+;;; Commentary:
+
+;;; Code:
+
 ;; setup packages installed by MELPA
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -18,3 +24,5 @@
 
 (load-theme 'ample t)
 (message "All system online.")
+
+;;; .emacs ends here

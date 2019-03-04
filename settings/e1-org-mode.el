@@ -1,3 +1,9 @@
+;;; Package --- Settings for Org Mode
+
+;;; Commentary:
+
+;;; Code:
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                        Common Settings                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -310,3 +316,5 @@ EXPORTER is provided by Org Mode."
           (tags "refile"
                ((org-agenda-overriding-header "Refile")))
 		  nil))))
+
+;;; e1-org-mode.el ends here

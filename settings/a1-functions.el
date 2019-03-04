@@ -1,8 +1,7 @@
-;;; Package --- Summary
-;;;
+;;; Package --- Utility functions.
+
 ;;; Commentary:
-;;; This file contains utility functions.
-;;; 
+
 ;;; Code:
 
 (defun line-in-comment? ()
@@ -15,12 +14,12 @@
 					(line-end-position)))
 
 (defun line-empty? ()
-  "Return T if line contains only spaces or nothing."
+  "Return T if the line contain only spaces or nothing."
   (string-empty-p (string-trim (current-line-content))))
 
 (defun toggle-comment-in-line (&optional arg)
   "If there is no content after CHAR, delete the comment char.
-Otherwise, call `comment-dwin'."
+Otherwise, call `comment-dwin' with optional ARG."
   (interactive "*P")
   (if (or (use-region-p)
 		  (string-empty-p (string-trim (current-line-content))))
@@ -47,7 +46,7 @@ Otherwise, call `comment-dwin'."
 	(newline-and-indent)))
 
 (defun get-available-font (font-list)
-  "Return the first font in the list that is available in the system.
+  "Return the first available font in FONT-LIST.
 If no one was found, NIL is returned."
   (catch 'found
     (dolist (font font-list)

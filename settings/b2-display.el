@@ -1,8 +1,7 @@
-;;; Package --- Summary
-;;;
+;;; Package --- Window behavior, display effects etc
+
 ;;; Commentary:
-;;; This file contains settings related to window behavior, status bar etc.
-;;;
+
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -16,8 +15,9 @@
     (if (not (x-list-fonts fontname)) nil t)))
 
 (defun set-font (english-font-list chinese-font-list size-pair)
-  "Setup Emacs ENGLISH and CHINESE font on x window system, with given
-SIZE-PAIR."
+  "Setup Emacs English and Chinese font on x window system.
+ENGLISH-FONT-LIST and CHINESE-FONT-LIST are lists of fonts.
+SIZE-PAIR is a cons pair indicating font size."
   (let ((english-font (get-available-font english-font-list))
         (chinese-font (get-available-font chinese-font-list)))
     (if english-font
@@ -81,7 +81,7 @@ A dedicated window can't be switched or modified by some commands."
 ;; Force window behavior.
 (use-package shackle
   :ensure
-  :init 
+  :init
   ;; one of below, above, left, right
   (setq shackle-default-alignment 'below)
   ;; Don't reuse windows by default.

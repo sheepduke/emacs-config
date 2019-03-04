@@ -1,3 +1,9 @@
+;;; Package --- Settings for Ivy/Counsel as completion framework
+
+;;; Commentary:
+
+;;; Code:
+
 ;; When smex is installed, ivy will behave differently.
 (use-package smex
   :ensure
@@ -50,3 +56,5 @@
   
   :config
   (call-when-defined 'ivy-mode 1))
+
+;;; d0-ivy.el ends here

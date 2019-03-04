@@ -1,9 +1,7 @@
-;;; Package --- Summary
-;;;
+;;; Package --- Common settings for development environments
+
 ;;; Commentary:
-;;; This file contains functionality common used by all development
-;;; environment.
-;;;
+
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -225,4 +223,4 @@ completion."
         ("<return>" . newline-smart-comment)))
 
 
-;;; d0-dev-common.el ends here
+;;; d1-dev-common.el ends here

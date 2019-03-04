@@ -1,3 +1,9 @@
+;;; Package --- Email settings
+
+;;; Commentary:
+
+;;; Code:
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                          Notification                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -11,6 +17,7 @@
   "Function to update/index mail database.")
 
 (defun check-new-mail ()
+  "Check new mail and send desktop notification if there is any new mail."
   (catch 'checked
     (dolist (filename (directory-files *mailbox-dir*))
       (unless (or (equal filename ".")
@@ -138,5 +145,5 @@
   (:map notmuch-show-mode-map
         ("C-c C-o" . browse-url-at-point)))
 
-(provide 'f4-mail)
+
 ;;; f4-mail.el ends here

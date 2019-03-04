@@ -1,27 +1,25 @@
-;;; Package --- Summary
-;;;
+;;; Package --- Small tools that enhances Emacs
+
 ;;; Commentary:
-;;; This file contains small tools that makes Emacs smarter.
-;;;
+
 ;;; Code:
 
 ;; This is built-in in Emacs 24 or something.
 ;; Used to automatically pair brackets.
-;; 
 (use-package electric
   :ensure
   :config
   (electric-pair-mode))
 
+
 ;; Ebuild mode, for Gentoo users.
-;;
 (use-package ebuild-mode
   :mode "\\.use\\'"
   :mode "\\.mask\\'"
   :mode "\\.unmask\\'")
 
+
 ;; Make undo like a tree.
-;; 
 (use-package undo-tree
   :ensure
   :init
@@ -40,22 +38,22 @@
   :config
   (call-when-defined 'global-undo-tree-mode))
 
+
 ;; Replace the original doc-view for PDF files.
-;;
 (use-package pdf-tools
   :ensure
   :config
   (call-when-defined 'pdf-tools-install))
 
+
 ;; Open epub files.
-;; 
 (use-package nov
   :ensure
   :init
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
+
 ;; Edit multiple places at the same time.
-;; 
 (use-package multiple-cursors
   :ensure
   :init
@@ -65,7 +63,6 @@
 
 
 ;; It's Magit! Git inside Emacs.
-;; 
 (use-package magit
   :ensure
   :bind ("C-x v" . magit-status)
@@ -74,7 +71,6 @@
 
 
 ;; Jump to character from 2 leading chars.
-;; 
 (use-package avy
   :ensure
   :bind
@@ -84,7 +80,6 @@
 
 
 ;; Automatically compile Emacs Lisp libraries
-;; 
 (use-package auto-compile
   :ensure
   :config
@@ -93,14 +88,13 @@
 
 
 ;; Execute asynchronous commands.
-;; 
 (use-package async
   :ensure
   :config
   (dired-async-mode 1))
 
+
 ;; Built-in input method.
-;; 
 (use-package pyim
   :ensure
   :init
@@ -123,6 +117,8 @@
   :bind
   ("C-`" . toggle-input-method))
 
+
+;; Show Nyan cat in progress bar.
 (use-package nyan-mode
   :ensure
   :init
@@ -132,9 +128,13 @@
   (call-when-defined 'nyan-mode 1)
   (call-when-defined 'nyan-start-animation))
 
+
+;; Emacs interface for `cheat.sh'.
 (use-package cheat-sh
   :ensure)
 
+
+;; Provides extra information for EShell prompt.
 (use-package eshell-prompt-extras
   :ensure
   :init
@@ -142,6 +142,8 @@
   (setq eshell-highlight-prompt t
         eshell-prompt-function 'epe-theme-lambda))
 
+
+;; Disable font displaying effects when the lines are too long,
 (use-package so-long
   :init
   ;; Set the max columns that will trigger so-long mode.
@@ -151,8 +153,11 @@
   :config
   (so-long-enable))
 
+
+;; Toggle layout of 2 windows between vertical and horizontal.
 (use-package toggle-window-split
   :bind
   ("C-x *" . toggle-window-split))
+
 
 ;;; b1-tools.el ends here

@@ -1,8 +1,7 @@
-;;; Package --- Summary
-;;; 
+;;; Package --- Functions with external programs
+
 ;;; Commentary:
-;;; This file contains functions that need external tool support.
-;;;
+
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1,9 +1,7 @@
-;;; Package --- Summary
-;;;
+;;; Package --- Customized built-in packages
+
 ;;; Commentary:
-;;; This file contains customize things for built-in packages,
-;;; changing default behavior of Emacs.
-;;;
+
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -157,7 +155,7 @@ output."
 (define-key dired-mode-map (kbd "h") 'dired-omit-mode)
 
 (defun sudo-find-file (file-name)
-  "Like find file, but opens the file as root."
+  "Open FILE-NAME like `find-file', but opens the file as root."
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
@@ -170,8 +168,8 @@ output."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun enable-command (&rest commands)
-  "Enable command inside `commands'. 
-`commands' must be a list containing the symbol name of commands."
+  "Enable all commands specified by COMMANDS.
+COMMANDS must be a list containing the symbol name of commands."
   (mapcar (lambda (command)
             (put command 'disabled nil))
           commands))
@@ -184,8 +182,8 @@ output."
                 'narrow-to-region)
 
 (defun save-buffer-readonly ()
-  "If current buffer is read-only, change its permission and write to it,
-then change the permission back. This works like Vim 'w!'"
+  "If buffer is read-only, temporally change its permission and write to it.
+This works like Vim 'w!'."
   (interactive)
   (let* ((filename (buffer-file-name))
          (original-file-modes (file-modes (buffer-file-name))))
