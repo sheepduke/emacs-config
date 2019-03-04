@@ -22,7 +22,6 @@
 ;; Start sly.
 (sly)
 
-(load-theme 'ample t)
-(message "All system online.")
+(load-theme 'whiteboard)
 
 ;;; .emacs ends here
