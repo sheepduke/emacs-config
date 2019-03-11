@@ -5,25 +5,36 @@
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                        Common Settings                           ;;
+;;;;                        Customization                         ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Habit tracking
-(require 'org-habit)
-;; Do not spam my timeline with it.
-(setq org-habit-show-habits-only-for-today t)
-;; Show my habits no matter whether it is scheduled today.
-(setq org-habit-show-all-today t)
+;; Set the default directory for all notes.
+(setq org-directory "~/notes/")
 
-;; Convert the source code into HTML file keeping the highlight.
-;; NOTE: This plugin is necessary when using Org Mode to generate HTML file.
-(require 'htmlize)
-
-;; Org modules loaded with org mode itself
-(setq org-modules
-      '(org-w3m org-bbdb org-habit org-bibtex org-docview org-info))
-;; default table size
+;; Default table size.
 (setq org-table-default-size "2x2")
+
+;; Show everything on startup.
+(setq org-startup-folded nil)
+
+;; Do indenting during start-up.
+(setq org-startup-indented t)
+
+;; Fontify code blocks.
+(setq org-src-fontify-natively t)
+
+;; Don't show all the leading stars.
+(setq org-hide-leading-stars t)
+
+;; Enable bold, italic etc inside Chinese context.
+(setf (nth 0 org-emphasis-regexp-components) " \t('\"{[:multibyte:]")
+(setf (nth 1 org-emphasis-regexp-components) " \t\r\n('\"{[:multibyte:],.)")
+(org-set-emph-re 'org-emphasis-regexp-components
+                 org-emphasis-regexp-components)
+
+;; Always insert a new line before new item.
+(setq org-blank-before-new-entry '((heading . t)
+                                   (plain-list-item . auto)))
 
 (defun org-mode-hook-function ()
   "Setup."
@@ -48,22 +59,42 @@
 (define-key org-mode-map (kbd "C-c C-i") 'org-mark-ring-goto)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                            Contribs                              ;;
+;;;;                          Modules                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Org modules loaded with org mode itself
+(setq org-modules
+      '(org-w3m org-bbdb org-habit org-bibtex org-docview org-info))
 
 (use-package org-bullets
   :ensure
   :init
   (add-hook 'org-mode-hook 'org-bullets-mode))
 
+
+(use-package org-habit
+  :ensure org-plus-contrib
+
+  :init
+  ;; Habit tracking
+  (require 'org-habit)
+  ;; Do not spam my timeline with it.
+  (setq org-habit-show-habits-only-for-today t)
+  ;; Show my habits no matter whether it is scheduled today.
+  (setq org-habit-show-all-today t))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                         Localization                             ;;
+;;;;                       Localization                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Display org in a bigger calendar!
-(require 'calfw-org)
+(use-package calfw-org
+  :ensure)
+
 ;; Chinese localization
-(require 'cal-china-x)
+(use-package cal-china-x
+  :ensure)
 
 ;; Use Chinese month name.
 (setq calendar-month-name-array
@@ -103,35 +134,11 @@
 (global-set-key (kbd "C-c o") 'cfw:open-org-calendar)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                        Customization                             ;;
+;;;;                            Export                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Set the default directory for all notes.
-(setq org-directory "~/notes/")
-;; Days to show in agenda view.
-(setq org-agenda-span 'week)
-;; Always start on today in agenda.
-(setq org-agenda-start-on-weekday nil)
-;; Display agenda in the other window.
-(setq org-agenda-window-setup 'current-window)
-;; Restore the window config after displaying agenda.
-(setq org-agendaq-restore-windows-after-quit t)
-;; Do not show scheduled and deadline of finished items.
-(setq org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t)
-;; Set it to NIL because super-agenda is used.
-(setq org-agenda-todo-ignore-scheduled nil)
 
 ;; Get rid of the foot detail while generating HTML.
 (setq org-html-postamble nil)
-;; show everything on startup
-(setq org-startup-folded nil)
-;; do indenting
-(setq org-startup-indented t)
-;; fontify code blocks
-(setq org-src-fontify-natively t)
-;; don't show all the leading stars
-(setq org-hide-leading-stars t)
 
 ;; Set the extra CSS for exported HTML files.
 (setq org-html-head-extra
@@ -142,24 +149,6 @@
 }​
 </style>
 ")
-
-;; Enable bold, italic etc inside Chinese context.
-(setf (nth 0 org-emphasis-regexp-components) " \t('\"{[:multibyte:]")
-(setf (nth 1 org-emphasis-regexp-components) " \t\r\n('\"{[:multibyte:],.)")
-(org-set-emph-re 'org-emphasis-regexp-components
-                 org-emphasis-regexp-components)
-
-;; Always insert a new line before new item.
-(setq org-blank-before-new-entry '((heading . t)
-                                   (plain-list-item . auto)))
-
-;; Just let me refile!
-(setq org-outline-path-complete-in-steps nil)
-(setq org-refile-use-outline-path t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                              Export                              ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Enable Markdown export.
 (require 'ox-md)
@@ -238,7 +227,7 @@ EXPORTER is provided by Org Mode."
       (add-hook 'htmlize-after-hook #'modi/htmlize-after-hook-flyspell-enable-maybe))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                             Journal                              ;;
+;;;;                           Journal                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-journal
@@ -265,7 +254,7 @@ EXPORTER is provided by Org Mode."
   ("C-c j v" . org-journal-schedule-view))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                            Workflow                              ;;
+;;;;                          Workflow                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'org-depend)
@@ -299,6 +288,10 @@ EXPORTER is provided by Org Mode."
         ("main.org" :level . 1)
         ("capture.org" :level . 1)))
 
+;; Just let me refile!
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-use-outline-path t)
+
 ;; Set templates:
 ;; (KEYS DESCRIPTION TYPE TARGET TEMPLATE PROPERTIES)
 ;; TYPE: entry item checkitem table-line plain
@@ -325,8 +318,22 @@ EXPORTER is provided by Org Mode."
         (search category-keep)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                           Super Agenda                           ;;
+;;;;                         Super Agenda                         ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Days to show in agenda view.
+(setq org-agenda-span 'week)
+;; Always start on today in agenda.
+(setq org-agenda-start-on-weekday nil)
+;; Display agenda in the other window.
+(setq org-agenda-window-setup 'current-window)
+;; Do not restore the window config after displaying agenda.
+(setq org-agenda-restore-windows-after-quit nil)
+;; Do not show scheduled and deadline of finished items.
+(setq org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t)
+;; Set it to NIL because super-agenda is used.
+(setq org-agenda-todo-ignore-scheduled nil)
 
 (use-package org-super-agenda
   :ensure
