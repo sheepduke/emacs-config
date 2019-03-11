@@ -37,7 +37,7 @@
   (make-local-variable 'company-idle-delay)
   (setq company-idle-delay 0.5)
 
-  (setq fill-column 80))
+  (setq fill-column 78))
 (add-hook 'org-mode-hook 'org-mode-hook-function)
 (add-hook 'org-mode-hook 'flyspell-mode)
 
@@ -46,6 +46,15 @@
 (define-key org-mode-map (kbd "C-c C-.") 'org-demote-subtree)
 (define-key org-mode-map (kbd "C-c C-l") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "C-c C-i") 'org-mark-ring-goto)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                            Contribs                              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package org-bullets
+  :ensure
+  :init
+  (add-hook 'org-mode-hook 'org-bullets-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                         Localization                             ;;
@@ -110,8 +119,8 @@
 ;; Do not show scheduled and deadline of finished items.
 (setq org-agenda-skip-scheduled-if-done t
       org-agenda-skip-deadline-if-done t)
-;; Do now show scheduled items in global TOOD list.
-(setq org-agenda-todo-ignore-scheduled t)
+;; Set it to NIL because super-agenda is used.
+(setq org-agenda-todo-ignore-scheduled nil)
 
 ;; Get rid of the foot detail while generating HTML.
 (setq org-html-postamble nil)
@@ -142,7 +151,7 @@
 
 ;; Always insert a new line before new item.
 (setq org-blank-before-new-entry '((heading . t)
-                                   (plain-list-item . t)))
+                                   (plain-list-item . auto)))
 
 ;; Just let me refile!
 (setq org-outline-path-complete-in-steps nil)
@@ -286,9 +295,8 @@ EXPORTER is provided by Org Mode."
 
 (setq org-refile-targets
       '((nil :maxlevel . 4)
-        (org-agenda-files :maxlevel . 3)
-        ("todo.org" :level . 1)
-        ("event.org" :level . 1)
+        (org-agenda-files :maxlevel . 2)
+        ("main.org" :level . 1)
         ("capture.org" :level . 1)))
 
 ;; Set templates:
@@ -296,7 +304,19 @@ EXPORTER is provided by Org Mode."
 ;; TYPE: entry item checkitem table-line plain
 ;; TARGET: file id file+headline
 (setq org-capture-templates
-      `(("k" "Capture" entry (file "capture.org") "* %?")))
+      `(("k" "Capture" entry
+         (file "capture.org") "* %?\n"
+         :empty-lines 1)
+
+        ("t" "Task" entry
+         (file+headline "main.org" "Tasks")
+         "* %? :task:"
+         :empty-lines 1)
+        
+        ("e" "Event" entry
+         (file+headline "main.org" "Events")
+         "* %? :event:"
+         :empty-lines 1)))
 
 (setq org-agenda-sorting-strategy
       '((category-keep agenda habit-down time-up priority-down)
@@ -304,17 +324,57 @@ EXPORTER is provided by Org Mode."
         (category-keep tags priority-down)
         (search category-keep)))
 
-(setq org-agenda-custom-commands
-      '(("n" "Agenda"
-         ((agenda "" nil)
-		  (todo "HOLD"
-                ((org-agenda-overriding-header "On Hold")))
-		  (tags-todo "+TODO=\"TODO\"-backlog-reminder"
-				((org-agenda-overriding-header "TODO List")))
-          (tags-todo "backlog"
-                     ((org-agenda-overriding-header "Backlog")))
-          (tags "refile"
-               ((org-agenda-overriding-header "Refile")))
-		  nil))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                           Super Agenda                           ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package org-super-agenda
+  :ensure
+  :init
+  (call-when-defined 'org-super-agenda-mode 1)
+
+  ;; Set the separator between blocks.
+  (setq org-super-agenda-header-separator "\n")
+
+  (setq org-agenda-custom-commands
+        `(("n" "Super Agenda"
+           ((agenda "" nil)
+            (todo ""
+                  ((org-agenda-overriding-header "")
+                   (org-super-agenda-groups
+                    '((:discard (:scheduled t))
+                      (:name "On Hold"
+                             :todo "HOLD"
+                             :order 1)
+                      (:name "Important"
+                             :priority "A"
+                             :order 3)
+                      (:name "Priority B and C"
+                             :priority<= "B"
+                             :order 5)
+                      (:name "Backlog"
+                             :and (:todo "TODO" :not (:priority>= "C"))
+                             :order 100)
+
+                      ))))
+            (tags "refile"
+                  ((org-agenda-overriding-header "")
+                   (org-super-agenda-groups
+                    '((:name "Capture"
+                             :tag "refile")))))))
+
+          ("p" "Projects"
+           ((todo ""
+                  ((org-agenda-overriding-header "")
+                   (org-super-agenda-groups
+                    '((:discard (:category "main"))
+                      (:auto-category t)))))))
+          
+          ("u" "Scheduled Tasks"
+           ((todo ""
+                  ((org-super-agenda-groups
+                    '((:name "Scheduled Tasks"
+                             :scheduled t)
+                      (:discard (:not (:scheduled t))))))))))))
+  
 ;;; e1-org-mode.el ends here
