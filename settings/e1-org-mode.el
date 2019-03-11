@@ -303,7 +303,7 @@ EXPORTER is provided by Org Mode."
 
         ("t" "Task" entry
          (file+headline "main.org" "Tasks")
-         "* %? :task:"
+         "* TODO %? :task:"
          :empty-lines 1)
         
         ("e" "Event" entry
@@ -350,15 +350,18 @@ EXPORTER is provided by Org Mode."
                   ((org-agenda-overriding-header "")
                    (org-super-agenda-groups
                     '((:discard (:scheduled t))
+                      (:name "Today"
+                             :scheduled today
+                             :order 10)
                       (:name "On Hold"
                              :todo "HOLD"
-                             :order 1)
+                             :order 20)
                       (:name "Important"
                              :priority "A"
-                             :order 3)
+                             :order 30)
                       (:name "Priority B and C"
                              :priority<= "B"
-                             :order 5)
+                             :order 50)
                       (:name "Backlog"
                              :and (:todo "TODO" :not (:priority>= "C"))
                              :order 100)
