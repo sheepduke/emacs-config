@@ -27,8 +27,10 @@
 (setq org-hide-leading-stars t)
 
 ;; Enable bold, italic etc inside Chinese context.
-(setf (nth 0 org-emphasis-regexp-components) " \t('\"{[:multibyte:]")
-(setf (nth 1 org-emphasis-regexp-components) " \t\r\n('\"{[:multibyte:],.)")
+(setf (nth 0 org-emphasis-regexp-components)
+      "-[:space:]('\"{[:multibyte:]")
+(setf (nth 1 org-emphasis-regexp-components)
+      "-[:space:].,:!?;'\")}\\[[:multibyte:]")
 (org-set-emph-re 'org-emphasis-regexp-components
                  org-emphasis-regexp-components)
 
@@ -83,6 +85,10 @@
   ;; Show my habits no matter whether it is scheduled today.
   (setq org-habit-show-all-today t))
 
+(use-package org-brain
+  :ensure
+  :bind
+  ("C-c b" . org-brain-visualize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                       Localization                           ;;;;
