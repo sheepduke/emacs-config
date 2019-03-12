@@ -8,6 +8,8 @@
 ;;;;                        Customization                         ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'org)
+
 ;; Set the default directory for all notes.
 (setq org-directory "~/notes/")
 
