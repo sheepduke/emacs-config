@@ -349,7 +349,7 @@ EXPORTER is provided by Org Mode."
   (call-when-defined 'org-super-agenda-mode 1)
 
   ;; Set the separator between blocks.
-  (setq org-super-agenda-header-separator "\n")
+  (setq org-super-agenda-header-separator "\n●")
 
   (setq org-agenda-custom-commands
         `(("n" "Super Agenda"
