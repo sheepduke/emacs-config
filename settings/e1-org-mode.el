@@ -9,6 +9,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'org)
+(require 'org-agenda)
 
 ;; Set the default directory for all notes.
 (setq org-directory "~/notes/")
