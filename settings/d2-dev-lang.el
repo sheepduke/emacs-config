@@ -157,7 +157,9 @@
   (defun rust-mode-setup ()
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
-		 "cargo test"))
+		 "cargo test")
+    (when (fboundp 'rust-format-buffer)
+      (add-hook 'before-save-hook 'rust-format-buffer)))
   (add-hook 'rust-mode-hook 'rust-mode-setup)
 
   :bind
