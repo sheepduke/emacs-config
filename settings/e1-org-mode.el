@@ -287,10 +287,7 @@ EXPORTER is provided by Org Mode."
 (org-clock-persistence-insinuate)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
-
-(global-set-key (kbd "C-c k") (cond
-                               ((featurep 'ivy) 'counsel-org-capture)
-                               (t 'org-capture)))
+(global-set-key (kbd "C-c k") 'org-capture)
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "HOLD(h@/!)" "|"
