@@ -90,8 +90,12 @@
 ;; Execute asynchronous commands.
 (use-package async
   :ensure
-  :config
-  (dired-async-mode 1))
+  :init
+  (dired-async-mode 1)
+  
+  ;; Compile packages asynchronously.
+  (setq async-bytecomp-allowed-packages '(all))
+  (async-bytecomp-package-mode 1))
 
 
 ;; Built-in input method.
