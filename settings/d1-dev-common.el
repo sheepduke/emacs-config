@@ -215,9 +215,6 @@ completion."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package prog-mode
-  :init
-  (add-hook 'prog-mode-hook 'linum-mode)
-
   :bind
   (:map prog-mode-map
         ("<return>" . newline-smart-comment)))
