@@ -65,4 +65,20 @@ ARGS are arguments passed to FUNC."
          (start (string-match "[0-9]\\{2\\}" version)))
     (string-to-number (substring version start (+ 2 start)))))
 
+(defun lisp-code-comment-block (comment)
+  "Return a block with COMMENT inside."
+  (let* ((comment-length (length comment))
+         (length-before-comment (/ (- 62 comment-length) 2))
+         (length-after-comment (- 62 comment-length length-before-comment)))
+    (format "%s\n;;;;%s%s%s;;;;\n%s"
+            (make-string 70 ?\;)
+            (make-string length-before-comment ? )
+            comment
+            (make-string length-after-comment ? )
+            (make-string 70 ?\;))))
+
+(defun insert-lisp-code-comment-block ()
+  (interactive)
+  (insert (lisp-code-comment-block (read-string "Comment: "))))
+
 ;;; a1-functions.el ends here

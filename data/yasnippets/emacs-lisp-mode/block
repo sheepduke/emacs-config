@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: block
+# key: block
+# --
+`(insert-lisp-code-comment-block)`
