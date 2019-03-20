@@ -159,7 +159,9 @@
     (set (make-local-variable 'compile-command)
 		 "cargo test")
     (when (fboundp 'rust-format-buffer)
-      (add-hook 'before-save-hook 'rust-format-buffer)))
+      (add-hook 'before-save-hook 'rust-format-buffer))
+    ;; Disable fci-mode because the use of rustfmt.
+    (fci-mode -1))
   (add-hook 'rust-mode-hook 'rust-mode-setup)
 
   :bind
