@@ -233,11 +233,17 @@ This works like Vim 'w!'."
   (setq eww-download-directory "~/downloads/")
   (setq eww-bookmarks-directory (concat *data-path* "eww/"))
 
-  ;; :bind
-  ;; ("C-c 3 3" . eww)
-  ;; ("C-c 3 k" . eww-list-bookmarks)
-  ;; ("C-c 3 l" . eww-list-buffers)
+  :bind
+  ("C-c e k" . eww-list-bookmarks)
+  ("C-c e l" . eww-list-buffers)
   )
+
+(use-package eww-plus
+  :after eww
+  :bind
+  ("C-c e E" . eww)
+  ("C-c e e" . eww-new-buffer)
+  ("C-c e s" . eww-select-buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;

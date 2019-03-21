@@ -235,7 +235,8 @@
 (use-package elisp-mode
   :bind
   (:map emacs-lisp-mode-map
-		("<f12>" . eval-buffer))
+        ("C-c C-r" . eval-region)
+		("C-c C-b" . eval-buffer))
 
   :config
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
