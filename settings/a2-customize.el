@@ -239,11 +239,10 @@ This works like Vim 'w!'."
   )
 
 (use-package eww-plus
-  :after eww
   :bind
   ("C-c e E" . eww)
   ("C-c e e" . eww-new-buffer)
-  ("C-c e s" . eww-select-buffer))
+  ("C-c e s" . eww-switch-buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;

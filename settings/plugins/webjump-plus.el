@@ -38,7 +38,7 @@
 (defun webjump-load ()
   "Load content of WEBJUMP-FILE into WEBJUMP-SITES."
   (setq webjump-sites
-        (first
+        (cl-first
          (read-from-string
           (with-temp-buffer
             (insert-file-contents webjump-file)

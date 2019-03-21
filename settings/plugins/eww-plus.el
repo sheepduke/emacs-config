@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(require 'eww)
+
 (defun eww-is-eww-buffer (buffer)
   "Return T if given BUFFER is a eww buffer."
   (with-current-buffer buffer
@@ -18,7 +20,7 @@ Each element is a plist that contains keys: (:buffer :title :url)."
            collect (with-current-buffer buffer
                      (list :buffer buffer
                            :title (cl-getf eww-data :title)
-                           :url (cl-get eww-data :url)))))
+                           :url (cl-getf eww-data :url)))))
 
 (defun eww-switch-buffer ()
   "Interactively select buffer using COMPLETING-READ."
@@ -80,7 +82,7 @@ word(s) will be searched for via `eww-search-prefix'."
         (rename-buffer (generate-new-buffer-name "*eww*")))))
   (eww url))
 
-(eval-after-load 'ivy
+(when (require 'ivy nil t)
   (ivy-set-actions
    'eww-select-buffer
    '(("k"
