@@ -224,8 +224,6 @@
         ("C-c C-p" . sly-eval-print-last-expression)
         ("C-c C-d d" . hyperspec-lookup)
         ("C-M-l" . sly-repl-clear-buffer-anywhere)))
-  ;; (:map sly-mrepl-mode-map
-  ;;       ("C-M-l" . sly-mrepl-clear-repl)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

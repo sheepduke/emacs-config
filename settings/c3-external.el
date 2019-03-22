@@ -49,76 +49,7 @@
   ("C-c 3 SPC" . emms-pause)
   ("C-c 3 s" . emms-stop)
   ("C-c 3 n" . emms-next)
-  ("C-c 3 p" . emms-previous))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                             w3m                              ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(when (executable-find "w3m")
-  (use-package w3m
-    :ensure
-	:init
-	(setq w3m-home-page "about://bookmark/")
-    ;; Images
-    (setq w3m-toggle-inline-images-permanently t)
-    (setq w3m-default-display-inline-images t)
-    ;; Cookies
-    (setq w3m-use-cookies t)
-    (setq w3m-cookie-accept-bad-cookies t)
-    ;; Sessions
-    (setq w3m-session-load-last-sessions t)
-    (setq w3m-new-session-in-background nil)
-    (setq w3m-session-time-format "%Y-%m-%d %A %H:%M")
-    ;; Cache
-    (setq w3m-favicon-use-cache-file t)
-    (setq w3m-keep-arrived-urls 5000)
-    (setq w3m-keep-cache-size 1000)
-    ;; Don't ask me if I'm leaving secure page.
-    (setq w3m-confirm-leaving-secure-page nil)
-    ;; Storage
-    (setq w3m-default-save-directory (concat *data-path* "w3m/saved/"))
-    (setq w3m-bookmark-file (concat *data-path* "w3m/bookmark.html"))
-    ;; Set w3m as the default browser inside Emacs.
-    (setq browse-url-browser-function
-          `(("HyperSpec" . w3m-goto-url-new-session)
-            (".*" . browse-url-default-browser)))
-    ;; Set duckduckgo as the default search engine.
-    (setq w3m-search-default-engine "duckduckgo")
-    
-	:bind (("C-c 3" . w3m)
-		   :map w3m-mode-map
-           ("C-<return>" . w3m-view-this-url-new-session)
-		   ("C-M-h" . w3m-previous-buffer)
-		   ("C-M-l" . w3m-next-buffer)
-           ("H" . w3m-view-previous-page)
-           ("L" . w3m-view-next-page)
-		   ("h" . w3m-db-history))
-
-    :defines
-    (desktop-buffer-major-mode)
-
-	:config
-	;; Save session.
-	(defun w3m-register-desktop-save ()
-	  "Set `desktop-save-buffer' to a function returning the current URL."
-	  (setq desktop-save-buffer (lambda (desktop-dirname) w3m-current-url)))
-	(add-hook 'w3m-mode-hook 'w3m-register-desktop-save)
-
-	(defun w3m-restore-desktop-buffer (d-b-file-name d-b-name d-b-misc)
-	  "Restore a `w3m' buffer on `desktop' load."
-	  (when (eq 'w3m-mode desktop-buffer-major-mode)
-		(let ((url d-b-misc))
-		  (when url
-			(require 'w3m)
-			(if (string-match "^file" url)
-                (call-when-defined 'w3m-find-file (substring url 7))
-			  (call-when-defined 'w3m-goto-url-new-session url))
-			(current-buffer)))))
-	(add-to-list 'desktop-buffer-mode-handlers
-                 '(w3m-mode . w3m-restore-desktop-buffer))))
-  
+  ("C-c 3 p" . emms-previous))  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Dictionary                           ;;;;
