@@ -66,6 +66,11 @@ Each element is a plist that contains keys: (:buffer :title :url)."
   "Kill corresponding buffer according to CHOICE."
   (kill-buffer (eww--choice-to-buffer choice)))
 
+(defun eww-browse-url-new-buffer (url &optional new-window)
+  "Browse given URL using eww in a new buffer with NEW-WINDOW setting."
+  (eww-rename-eww-buffer)
+  (eww-browse-url url new-window))
+
 (defun eww-new-buffer (url)
   "Fetch URL and render the page in new buffer.
 If the input doesn't look like an URL or a domain name, the
@@ -76,11 +81,15 @@ word(s) will be searched for via `eww-search-prefix'."
                           (if uris (format " (default %s)" (car uris)) "")
                           ": ")))
      (list (read-string prompt nil nil uris))))
+  (eww-rename-eww-buffer)
+  (eww url))
+
+(defun eww-rename-eww-buffer ()
+  "Rename buffer `*eww*' to a new name according to the index."
   (let ((eww-buffer (get-buffer "*eww*")))
     (when eww-buffer
       (with-current-buffer eww-buffer
-        (rename-buffer (generate-new-buffer-name "*eww*")))))
-  (eww url))
+        (rename-buffer (generate-new-buffer-name "*eww*"))))))
 
 (when (require 'ivy nil t)
   (ivy-set-actions

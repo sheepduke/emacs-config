@@ -1,6 +1,4 @@
-;;; Package --- Customized built-in packages
-
-;;; Commentary:
+;;; Package --- Customized built-in packantary:
 
 ;;; Code:
 
@@ -239,6 +237,9 @@ This works like Vim 'w!'."
   )
 
 (use-package eww-plus
+  :init
+  (setq browse-url-browser-function 'eww-browse-url-new-buffer)
+
   :bind
   ("C-c e E" . eww)
   ("C-c e e" . eww-new-buffer)
