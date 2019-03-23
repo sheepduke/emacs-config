@@ -33,15 +33,15 @@ Each element is a plist that contains keys: (:buffer :title :url)."
                       "Choose eww Buffer: "
                       (mapcar (lambda (data)
                                 (format "[%d] %s - %s"
-                                        (eww--buffer-to-number (cl-getf data :buffer))
+                                        (eww-buffer-to-number (cl-getf data :buffer))
                                         (cl-getf data :title)
                                         (cl-getf data :url)))
                               eww-buffer-list)))
-             (buffer (eww--choice-to-buffer choice)))
+             (buffer (eww-choice-to-buffer choice)))
         (when (buffer-live-p buffer)
           (switch-to-buffer buffer)))))))
 
-(defun eww--buffer-to-number (buffer)
+(defun eww-buffer-to-number (buffer)
   "Return the number part in eww BUFFER name."
   (let* ((name (buffer-name (get-buffer buffer)))
          (start (string-match "[0-9]+" name)))
@@ -49,26 +49,26 @@ Each element is a plist that contains keys: (:buffer :title :url)."
         (string-to-number (substring name start (length name)))
       1)))
 
-(defun eww--number-to-buffer (number)
+(defun eww-number-to-buffer (number)
   "Return the buffer from its prefix NUMBER."
   (get-buffer (concat "*eww*"
                       (if (> number 1)
                           (format "<%d>" number)
                         ""))))
 
-(defun eww--choice-to-buffer (choice)
+(defun eww-choice-to-buffer (choice)
   "Return corresponding buffer from CHOICE."
-  (eww--number-to-buffer
+  (eww-number-to-buffer
    (string-to-number
     (substring choice 1 (string-match "\]" choice)))))
 
-(defun eww--kill-buffer-from-select (choice)
+(defun eww-kill-buffer-from-select (choice)
   "Kill corresponding buffer according to CHOICE."
-  (kill-buffer (eww--choice-to-buffer choice)))
+  (kill-buffer (eww-choice-to-buffer choice)))
 
 (defun eww-browse-url-new-buffer (url &optional new-window)
   "Browse given URL using eww in a new buffer with NEW-WINDOW setting."
-  (eww-rename-eww-buffer)
+  (eww-make-new-buffer)
   (eww-browse-url url new-window))
 
 (defun eww-new-buffer (url)
@@ -81,21 +81,23 @@ word(s) will be searched for via `eww-search-prefix'."
                           (if uris (format " (default %s)" (car uris)) "")
                           ": ")))
      (list (read-string prompt nil nil uris))))
-  (eww-rename-eww-buffer)
+  (eww-make-new-buffer)
   (eww url))
 
-(defun eww-rename-eww-buffer ()
-  "Rename buffer `*eww*' to a new name according to the index."
+(defun eww-make-new-buffer ()
+  "Copy buffer *eww* to a new one with name generated according to the index."
   (let ((eww-buffer (get-buffer "*eww*")))
     (when eww-buffer
       (with-current-buffer eww-buffer
-        (rename-buffer (generate-new-buffer-name "*eww*"))))))
+        (rename-buffer (generate-new-buffer-name "*eww*")))
+      (switch-to-buffer "*eww*")
+      (eww-setup-buffer))))
 
 (when (require 'ivy nil t)
   (ivy-set-actions
    'eww-select-buffer
    '(("k"
-      eww--kill-buffer-from-select
+      eww-kill-buffer-from-select
       "kill"))))
 
 (provide 'eww-plus)

@@ -243,7 +243,9 @@ This works like Vim 'w!'."
   :bind
   ("C-c e E" . eww)
   ("C-c e e" . eww-new-buffer)
-  ("C-c e s" . eww-switch-buffer))
+  ("C-c e s" . eww-switch-buffer)
+  (:map eww-mode-map
+        ("N" . eww-new-buffer)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;
