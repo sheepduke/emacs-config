@@ -166,8 +166,8 @@
 
   :bind
   (:map rust-mode-map
-        ("C-<f5>" . compile)
-        ("<f5>" . recompile)))
+        ("C-c C-b" . recompile)
+        ("C-c C-v" . compile)))
 
 (use-package cargo
   :init
