@@ -238,7 +238,9 @@ This works like Vim 'w!'."
 
 (use-package eww-plus
   :init
-  (setq browse-url-browser-function 'eww-browse-url-new-buffer)
+  (setq browse-url-browser-function
+        `(("HyperSpec" . eww-browse-url-new-buffer)
+          (".*" . browse-url-default-browser)))
 
   :bind
   ("C-c e E" . eww)
