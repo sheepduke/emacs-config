@@ -19,8 +19,6 @@
 
 ;; Start Emacs server.
 (server-start)
-;; Start sly.
-(sly)
 
 (load-theme 'whiteboard)
 
