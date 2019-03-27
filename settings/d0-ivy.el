@@ -22,9 +22,6 @@
   ;; Change the way ivy displays the count of alternatives.
   (setq ivy-count-format "(%d/%d) ")
 
-  ;; Do not ignore VCS files.
-  (setq counsel-ag-base-command "ag --nocolor --nogroup -U --ignore .git %s")
-
   ;; Set regex engine for different scenario.
   (setq ivy-re-builders-alist
         '((t . ivy--regex-plus)))
@@ -44,7 +41,7 @@
         ("M-i" . counsel-yank-pop)
         ("C-:" . counsel-company)
         ;; Global
-        ("C-x c a" . counsel-ag)
+        ("C-x c a" . counsel-rg)
         ("C-x c t" . counsel-load-theme)
         ;; Projectile
         ("C-c p p" . counsel-projectile-switch-project)
