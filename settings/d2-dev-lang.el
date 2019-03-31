@@ -38,11 +38,11 @@
 
   :bind
   (:map c++-mode-map
-		("<f5>" . recompile)
-		("C-<f5>" . compile)
+		("C-c C-v" . compile)
+		("C-c C-b" . recompile)
 		:map c-mode-map
-		("<f5>" . recompile)
-		("C-<f5>" . compile))
+		("C-c C-v" . compile)
+		("C-c C-b" . recompile))
 
   :config
   (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
