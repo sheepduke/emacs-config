@@ -39,7 +39,7 @@ SIZE-PAIR is a cons pair indicating font size."
 (when window-system
   (set-font '("DejaVu Sans Mono")
             '("文泉驿等宽微米黑" "WenQuanYi Micro Hei")
-            '(14 . 16)))
+            '(16 . 16)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Window                           ;;;;
