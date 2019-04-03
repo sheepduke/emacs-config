@@ -211,7 +211,8 @@ This works like Vim 'w!'."
 
 
 ;; auto fill
-(global-set-key (kbd "M-q") 'fill-region)
+(global-set-key (kbd "M-q") 'fill-paragraph)
+(global-set-key (kbd "C-M-q") 'fill-region)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            ediff                             ;;;;
