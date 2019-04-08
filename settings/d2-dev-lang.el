@@ -210,6 +210,8 @@
   ;; Use classic completion style.
   (setq sly-complete-symbol-function 'sly-simple-completions)
 
+  (push 'sly-repl-ansi-color sly-contribs)
+
   ;; Set the location of HyperSpec.
   (setq common-lisp-hyperspec-root
         (concat "file://"
@@ -621,28 +623,14 @@
   :preface
   (defun markdown-mode-setup()
     "Setup markdown-mode."
-    (auto-fill-mode 1)
-    (add-hook 'after-save-hook 'markdown-live-preview-w3m-reload t t))
-
-  (defun markdown-live-preview-window-w3m (file)
-    (cond
-     ((require 'w3m nil t)
-      (w3m-find-file file)
-      (get-buffer "*w3m*"))
-     (t (error "Package w3m not available"))))
-
-  (defun markdown-live-preview-w3m-reload ()
-    "Reload generated HTML."
-    (when (and markdown-live-preview-mode
-               (get-buffer "*w3m*"))
-      (call-when-defined 'w3m-reload-all-pages)))
+    (auto-fill-mode 1))
 
   :init
   ;; Use pandoc as markdown generator.
   (setq markdown-command "pandoc")
   ;; Use w3m to preview markdown.
   (setq markdown-live-preview-window-function
-        'markdown-live-preview-window-w3m)
+        'markdown-live-preview-window-eww)
   
   :config
   (add-hook 'markdown-mode-hook 'flyspell-mode)
