@@ -409,15 +409,12 @@
 (use-package tide
   :ensure
 
-  :preface
-  (defun setup-tide-mode ()
-    (interactive)
-    (call-when-defined 'tide-setup)
-    (setq flycheck-check-syntax-automatically '(save idle-change))
-    (call-when-defined 'tide-hl-identifier-mode 1))
-
-  :init
-  (add-hook 'js-mode-hook 'setup-tide-mode))
+  :hook
+  ((typescript-mode . tide-setup)
+   (typescript-mode . tide-hl-identifier-mode)
+   (js-mode . tide-setup)
+   (js-mode . tide-hl-identifier-mode)
+   (before-save . tide-format-before-save)))
 
 (use-package company-tern
   :ensure t)
