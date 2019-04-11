@@ -64,14 +64,6 @@
 (define-key org-mode-map (kbd "C-c C-l") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "C-c C-i") 'org-mark-ring-goto)
 
-(defun get-org-tag-function ()
-  "Return a function to set Org Mode tags."
-  (cond
-   ((featurep 'ivy) 'counsel-org-tag)
-   (t 'org-set-tags)))
-(define-key org-mode-map (kbd "C-c C-q") (get-org-tag-function))
-(define-key org-agenda-mode-map (kbd "C-c C-q") (get-org-tag-function))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Modules                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
