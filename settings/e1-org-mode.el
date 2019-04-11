@@ -292,6 +292,14 @@ EXPORTER is provided by Org Mode."
         ("DONE" . org-done)
         ("STOP" :foreground "DarkGreen" :weight bold)))
 
+(setq org-tag-persistent-alist
+      '((:startgroup . nil)
+        ("task" . ?t) ("event" . ?e)
+        (:endgroup . nil)
+        (:startgroup . nil)
+        ("feature" . ?f) ("bug" . ?b) ("enhancement" . ?e)
+        (:endgroup . nil)))
+
 (setq org-refile-targets
       '((nil :maxlevel . 4)
         (org-agenda-files :maxlevel . 2)
