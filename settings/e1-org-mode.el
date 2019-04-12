@@ -294,9 +294,6 @@ EXPORTER is provided by Org Mode."
 
 (setq org-tag-persistent-alist
       '((:startgroup . nil)
-        ("task" . ?t) ("event" . ?e)
-        (:endgroup . nil)
-        (:startgroup . nil)
         ("feature" . ?f) ("bug" . ?b) ("enhancement" . ?e)
         (:endgroup . nil)))
 
@@ -322,11 +319,6 @@ EXPORTER is provided by Org Mode."
         ("t" "Task" entry
          (file+headline "main.org" "Tasks")
          "* TODO %? :task:"
-         :empty-lines 1)
-        
-        ("e" "Event" entry
-         (file+headline "main.org" "Events")
-         "* %? :event:"
          :empty-lines 1)))
 
 (setq org-agenda-sorting-strategy
