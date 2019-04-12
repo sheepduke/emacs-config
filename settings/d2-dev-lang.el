@@ -413,8 +413,7 @@
   ((typescript-mode . tide-setup)
    (typescript-mode . tide-hl-identifier-mode)
    (js-mode . tide-setup)
-   (js-mode . tide-hl-identifier-mode)
-   (before-save . tide-format-before-save)))
+   (js-mode . tide-hl-identifier-mode)))
 
 (use-package company-tern
   :ensure t)
