@@ -15,13 +15,39 @@
   (setq company-idle-delay 0)
   ;; Make it possible to select item before first or after last wraps around.
   (setq company-selection-wrap-around t)
+
+  ;; Regex to match whether to complete.
+  (defcustom company-begin-regex "[0-9a-zA-Z_.>:-]"
+	"Used by function `complete-or-indent' to decide whether or not to start
+completion."
+	:type 'string
+	:group 'none
+	:safe t)
+
+  ;; Bind company complete to <TAB> in a smart way.
+  ;; TODO Remove this snippet later...
+  (defun complete-or-indent ()
+	"Complete using company-mode or indent current line by checking "
+	(interactive)
+	(cond
+	 ;; When in region, indent the region.
+	 ((use-region-p)
+	  (indent-region (region-beginning) (region-end)))
+	 ;; When yasnippet is active, move to next field.
+	 ((yas-active-snippets)
+	  (yas-next-field))
+	 ;; When it is possible to complete, do it.
+	 ((and (string-match-p company-begin-regex (char-to-string (char-before)))
+           (call-when-defined 'company-manual-begin))
+	  (call-when-defined 'company-complete-common))
+	 (t (indent-for-tab-command))))
     
   :bind (:map company-active-map
 			  ("C-n" . company-select-next)
 			  ("C-p" . company-select-previous))
 
   :bind (:map company-mode-map
-  			  ("<tab>" . company-indent-or-complete-common))
+  			  ("<tab>" . complete-or-indent))
 
   :config
   ;; Remove unused backends.
