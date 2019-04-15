@@ -290,4 +290,10 @@ This works like Vim 'w!'."
   (global-set-key (kbd "C-c 1") 'webjump)
   (global-set-key (kbd "C-c 2") 'webjump-add))
 
+(use-package hl-line
+  :ensure
+
+  :init
+  (global-hl-line-mode 1))
+
 ;;; a2-customize.el ends here
