@@ -318,7 +318,7 @@ EXPORTER is provided by Org Mode."
 
         ("t" "Task" entry
          (file+headline "main.org" "Tasks")
-         "* TODO %? :task:"
+         "* TODO %?"
          :empty-lines 1)))
 
 (setq org-agenda-sorting-strategy
