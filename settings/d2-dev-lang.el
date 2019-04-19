@@ -158,11 +158,14 @@
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
 		 "cargo test")
-    (when (fboundp 'rust-format-buffer)
-      (add-hook 'before-save-hook 'rust-format-buffer))
     ;; Disable fci-mode because the use of rustfmt.
     (fci-mode -1))
-  (add-hook 'rust-mode-hook 'rust-mode-setup)
+
+  ;; Format rust code before save.
+  (setq rust-format-on-save t)
+
+  :hook
+  ((rust-mode . rust-mode-setup))
 
   :bind
   (:map rust-mode-map
@@ -632,6 +635,11 @@
   (add-hook 'markdown-mode-hook 'flyspell-mode)
   (add-hook 'markdown-mode-hook 'toggle-word-wrap)
   (add-hook 'markdown-mode-hook 'markdown-mode-setup))
+
+(use-package poly-markdown
+  :ensure
+  :hook
+  ((markdown-mode . poly-markdown-mode)))
 
 (use-package flymd
   :after markdown-mode
