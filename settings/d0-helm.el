@@ -43,6 +43,11 @@
 
 (use-package helm-swoop
   :ensure
+
+  :init
+  ;; Split window in the same way as helm itself.
+  (setq helm-swoop-split-window-function 'helm-default-display-buffer)
+
   :bind
   ("C-s" . helm-swoop))
 
@@ -84,8 +89,12 @@
 (use-package helm-rg
   :ensure
   :after helm
+
+  :init
+  ;; Do not use current word as initial value.
+  (setq helm-rg-thing-at-point nil)
+
   :bind
   ("C-x c a" . helm-rg))
-
 
 ;;; d0-completion.el ends here
