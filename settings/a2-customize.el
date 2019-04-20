@@ -188,7 +188,6 @@ This works like Vim 'w!'."
     (condition-case nil
         (save-buffer)
       (error (set-file-modes filename (+ original-file-modes #o222))
-             (message "....")
              (save-buffer)
              (set-file-modes filename original-file-modes)))))
 
@@ -292,8 +291,7 @@ This works like Vim 'w!'."
 
 (use-package hl-line
   :ensure
-
   :init
-  (global-hl-line-mode 1))
+  (call-when-defined 'global-hl-line-mode 1))
 
 ;;; a2-customize.el ends here
