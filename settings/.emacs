@@ -9,7 +9,6 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
-(setq package-enable-at-startup nil)
 (package-initialize)
 (setq load-prefer-newer t)
 (require 'use-package)
@@ -20,6 +19,9 @@
 ;; Start Emacs server.
 (server-start)
 
-(load-theme 'whiteboard)
+;; Make Emacs fullscreen.
+(toggle-frame-fullscreen)
+;; You may change it to any theme you favorite theme.
+(load-theme 'moe-dark t)
 
 ;;; .emacs ends here
