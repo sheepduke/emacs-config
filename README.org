@@ -40,7 +40,7 @@ The place where all configuration and custom plugin (outside elpa) goes.
 - ~b2-display~: Customization related to buffer display, X window etc.
 - ~c3-external~: Tools that relies on external programs.
 - ~d0-helm~: ~helm~ configuration. You may find ~Ivy~ related things in
-  commit history.
+  ~d0-ivy~ backup file.
 - ~d1-dev-common~: Some common programming configuration.
 - ~d2-dev-lang~: Configuration for each programming language.
 - ~e1-org-mode~: Org related settings.
