@@ -88,17 +88,12 @@
   ;; Enable helm-projectile!
   (call-when-defined 'helm-projectile-on))
 
-
-(use-package helm-rg
+(use-package helm-ag
   :ensure
   :after helm
 
-  :init
-  ;; Do not use current word as initial value.
-  (setq helm-rg-thing-at-point nil)
-
   :bind
-  ("C-x c a" . helm-rg))
+  ("C-x c a" . helm-ag))
 
 (use-package helm-eww
   :ensure
