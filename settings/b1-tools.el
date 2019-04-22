@@ -74,8 +74,7 @@
 (use-package avy
   :ensure
   :bind
-  ("M-g c" . avy-goto-char)
-  ("M-g a" . avy-goto-char-2)
+  ("C-'" . avy-goto-char-timer)
   ("M-g g" . avy-goto-line))
 
 

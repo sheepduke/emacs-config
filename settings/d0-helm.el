@@ -41,19 +41,10 @@
   :config
   (call-when-defined 'helm-mode 1))
 
-(use-package helm-swoop
-  :ensure
-
-  :init
-  ;; Split window in the same way as helm itself.
-  (setq helm-swoop-split-window-function 'helm-default-display-buffer)
-
-  :bind
-  ("C-s" . helm-swoop))
-
 (use-package helm-themes
   :ensure
   :after helm
+
   :bind
   ("C-x c t" . helm-themes))
 
@@ -61,6 +52,7 @@
 (use-package helm-descbinds
   :ensure
   :after helm
+
   :init
   (call-when-defined 'helm-descbinds-mode 1))
 
@@ -73,6 +65,17 @@
         ("C-:" . helm-company))
   (:map company-active-map
         ("C-:" . helm-company)))
+
+(use-package swiper-helm
+  :ensure
+  :after helm
+  
+  :init
+  ;; Use the same buffer strategy as helm.
+  (setq swiper-helm-display-function helm-display-function)
+
+  :bind
+  ("C-s" . swiper-helm))
 
 (use-package helm-projectile
   :ensure
