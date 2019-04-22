@@ -229,25 +229,15 @@ This works like Vim 'w!'."
 (use-package eww
   :init
   (setq eww-download-directory "~/downloads/")
-  (setq eww-bookmarks-directory (concat *data-path* "eww/"))
-
-  :bind
-  ("C-c e k" . eww-list-bookmarks)
-  ("C-c e l" . eww-list-buffers)
-  )
+  (setq eww-bookmarks-directory (concat *data-path* "eww/")))
 
 (use-package eww-plus
+  :after eww
+
   :init
   (setq browse-url-browser-function
         `(("HyperSpec" . eww-browse-url-new-buffer)
-          (".*" . browse-url-default-browser)))
-
-  :bind
-  ("C-c e E" . eww)
-  ("C-c e e" . eww-new-buffer)
-  ("C-c e s" . eww-switch-buffer)
-  (:map eww-mode-map
-        ("N" . eww-new-buffer)))
+          (".*" . browse-url-default-browser))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;

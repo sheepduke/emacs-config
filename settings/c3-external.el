@@ -39,17 +39,17 @@
   (setq emms-source-file-default-directory "~/music")
 
   :bind
-  ("C-c 3 g" . emms-play-directory)
-  ("C-c 3 e" . emms-play-file)
+  ("C-c e g" . emms-play-directory)
+  ("C-c e e" . emms-play-file)
 
-  ("C-c 3 d" . emms-play-dired)
-  ("C-c 3 f" . emms-shuffle)
-  ("C-c 3 l" . emms-playlist-mode-go)
-  ("C-c 3 x" . emms-start)
-  ("C-c 3 SPC" . emms-pause)
-  ("C-c 3 s" . emms-stop)
-  ("C-c 3 n" . emms-next)
-  ("C-c 3 p" . emms-previous))  
+  ("C-c e d" . emms-play-dired)
+  ("C-c e f" . emms-shuffle)
+  ("C-c e l" . emms-playlist-mode-go)
+  ("C-c e x" . emms-start)
+  ("C-c e SPC" . emms-pause)
+  ("C-c e s" . emms-stop)
+  ("C-c e n" . emms-next)
+  ("C-c e p" . emms-previous))  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Dictionary                           ;;;;

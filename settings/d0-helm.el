@@ -100,4 +100,11 @@
   :bind
   ("C-x c a" . helm-rg))
 
+(use-package helm-eww
+  :ensure
+  :after helm
+
+  :bind
+  ("C-c 3" . helm-eww))
+
 ;;; d0-completion.el ends here
