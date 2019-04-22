@@ -107,4 +107,10 @@
   :bind
   ("C-c 3" . helm-eww))
 
+(use-package helm-unicode
+  :ensure
+
+  :bind
+  ("C-x 8 <return>" . helm-unicode))
+
 ;;; d0-completion.el ends here
