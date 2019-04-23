@@ -32,6 +32,7 @@
    ("C-x r i" . helm-register)
    ("C-h a" . helm-apropos)
    ("C-x c ," . helm-calcul-expression)
+   ("C-x 8 <return>" . helm-ucs)
    ("M-i" . helm-show-kill-ring)
    :map helm-map
    ("<tab>" . helm-execute-persistent-action)
