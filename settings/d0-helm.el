@@ -37,7 +37,9 @@
    :map helm-map
    ("<tab>" . helm-execute-persistent-action)
    ("M-x" . helm-select-action)
-   ("C-z" . nil))
+   ("C-z" . nil)
+   :map org-mode-map
+   ("C-c C-j" . helm-org-in-buffer-headings))
 
   :config
   (call-when-defined 'helm-mode 1))
