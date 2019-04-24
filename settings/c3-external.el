@@ -122,4 +122,16 @@
 	:config
 	(add-hook 'imagex-sticky-mode-hook 'imagex-auto-adjust-mode)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                         Silver Brain                         ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'load-path "~/.silver-brain/emacs/")
+(use-package silver-brain
+  :init
+  (setq silver-brain-server-port 5000)
+
+  :bind
+  ("C-c b" . silver-brain))
+
 ;;; c3-external.el ends here

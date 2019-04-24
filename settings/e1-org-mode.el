@@ -89,11 +89,6 @@
   ;; Show my habits no matter whether it is scheduled today.
   (setq org-habit-show-all-today t))
 
-(use-package org-brain
-  :ensure
-  :bind
-  ("C-c b" . org-brain-visualize))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                       Localization                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
