@@ -73,6 +73,11 @@
 ;; Jump to character from 2 leading chars.
 (use-package avy
   :ensure
+
+  :init
+  ;; Set the timeout to a very short time.
+  (setq avy-timeout-seconds 0.2)
+
   :bind
   ("C-'" . avy-goto-char-timer)
   ("M-g g" . avy-goto-line))
