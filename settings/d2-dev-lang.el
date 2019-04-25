@@ -11,8 +11,8 @@
 (use-package arduino-mode
   :mode "\\.ino"
   
-  :config
-  (defun arduino-mode-hook-function ()
+  :preface
+  (defun arduino-mode-setup ()
 	(semantic-mode 0)
 	(set (make-local-variable 'compile-command)
 		 "make -j4 -l5 && make upload")
@@ -23,8 +23,8 @@
 			(company-c-headers :with company-yasnippet)
 			(company-capf :with company-yasnippet))))
 
-  (add-hook 'arduino-mode-hook 'arduino-mode-hook-function))
-
+  :hook
+  (arduino-mode . arduino-mode-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            C/C++                             ;;;;
@@ -32,6 +32,19 @@
 
 (use-package cc-mode
   :ensure
+
+  :preface
+  (defun c/c++-mode-setup-company ()
+	(company-mode 1)
+	(make-local-variable 'company-backends)
+	(setq company-backends
+		  '((company-dabbrev-code company-gtags company-etags company-keywords
+								  :with company-yasnippet)
+			(company-c-headers :with company-yasnippet)
+			(company-capf :with company-yasnippet)))
+	(setq comment-start "//")
+	(setq comment-end ""))
+
   :init
   ;; Use 'gnu' coding style.
   (setq c-default-style "gnu")
@@ -47,20 +60,10 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
 
-  (add-hook 'c++-mode-hook 'ggtags-mode)
-
-  (defun c/c++-mode-setup-company ()
-	(company-mode 1)
-	(make-local-variable 'company-backends)
-	(setq company-backends
-		  '((company-dabbrev-code company-gtags company-etags company-keywords
-								  :with company-yasnippet)
-			(company-c-headers :with company-yasnippet)
-			(company-capf :with company-yasnippet)))
-	(setq comment-start "//")
-	(setq comment-end ""))
-  (add-hook 'c++-mode-hook 'c/c++-mode-setup-company)
-  (add-hook 'c-mode-hook 'c/c++-mode-setup-company))
+  :hook
+  (c++-mode . ggtags-mode)
+  (c++-mode . c/c++-mode-setup-company)
+  (c-mode . c/c++-mode-setup-company))
 
 (use-package cmake-mode
   :ensure
@@ -74,20 +77,25 @@
 ;;;;                            Java                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun java-mode-setup ()
-  "Setup Java mode."
-  (setq fill-column 120))
-(add-hook 'java-mode-hook 'java-mode-setup)
+(use-package cc-mode
+  :preface
+  (defun java-mode-setup ()
+    "Setup Java mode."
+    (setq fill-column 120))
+  
+  :hook
+  (java-mode . java-mode-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Erlang                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package erlang
+  :ensure
+  
   :init
+  ;; Set indentation level.
   (setq erlang-indent-level 2)
-
-  :config
   (require 'erlang-start)
 
   :bind
@@ -96,17 +104,21 @@
         ("C-<f5>" . compile)))
 
 (use-package company-erlang
-  :init
-  (add-hook 'erlang-mode-hook 'company-mode)
-  (add-hook 'erlang-mode-hook 'company-erlang-init))
+  :ensure
+  
+  :hook
+  (erlang-mode . company-mode)
+  (erlang-mode . company-erlang-init))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Elixir                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package alchemist
+  :ensure
   :after elixir-mode
-  :init
+
+  :preface
   (defun elixir-insert-end ()
 	"Insert END accordingly."
 	(interactive)
@@ -125,9 +137,6 @@
     "Send current buffer."
     (interactive)
     (alchemist-iex-send-region (point-min) (point-max)))
-  (add-hook 'elixir-mode-hook 'alchemist-mode)
-  (add-hook 'alchemist-mode-hook 'company-mode)
-  (add-hook 'alchemist-mode-hook 'flyspell-prog-mode)
 
   (defun alchemist-run-iex-dwim ()
     "Run iex with or without mix accordingly."
@@ -135,7 +144,7 @@
     (let ((result (alchemist-iex-project-run)))
       (unless (bufferp result)
         (alchemist-iex-run))))
-  
+
   :bind
   (:map alchemist-mode-map
         ("C-c b" . alchemist-iex-send-buffer)
@@ -146,14 +155,21 @@
         ("C-c C-p" . alchemist-run-iex-dwim)
         ("M-P" . nil)
         ("M-N" . nil)
-        ("C-c a" . nil)))
+        ("C-c a" . nil))
+
+  :hook
+  (elixir-mode . alchemist-mode)
+  (alchemist-mode . company-mode)
+  (alchemist-mode . flyspell-prog-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Rust                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package rust-mode
-  :init
+  :ensure
+  
+  :preface
   (defun rust-mode-setup ()
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
@@ -161,38 +177,47 @@
     ;; Disable fci-mode because the use of rustfmt.
     (fci-mode -1))
 
+  :init
   ;; Format rust code before save.
   (setq rust-format-on-save t)
-
-  :hook
-  ((rust-mode . rust-mode-setup))
 
   :bind
   (:map rust-mode-map
         ("C-c C-b" . recompile)
-        ("C-c C-v" . compile)))
+        ("C-c C-v" . compile))
+
+  :hook
+  ((rust-mode . rust-mode-setup)))
 
 (use-package cargo
-  :init
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+  :ensure
+  
+  :hook
+  (rust-mode . cargo-minor-mode))
 
 (use-package racer
-  :init
-  (add-hook 'rust-mode-hook 'racer-activate)
-  (add-hook 'rust-mode-hook 'racer-turn-on-eldoc))
+  :ensure
+  
+  :hook
+  (rust-mode . racer-mode)
+  (rust-mode . eldoc-mode))
 
 (use-package flycheck-rust
-  :init
-  (add-hook 'flycheck-mode-hook 'flycheck-rust-setup))
+  :ensure
+  
+  :hook
+  (flycheck-mode . flycheck-rust-setup))
 
 (use-package company-racer
-  :config
+  :ensure
+  
+  :preface
   (defun company-racer-setup ()
 	(make-local-variable 'company-backends)
 	(setq company-backends '((company-racer :with company-yasnippet))))
 
-  (add-to-list 'rust-mode-hook 'company-racer-setup))
-
+  :hook
+  (rust-mode . company-racer-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                       Common Lisp                            ;;;;
@@ -200,6 +225,7 @@
 
 (use-package sly
   :ensure
+  
   :preface
   (defun sly-repl-clear-buffer-anywhere ()
     "Clear Sly buffer from anywhere."
@@ -220,8 +246,6 @@
         (concat "file://"
                 (expand-file-name "~/documents/manuals/lisp/HyperSpec/")))
 
-  (add-hook 'lisp-mode-hook 'sly-editing-mode)
-  
   :bind
   (:map sly-mode-map
         ("C-c C-k" . sly-interrupt)
@@ -229,8 +253,10 @@
         ("C-c C-l" . sly-eval-defun)
         ("C-c C-p" . sly-eval-print-last-expression)
         ("C-c C-d d" . hyperspec-lookup)
-        ("C-M-l" . sly-repl-clear-buffer-anywhere)))
+        ("C-M-l" . sly-repl-clear-buffer-anywhere))
 
+  :hook
+  (lisp-mode . sly-editing-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Emacs Lisp                            ;;;;
@@ -242,8 +268,8 @@
         ("C-c C-r" . eval-region)
 		("C-c C-b" . eval-buffer))
 
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
+  :hook
+  (emacs-lisp-mode . eldoc-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -251,19 +277,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package cider
-  :init
+  :ensure
+  
+  :preface
   (defun cider-eval-buffer-content ()
     "Eval buffer content without having to save it."
     (interactive)
     (call-when-defined 'cider-eval-region (point-min) (point-max)))
-
-  (add-hook 'clojure-mode-hook 'cider-mode)
-
+  
   :bind
   (:map cider-mode-map
         ("C-c b" . cider-eval-buffer-content))
   (:map cider-repl-mode-map
-        ("C-M-l" . cider-repl-clear-buffer)))
+        ("C-M-l" . cider-repl-clear-buffer))
+
+  :hook
+  (clojure-mode . cider-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -271,15 +300,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package geiser
+  :ensure
+  
   :init
   ;; Set racket to be the only implementation.
   (setq geiser-active-implementations '(racket))
   ;; Don't record duplicated command in history.
   (setq geiser-repl-history-no-dups-p t)
 
-  :config
-  (add-hook 'geiser-mode-hook 'disable-company-quickhelp-mode)
-  (add-hook 'scheme-mode 'geiser-mode))
+  :hook
+  (geiser-mode . disable-company-quickhelp-mode)
+  (scheme-mode . geiser-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -287,22 +318,31 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package julia-mode
-  :init
-  (setq julia-indent-offset 4)
-
+  :ensure
+  
+  :preface
   (defun julia-mode-setup ()
+    "Setup Julia mode."
     ;; Set fill column.
     (setq fill-column 92)
     ;; Set company source.
     (make-local-variable 'company-backends)
 	(setq company-backends
 		  '(company-dabbrev :with 'company-yasnippet)))
-  (add-hook 'julia-mode-hook 'julia-mode-setup))
+  :init
+  ;; Set indentation level.
+  (setq julia-indent-offset 4)
+
+  :hook
+  (julia-mode . julia-mode-setup))
   
 (use-package julia-repl
-  :init
+  :ensure
+  :after julia-mode
+
+  :preface
   (defun julia-repl-send-buffer-content ()
-    "Send buffer to julia repl."
+    "Send buffer to Julia REPL."
     (interactive)
     (save-excursion
       (goto-char (point-min))
@@ -311,6 +351,7 @@
       (julia-repl-send-region-or-line)))
 
   (defun julia-repl-send-line-content ()
+    "Send line to Julia REPL."
     (interactive)
     (save-excursion
       (call-when-defined 'julia-repl-send-line)))
@@ -325,7 +366,6 @@
     (forward-line -1)
     (end-of-line))
 
-  :after julia-mode
   :bind
   (:map julia-mode-map
         ("C-<return>" . julia-newline-with-end)
@@ -339,6 +379,7 @@
 
 (use-package web-mode
   :ensure
+  
   :mode "\\.html\\'"
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
@@ -367,10 +408,13 @@
   (setq css-indent-offset 2)
 
   (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (add-hook 'web-mode-hook 'web-mode-setup))
+
+  :hook
+  (web-mode . web-mode-setup))
 
 (use-package emmet-mode
   :ensure
+  
   :init
   (add-hook 'web-mode-hook 'emmet-mode)
 
@@ -383,15 +427,19 @@
   :ensure)
 
 (use-package rainbow-mode
+  :ensure
   :after web-mode
-  :init
-  (add-hook 'web-mode-hook 'rainbow-mode))
+  
+  :hook
+  (web-mode . rainbow-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         JavaScript                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package js2-mode
+  :ensure
+  
   :preface
   (defun setup-js2-mode ()
     (when (equal major-mode 'js-mode)
@@ -407,7 +455,8 @@
                 (append flycheck-disabled-checkers
                         '(javascript-jshint json-jsonlist)))
 
-  (add-hook 'js-mode-hook 'setup-js2-mode))
+  :hook
+  (js-mode . setup-js2-mode))
 
 (use-package tide
   :ensure
@@ -419,9 +468,10 @@
    (js-mode . tide-hl-identifier-mode)))
 
 (use-package company-tern
-  :ensure t)
+  :ensure)
 
 (use-package flycheck
+  :ensure
 
   :preface
   (defun flycheck-use-local-eslint ()
@@ -434,21 +484,25 @@
       (when (and eslint (file-executable-p eslint))
         (setq-local flycheck-javascript-eslint-executable eslint))))
 
-  :init
-  (add-hook 'flycheck-mode-hook 'flycheck-use-local-eslint))
+  :hook
+  (flycheck-mode . flycheck-use-local-eslint))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Python                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package python
+  :ensure
+  
   :init
+  ;; Use Python 3 instead of Python 2.
   (setq python-shell-interpreter "python3")
   (setq flycheck-python-pycompile-executable "python3"))
 
 ;; For setup elpy, run:
 ;; pip install jedi flake8 autopep8
 (use-package elpy
+  :ensure
   :after python
 
   :preface
@@ -473,7 +527,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package ruby-mode
-  :init
+  :ensure
+  
+  :preface
   (defun ruby-insert-end ()
 	"Insert `end' accordingly."
 	(interactive)
@@ -494,7 +550,9 @@
 		("C-c b" . ruby-send-buffer)))
 
 (use-package inf-ruby
-  :init
+  :ensure
+  
+  :preface
   (defun inf-ruby-restart (&optional impl)
 	(interactive)
 	(catch 'return
@@ -518,13 +576,17 @@
   (:map inf-ruby-minor-mode-map
 		("C-c C-s" . inf-ruby-restart))
 
-  :config
-  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode))
+  :hook
+  (ruby-mode . inf-ruby-minor-mode))
 
 (use-package company-inf-ruby
-  :config
+  :ensure
+  
+  :init
   (add-to-list 'company-backends 'company-inf-ruby)
-  (add-hook 'inf-ruby-mode-hook 'company-mode))
+
+  :hook
+  (inf-ruby-mode . company-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -532,7 +594,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package go-mode
-  :init
+  :ensure
+  
+  :preface
   (defun optimize-and-save ()
     (interactive)
     (call-when-defined 'gofmt)
@@ -545,11 +609,14 @@
         ("C-x C-s" . optimize-and-save)))
 
 (use-package go-eldoc
+  :ensure
   :after go-mode
-  :config
-  (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+  :hook
+  (go-mode . go-eldoc-setup))
 
 (use-package company-go
+  :ensure
   :after go-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -557,6 +624,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package latex
+  :preface
+  (defun LaTeX-mode-setup ()
+	"Hook function for LaTeX mode."
+	;; Enable auto-fill.
+	(auto-fill-mode)
+	;; Disable flycheck mode.
+	(call-when-defined flycheck-mode -1)
+	;; Enable toc viewer.
+	(turn-on-reftex)
+	;; Stop using default completion.
+	(setq completion-at-point-functions 'complete-or-indent))
+  
   :init
   ;; Add Chinese support.
   (setq pdf-latex-command "xelatex")
@@ -573,26 +652,20 @@
 							 LaTeX-section-section
 							 LaTeX-section-label))
 
-  :config
-  (defun LaTeX-mode-hook-function ()
-	"Hook function for LaTeX mode."
-	;; Enable auto-fill.
-	(auto-fill-mode)
-	;; Disable flycheck mode.
-	(call-when-defined flycheck-mode -1)
-	;; Enable toc viewer.
-	(turn-on-reftex)
-	;; Stop using default completion.
-	(setq completion-at-point-functions 'auto-complete))
-  (add-hook 'LaTeX-mode-hook 'LaTeX-mode-hook-function))
+  :hook
+  (LaTeX-mode . LaTeX-mode-setup))
 
 
 (use-package latex-preview-pane
+  :ensure
+
   :bind
   (:map latex-preview-pane-mode-map
 		("M-P" . nil)))
 
 (use-package reftex-toc
+  :ensure
+
   :init
   ;; Enable on-the-fly table-of-content.
   (setq reftex-plug-into-AUCTeX t)
@@ -601,7 +674,9 @@
 			  ("q" . delete-window)))
 
 (use-package company-auctex
-  :config
+  :ensure
+  
+  :preface
   (defun LaTeX-mode-setup-company ()
 	(make-local-variable 'company-backends)
 	(setq company-backends '(company-dabbrev company-auctex-bibs
@@ -611,7 +686,9 @@
 	(company-mode-setup-yasnippet-backend)
 	;; Disable idle completion.
 	(set (make-local-variable 'company-idle-delay) nil))
-  (add-hook 'LaTeX-mode-hook 'LaTeX-mode-setup-company))
+
+  :hook
+  (LaTeX-mode . LaTeX-mode-setup-company))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -619,6 +696,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package markdown-mode
+  :ensure
+  
   :preface
   (defun markdown-mode-setup()
     "Setup markdown-mode."
@@ -631,24 +710,28 @@
   (setq markdown-live-preview-window-function
         'markdown-live-preview-window-eww)
   
-  :config
-  (add-hook 'markdown-mode-hook 'flyspell-mode)
-  (add-hook 'markdown-mode-hook 'toggle-word-wrap)
-  (add-hook 'markdown-mode-hook 'markdown-mode-setup))
+  :hook
+  (markdown-mode . flyspell-mode)
+  (markdown-mode . toggle-word-wrap)
+  (markdown-mode . markdown-mode-setup))
 
 (use-package poly-markdown
   :ensure
+  
   :hook
-  ((markdown-mode . poly-markdown-mode)))
+  (markdown-mode . poly-markdown-mode))
 
 (use-package flymd
+  :ensure
   :after markdown-mode
 
-  :config
+  :init
   (setq flymd-output-directory "/tmp/"))
 
 (use-package markdown-toc
+  :ensure
   :after markdown-mode
+
   :bind
   (:map markdown-mode-map
         ("C-c =" . markdown-toc-generate-or-refresh-toc)))
@@ -658,14 +741,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yaml-mode
+  :ensure
+
   :mode "\\.yml\\'"
   :mode "\\.yml.j2\\'"
+
+  :hook
+  (yaml-mode . highlight-indent-guides-mode)
 
   :bind
   (:map yaml-mode-map
         ("<return>" . newline-smart-comment)))
 
 (use-package conf-mode
+  :ensure
   :bind
   (:map conf-mode-map
         ("<return>" . newline-smart-comment)))
