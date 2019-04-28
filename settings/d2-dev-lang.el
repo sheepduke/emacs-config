@@ -716,10 +716,8 @@
   (markdown-mode . markdown-mode-setup))
 
 (use-package poly-markdown
-  :ensure
-  
-  :hook
-  (markdown-mode . poly-markdown-mode))
+  :ensure)
+(remove-hook 'markdown-mode-hook 'poly-markdown-mode)
 
 (use-package flymd
   :ensure
