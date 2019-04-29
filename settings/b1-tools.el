@@ -77,6 +77,8 @@
   :init
   ;; Set the timeout to a very short time.
   (setq avy-timeout-seconds 0.2)
+  ;; Do not directly jump to the only candidate.
+  (setq avy-single-candidate-jump nil)
 
   :bind
   ("C-'" . avy-goto-char-timer)
