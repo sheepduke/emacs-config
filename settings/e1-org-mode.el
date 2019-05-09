@@ -290,6 +290,9 @@ EXPORTER is provided by Org Mode."
 (setq org-tag-persistent-alist
       '((:startgroup . nil)
         ("feature" . ?f) ("bug" . ?b) ("enhancement" . ?e)
+        (:endgroup . nil)
+        (:startgroup . nil)
+        ("@work" . ?w) ("@home" . ?h)
         (:endgroup . nil)))
 
 (setq org-refile-targets
