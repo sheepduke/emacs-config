@@ -268,8 +268,9 @@ EXPORTER is provided by Org Mode."
 (setq org-log-done 'time)
 ;; Keep the task dependency.
 (setq org-enforce-todo-dependencies t)
-;; Archive to local file under 'Archived' tree with corresponding tag.
-(setq org-archive-location "::* Archived :ARCHIVE:")
+;; Archive to "archive.org" file.
+(setq org-archive-location
+      (format "%s/archive.org::" org-directory))
 ;; Record clock information of both running and history clocks.
 (setq org-clock-persist t)
 (org-clock-persistence-insinuate)
@@ -292,20 +293,15 @@ EXPORTER is provided by Org Mode."
         ("feature" . ?f) ("bug" . ?b) ("enhancement" . ?e)
         (:endgroup . nil)
         (:startgroup . nil)
-        ("@work" . ?w) ("@home" . ?h)
+        ("@work" . ?w) ("@home" . ?h) ("@outside" . ?o)
         (:endgroup . nil)))
 
 (setq org-refile-targets
-      '((nil :maxlevel . 4)
-        (org-agenda-files :maxlevel . 2)
-        ("main.org" :level . 1)
-        ("someday.org" :level . 1)
-        ("reminder.org" :level . 1)
-        ("capture.org" :level . 1)))
+      '((org-agenda-files :level . 1)))
 
 ;; Just let me refile!
 (setq org-outline-path-complete-in-steps nil)
-(setq org-refile-use-outline-path t)
+(setq org-refile-use-outline-path 'file)
 
 ;; Set templates:
 ;; (KEYS DESCRIPTION TYPE TARGET TEMPLATE PROPERTIES)
