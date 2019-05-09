@@ -299,6 +299,8 @@ EXPORTER is provided by Org Mode."
       '((nil :maxlevel . 4)
         (org-agenda-files :maxlevel . 2)
         ("main.org" :level . 1)
+        ("someday.org" :level . 1)
+        ("reminder.org" :level . 1)
         ("capture.org" :level . 1)))
 
 ;; Just let me refile!
@@ -355,9 +357,10 @@ EXPORTER is provided by Org Mode."
         `(("n" "Super Agenda"
            ((agenda "" nil)
             (todo ""
-                  ((org-agenda-overriding-header "")
+                  ((org-agenda-overriding-header "TASKS")
                    (org-super-agenda-groups
                     '((:discard (:scheduled t))
+                      (:discard (:tag "someday"))
                       (:name "Today"
                              :scheduled today
                              :order 10)
@@ -375,19 +378,12 @@ EXPORTER is provided by Org Mode."
                              :order 100)
 
                       ))))
-            (tags "refile"
-                  ((org-agenda-overriding-header "")
+            (tags "capture"
+                  ((org-agenda-overriding-header "INBOX")
                    (org-super-agenda-groups
                     '((:name "Capture"
-                             :tag "refile")))))))
+                             :tag "capture")))))))
 
-          ("p" "Projects"
-           ((todo ""
-                  ((org-agenda-overriding-header "")
-                   (org-super-agenda-groups
-                    '((:discard (:category "main"))
-                      (:auto-category t)))))))
-          
           ("u" "Scheduled Tasks"
            ((todo ""
                   ((org-super-agenda-groups
