@@ -334,7 +334,12 @@ EXPORTER is provided by Org Mode."
   ;; Length of pomodoro cycle.
   (setq org-pomodoro-length 25)
   ;; Length of pomodoro short break.
-  (setq org-pomodoro-short-break-length 5))
+  (setq org-pomodoro-short-break-length 5)
+
+  :bind
+  (:map org-agenda-mode-map
+        ("i" . org-pomodoro)
+        ("I" . org-clock-in)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Super Agenda                         ;;;;
