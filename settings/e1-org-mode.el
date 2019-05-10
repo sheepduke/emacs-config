@@ -339,7 +339,7 @@ EXPORTER is provided by Org Mode."
   :bind
   (:map org-agenda-mode-map
         ("i" . org-pomodoro)
-        ("I" . org-clock-in)))
+        ("I" . org-agenda-clock-in)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Super Agenda                         ;;;;
