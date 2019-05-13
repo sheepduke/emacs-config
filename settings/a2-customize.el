@@ -1,4 +1,6 @@
-;;; Package --- Customized built-in packantary:
+;;; Package --- Customize built-in packages.
+
+;;; Commentary:
 
 ;;; Code:
 

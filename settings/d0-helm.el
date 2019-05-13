@@ -41,8 +41,9 @@
    :map org-mode-map
    ("C-c C-j" . helm-org-in-buffer-headings))
 
-  :config
-  (call-when-defined 'helm-mode 1))
+  :hook
+  ;; Otherwise helm will not work for some plugins.
+  (after-init . helm-mode))
 
 (use-package helm-themes
   :ensure
