@@ -370,23 +370,10 @@ EXPORTER is provided by Org Mode."
                    (org-super-agenda-groups
                     '((:discard (:scheduled t))
                       (:discard (:tag "someday"))
-                      (:name "Today"
-                             :scheduled today
-                             :order 10)
-                      (:name "On Hold"
-                             :todo "HOLD"
-                             :order 20)
-                      (:name "Important"
-                             :priority "A"
-                             :order 30)
-                      (:name "Priority B and C"
-                             :priority<= "B"
-                             :order 50)
-                      (:name "Backlog"
-                             :and (:todo "TODO" :not (:priority>= "C"))
-                             :order 100)
-
-                      ))))
+                      (:name "Projects"
+                             :auto-parent)
+                      (:name "Priority"
+                             :auto-priority)))))
             (tags "capture"
                   ((org-agenda-overriding-header "INBOX")
                    (org-super-agenda-groups
