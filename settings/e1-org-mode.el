@@ -309,6 +309,9 @@ EXPORTER is provided by Org Mode."
 (setq org-capture-templates
       `(("k" "Capture" entry
          (file "capture.org") "* %?\n"
+         :empty-lines 1)
+        ("t" "TODO" entry
+         (file "capture.org") "* TODO %?\n"
          :empty-lines 1)))
 
 (setq org-agenda-sorting-strategy
