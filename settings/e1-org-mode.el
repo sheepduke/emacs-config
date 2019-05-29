@@ -371,6 +371,7 @@ EXPORTER is provided by Org Mode."
                   ((org-agenda-overriding-header "TASKS")
                    (org-super-agenda-groups
                     '((:discard (:scheduled t))
+                      (:discard (:tag "capture"))
                       (:discard (:tag "someday"))
                       (:name "Projects"
                              :auto-parent)
