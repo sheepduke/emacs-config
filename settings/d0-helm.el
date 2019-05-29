@@ -38,6 +38,8 @@
    ("<tab>" . helm-execute-persistent-action)
    ("M-x" . helm-select-action)
    ("C-z" . nil)
+   :map helm-find-files-map
+   ("C-<backspace>" . nil)
    :map org-mode-map
    ("C-c C-j" . helm-org-in-buffer-headings))
 
