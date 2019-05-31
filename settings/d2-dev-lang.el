@@ -752,6 +752,7 @@
   :mode "\\.yml.j2\\'"
 
   :hook
+  (yaml-mode . fci-mode)
   (yaml-mode . highlight-indent-guides-mode)
 
   :bind
