@@ -23,6 +23,10 @@
   (setq helm-split-window-inside-p t)
   ;; Use follow mode from now!
   (setq helm-follow-mode-persistent t)
+  ;; For helm-find-files related bindings.
+  (require 'helm-files)
+  ;; For Org Mode bindings.
+  (require 'org)
   
   :bind
   (("M-x" . helm-M-x)
