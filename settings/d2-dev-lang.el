@@ -230,40 +230,54 @@
 ;;;;                       Common Lisp                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package sly
+(use-package slime
   :ensure
-  
   :preface
-  (defun sly-repl-clear-buffer-anywhere ()
-    "Clear Sly buffer from anywhere."
+  (defun setup-slime-mode ()
+    ;; Set the line length to 80.
+    (setq fill-column 80)
+    (ggtags-mode 0))
+
+  (defun slime-repl-clear-buffer-anywhere ()
+    "Clear Slime buffer from anywhere."
     (interactive)
-    (with-current-buffer "*sly-mrepl for sbcl*"
-      (call-when-defined 'sly-mrepl-clear-repl)))
+    (with-current-buffer "*slime-repl sbcl*"
+      (slime-repl-clear-buffer)))
 
   :init
+  (add-hook 'slime-mode-hook 'setup-slime-mode)
+  
   ;; set common lisp REPL
   (setq inferior-lisp-program "ros run")
-  ;; Use classic completion style.
-  (setq sly-complete-symbol-function 'sly-simple-completions)
-
-  (push 'sly-repl-ansi-color sly-contribs)
+  (require 'slime-autoloads)
 
   ;; Set the location of HyperSpec.
   (setq common-lisp-hyperspec-root
-        (concat "file://"
-                (expand-file-name "~/documents/manuals/lisp/HyperSpec/")))
+        (expand-file-name "~/documents/manuals/lisp/HyperSpec/"))
 
   :bind
-  (:map sly-mode-map
-        ("C-c C-k" . sly-interrupt)
-        ("C-c C-b" . sly-eval-buffer)
-        ("C-c C-l" . sly-eval-defun)
-        ("C-c C-p" . sly-eval-print-last-expression)
+  (:map slime-mode-map
+        ("C-c C-k" . slime-interrupt)
+        ("C-c C-b" . slime-eval-buffer)
+        ("C-c C-l" . slime-eval-defun)
         ("C-c C-d d" . hyperspec-lookup)
-        ("C-M-l" . sly-repl-clear-buffer-anywhere))
+        ("C-M-l" . slime-repl-clear-buffer-anywhere))
+  (:map slime-repl-mode-map
+        ("C-M-l" . slime-repl-clear-buffer))
 
-  :hook
-  (lisp-mode . sly-editing-mode))
+  :config
+  (call-when-defined 'slime-setup
+                     '(slime-fancy slime-company slime-repl-ansi-color))
+
+  (add-hook 'slime-repl-mode-hook 'company-mode))
+
+;; Contrib packages must not be loaded manually.
+;; SLIME handles them.
+(use-package slime-repl-ansi-color
+  :ensure)
+
+(use-package slime-company
+  :ensure)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Emacs Lisp                            ;;;;
