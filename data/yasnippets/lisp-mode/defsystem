@@ -11,4 +11,16 @@
   :components ((:module "src"
                 :components
                 ((:file "package")
-                 (:file "$1")))))
+                 (:file "$1"))))
+  :in-order-to ((test-op (test-op "cl-republic/tests"))))
+
+(defsystem $1/tests
+  :description "Tests of $1 system"
+  :author "$3"
+  :license "$4"
+  :version "0.0.1"
+  :depends-on (#:$1
+               #:rove)
+  :components ((:module "src"
+                :components
+                ((:file "package")))))
