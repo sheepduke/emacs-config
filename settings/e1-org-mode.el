@@ -367,10 +367,13 @@ EXPORTER is provided by Org Mode."
   (setq org-agenda-custom-commands
         `(("n" "Super Agenda"
            ((agenda "" nil)
+            (todo "HOLD"
+                  ((org-agenda-overriding-header "On Hold")))
             (todo ""
                   ((org-agenda-overriding-header "TASKS")
                    (org-super-agenda-groups
                     '((:discard (:scheduled t))
+                      (:discard (:todo "HOLD"))
                       (:discard (:tag "capture"))
                       (:discard (:tag "someday"))
                       (:name "Projects"
