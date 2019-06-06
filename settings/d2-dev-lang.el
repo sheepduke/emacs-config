@@ -253,7 +253,8 @@
 
   ;; Set the location of HyperSpec.
   (setq common-lisp-hyperspec-root
-        (expand-file-name "~/documents/manuals/lisp/HyperSpec/"))
+        (concat "file://"
+                (expand-file-name "~/documents/manuals/lisp/HyperSpec/")))
 
   :bind
   (:map slime-mode-map
