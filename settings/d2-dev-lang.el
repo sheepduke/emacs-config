@@ -245,8 +245,6 @@
       (slime-repl-clear-buffer)))
 
   :init
-  (add-hook 'slime-mode-hook 'setup-slime-mode)
-  
   ;; set common lisp REPL
   (setq inferior-lisp-program "ros run")
   (require 'slime-autoloads)
@@ -270,7 +268,10 @@
   (call-when-defined 'slime-setup
                      '(slime-fancy slime-company slime-repl-ansi-color))
 
-  (add-hook 'slime-repl-mode-hook 'company-mode))
+  :hook
+  (slime-mode . setup-slime-mode)
+  (slime-repl-mode . company-mode)
+  (slime-repl-mode . slime-repl-ansi-color-mode))
 
 ;; Contrib packages must not be loaded manually.
 ;; SLIME handles them.
@@ -436,14 +437,14 @@
 
 (use-package emmet-mode
   :ensure
-  
-  :init
-  (add-hook 'web-mode-hook 'emmet-mode)
 
   :bind
   (:map emmet-mode-keymap
         ("C-j" . emmet-expand-line)
-        ("C-M-j" . emmet-expand-yas)))
+        ("C-M-j" . emmet-expand-yas))
+
+  :hook
+  (web-mode . emmet-mode))
 
 (use-package company-web
   :ensure)

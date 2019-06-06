@@ -252,6 +252,7 @@ EXPORTER is provided by Org Mode."
   (setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"HOLD\"")
   
   :bind
+  ("C-c C-j" . nil)
   ("C-c j s" . org-journal-search)
   ("C-c j j" . org-journal-new-entry)
   ("C-c j k" . org-journal-new-scheduled-entry)
