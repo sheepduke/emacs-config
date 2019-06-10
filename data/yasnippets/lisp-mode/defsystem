@@ -12,7 +12,7 @@
                 :components
                 ((:file "packages")
                  (:file "$1"))))
-  :in-order-to ((test-op (test-op "cl-republic/tests"))))
+  :in-order-to ((test-op (test-op "cl-$1/tests"))))
 
 (defsystem $1/tests
   :description "Tests of $1 system"
