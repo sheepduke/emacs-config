@@ -139,6 +139,12 @@ output."
 
   (add-hook 'eshell-mode-hook 'eshell-mode-setup))
 
+(add-to-list 'load-path (concat *plugins-path* "aweshell"))
+(use-package aweshell
+  :bind
+  ("C-c s" . aweshell-switch-buffer)
+  ("C-c S" . aweshell-new))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Dired                               ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -199,7 +205,6 @@ This works like Vim 'w!'."
   (switch-to-buffer (other-buffer)))
 
 (global-set-key (kbd "C-c r") 'rename-buffer)
-(global-set-key (kbd "C-c s") 'eshell)
 (global-set-key (kbd "C-x C-b") 'switch-to-other-buffer)
 (global-set-key (kbd "C-x C-k") 'bury-buffer)
 (global-set-key (kbd "C-x C-s") 'save-buffer-readonly)
