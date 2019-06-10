@@ -10,7 +10,7 @@
   :depends-on ()
   :components ((:module "src"
                 :components
-                ((:file "package")
+                ((:file "packages")
                  (:file "$1"))))
   :in-order-to ((test-op (test-op "cl-republic/tests"))))
 
@@ -23,5 +23,5 @@
                #:rove)
   :components ((:module "src"
                 :components
-                ((:file "package"))))
+                ((:file "packages"))))
   :perform (test-op (op c) (symbol-call :rove :run c)))
