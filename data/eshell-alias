@@ -1,3 +1,4 @@
-alias l ls -alh $*
-alias ll ls -alh $*
+alias rg=/usr/bin/rg --color=always
 alias la ls $*
+alias ll ls -alh $*
+alias l ls -alh $*
