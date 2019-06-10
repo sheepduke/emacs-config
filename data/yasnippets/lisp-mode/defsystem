@@ -19,8 +19,7 @@
   :author "$3"
   :license "$4"
   :version "0.0.1"
-  :depends-on (#:$1
-               #:rove)
+  :depends-on (:$1 :rove)
   :components ((:module "src"
                 :components
                 ((:file "packages"))))
