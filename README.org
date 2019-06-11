@@ -7,7 +7,7 @@ This repository contains Emacs settings used by me.
 ** Installation
 
 1. Place ~settings/.emacs~ file to your ~$HOME~ directory and others to
-   ~~/.emacs.d/~.
+   ~$HOME/.emacs.d/~.
 2. Open Emacs and run command ~package-refresh-contents~.
 3. Navigate to ~~/.emacs.d/settings/~ and run ~C-u 0
    byte-recompile-directory~. This will install all required packages and
@@ -32,7 +32,7 @@ However, a better solution might be using ~:ensure~ feature of ~use-package~.
 
 The place where all configuration and custom plugin (outside elpa) goes.
 
-- ~.emacs~: Backup for `~/.emacs` file.
+- ~.emacs~: Backup for ~$HOME/.emacs~ file.
 - ~a0-variables~: Definition of global variables.
 - ~a1-functions~: Definition of common functions.
 - ~b0-customize~: Customization of built-in functionality.
