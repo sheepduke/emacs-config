@@ -43,7 +43,7 @@
    ("M-x" . helm-select-action)
    ("C-z" . nil)
    :map helm-find-files-map
-   ("C-<backspace>" . nil)
+   ("C-<backspace>" . helm-find-files-up-one-level)
    :map org-mode-map
    ("C-c C-j" . helm-org-in-buffer-headings))
 
