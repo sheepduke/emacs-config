@@ -57,6 +57,7 @@
 (add-hook 'org-mode-hook 'flyspell-mode)
 
 ;; Some hot keys.
+(define-key org-mode-map (kbd "C-'") nil)
 (define-key org-mode-map (kbd "M-q") 'org-fill-paragraph)
 (define-key org-mode-map (kbd "C-c C-,") 'org-promote-subtree)
 (define-key org-mode-map (kbd "C-c C-.") 'org-demote-subtree)
