@@ -784,5 +784,8 @@
 (use-package json-mode
   :ensure)
 
+(use-package toml-mode
+  :ensure)
+
 
 ;;; d2-dev-lang.el ends here

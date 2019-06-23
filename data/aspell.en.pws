@@ -1,4 +1,4 @@
-personal_ws-1.1 en 102
+personal_ws-1.1 en 110 
 runtime
 Nginx
 API
@@ -10,6 +10,7 @@ StumpWM
 QoS
 Regex
 Lucene
+CLI
 UUID
 bot
 TCP
@@ -17,12 +18,14 @@ JMX
 GC
 uptime
 EBS
+SMB
 SLI
 uncomment
 AWS
 resizing
 login
 unary
+SFTP
 SBCL
 IP
 Wubi
@@ -33,17 +36,21 @@ namespace
 namespaces
 SRC
 SRE
-REPL
 natively
+REPL
 timestamp
 WebSocket
+systemd
 CLHS
 CSS
 livelock
+VSFTP
 Erlang
 middleware
 OO
+chroot
 polymorphism
+blazingly
 refactor
 Ansible
 AppDynamics
@@ -55,9 +62,11 @@ customizable
 UI
 Kubernetes
 CLOS
+SSHFS
 synchronizer
 LVM
 VM
+plugin
 localhost
 PDF
 Rennes
@@ -71,6 +80,7 @@ UTF
 hostname
 resize
 CLISP
+plugins
 PostgreSQL
 boolean
 GitBook
@@ -90,8 +100,8 @@ TOML
 bitwise
 Quicklisp
 tmux
-GitHub
 GitLab
+GitHub
 Voila
 refactoring
 broadcasted
@@ -99,5 +109,3 @@ comparators
 Telecom
 RESTful
 JSON
-plugin
-plugins
