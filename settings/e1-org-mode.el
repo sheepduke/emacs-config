@@ -44,6 +44,7 @@
 (defun org-mode-hook-function ()
   "Setup."
   (toggle-word-wrap 1)
+  (toggle-truncate-lines 0)
   
   (make-local-variable 'company-backends)
   (setq company-backends '((company-dabbrev :with company-yasnippet)))
