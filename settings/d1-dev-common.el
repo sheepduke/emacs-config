@@ -10,22 +10,8 @@
 
 (use-package company
   :ensure
-  :init
-  ;; Make company mode complete immediately.
-  (setq company-idle-delay 0)
-  ;; Make it possible to select item before first or after last wraps around.
-  (setq company-selection-wrap-around t)
 
-  ;; Regex to match whether to complete.
-  (defcustom company-begin-regex "[0-9a-zA-Z_.>:-]"
-	"Used by function `complete-or-indent' to decide whether or not to start
-completion."
-	:type 'string
-	:group 'none
-	:safe t)
-
-  ;; Bind company complete to <TAB> in a smart way.
-  ;; TODO Remove this snippet later...
+  :preface
   (defun complete-or-indent ()
 	"Complete using company-mode or indent current line by checking "
 	(interactive)
@@ -41,6 +27,20 @@ completion."
            (call-when-defined 'company-manual-begin))
 	  (call-when-defined 'company-complete-common))
 	 (t (indent-for-tab-command))))
+
+  :init
+  ;; Make company mode complete immediately.
+  (setq company-idle-delay 0)
+  ;; Make it possible to select item before first or after last wraps around.
+  (setq company-selection-wrap-around t)
+
+  ;; Regex to match whether to complete.
+  (defcustom company-begin-regex "[0-9a-zA-Z_.>:-]"
+	"Used by function `complete-or-indent' to decide whether or not to start
+completion."
+	:type 'string
+	:group 'none
+	:safe t)  
     
   :bind (:map company-active-map
 			  ("C-n" . company-select-next)
@@ -82,25 +82,9 @@ completion."
 
   (company-mode-setup-yasnippet-backend)
 
+  :hook
   ;; Enable company-mode for all programming languages.
-  (add-hook 'prog-mode-hook 'company-mode)
-
-  ;; HACK fix the compatibility issue with fill-column-indicator.
-  ;;
-  (use-package fill-column-indicator
-    :init
-    (defun company-turn-off-fci (&rest ignore)
-      (when (boundp 'fci-mode)
-        (setq company-fci-mode-on-p fci-mode)
-        (when fci-mode (call-when-defined 'fci-mode -1))))
-
-    (defun company-maybe-turn-on-fci (&rest ignore)
-      (when company-fci-mode-on-p (call-when-defined 'fci-mode 1)))
-
-    (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-    (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-    (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)))
-
+  (prog-mode . company-mode))
 
 (use-package company-quickhelp
   :ensure
@@ -180,19 +164,29 @@ completion."
 ;;;;                        Indentation                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package highlight-indent-guides
-  :ensure
-  :config
-  (setq highlight-indent-guides-method 'character)
-  ;; Set how obvious the indicator character is. Higher, more obvious.
-  (setq highlight-indent-guides-auto-character-face-perc 10)
-  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
-
 (use-package fill-column-indicator
   :ensure
-  :config
-  (setq-default fill-column 78)
-  (add-hook 'prog-mode-hook 'fci-mode))
+  :after company
+
+  :preface
+  (defun company-turn-off-fci (&rest ignore)
+    (when (boundp 'fci-mode)
+      (setq company-fci-mode-on-p fci-mode)
+      (when fci-mode (call-when-defined 'fci-mode -1))))
+
+  (defun company-maybe-turn-on-fci (&rest ignore)
+    (when company-fci-mode-on-p (call-when-defined 'fci-mode 1)))
+
+  :init
+  (setq-default fill-column 79)
+  ;; Do not truncate long lines.
+  (setq fci-handle-truncate-lines nil)
+
+  :hook
+  (prog-mode . turn-on-fci-mode)
+  (company-completion-started . company-turn-off-fci)
+  (company-completion-finished . company-maybe-turn-on-fci)
+  (company-completion-cancelled . company-maybe-turn-on-fci))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -202,8 +196,10 @@ completion."
 (require 'hideshow)
 (use-package hideshow
   :ensure
-  :config
-  (add-hook 'prog-mode-hook 'hs-minor-mode)
+  
+  :hook
+  (prog-mode . hs-minor-mode)
+  
   :bind
   (:map hs-minor-mode-map
         ("C-c i s" . hs-show-all)

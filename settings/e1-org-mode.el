@@ -43,7 +43,6 @@
 
 (defun org-mode-hook-function ()
   "Setup."
-  (toggle-truncate-lines 0)
   (toggle-word-wrap 1)
   
   (make-local-variable 'company-backends)

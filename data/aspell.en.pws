@@ -1,4 +1,4 @@
-personal_ws-1.1 en 110 
+personal_ws-1.1 en 111 
 runtime
 Nginx
 API
@@ -43,14 +43,15 @@ WebSocket
 systemd
 CLHS
 CSS
-livelock
 VSFTP
+livelock
+JWT
 Erlang
 middleware
 OO
 chroot
-polymorphism
 blazingly
+polymorphism
 refactor
 Ansible
 AppDynamics
@@ -65,8 +66,8 @@ CLOS
 SSHFS
 synchronizer
 LVM
-VM
 plugin
+VM
 localhost
 PDF
 Rennes
