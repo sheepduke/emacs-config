@@ -164,6 +164,13 @@ completion."
 ;;;;                        Indentation                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package highlight-indent-guides
+  :ensure
+  :config
+  (setq highlight-indent-guides-method 'character)
+  ;; Set how obvious the indicator character is. Higher, more obvious.
+  (setq highlight-indent-guides-auto-character-face-perc 10))
+
 (use-package fill-column-indicator
   :ensure
   :after company
