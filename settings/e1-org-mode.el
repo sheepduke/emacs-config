@@ -70,7 +70,7 @@
 
 ;; Org modules loaded with org mode itself
 (setq org-modules
-      '(org-w3m org-bbdb org-habit org-bibtex org-docview org-info))
+      '(org-notmuch org-bbdb org-habit org-bibtex org-docview org-info))
 
 (use-package org-bullets
   :ensure
@@ -278,6 +278,8 @@ EXPORTER is provided by Org Mode."
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c k") 'org-capture)
+(global-set-key (kbd "C-c l l") 'org-store-link)
+(global-set-key (kbd "C-c l i") 'org-insert-link)
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "HOLD(h@/!)" "|"
