@@ -122,8 +122,7 @@
           (:name "Ecnu" :query "tag:ecnu")
           (:name "Gentoo User" :query "tag:gentoo-user")
           (:name "Emacs User" :query "tag:emacs-user")
-          (:name "Lisp Cookbook" :query "tag:cl-cookbook")
-          ))
+          (:name "CL Cookbook" :query "tag:cl-cookbook")))
 
   (defun notmuch-hello-init-cursor-position ()
     "Move cursor place to the first position of saved searches."
