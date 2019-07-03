@@ -297,7 +297,10 @@
   
   :bind
   (:map cider-mode-map
-        ("C-c b" . cider-eval-buffer-content))
+        ("C-c C-b" . cider-eval-buffer-content)
+        ("C-c C-r" . cider-eval-region)
+        ("C-c C-c" . cider-eval-defun-at-point)
+        ("C-c C-k" . cider-interrupt))
   (:map cider-repl-mode-map
         ("C-M-l" . cider-repl-clear-buffer))
 
