@@ -113,15 +113,17 @@
   (setq notmuch-saved-searches
         '((:name "Unread Gmail" :query "tag:unread AND tag:gmail")
           (:name "Unread" :query "tag:unread" :key "u")
+          (:name "Drafts" :query "tag:draft" :key "d")
           (:name "Flagged" :query "tag:flagged" :key "f")
           (:name "Gmail" :query "tag:gmail" :key "g")
-          (:name "Feed" :query "tag:feed" :key "")
-          (:name "Me" :query "tag:me" :key "m")
+          (:name "Feed" :query "tag:feed")
+          (:name "Me" :query "tag:me")
           (:name "Inbox" :query "tag:inbox" :key "i")
           (:name "Ecnu" :query "tag:ecnu")
-          (:name "Gentoo User" :query "tag:gentoo-user" :key "n")
-          (:name "Emacs User" :query "tag:emacs-user" :key "a")
-          (:name "Drafts" :query "tag:draft" :key "d")))
+          (:name "Gentoo User" :query "tag:gentoo-user")
+          (:name "Emacs User" :query "tag:emacs-user")
+          (:name "Lisp Cookbook" :query "tag:cl-cookbook")
+          ))
 
   (defun notmuch-hello-init-cursor-position ()
     "Move cursor place to the first position of saved searches."
