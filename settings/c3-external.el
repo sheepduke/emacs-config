@@ -17,25 +17,25 @@
   (emms-all)
   (emms-default-players)
 
-  ;; Show info at mode-line
+  ;; Show info at mode-line.
   (require 'emms-mode-line)
   (emms-mode-line 1)
 
-  ;; Show time of music
+  ;; Show time of music.
   (require 'emms-playing-time)
   (emms-playing-time 1)
 
-  ;; Auto identify encode
+  ;; Auto identify encode.
   (require 'emms-i18n)
 
-  ;; Auto save and import playlist
+  ;; Do NOT save and import playlist automatically.
   ;; WARNING! It will make Emacs slow.
-  (require 'emms-history)
-  (emms-history-load)
+  ;; (require 'emms-history)
+  ;; (emms-history-load)
 
   ;; Don't repeat playlist.
   (setq emms-repeat-playlist nil)
-  ;; Set default music directory
+  ;; Set default music directory.
   (setq emms-source-file-default-directory "~/music")
 
   :bind
@@ -49,7 +49,7 @@
   ("C-c e SPC" . emms-pause)
   ("C-c e s" . emms-stop)
   ("C-c e n" . emms-next)
-  ("C-c e p" . emms-previous))  
+  ("C-c e p" . emms-previous))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Dictionary                           ;;;;
