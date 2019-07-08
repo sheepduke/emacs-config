@@ -112,7 +112,7 @@
   ;; Set the saved searchers.
   (setq notmuch-saved-searches
         '((:name "Unread Gmail" :query "tag:unread AND tag:gmail")
-          (:name "Unread" :query "tag:unread" :key "u")
+          (:name "Unread Other" :query "tag:unread AND NOT tag:gmail" :key "u")
           (:name "Drafts" :query "tag:draft" :key "d")
           (:name "Flagged" :query "tag:flagged" :key "f")
           (:name "Gmail" :query "tag:gmail" :key "g")
