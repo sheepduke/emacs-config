@@ -45,9 +45,13 @@
 	(setq comment-start "//")
 	(setq comment-end ""))
 
-  :init
-  ;; Use 'gnu' coding style.
-  (setq c-default-style "gnu")
+  :init  
+  (c-add-style "sheep"
+               '("stroustrup"
+                 (c-basic-offset . 2)))
+
+  ;; Use "sheep" coding style.
+  (setq c-default-style "sheep")
 
   :bind
   (:map c++-mode-map
