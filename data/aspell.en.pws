@@ -1,4 +1,4 @@
-personal_ws-1.1 en 116 
+personal_ws-1.1 en 123 
 runtime
 Nginx
 API
@@ -8,6 +8,7 @@ Redmine
 TBD
 StumpWM
 QoS
+de
 Regex
 Lucene
 CLI
@@ -37,6 +38,7 @@ Daian
 RSS
 namespace
 namespaces
+persistency
 SRC
 SRE
 natively
@@ -48,6 +50,7 @@ CLHS
 CSS
 VSFTP
 livelock
+bordeaux
 JWT
 Erlang
 middleware
@@ -63,12 +66,14 @@ Morphling
 timestamps
 STW
 customizable
+facto
 UI
 Kubernetes
 CLOS
 SSHFS
 synchronizer
 LVM
+Vuetify
 plugin
 VM
 localhost
@@ -80,6 +85,7 @@ Hadoop
 runnable
 ZooKeeper
 Grafana
+ACK
 UTF
 hostname
 resize
@@ -95,6 +101,7 @@ transactional
 aggregator
 Thinkpad
 ASDF
+Vue
 structs
 struct
 Redis

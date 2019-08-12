@@ -241,8 +241,12 @@
   (defun sly-repl-clear-buffer-anywhere ()
     "Clear Sly buffer from anywhere."
     (interactive)
-    (with-current-buffer "*sly-mrepl for sbcl*"
-      (call-when-defined 'sly-mrepl-clear-repl)))
+    (dolist (buffer (cl-remove-if-not (lambda (buffer)
+                                        (string-prefix-p "*sly-mrepl for"
+                                                         (buffer-name buffer)))
+                                      (buffer-list)))
+      (with-current-buffer buffer
+        (call-when-defined 'sly-mrepl-clear-repl))))
 
   :init
   ;; set common lisp REPL
