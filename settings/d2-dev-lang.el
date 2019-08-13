@@ -302,16 +302,6 @@
     "Eval buffer content without having to save it."
     (interactive)
     (call-when-defined 'cider-eval-region (point-min) (point-max)))
-
-  (defun cider-clear-buffer-anywhere ()
-    "Clear Sly buffer from anywhere."
-    (interactive)
-    (cl-dolist (buffer (cl-remove-if-not (lambda (buffer)
-                                           (string-match "^\*cider-repl"
-                                                         (buffer-name buffer)))
-                                         (buffer-list)))
-      (with-current-buffer buffer
-        (call-when-defined 'cider-repl-clear-buffer))))
   
   :bind
   (:map cider-mode-map
@@ -319,7 +309,7 @@
         ("C-c C-r" . cider-eval-region)
         ("C-c C-l" . cider-eval-defun-at-point)
         ("C-c C-k" . cider-interrupt)
-        ("C-M-l" . cider-clear-buffer-anywhere))
+        ("C-M-l" . cider-find-and-clear-repl-output))
   (:map cider-repl-mode-map
         ("C-M-l" . cider-repl-clear-buffer))
 
