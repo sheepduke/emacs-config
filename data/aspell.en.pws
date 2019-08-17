@@ -1,10 +1,11 @@
-personal_ws-1.1 en 123 
+personal_ws-1.1 en 126
 runtime
 Nginx
 API
 Zabbix
 playbook
 Redmine
+Dexador
 TBD
 StumpWM
 QoS
@@ -29,6 +30,7 @@ login
 SLO
 unary
 SFTP
+CHANGELOG
 SBCL
 IP
 Wubi
@@ -37,6 +39,7 @@ NaN
 Daian
 RSS
 namespace
+Drakma
 namespaces
 persistency
 SRC

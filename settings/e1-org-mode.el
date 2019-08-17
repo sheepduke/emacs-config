@@ -282,11 +282,12 @@ EXPORTER is provided by Org Mode."
 (global-set-key (kbd "C-c l i") 'org-insert-link)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "HOLD(h@/!)" "|"
+      '((sequence "TODO(t)" "HOLD(h@/!)" "PROJ" "|"
                   "DONE(d@/!)" "STOP(s@/!)")))
 
 (setq org-todo-keyword-faces
-      '(("TODO" . org-todo)
+      '(("PROJ" :foreground "tomato" :weight bold)
+        ("TODO" . org-todo)
         ("HOLD" :foreground "purple" :weight bold)
         ("DONE" . org-done)
         ("STOP" :foreground "DarkGreen" :weight bold)))
@@ -373,11 +374,14 @@ EXPORTER is provided by Org Mode."
            ((agenda "" nil)
             (todo "HOLD"
                   ((org-agenda-overriding-header "On Hold")))
+            (todo "PROJ"
+                  ((org-agenda-overriding-header "Projects")))
             (todo ""
                   ((org-agenda-overriding-header "TASKS")
                    (org-super-agenda-groups
                     '((:discard (:scheduled t))
                       (:discard (:todo "HOLD"))
+                      (:discard (:todo "PROJ"))
                       (:discard (:tag "capture"))
                       (:discard (:tag "someday"))
                       (:name "Projects"
