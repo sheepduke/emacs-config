@@ -118,4 +118,7 @@
   :bind
   ("C-x 8 <return>" . helm-unicode))
 
+(use-package helm-gitignore
+  :ensure)
+
 ;;; d0-completion.el ends here
