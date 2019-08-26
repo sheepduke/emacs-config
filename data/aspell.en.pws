@@ -1,10 +1,11 @@
-personal_ws-1.1 en 126
+personal_ws-1.1 en 127 
 runtime
 Nginx
 API
 Zabbix
 playbook
 Redmine
+README
 Dexador
 TBD
 StumpWM
@@ -68,15 +69,15 @@ WAP
 Morphling
 timestamps
 STW
-customizable
 facto
+customizable
 UI
 Kubernetes
 CLOS
 SSHFS
 synchronizer
-LVM
 Vuetify
+LVM
 plugin
 VM
 localhost
