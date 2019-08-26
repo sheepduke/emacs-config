@@ -2,4 +2,4 @@
 # name: block
 # key: block
 # --
-`(insert-lisp-code-comment-block)`
+`(insert-comment-block ?; 4)`
