@@ -315,6 +315,9 @@ EXPORTER is provided by Org Mode."
       `(("k" "Capture" entry
          (file "capture.org") "* %?\n"
          :empty-lines 1)
+        ("K" "Kill Ring" entry
+         (file "capture.org") "* %c\n"
+         :empty-lines 1)
         ("t" "TODO" entry
          (file "capture.org") "* TODO %?\n"
          :empty-lines 1)))
