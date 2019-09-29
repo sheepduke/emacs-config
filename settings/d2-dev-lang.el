@@ -716,11 +716,6 @@
 
 (use-package markdown-mode
   :ensure
-  
-  :preface
-  (defun markdown-mode-setup()
-    "Setup markdown-mode."
-    (auto-fill-mode 1))
 
   :init
   ;; Use pandoc as markdown generator.
@@ -731,8 +726,7 @@
   
   :hook
   (markdown-mode . flyspell-mode)
-  (markdown-mode . toggle-word-wrap)
-  (markdown-mode . markdown-mode-setup))
+  (markdown-mode . toggle-word-wrap))
 
 (use-package poly-markdown
   :ensure)
