@@ -184,9 +184,7 @@
   (defun rust-mode-setup ()
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
-		 "cargo test")
-    ;; Disable fci-mode because the use of rustfmt.
-    (fci-mode -1))
+		 "cargo test"))
 
   :init
   ;; Format rust code before save.
@@ -413,8 +411,7 @@
           '(("java" . "/*")
             ("javascript" . "//")
             ("php" . "/*")
-            ("css" . "/*")))
-    (fci-mode 0))
+            ("css" . "/*"))))
 
   :init
   ;; Set offset to 2.
@@ -767,7 +764,6 @@
   :mode "\\.yml.j2\\'"
 
   :hook
-  (yaml-mode . fci-mode)
   (yaml-mode . highlight-indent-guides-mode)
 
   :bind

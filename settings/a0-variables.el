@@ -24,7 +24,4 @@
 (defvar *backup-dir* "~/backup/"
   "Path to backup directory.")
 
-(defvar-local company-fci-mode-on-p nil
-  "Used by hack between company-mode and fci-mode inside dev-common.el")
-
 ;;; a0-variables.el ends here

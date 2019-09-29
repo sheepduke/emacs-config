@@ -176,6 +176,9 @@ completion."
   :after company
 
   :preface
+  (defvar-local company-fci-mode-on-p nil
+    "Used by hack between company-mode and fci-mode inside dev-common.el")
+
   (defun company-turn-off-fci (&rest ignore)
     (when (boundp 'fci-mode)
       (setq company-fci-mode-on-p fci-mode)
@@ -190,11 +193,9 @@ completion."
   (setq fci-handle-truncate-lines nil)
 
   :hook
-  (prog-mode . turn-on-fci-mode)
   (company-completion-started . company-turn-off-fci)
   (company-completion-finished . company-maybe-turn-on-fci)
   (company-completion-cancelled . company-maybe-turn-on-fci))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         HS Mode                              ;;;;
