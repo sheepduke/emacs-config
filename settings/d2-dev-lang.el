@@ -539,7 +539,11 @@
         ("C-c C-p" . run-python)
         ("C-c C-r" . 'elpy-shell-send-region-or-buffer)
         ("C-c C-b" . elpy-shell-send-region-or-buffer)
-        ("C-c C-c" . elpy-shell-send-current-line)))
+        ("C-c C-c" . elpy-shell-send-current-line))
+
+  :hook
+  (elpy-mode . (lambda () (highlight-indentation-mode -1)))
+  (elpy-mode . highlight-indent-guides-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Ruby                             ;;;;
