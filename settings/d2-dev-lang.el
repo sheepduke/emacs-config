@@ -542,8 +542,7 @@
         ("C-c C-c" . elpy-shell-send-current-line))
 
   :hook
-  (elpy-mode . (lambda () (highlight-indentation-mode -1)))
-  (elpy-mode . highlight-indent-guides-mode))
+  (elpy-mode . (lambda () (highlight-indentation-mode -1))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Ruby                             ;;;;
@@ -754,6 +753,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package nxml-mode
+  :hook
+  (nxml-mode . highlight-indent-guides-mode))
 
 (use-package yaml-mode
   :ensure

@@ -169,7 +169,10 @@ completion."
   :config
   (setq highlight-indent-guides-method 'character)
   ;; Set how obvious the indicator character is. Higher, more obvious.
-  (setq highlight-indent-guides-auto-character-face-perc 10))
+  (setq highlight-indent-guides-auto-character-face-perc 10)
+
+  :hook
+  (prog-mode . highlight-indent-guides-mode))
 
 (use-package fill-column-indicator
   :ensure
