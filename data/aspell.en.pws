@@ -1,4 +1,4 @@
-personal_ws-1.1 en 140 
+personal_ws-1.1 en 141 
 runtime
 Nginx
 API
@@ -27,8 +27,8 @@ EBS
 SMB
 SLI
 uncomment
-AWS
 JetBrains
+AWS
 resizing
 CloudFormation
 login
@@ -43,9 +43,9 @@ YAML
 NaN
 Daian
 RSS
+JVM
 Drakma
 namespace
-JVM
 namespaces
 persistency
 SRC
@@ -95,6 +95,7 @@ Hadoop
 deserialize
 runnable
 CodeBuild
+TODO
 Uber
 ZooKeeper
 Grafana
