@@ -477,6 +477,7 @@
   :hook
   (js-mode . setup-js2-mode))
 
+;; IDE for JavaScript.
 (use-package tide
   :ensure
 
@@ -485,6 +486,20 @@
    (typescript-mode . tide-hl-identifier-mode)
    (js-mode . tide-setup)
    (js-mode . tide-hl-identifier-mode)))
+
+;; REPL for JavaScript.
+(use-package js-comint
+  :ensure
+
+  :init
+  (setq js-comint-prompt "==> ")
+
+  :bind
+  (:map js-mode-map
+        ("C-x C-e" . js-comint-send-last-sexp)
+        ("C-c C-r" . js-comint-send-region)
+        ("C-c C-b" . js-comint-send-buffer)
+        ("C-M-l" . js-comint-clear)))
 
 (use-package company-tern
   :ensure)
