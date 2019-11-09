@@ -101,6 +101,14 @@
     (interactive)
     (call-when-defined 'notmuch-tag "tag:unread" '("-unread")))
 
+  (defun notmuch-search-toggle-flag ()
+    "Toggle flagged tag for current item."
+    (interactive)
+    (notmuch-search-tag
+     (if (member "flagged" (notmuch-search-get-tags))
+         '("-flagged")
+       '("+flagged"))))
+
   :init
   ;; The number of recent searches to display.
   (setq notmuch-hello-recent-searches-max 10)
@@ -142,6 +150,7 @@
         ("M r" . notmuch-mark-all-as-read))
   (:map notmuch-search-mode-map
         ("g" . notmuch-refresh-this-buffer)
+        ("f" . notmuch-search-toggle-flag)
         ("M r" . notmuch-mark-all-as-read))
   (:map notmuch-show-mode-map
         ("C-c C-o" . browse-url-at-point)))
