@@ -101,13 +101,26 @@
     (interactive)
     (call-when-defined 'notmuch-tag "tag:unread" '("-unread")))
 
-  (defun notmuch-search-toggle-flag ()
+  (defun notmuch-toggle-flagged (get-tag-fun change-tag-fun)
+    (funcall change-tag-fun
+             (if (member "flagged" (funcall get-tag-fun))
+                 '("-flagged")
+               '("+flagged"))))
+
+  (defun notmuch-search-toggle-flagged ()
     "Toggle flagged tag for current item."
     (interactive)
-    (notmuch-search-tag
-     (if (member "flagged" (notmuch-search-get-tags))
-         '("-flagged")
-       '("+flagged"))))
+    (notmuch-toggle-flagged #'notmuch-search-get-tags #'notmuch-search-tag))
+
+  (defun notmuch-tree-toggle-flagged ()
+    "Toggle flagged tag for current item."
+    (interactive)
+    (notmuch-toggle-flagged #'notmuch-tree-get-tags #'notmuch-tree-tag))
+
+  (defun notmuch-show-toggle-flagged ()
+    "Toggle flagged tag for current item."
+    (interactive)
+    (notmuch-toggle-flagged #'notmuch-show-get-tags #'notmuch-show-tag))
 
   :init
   ;; The number of recent searches to display.
@@ -150,9 +163,12 @@
         ("M r" . notmuch-mark-all-as-read))
   (:map notmuch-search-mode-map
         ("g" . notmuch-refresh-this-buffer)
-        ("f" . notmuch-search-toggle-flag)
+        ("f" . notmuch-search-toggle-flagged)
         ("M r" . notmuch-mark-all-as-read))
+  (:map notmuch-tree-mode-map
+        ("f" . notmuch-tree-toggle-flagged))
   (:map notmuch-show-mode-map
+        ("f" . notmuch-show-toggle-flagged)
         ("C-c C-o" . browse-url-at-point)))
 
 
