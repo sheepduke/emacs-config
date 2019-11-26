@@ -4,5 +4,5 @@
 # --
 #+CAPTION: $1
 #+NAME: fig:$2
-#+ATTR_ORG: :width $3px
+#+ATTR_ORG: :width 300px
 [[$0]]

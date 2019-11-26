@@ -1,9 +1,10 @@
-personal_ws-1.1 en 160
+personal_ws-1.1 en 165 
 ACK
 API
 APIs
 ASDF
 AWS
+Accessors
 Acknowledgement
 Ansible
 AppDynamics
@@ -39,6 +40,7 @@ HTTPS
 Hadoop
 IOPS
 IP
+Integrations
 JMX
 JSON
 JVM
@@ -48,10 +50,10 @@ Kubernetes
 LVM
 Lucene
 MVC
+Modularity
 NaN
 Nginx
 NoSQL
-Modularity
 OO
 OOM
 OOP
@@ -80,9 +82,9 @@ SRC
 SRE
 SSHFS
 STW
+Scalability
 Serverless
 Sharding
-Scalability
 StumpWM
 TBD
 TCP
@@ -104,6 +106,7 @@ Vue
 Vuetify
 WAP
 WebSocket
+Webhooks
 Wubi
 YAML
 Zabbix
@@ -158,4 +161,6 @@ unary
 uncomment
 unencrypted
 uptime
+webhook
+webhooks
 workflow
