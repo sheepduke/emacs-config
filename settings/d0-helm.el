@@ -105,6 +105,10 @@
   :bind
   ("C-x c a" . helm-ag))
 
+(use-package helm-org
+  :ensure
+  :after helm)
+
 (use-package helm-eww
   :ensure
   :after helm
