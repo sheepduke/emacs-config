@@ -14,7 +14,7 @@
                  (:file "$1"))))
   :in-order-to ((test-op (test-op "cl-$1/tests"))))
 
-(defsystem $1/tests
+(defsystem $1-tests
   :description "Tests of $1 system"
   :author "$3"
   :license "$4"
