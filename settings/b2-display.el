@@ -153,7 +153,7 @@ A dedicated window can't be switched or modified by some commands."
   (call-when-defined 'winner-mode 1))
 
 
-;; Fast switching frames
+;; Fast switching windows.
 (use-package ace-window
   :ensure
   :init

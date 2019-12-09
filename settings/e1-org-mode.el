@@ -81,7 +81,6 @@
   :init
   (add-hook 'org-mode-hook 'org-bullets-mode))
 
-
 (use-package org-habit
   :ensure org-plus-contrib
 

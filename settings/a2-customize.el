@@ -287,6 +287,7 @@ This works like Vim 'w!'."
   (global-set-key (kbd "C-c 1") 'webjump)
   (global-set-key (kbd "C-c 2") 'webjump-add))
 
+;; Highlight current line.
 (use-package hl-line
   :ensure
   :init
