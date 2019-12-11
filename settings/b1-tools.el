@@ -169,5 +169,13 @@
   :bind
   ("C-x *" . toggle-window-split))
 
+(use-package which-key
+  :ensure
+
+  :init
+  (setq which-key-idle-delay 0.5)
+
+  :config
+  (which-key-mode 1))
 
 ;;; b1-tools.el ends here
