@@ -244,7 +244,8 @@
                                                          (buffer-name buffer)))
                                       (buffer-list)))
       (with-current-buffer buffer
-        (call-when-defined 'sly-mrepl-clear-repl))))
+        (call-when-defined 'sly-mrepl-clear-repl)
+        (goto-char (point-max)))))
 
   :init
   ;; set common lisp REPL
