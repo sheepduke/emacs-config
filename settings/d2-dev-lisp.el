@@ -1,3 +1,4 @@
+(require 'cl-lib)
 (defvar *common-lisp-built-in-functions*
   '("+" "-" "/" "/=" "<" "<=" "=" ">" ">=" "*" "1-" "1+" "abs" "acons" "acos"
     "acosh" "add-method" "adjoin" "adjustable-array-p" "adjust-array"
@@ -205,18 +206,21 @@
     "notinline" "optimize" "otherwise" "safety" "satisfies" "space" "special"
     "speed" "structure" "type"))
 
-(font-lock-add-keywords
- 'lisp-mode
- `((,(regexp-opt *common-lisp-built-in-functions* 'symbols) . font-lock-function-name-face)))
+(defvar *common-lisp-character-names*
+  '("newline" "space" "rubout" "page" "tab" "backspace" "return" "linefeed"))
 
-(font-lock-add-keywords
- 'lisp-mode
- `((,(regexp-opt *common-lisp-built-in-variables* 'symbols) . font-lock-variable-name-face)))
-
-(font-lock-add-keywords
- 'lisp-mode
- `((,(regexp-opt *common-lisp-built-in-types* 'symbols) . font-lock-type-face)))
-
-(font-lock-add-keywords
- 'lisp-mode
- `((,(regexp-opt *common-lisp-built-in-symbols* 'symbols) . font-lock-builtin-face)))
+(defmacro add-regexes (mode &rest symbol-face)
+  `(progn
+     ,@(cl-loop for s in symbol-face
+                collect
+                `(font-lock-add-keywords
+                  ',mode
+                  `((,(regexp-opt ,(car s) 'symbols)
+                     . ,(cdr ',s)))))))
+(add-regexes
+ lisp-mode
+ (*common-lisp-built-in-functions* . font-lock-function-name-face)
+ (*common-lisp-built-in-variables* . font-lock-variable-name-face)
+ (*common-lisp-built-in-types* . font-lock-type-face)
+ (*common-lisp-built-in-symbols* . font-lock-builtin-face)
+ (*common-lisp-character-names* . font-lock-variable-name-face))
