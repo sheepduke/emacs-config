@@ -206,6 +206,9 @@
     "notinline" "optimize" "otherwise" "safety" "satisfies" "space" "special"
     "speed" "structure" "type"))
 
+(defvar *common-lisp-character-names*
+  '("newline" "space" "rubout" "page" "tab" "backspace" "return" "linefeed"))
+
 (defmacro add-regexes (mode &rest symbol-face)
   `(progn
      ,@(cl-loop for s in symbol-face
@@ -219,4 +222,5 @@
  (*common-lisp-built-in-functions* . font-lock-function-name-face)
  (*common-lisp-built-in-variables* . font-lock-variable-name-face)
  (*common-lisp-built-in-types* . font-lock-type-face)
- (*common-lisp-built-in-symbols* . font-lock-builtin-face))
+ (*common-lisp-built-in-symbols* . font-lock-builtin-face)
+ (*common-lisp-character-names* . font-lock-variable-name-face))
