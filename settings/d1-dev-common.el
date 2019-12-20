@@ -213,9 +213,9 @@ completion."
   
   :bind
   (:map hs-minor-mode-map
-        ("C-c i s" . hs-show-all)
-        ("C-c i h" . hs-hide-all)
-        ("C-c i i" . hs-toggle-hiding)))
+        ("C-c h S" . hs-show-all)
+        ("C-c h H" . hs-hide-all)
+        ("C-c h h" . hs-toggle-hiding)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;
