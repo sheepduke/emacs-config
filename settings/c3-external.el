@@ -123,6 +123,63 @@
 	(add-hook 'imagex-sticky-mode-hook 'imagex-auto-adjust-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                             w3m                              ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(when (executable-find "w3m")
+  (use-package w3m
+    :ensure
+
+    :preface
+    (defun w3m-bury-all-buffers ()
+      "Bury all w3m related buffers."
+      (interactive)
+      (mapcar (lambda (buffer)
+                (bury-buffer buffer))
+              (cl-remove-if-not (lambda (buffer)
+                                  (string-match "\\*w3m\\*"
+                                                (buffer-name buffer)))
+                                (buffer-list))))
+    
+	:init
+	(setq w3m-home-page "about://bookmark/")
+    ;; Images
+    (setq w3m-toggle-inline-images-permanently t)
+    (setq w3m-default-display-inline-images t)
+    ;; Cookies
+    (setq w3m-use-cookies t)
+    (setq w3m-cookie-accept-bad-cookies t)
+    ;; Sessions
+    (setq w3m-session-load-last-sessions t)
+    (setq w3m-new-session-in-background nil)
+    (setq w3m-session-time-format "%Y-%m-%d %A %H:%M")
+    ;; Cache
+    (setq w3m-favicon-use-cache-file t)
+    (setq w3m-keep-arrived-urls 5000)
+    (setq w3m-keep-cache-size 1000)
+    ;; Don't ask me if I'm leaving secure page.
+    (setq w3m-confirm-leaving-secure-page nil)
+    ;; Storage
+    (setq w3m-default-save-directory (concat *data-path* "w3m/saved/"))
+    (setq w3m-bookmark-file (concat *data-path* "w3m/bookmark.html"))
+    ;; Set w3m as the default browser inside Emacs.
+    (setq browse-url-browser-function
+          `(("HyperSpec" . w3m-goto-url-new-session)
+            (".*" . browse-url-default-browser)))
+    ;; Set duckduckgo as the default search engine.
+    (setq w3m-search-default-engine "duckduckgo")
+    
+	:bind (("C-c 3" . w3m)
+		   :map w3m-mode-map
+           ("C-<return>" . w3m-view-this-url-new-session)
+		   ("C-M-h" . w3m-previous-buffer)
+		   ("C-M-l" . w3m-next-buffer)
+           ("H" . w3m-view-previous-page)
+           ("L" . w3m-view-next-page)
+		   ("h" . w3m-db-history))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Silver Brain                         ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

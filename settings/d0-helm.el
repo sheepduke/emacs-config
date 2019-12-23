@@ -109,12 +109,12 @@
   :ensure
   :after helm)
 
-(use-package helm-eww
-  :ensure
-  :after helm
+;; (use-package helm-eww
+;;   :ensure
+;;   :after helm
 
-  :bind
-  ("C-c 3" . helm-eww))
+;;   :bind
+;;   ("C-c 3" . helm-eww))
 
 (use-package helm-unicode
   :ensure

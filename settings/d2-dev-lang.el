@@ -737,16 +737,37 @@
 (use-package markdown-mode
   :ensure
 
+  :preface
+  (defun markdown-mode-setup ()
+    (add-hook 'after-save-hook 'markdown-live-preview-w3m-reload))
+
+  (defun markdown-live-preview-window-w3m (file)
+    "Use w3m to preview Markdown buffer."
+    (cond
+     ((require 'w3m nil t)
+      (w3m-find-file file)
+      (get-buffer "*w3m*"))
+     (t (error "Package w3m not available"))))
+
+  (defun markdown-live-preview-w3m-reload ()
+    "Reload generated HTML."
+    (when (and markdown-live-preview-mode
+               (get-buffer "*w3m*"))
+      (call-when-defined 'w3m-reload-all-pages)))
+
   :init
   ;; Use pandoc as markdown generator.
   (setq markdown-command "pandoc")
   ;; Use w3m to preview markdown.
   (setq markdown-live-preview-window-function
-        'markdown-live-preview-window-eww)
+        'markdown-live-preview-window-w3m)
+  (add-to-list 'browse-url-browser-function
+               '("HyperSpec" . w3m-goto-url-new-session))
   
   :hook
   (markdown-mode . flyspell-mode)
-  (markdown-mode . toggle-word-wrap))
+  (markdown-mode . toggle-word-wrap)
+  (markdown-mode . markdown-mode-setup))
 
 (use-package poly-markdown
   :ensure)
