@@ -12,15 +12,15 @@
                 :components
                 ((:file "packages")
                  (:file "$1"))))
-  :in-order-to ((test-op (test-op "$1-tests"))))
+  :in-order-to ((test-op (test-op "$1/tests"))))
 
-(defsystem $1-tests
+(defsystem $1/tests
   :description "Tests of $1 system"
   :author "$3"
   :license "$4"
   :version "0.0.1"
-  :depends-on (:$1 :rove)
+  :depends-on (:$1 :fiveam)
   :components ((:module "tests"
                 :components
                 ((:file "packages"))))
-  :perform (test-op (op c) (symbol-call :rove :run c)))
+  :perform (test-op (op c) (symbol-call :fiveam :run-all-tests)))
