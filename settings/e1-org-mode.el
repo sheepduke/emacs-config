@@ -97,6 +97,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Display org in a bigger calendar!
+(use-package calfw
+  :ensure)
+
 (use-package calfw-org
   :ensure)
 
