@@ -175,4 +175,13 @@ A dedicated window can't be switched or modified by some commands."
   ("M-L" . windmove-right)
   ("M-H" . windmove-left))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                            Theme                             ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package tangotango-theme :ensure t)
+(use-package ample-theme :ensure t)
+(use-package moe-theme :ensure t)
+(use-package spacemacs-theme :ensure t)
+
 ;;; b2-display.el ends here
