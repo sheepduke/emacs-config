@@ -75,7 +75,7 @@
   :mode "\\.cmake\\'")
 
 ;; Add completion for C headers.
-(use-package company-c-headers)
+(use-package company-c-headers :ensure)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Java                              ;;;;
@@ -334,6 +334,36 @@
   (geiser-mode . disable-company-quickhelp-mode)
   (scheme-mode . geiser-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                           Haskell                            ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package haskell-mode :ensure
+  :preface
+  (defun interactive-haskell-do-eval ()
+    "Evaluate the current expression in Haskell REPL."
+    (with-current-buffer (haskell-session-interactive-buffer (haskell-session))
+      (haskell-interactive-handle-expr)))
+
+  (defun interactive-haskell-eval-expr (expr)
+    "Evaluate given EXPR in the REPL."
+    (haskell-interactive-mode-set-prompt expr)
+    (interactive-haskell-do-eval))
+  
+  (defun interactive-haskell-eval-current-line ()
+    "Evaluate current line."
+    (interactive)
+    (haskell-interactive-copy-to-prompt)
+    (interactive-haskell-do-eval))
+
+  :bind
+  (:map haskell-mode-map
+        ("C-c C-c" . interactive-haskell-eval-current-line)
+        ("C-M-l" . haskell-interactive-mode-clear))
+  (:map haskell-interactive-mode-map
+        ("C-c C-b" . haskell-interactive-switch-back))
+  :hook
+  (haskell-mode . interactive-haskell-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Julia                            ;;;;
@@ -820,6 +850,5 @@
 
 (use-package toml-mode
   :ensure)
-
 
 ;;; d2-dev-lang.el ends here
