@@ -55,14 +55,9 @@
 ;;;;                         Dictionary                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(cond
- ((executable-find "sdcv")
-  (use-package sdcv
+(when (executable-find "sdcv")
+  (use-package sdcv :ensure
 	:bind ("C-c d" . sdcv-search-input)))
- ((executable-find "ydcv")
-  (use-package youdao-dictionary
-	:bind
-    ("C-c d" . youdao-dictionary-search-from-input))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Image+                              ;;;;
@@ -70,8 +65,7 @@
 
 ;; Image processing
 (when (executable-find "convert")
-  :ensure
-  (use-package image+
+  (use-package image+ :ensure
 	:init
 	(add-hook 'after-init-hook 'imagex-global-sticky-mode)
     ;; Stop showing annoying warnings.
