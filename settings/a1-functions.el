@@ -76,12 +76,12 @@ ARGS are arguments passed to FUNC."
          (length-before-comment (/ comment-length-with-space 2))
          (length-after-comment (- comment-length-with-space length-before-comment)))
     (format "%s\n%s%s%s%s%s\n%s"
-            (make-string comment-line-length ?\;)
+            (make-string comment-line-length comment-char)
             (make-string comment-char-count comment-char)
             (make-string length-before-comment ? )
             comment
             (make-string length-after-comment ? )
             (make-string comment-char-count comment-char)
-            (make-string comment-line-length ?\;))))
+            (make-string comment-line-length comment-char))))
 
 ;;; a1-functions.el ends here
