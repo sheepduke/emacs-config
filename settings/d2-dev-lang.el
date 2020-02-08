@@ -359,9 +359,36 @@
         ("C-c C-c" . interactive-haskell-eval-current-line)
         ("C-M-l" . haskell-interactive-mode-clear))
   (:map haskell-interactive-mode-map
-        ("C-c C-b" . haskell-interactive-switch-back))
+        ("C-c C-b" . haskell-interactive-switch-back)
+        ("C-M-l" . haskell-interactive-mode-clear))
   :hook
   (haskell-mode . interactive-haskell-mode))
+
+(use-package hindent :ensure
+  :preface
+  (defun my-setup-hindent-mode ()
+    "Setup HIndent mode."
+    (haskell-indentation-mode -1)
+    (hindent-mode 1))
+
+  :init
+  (setq hindent-reformat-buffer-on-save t)
+  
+  :hook
+  (haskell-mode . my-setup-hindent-mode))
+
+;; FlyCheck setup.
+;; 
+(use-package flycheck-haskell :ensure
+  :preface
+  (defun my-flycheck-haskell-setup ()
+    "Setup FlyCheck mode for Haskell."
+    (flycheck-haskell-setup)
+    (setq flycheck-check-syntax-automatically '(idle-change mode-enabled))
+    (setq flycheck-idle-change-delay 2))
+
+  :hook
+  (haskell-mode . my-flycheck-haskell-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Julia                            ;;;;
