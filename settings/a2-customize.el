@@ -46,6 +46,12 @@
 ;; Disable recursive mini buffers.
 (setq enable-recursive-minibuffers nil)
 
+;; Ignore all ring bell.
+(setq ring-bell-function 'ignore)
+
+;; Force to use Unix coding system.
+(set-buffer-file-coding-system 'unix)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Backup                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
