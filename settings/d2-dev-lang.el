@@ -368,7 +368,6 @@
   :preface
   (defun my-setup-hindent-mode ()
     "Setup HIndent mode."
-    (haskell-indentation-mode -1)
     (hindent-mode 1))
 
   :init
@@ -384,8 +383,8 @@
   (defun my-flycheck-haskell-setup ()
     "Setup FlyCheck mode for Haskell."
     (flycheck-haskell-setup)
-    (setq flycheck-check-syntax-automatically '(idle-change mode-enabled))
-    (setq flycheck-idle-change-delay 2))
+    (setq flycheck-check-syntax-automatically '(idle-change))
+    (setq flycheck-idle-change-delay 1))
 
   :hook
   (haskell-mode . my-flycheck-haskell-setup))
