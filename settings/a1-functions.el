@@ -84,4 +84,8 @@ ARGS are arguments passed to FUNC."
             (make-string comment-char-count comment-char)
             (make-string comment-line-length comment-char))))
 
+(defun windows? ()
+  "Return T if current OS is Windows."
+  (equal system-type 'windows-nt))
+
 ;;; a1-functions.el ends here

@@ -49,8 +49,10 @@
 ;; Ignore all ring bell.
 (setq ring-bell-function 'ignore)
 
-;; Force to use Unix coding system.
-(set-buffer-file-coding-system 'unix)
+;; Force to use Unix UTF-8 coding system.
+(setq-default buffer-file-coding-system 'utf-8-unix)
+
+(setq-default default-directory (getenv "HOME"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Backup                              ;;;;
