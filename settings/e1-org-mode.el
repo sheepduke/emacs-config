@@ -30,7 +30,7 @@
 (setq org-hide-leading-stars t)
 
 ;; Set the format of captured email link.
-(setq org-email-link-description-format "Email: %s")
+(setq org-link-email-description-format "Email: %s")
 
 ;; Enable bold, italic etc inside Chinese context.
 (setf (nth 0 org-emphasis-regexp-components)
