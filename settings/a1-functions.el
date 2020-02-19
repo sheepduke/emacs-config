@@ -67,6 +67,7 @@ ARGS are arguments passed to FUNC."
 
 (cl-defun insert-comment-block (comment-char &optional (comment-char-count 2))
   "Return a block with COMMENT inside."
+  (interactive)
   (let* ((comment (read-string "Comment: "))
          (comment-length (length comment))
          (comment-line-length 70)

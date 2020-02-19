@@ -869,10 +869,10 @@
   (:map conf-mode-map
         ("<return>" . newline-smart-comment)))
 
-(use-package json-mode
-  :ensure)
+(use-package json-mode :ensure)
 
-(use-package toml-mode
-  :ensure)
+(use-package toml-mode :ensure)
+
+(use-package powershell :ensure)
 
 ;;; d2-dev-lang.el ends here
