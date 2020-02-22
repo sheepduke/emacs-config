@@ -162,6 +162,8 @@
             (".*" . browse-url-default-browser)))
     ;; Set duckduckgo as the default search engine.
     (setq w3m-search-default-engine "duckduckgo")
+    ;; Use w3m to render HTML mails.
+    (setq mm-text-html-renderer 'w3m)
     
 	:bind (("C-c 3" . w3m)
 		   :map w3m-mode-map
