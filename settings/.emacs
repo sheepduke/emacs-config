@@ -6,8 +6,19 @@
 
 ;; setup packages installed by MELPA
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+
+(setq package-archives
+      '(;; Choose whatever you like.
+        ;; --- Default
+        ;; ("gnu" . "https://elpa.gnu.org/packages/")
+        ;; ("melpa" . "https://melpa.org/packages/")
+        ;; ("org" . "https://orgmode.org/elpa/")
+        ;; --- TUNA mirror
+        ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+        ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+        ;; ---
+        ))
 
 (package-initialize)
 (setq load-prefer-newer t)
