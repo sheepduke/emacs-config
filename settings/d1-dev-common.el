@@ -166,13 +166,19 @@ completion."
 
 (use-package highlight-indent-guides
   :ensure
-  :config
+  :init
   (setq highlight-indent-guides-method 'character)
   ;; Set how obvious the indicator character is. Higher, more obvious.
   (setq highlight-indent-guides-auto-character-face-perc 10)
 
+  :preface
+  (defun enable-highlight-indent-guides ()
+    "Conditionally enable highlight-indent-guides-mode when under X system."
+    (when (x?)
+      (highlight-indent-guides-mode 1)))
+
   :hook
-  (prog-mode . highlight-indent-guides-mode))
+  (prog-mode . enable-highlight-indent-guides))
 
 (use-package fill-column-indicator
   :ensure

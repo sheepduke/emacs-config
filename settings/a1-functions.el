@@ -90,3 +90,7 @@ ARGS are arguments passed to FUNC."
   (equal system-type 'windows-nt))
 
 ;;; a1-functions.el ends here
+
+(defun x? ()
+  "Return TRUE if we are under X system."
+  (getenv "DISPLAY"))
