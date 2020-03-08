@@ -230,7 +230,10 @@ completion."
 (use-package prog-mode
   :bind
   (:map prog-mode-map
-        ("<return>" . newline-smart-comment)))
+        ("<return>" . newline-smart-comment))
+
+  :hook
+  (prog-mode . linum-on))
 
 
 ;;; d1-dev-common.el ends here

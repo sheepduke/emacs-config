@@ -40,11 +40,9 @@
 
 
 ;; Replace the original doc-view for PDF files.
-(use-package pdf-tools
-  :ensure
+(use-package pdf-tools :ensure
   :config
   (call-when-defined 'pdf-tools-install))
-
 
 ;; Open epub files.
 (use-package nov

@@ -85,12 +85,16 @@ ARGS are arguments passed to FUNC."
             (make-string comment-char-count comment-char)
             (make-string comment-line-length comment-char))))
 
+(defun linum-off ()
+  "Turn linum-mode off."
+  (linum-mode -1))
+
 (defun windows? ()
   "Return T if current OS is Windows."
   (equal system-type 'windows-nt))
 
-;;; a1-functions.el ends here
-
 (defun x? ()
   "Return TRUE if we are under X system."
   (getenv "DISPLAY"))
+
+;;; a1-functions.el ends here
