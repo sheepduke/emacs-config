@@ -111,9 +111,7 @@
   (require 'pyim)
   ;; 设定默认输入法
   (setq default-input-method "pyim")
-  ;; 使用五笔
-  (require 'pyim-wbdict)
-  (setq pyim-default-scheme 'wubi)
+
   ;; 中文使用全角标点，英文使用半角标点。
   (setq pyim-punctuation-translate-p '(auto yes no))
   ;; 作为五笔用户，我觉得自己完全不需要选词框。
@@ -121,12 +119,15 @@
   ;; 同上，取消词库。
   (setq pyim-dcache-auto-update nil)
 
-  ;; 设定词库文件
-  (pyim-wbdict-v98-enable)
-
   :bind
   ("C-`" . toggle-input-method))
 
+(use-package pyim-wbdict :ensure
+  :init
+  (setq pyim-default-scheme 'wubi)
+
+  :config
+  (pyim-wbdict-v98-enable))
 
 ;; Show Nyan cat in progress bar.
 (use-package nyan-mode
