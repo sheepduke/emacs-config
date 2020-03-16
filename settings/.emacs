@@ -14,7 +14,7 @@
         ;; ("melpa" . "https://melpa.org/packages/")
         ;; ("org" . "https://orgmode.org/elpa/")
         ;; --- TUNA mirror
-        ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
         ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
         ;; ---

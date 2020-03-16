@@ -1,4 +1,4 @@
-personal_ws-1.1 en 189
+personal_ws-1.1 en 189 
 ACK
 API
 APIs
@@ -14,13 +14,17 @@ CLHS
 CLI
 CLISP
 CLOS
+CMD
 CNAME
 CSS
+Cafe
 CloudFormation
 CloudWatch
 CodeBuild
 DAU
 DDD
+DLL
+DLLs
 DNS
 DSL
 Daian
@@ -39,9 +43,13 @@ Gradle
 Grafana
 HTTPS
 Hadoop
+Hunspell
+IMAP
+INI
 IOPS
 IP
 Integrations
+JIT
 JMX
 JSON
 JVM
@@ -51,6 +59,8 @@ Kubernetes
 LVM
 Lucene
 MVC
+MicroSoft
+Mingw
 Modularity
 NaN
 Nginx
@@ -60,10 +70,12 @@ OOM
 OOP
 OSI
 PDF
+PID
 PostgreSQL
 QoS
 Quicklisp
 RDB
+RDP
 README
 REPL
 RESTful
@@ -89,11 +101,14 @@ Serverless
 Sharding
 StumpWM
 TBD
+TCO
 TCP
+TDS
 TODO
 TOML
 Telecom
 Thinkpad
+Tsinghua
 UDP
 UI
 UTF
@@ -112,6 +127,7 @@ Webhooks
 Wubi
 XMonad
 YAML
+ZSH
 Zabbix
 ZooKeeper
 aggregator
@@ -122,9 +138,11 @@ boolean
 bordeaux
 bot
 broadcasted
+cheatsheet
 chroot
 comparator
 comparators
+conf
 customizable
 de
 decrypt
@@ -134,6 +152,7 @@ deserialized
 facto
 hostname
 inexistence
+init
 livelock
 localhost
 login
@@ -141,6 +160,8 @@ middleware
 namespace
 namespaces
 natively
+online
+pacman
 persistency
 playbook
 plugin
@@ -167,24 +188,3 @@ uptime
 webhook
 webhooks
 workflow
-Hunspell
-ZSH
-pacman
-Mingw
-conf
-Tsinghua
-Pacman
-INI
-Cafe
-init
-cheatsheet
-DLL
-DLLs
-PID
-CMD
-TDS
-JIT
-IMAP
-online
-MicroSoft
-RDP
