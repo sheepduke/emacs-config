@@ -168,6 +168,7 @@
   :bind
   ("C-x *" . toggle-window-split))
 
+;; Show hot keys when prefix keys are pressed.
 (use-package which-key
   :ensure
 
@@ -176,5 +177,10 @@
 
   :config
   (which-key-mode 1))
+
+;; AutoHotkey mode.
+;; Only for Windows.
+(when (windows?)
+  (use-package ahk-mode :ensure))
 
 ;;; b1-tools.el ends here
