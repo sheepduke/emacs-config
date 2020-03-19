@@ -143,6 +143,7 @@
           (:name "Ecnu" :query "tag:ecnu")
           (:name "Gentoo User" :query "tag:gentoo-user")
           (:name "Emacs User" :query "tag:emacs-user")
+          (:name "Emacs Devel" :query "tag:emacs-devel")
           (:name "CL Cookbook" :query "tag:cl-cookbook")))
 
   (defun notmuch-hello-init-cursor-position ()
