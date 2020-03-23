@@ -33,6 +33,6 @@
 ;; Make Emacs fullscreen.
 (toggle-frame-fullscreen)
 ;; You may change it to any theme you favorite theme.
-(load-theme 'moe-dark t)
+(load-theme 'leuven t)
 
 ;;; .emacs ends here
