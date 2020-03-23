@@ -20,8 +20,7 @@
 
 
 ;; Make undo like a tree.
-(use-package undo-tree
-  :ensure
+(use-package undo-tree :ensure
   :init
   ;; Show diffs when browsing through the undo tree
   (setq undo-tree-visualizer-diff t)
@@ -34,6 +33,8 @@
   ("C-/" . undo-tree-undo)
   ("C-?" . undo-tree-redo)
   ("C-x u" . undo-tree-visualize)
+
+  :delight
 
   :config
   (call-when-defined 'global-undo-tree-mode))

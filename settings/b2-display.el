@@ -122,25 +122,10 @@ A dedicated window can't be switched or modified by some commands."
 	 (emacs-lisp-mode "ELisp" :major)
 	 ;; Globally enabled modes.
 	 (auto-revert-mode "" auto-revert)
-	 (company-mode " company" company)
-	 (flyspell-mode "" flyspell)
 	 (autopair-mode "" autopair)
-	 (undo-tree-mode "" undo-tree)
 	 (eldoc-mode "" eldoc)
-     (ivy-mode "" ivy)
-	 (yas-minor-mode "" yasnippet)
      ;; Dired
-     (dired-async-mode "" dired-async)
-     ;; Programming
-     (hs-minor-mode "" hideshow)
-     (highlight-indent-guides-mode "" highlight-indent-guides)
-     (ggtags-mode "" ggtags)
-     (company-mode "" company)
-     (projectile-mode "" projectile)
-     (vc-mode "" vc)
-	 ;; LaTeX ref, cite etc.
-	 (reftex-mode "" reftex)
-	 (latex-preview-pane-mode " Pane" latex-preview-pane))))
+     (dired-async-mode "" dired-async))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                           Tools                              ;;;;
@@ -183,9 +168,11 @@ A dedicated window can't be switched or modified by some commands."
 ;;;;                            Theme                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package tangotango-theme :ensure t)
-(use-package ample-theme :ensure t)
-(use-package moe-theme :ensure t)
-(use-package spacemacs-theme :ensure t)
+(use-package tangotango-theme :ensure)
+(use-package ample-theme :ensure)
+(use-package moe-theme :ensure)
+(use-package spacemacs-common
+  :ensure spacemacs-theme
+  :defer t)
 
 ;;; b2-display.el ends here

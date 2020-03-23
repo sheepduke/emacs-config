@@ -754,7 +754,9 @@
 
   :bind
   (:map latex-preview-pane-mode-map
-		("M-P" . nil)))
+		("M-P" . nil))
+
+  :delight " Pane")
 
 (use-package reftex-toc
   :ensure
@@ -764,7 +766,9 @@
   (setq reftex-plug-into-AUCTeX t)
 
   :bind (:map reftex-toc-mode-map
-			  ("q" . delete-window)))
+			  ("q" . delete-window))
+
+  :delight (reftex ""))
 
 (use-package company-auctex
   :ensure

@@ -8,9 +8,7 @@
 ;;;;                          Company                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package company
-  :ensure
-
+(use-package company :ensure
   :preface
   (defun complete-or-indent ()
 	"Complete using company-mode or indent current line by checking "
@@ -40,7 +38,9 @@
 completion."
 	:type 'string
 	:group 'none
-	:safe t)  
+	:safe t)
+
+  :delight " company"
     
   :bind (:map company-active-map
 			  ("C-n" . company-select-next)
@@ -105,7 +105,9 @@ completion."
   (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
 
   :config
-  (call-when-defined 'projectile-mode 1))
+  (call-when-defined 'projectile-mode 1)
+
+  :delight (projectile ""))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Yasnippet                           ;;;;
@@ -121,27 +123,31 @@ completion."
         ("<tab>" . nil))
 
   :config
-  (call-when-defined 'yas-global-mode 1))
+  (call-when-defined 'yas-global-mode 1)
+
+  :delight (yasnippet ""))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Syntax Checking                       ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package flycheck
-  :ensure
+(use-package flycheck :ensure
   :config
-  (call-when-defined 'global-flycheck-mode))
+  (call-when-defined 'global-flycheck-mode)
+
+  :delight " FC")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Spell Checking                        ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package flyspell
-  :ensure
+(use-package flyspell :ensure
   :config
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+  :delight " FS")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -158,7 +164,9 @@ completion."
   (:map ggtags-navigation-map
 		("M-o" . nil)
 		("M->" . nil)
-		("M-<" . nil)))
+		("M-<" . nil))
+
+  :delight " GG")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Indentation                           ;;;;
@@ -178,7 +186,9 @@ completion."
       (highlight-indent-guides-mode 1)))
 
   :hook
-  (prog-mode . enable-highlight-indent-guides))
+  (prog-mode . enable-highlight-indent-guides)
+
+  :delight "")
 
 (use-package fill-column-indicator
   :ensure
@@ -221,7 +231,9 @@ completion."
   (:map hs-minor-mode-map
         ("C-c h S" . hs-show-all)
         ("C-c h H" . hs-hide-all)
-        ("C-c h h" . hs-toggle-hiding)))
+        ("C-c h h" . hs-toggle-hiding))
+
+  :delight (hideshow "HS"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;
