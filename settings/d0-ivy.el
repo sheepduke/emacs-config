@@ -33,26 +33,29 @@
   (:map ivy-mode-map
         ;; Utilities
         ("M-x" . counsel-M-x)
+        ("C-h S" . counsel-info-lookup-symbol)
+        ("C-x C-f" . counsel-find-file)
+        ("C-x r b" . counsel-bookmark)
+        ("M-i" . counsel-yank-pop)
+        ("C-:" . counsel-company)
+        ("C-x c t" . counsel-load-theme)
+        ;; Search
+        ("C-s" . swiper)
+        ("C-x c a" . counsel-rg)
+        ;; Help
         ("C-h b" . counsel-descbinds)
         ("C-h f" . counsel-describe-function)
         ("C-h v" . counsel-describe-variable)
         ("C-h a" . counsel-apropos)
-        ("C-h S" . counsel-info-lookup-symbol)
-        ("C-x C-f" . counsel-find-file)
-        ("C-x r b" . counsel-bookmark)
-        ("C-s" . swiper)
-        ("M-i" . counsel-yank-pop)
-        ("C-:" . counsel-company)
-        ;; Global
-        ("C-x c a" . counsel-rg)
-        ("C-x c t" . counsel-load-theme)
+        ("C-h b" . counsel-descbinds)
         ;; Projectile
         ("C-c p p" . counsel-projectile-switch-project)
         ("C-c p h" . counsel-projectile)
         ("C-c p a" . counsel-projectile-ag)
         ;; Misc
         ("C-x 8 <return>" . counsel-unicode-char)
-        ("C-h b" . counsel-descbinds)
-        ("C-c C-j" . counsel-outline)))
+        ("C-c C-j" . counsel-outline))
+
+  :delight)
 
 ;;; d0-ivy.el ends here
