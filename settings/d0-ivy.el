@@ -48,14 +48,17 @@
         ("C-h v" . counsel-describe-variable)
         ("C-h a" . counsel-apropos)
         ("C-h b" . counsel-descbinds)
-        ;; Projectile
-        ("C-c p p" . counsel-projectile-switch-project)
-        ("C-c p h" . counsel-projectile)
-        ("C-c p a" . counsel-projectile-ag)
         ;; Misc
         ("C-x 8 <return>" . counsel-unicode-char)
         ("C-c C-j" . counsel-outline))
 
   :delight)
+
+(use-package counsel-projectile :ensure
+  :bind
+  (:map ivy-mode-map
+        ("C-c p p" . counsel-projectile-switch-project)
+        ("C-c p h" . counsel-projectile)
+        ("C-c p a" . counsel-projectile-ag)))
 
 ;;; d0-ivy.el ends here
