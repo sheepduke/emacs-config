@@ -32,18 +32,15 @@ SIZE-PAIR is a cons pair indicating font size."
                                        :size (cdr size-pair))))
       (warn "No available Chinese font."))))
 
-
 ;; Set font if X window is in use.
 ;; Note that Chinese font size must be 2 larger than English font for
 ;; alignment.
 (when window-system
-  (cond
-   ((windows?) (set-font '("Consolas")
-                         '("Microsoft Yahei")
-                         '(14 . 16)))
-   (t (set-font '("DejaVu Sans Mono" "Consolas")
-                '("Microsoft Yahei" "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
-                '(14 . 16)))))
+  (set-font '("DejaVu Sans Mono" "Consolas")
+            '("Microsoft Yahei" "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
+            (cl-case (display-pixel-width)
+              (3840 '(30 . 34))
+              (t '(14 . 16)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Window                           ;;;;
