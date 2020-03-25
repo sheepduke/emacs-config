@@ -42,6 +42,7 @@
 
 ;; Replace the original doc-view for PDF files.
 (use-package pdf-tools :ensure
+  :disabled (windows?)
   :config
   (call-when-defined 'pdf-tools-install))
 
