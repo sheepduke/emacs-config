@@ -255,6 +255,8 @@ EXPORTER is provided by Org Mode."
   (setq org-journal-find-file 'find-file)
   ;; Automatically adds current and future journals to agenda.
   (setq org-journal-enable-agenda-integration t)
+  ;; Delete empty journal file.
+  (setq org-journal-carryover-delete-empty-journal 'always)
   ;; Automatically carry over TODO items.
   (setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"HOLD\"")
   
