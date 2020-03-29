@@ -304,7 +304,9 @@ This works like Vim 'w!'."
   (call-when-defined 'global-hl-line-mode 1))
 
 (use-package linum
-  :config
-  (global-linum-mode))
+  :hook
+  (text-mode . linum-mode)
+  (fundamental-mode . linum-mode)
+  (prog-mode . linum-mode))
 
 ;;; a2-customize.el ends here
