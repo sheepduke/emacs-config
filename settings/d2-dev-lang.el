@@ -879,4 +879,6 @@
 
 (use-package powershell :ensure)
 
+(use-package systemd :ensure)
+
 ;;; d2-dev-lang.el ends here
