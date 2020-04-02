@@ -33,8 +33,9 @@
   (:map ivy-mode-map
         ;; Utilities
         ("M-x" . counsel-M-x)
-        ("C-h S" . counsel-info-lookup-symbol)
         ("C-x C-f" . counsel-find-file)
+        ("C-x b" . ivy-switch-buffer)
+        ("C-x B" . counsel-buffer-or-recentf)
         ("C-x r b" . counsel-bookmark)
         ("M-i" . counsel-yank-pop)
         ("C-:" . counsel-company)
@@ -48,6 +49,7 @@
         ("C-h v" . counsel-describe-variable)
         ("C-h a" . counsel-apropos)
         ("C-h b" . counsel-descbinds)
+        ("C-h S" . counsel-info-lookup-symbol)
         ;; Misc
         ("C-x 8 <return>" . counsel-unicode-char)
         ("C-c C-j" . counsel-outline))
