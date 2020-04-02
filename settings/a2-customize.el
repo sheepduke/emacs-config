@@ -306,8 +306,8 @@ This works like Vim 'w!'."
 
 (use-package linum
   :hook
-  (text-mode . linum-mode)
-  (fundamental-mode . linum-mode)
-  (prog-mode . linum-mode))
+  (text-mode . turn-linum-mode-on)
+  (fundamental-mode . turn-linum-mode-on)
+  (prog-mode . turn-linum-mode-on))
 
 ;;; a2-customize.el ends here
