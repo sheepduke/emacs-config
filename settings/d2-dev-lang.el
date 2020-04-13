@@ -881,4 +881,6 @@
 
 (use-package systemd :ensure)
 
+(use-package csharp-mode :ensure)
+
 ;;; d2-dev-lang.el ends here
