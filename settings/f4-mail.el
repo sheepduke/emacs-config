@@ -13,9 +13,6 @@
 (defvar *notification-sent* nil
   "Record whether or not the desktop notification has been sent.")
 
-(defvar mail-update-function 'notmuch-poll
-  "Function to update/index mail database.")
-
 (defun check-new-mail ()
   "Check new mail and send desktop notification if there is any new mail."
   (catch 'checked
