@@ -5,34 +5,28 @@
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                        Notification                          ;;;;
+;;;;                    New Mail Checking                         ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'notifications)
-
-(defvar *notification-sent* nil
-  "Record whether or not the desktop notification has been sent.")
-
 (defun check-new-mail ()
-  "Check new mail and send desktop notification if there is any new mail."
-  (catch 'checked
-    (dolist (filename (directory-files *mailbox-dir*))
-      (unless (or (equal filename ".")
-                  (equal filename ".."))
-        (let ((dir (concat *mailbox-dir* filename "/new/")))
-          (when (and (file-exists-p dir)
-                     (> (length (directory-files dir)) 2))
-            (call-when-defined mail-update-function)
-            (unless *notification-sent*
-              (setq *notification-sent* t)
-              (notifications-notify :title "New mail"))
-            (throw 'checked t)))))
-    (setq *notification-sent* nil)
-    nil))
+  "Check all sub-maildir under *MAILBOX-DIR* for new mails.
+Returns a boolean value indicating the result."
+  (unless (file-directory-p *mailbox-dir*)
+    (return nil))
+  (let* ((sub-maildirs (cl-remove-if-not
+                        #'file-directory-p 
+                        (directory-files *mailbox-dir* t "^[a-z]")))
+         (new-mail-dirs (cl-remove-if-not
+                         #'file-directory-p
+                         (mapcar (lambda (dir) (concat dir "/new"))
+                                 sub-maildirs)))
+         (mails (apply #'append
+                       (mapcar (lambda (dir) (directory-files dir t "^[0-9A-Za-z]"))
+                               new-mail-dirs)))
+         (mail-count (length mails)))
+    (> mail-count 0)))
 
-;; Register mail checking function.
-(when (file-exists-p *mailbox-dir*)
-  (setq display-time-mail-function 'check-new-mail))
+(setq display-time-mail-function 'check-new-mail)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            BBDB                              ;;;;
