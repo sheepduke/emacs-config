@@ -39,7 +39,7 @@ SIZE-PAIR is a cons pair indicating font size."
   (set-font '("DejaVu Sans Mono" "Consolas")
             '("Microsoft Yahei" "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
             (cl-case (display-pixel-height)
-              (2160 '(32 . 34))
+              (2160 '(34 . 36))
               (t '(14 . 16)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
