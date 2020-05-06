@@ -5,7 +5,6 @@
 ;;; Code:
 
 (use-package desktop
-  :ensure
   :init
   ;; No automatic save.
   (setq desktop-save nil)
