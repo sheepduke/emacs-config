@@ -224,7 +224,6 @@ This works like Vim 'w!'."
 (global-set-key (kbd "M->") 'end-of-buffer)
 (global-set-key (kbd "M-;") 'toggle-comment-in-line)
 
-
 ;; auto fill
 (global-set-key (kbd "M-q") 'fill-paragraph)
 (global-set-key (kbd "C-M-q") 'fill-region)
@@ -263,6 +262,22 @@ This works like Vim 'w!'."
 
 ;; Set the temporary directory.
 (setq flycheck-temp-prefix "/tmp/flycheck")
+
+(when (and (windows?)
+           (executable-find "hunspell"))
+  (setq ispell-program-name (executable-find "hunspell"))
+  (setq ispell-local-dictionary "en_US")
+  (setq ispell-hunspell-dict-paths-alist
+        '(("en_US" "c:/Hunspell/en_US.aff")))
+  (setq ispell-local-dictionary-alist '(("en_US"
+                                         "[[:alpha:]]"
+                                         "[^[:alpha:]]"
+                                         "[']"
+                                         nil
+                                         nil
+                                         nil
+                                         utf-8))))
+
 ;; Set the personal dictionary.
 (setq ispell-personal-dictionary
       (concat *data-path* "aspell.en.pws"))
