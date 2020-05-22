@@ -61,10 +61,12 @@
   (ivy-rich-mode 1))
 
 (use-package counsel-projectile :ensure
+  :after projectile
+
   :bind
   (:map ivy-mode-map
         ("C-c p p" . counsel-projectile-switch-project)
-        ("C-c p h" . counsel-projectile)
+        ("C-c p h" . counsel-projectile-find-file)
         ("C-c p a" . counsel-projectile-ag)))
 
 ;;; d0-ivy.el ends here
