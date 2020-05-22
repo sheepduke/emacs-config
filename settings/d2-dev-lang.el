@@ -557,9 +557,6 @@
         ("C-c C-b" . js-comint-send-buffer)
         ("C-M-l" . js-comint-clear)))
 
-(use-package company-tern
-  :ensure)
-
 (use-package flycheck
   :ensure
 
