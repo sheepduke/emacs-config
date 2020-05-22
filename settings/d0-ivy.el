@@ -56,6 +56,10 @@
 
   :delight)
 
+(use-package ivy-rich :ensure
+  :config
+  (ivy-rich-mode 1))
+
 (use-package counsel-projectile :ensure
   :bind
   (:map ivy-mode-map
