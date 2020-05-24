@@ -251,7 +251,7 @@
   ;; set common lisp REPL
   (setq inferior-lisp-program "ros run")
   ;; Use classic completion style.
-  (setq sly-complete-symbol-function 'sly-simple-completions)
+  (setq sly-complete-symbol-function 'sly-flex-completions)
 
   (push 'sly-repl-ansi-color sly-contribs)
 
