@@ -399,6 +399,12 @@
   :hook
   (tuareg-mode . merlin-mode))
 
+(use-package merlin-eldoc :ensure
+  :after merlin
+  
+  :hook
+  (tuareg-mode . merlin-eldoc-setup))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Julia                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
