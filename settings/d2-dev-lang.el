@@ -393,19 +393,31 @@
 ;;                               OCaml                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Major mode for editing OCaml files.
 (use-package tuareg :ensure)
 
+;;; Auto completion and more.
 (use-package merlin :ensure
+  :after tuareg
+  
   :hook
   (tuareg-mode . merlin-mode))
 
+;;; Type tips.
 (use-package merlin-eldoc :ensure
   :after merlin
   
   :hook
   (tuareg-mode . merlin-eldoc-setup))
 
+;;; Build system.
 (use-package dune :ensure)
+
+(use-package utop :ensure
+  :after tuareg
+
+  :hook
+  (tuareg-mode . utop-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Julia                            ;;;;
