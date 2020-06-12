@@ -313,12 +313,6 @@ This works like Vim 'w!'."
   (global-set-key (kbd "C-c 1") 'webjump)
   (global-set-key (kbd "C-c 2") 'webjump-add))
 
-;; Highlight current line.
-(use-package hl-line
-  :ensure
-  :init
-  (call-when-defined 'global-hl-line-mode 1))
-
 (use-package linum
   :hook
   (text-mode . turn-linum-mode-on)
