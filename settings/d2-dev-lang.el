@@ -602,6 +602,23 @@
         ("C-c C-b" . js-comint-send-buffer)
         ("C-M-l" . js-comint-clear)))
 
+;; REPL for TypeScript.
+;; First install the REPL via ~npm install -g tsun~.
+(use-package ts-comint :ensure
+  :preface
+  (defun ts-comint-clear ()
+    "Clear the TypeScript REPL buffer."
+    (interactive)
+    (with-current-buffer ts-comint-buffer
+      (erase-buffer)))
+
+  :bind
+  (:map typescript-mode-map
+        ("C-x C-e" . ts-send-last-sexp)
+        ("C-c C-r" . ts-send-region)
+        ("C-c C-b" . ts-send-buffer)
+        ("C-M-l" . ts-comint-clear)))
+
 (use-package flycheck
   :ensure
 
