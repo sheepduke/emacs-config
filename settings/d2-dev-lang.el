@@ -578,6 +578,10 @@
   :hook
   (js-mode . setup-js2-mode))
 
+(use-package typescript-mode :ensure
+  :init
+  (setq typescript-indent-level 2))
+
 ;; IDE for JavaScript.
 (use-package tide
   :ensure
@@ -619,9 +623,7 @@
         ("C-c C-b" . ts-send-buffer)
         ("C-M-l" . ts-comint-clear)))
 
-(use-package flycheck
-  :ensure
-
+(use-package flycheck :ensure
   :preface
   (defun flycheck-use-local-eslint ()
     (let* ((root (locate-dominating-file
