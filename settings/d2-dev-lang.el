@@ -394,7 +394,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Major mode for editing OCaml files.
-(use-package tuareg :ensure)
+(use-package tuareg :ensure
+  :preface
+  (defun tuareg-insert-comment-block ()
+    (interactive)
+    (let* ((comment (read-string "Comment: "))
+           (comment-length (length comment))
+           (comment-line (make-string 70 ?*))
+           (space-before-comment (/ (- 68 comment-length) 2))
+           (space-after-comment (- 68 comment-length space-before-comment)))
+      (insert (format "(%s\n *%s*\n %s)"
+                      comment-line
+                      (concat (make-string space-before-comment ?\s)
+                              comment
+                              (make-string space-after-comment ?\s))
+                      comment-line)))))
 
 ;;; Auto completion and more.
 (use-package merlin :ensure
