@@ -46,7 +46,6 @@
 
 (defun org-mode-hook-function ()
   "Setup."
-  (toggle-word-wrap 1)
   (toggle-truncate-lines 0)
   
   (make-local-variable 'company-backends)
@@ -58,7 +57,6 @@
   (setq fill-column 78))
 (add-hook 'org-mode-hook 'org-mode-hook-function)
 (add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'org-mode-hook 'auto-fill-mode)
 
 ;; Some hot keys.
 (define-key org-mode-map (kbd "C-'") nil)

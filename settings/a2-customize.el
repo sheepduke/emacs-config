@@ -298,6 +298,7 @@ This works like Vim 'w!'."
 (global-set-key (kbd "C-c t m") 'master-mode)
 (global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c t w") 'toggle-word-wrap)
+(global-set-key (kbd "C-c t v") 'visual-line-mode)
 
 (use-package master
   :bind
