@@ -353,7 +353,7 @@ EXPORTER is provided by Org Mode."
          (file "capture.org") "* %c\n"
          :empty-lines 1)
         ("t" "TODO" entry
-         (file "capture.org") "* TODO %?\n"
+         (file "main.org") "* TODO %?\n"
          :empty-lines 1)))
 
 (setq org-agenda-sorting-strategy
