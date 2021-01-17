@@ -172,5 +172,6 @@ A dedicated window can't be switched or modified by some commands."
 (use-package spacemacs-common
   :ensure spacemacs-theme
   :defer t)
+(use-package kaolin-themes :ensure)
 
 ;;; b2-display.el ends here
