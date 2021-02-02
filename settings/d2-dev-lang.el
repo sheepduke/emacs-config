@@ -401,9 +401,9 @@
     (let* ((comment (read-string "Comment: "))
            (comment-length (length comment))
            (comment-line (make-string 70 ?*))
-           (space-before-comment (/ (- 68 comment-length) 2))
-           (space-after-comment (- 68 comment-length space-before-comment)))
-      (insert (format "(%s\n *%s*\n %s)"
+           (space-before-comment (/ (- 66 comment-length) 2))
+           (space-after-comment (- 66 comment-length space-before-comment)))
+      (insert (format "(%s\n **%s**\n %s)"
                       comment-line
                       (concat (make-string space-before-comment ?\s)
                               comment

@@ -2,5 +2,5 @@
 # name: block
 # key: block
 # --
-`(tuareg-comment-block)`
+`(tuareg-insert-comment-block)`
 $0
