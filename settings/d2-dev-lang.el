@@ -5,28 +5,6 @@
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                            Arduino                           ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package arduino-mode
-  :mode "\\.ino"
-  
-  :preface
-  (defun arduino-mode-setup ()
-	(semantic-mode 0)
-	(set (make-local-variable 'compile-command)
-		 "make -j4 -l5 && make upload")
-	(make-local-variable 'company-backends)
-	(setq company-backends
-		  '((company-dabbrev company-gtags company-etags company-keywords
-							 :with company-yasnippet)
-			(company-c-headers :with company-yasnippet)
-			(company-capf :with company-yasnippet))))
-
-  :hook
-  (arduino-mode . arduino-mode-setup))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            C/C++                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -158,8 +136,8 @@
 
   :bind
   (:map alchemist-mode-map
-        ("C-c b" . alchemist-iex-send-buffer)
-        ("C-c r" . alchemist-iex-send-region)
+        ("C-c C-b" . alchemist-iex-send-buffer)
+        ("C-c C-r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
         ("C-c C-c" . alchemist-iex-send-current-line)
         ("C-c C-f" . elixir-insert-end)
@@ -170,7 +148,6 @@
 
   :hook
   (elixir-mode . alchemist-mode)
-  (alchemist-mode . company-mode)
   (alchemist-mode . flyspell-prog-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
