@@ -108,20 +108,6 @@
   :after elixir-mode
 
   :preface
-  (defun elixir-insert-end ()
-	"Insert END accordingly."
-	(interactive)
-	(let ((text (save-excursion
-				  (forward-line 0)
-				  (if (looking-at "^[ \t]*$")
-					  "end"
-					(if (looking-at ".*{[^}]*$")
-						"\n}"
-					  "\nend")))))
-	  (insert text)
-	  (indent-region (line-beginning-position)
-					 (line-end-position))))
-
   (defun alchemist-iex-send-buffer ()
     "Send current buffer."
     (interactive)
@@ -140,7 +126,6 @@
         ("C-c C-r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
         ("C-c C-c" . alchemist-iex-send-current-line)
-        ("C-c C-f" . elixir-insert-end)
         ("C-c C-p" . alchemist-run-iex-dwim)
         ("M-P" . nil)
         ("M-N" . nil)
@@ -149,6 +134,25 @@
   :hook
   (elixir-mode . alchemist-mode)
   (alchemist-mode . flyspell-prog-mode))
+
+(use-package eglot :ensure
+  :preface
+  (defun elixir-get-lsp-server-path ()
+    "Get LSP server path."
+    (format "%s/software/elixir-ls/language_server.%s"
+            (getenv "HOME")
+            (if (windows?) "bat" "sh")))
+
+  :init
+  (add-to-list 'eglot-server-programs
+               `(elixir-mode ,(elixir-get-lsp-server-path)))
+
+  :bind
+  (:map eglot-mode-map
+        ("C-c C-d" . eldoc-doc-buffer))
+
+  :hook
+  (elixir-mode . eglot))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Rust                              ;;;;
