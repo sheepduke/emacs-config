@@ -143,7 +143,13 @@
             (getenv "HOME")
             (if (windows?) "bat" "sh")))
 
-  :init
+  (defun eglot-format-elixir-buffer ()
+    "Sort the buffer using eglot when in elixir mode."
+    (interactive)
+    (when (member 'eglot--managed-mode minor-mode-list)
+      (eglot-format-buffer)))
+
+  :config
   (add-to-list 'eglot-server-programs
                `(elixir-mode ,(elixir-get-lsp-server-path)))
 
@@ -152,7 +158,8 @@
         ("C-c C-d" . eldoc-doc-buffer))
 
   :hook
-  (elixir-mode . eglot))
+  (elixir-mode . eglot)
+  (before-save . eglot-format-elixir-buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Rust                              ;;;;
