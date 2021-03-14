@@ -90,14 +90,14 @@ A dedicated window can't be switched or modified by some commands."
   (setq shackle-select-reused-windows nil)
   ;; Define shackle rules!
   (setq shackle-rules
-		'(("Capture" :regexp t :select t :inhibit-window-quit t :same t)
-		  ("*Help*" :select t :inhibit-window-quit nil)
-		  ("*grep*" :select t)
+		'(("*Bookmark List*" :select t :inhibit-window-quit t :same t)
+          ("*Calendar*" :select t :inhibit-window-quit nil :size 0.3 :align below)
+          ("Capture" :regexp t :select t :inhibit-window-quit t :same t)
 		  ("*Completions*" :select nil :inhibit-window-quit nil)
-		  ("*Calendar*" :select t :inhibit-window-quit nil :size 0.3 :align below)
-		  ("*Bookmark List*" :select t :inhibit-window-quit t :same t)
-		  ("*toc*" :select t :inhibit-window-quit t :same t :size 0.5)
-          ("*slime-description*" :select t :inhibit-window-quit t :same t)))
+		  ("*grep*" :select t)
+		  ("*Help*" :select t :inhibit-window-quit nil)
+          ("*slime-description*" :select t :inhibit-window-quit t :same t)
+		  ("*toc*" :select t :inhibit-window-quit t :same t :size 0.5)))
 
   :config
   (call-when-defined 'shackle-mode))
