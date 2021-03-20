@@ -32,8 +32,6 @@
               (remove "init.elc"
                       (directory-files "~/.emacs.d/settings/" nil "^[a-zA-Z0-9].*.elc$"))))
 
-(mapc 'load (directory-files "~/.emacs.d/settings/" t "^[a-zA-Z0-9].*.elc$"))
-
 ;; Start Emacs server.
 (server-start)
 
