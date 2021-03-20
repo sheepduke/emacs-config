@@ -151,24 +151,6 @@ completion."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                           ggtags                             ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package ggtags
-  :ensure
-  :init
-  (add-hook 'prog-mode-hook 'ggtags-mode)
-
-  :bind
-  ;; Stop messing up my key bindings!
-  (:map ggtags-navigation-map
-		("M-o" . nil)
-		("M->" . nil)
-		("M-<" . nil))
-
-  :delight " GG")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Indentation                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -245,7 +227,7 @@ completion."
         ("<return>" . newline-smart-comment))
 
   :hook
-  (prog-mode . linum-on))
+  (prog-mode . turn-linum-mode-on))
 
 
 ;;; d1-dev-common.el ends here
