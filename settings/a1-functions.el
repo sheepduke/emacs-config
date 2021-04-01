@@ -97,4 +97,10 @@ ARGS are arguments passed to FUNC."
   "Return TRUE if we are under X system."
   (getenv "DISPLAY"))
 
+(defun copy-whole-buffer ()
+  "Copy content of whole buffer to kill ring."
+  (interactive)
+  (kill-ring-save (point-min) (point-max))
+  (message "Buffer content saved to kill ring"))
+
 ;;; a1-functions.el ends here

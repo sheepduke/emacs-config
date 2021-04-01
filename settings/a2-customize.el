@@ -299,6 +299,7 @@ This works like Vim 'w!'."
 (global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c t w") 'toggle-word-wrap)
 (global-set-key (kbd "C-c t v") 'visual-line-mode)
+(global-set-key (kbd "C-x H") 'copy-whole-buffer)
 
 (use-package master
   :bind

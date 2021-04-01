@@ -40,6 +40,7 @@ SIZE-PAIR is a cons pair indicating font size."
             '("Microsoft Yahei" "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
             (cl-case (display-pixel-height)
               (2160 '(36 . 44))
+              (1500 '(17 . 18))
               (1440 '(17 . 18))
               (t '(14 . 16)))))
 
