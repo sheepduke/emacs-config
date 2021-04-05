@@ -114,23 +114,31 @@
     (alchemist-iex-send-region (point-min) (point-max)))
 
   (defun alchemist-run-iex-dwim ()
-    "Run iex with or without mix accordingly."
+    "Run IEx with or without mix accordingly."
     (interactive)
     (let ((result (alchemist-iex-project-run)))
       (unless (bufferp result)
         (alchemist-iex-run))))
 
+  (defun alchemist-clear-buffer-anywhere ()
+    "Clear IEx buffer from anywhere."
+    (interactive)
+    (with-current-buffer alchemist-iex-buffer
+      (alchemist-iex-clear-buffer)))
+
   :bind
   (:map alchemist-mode-map
+        ("C-c C-k" . alchemist-compile-this-buffer)
         ("C-c C-b" . alchemist-iex-send-buffer)
         ("C-c C-r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
         ("C-c C-c" . alchemist-iex-send-current-line)
         ("C-c C-p" . alchemist-run-iex-dwim)
+        ("C-M-l" . alchemist-clear-buffer-anywhere)
         ("M-P" . nil)
         ("M-N" . nil)
         ("C-c a" . nil))
-
+  
   :hook
   (elixir-mode . alchemist-mode)
   (alchemist-mode . flyspell-prog-mode))
