@@ -137,6 +137,7 @@
         ("C-M-l" . alchemist-clear-buffer-anywhere)
         ("M-P" . nil)
         ("M-N" . nil)
+        ("M-." . nil)
         ("C-c a" . nil))
   
   :hook
