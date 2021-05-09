@@ -955,4 +955,8 @@
 
 (use-package csharp-mode :ensure)
 
+(use-package ebuild-mode
+  :preface
+  (add-to-list 'load-path (concat *plugins-path* "ebuild-mode")))
+
 ;;; d2-dev-lang.el ends here
