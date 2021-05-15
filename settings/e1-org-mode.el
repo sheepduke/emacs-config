@@ -44,6 +44,16 @@
 (setq org-blank-before-new-entry '((heading . t)
                                    (plain-list-item . auto)))
 
+(defun org-insert-table ()
+  "Insert a 2x2 table to current position."
+  (interactive)
+  (save-excursion
+    (insert "|---+---|
+|   |   |
+|---+---|
+|   |   |
+|---+---|")))
+
 (defun org-mode-hook-function ()
   "Setup."
   (toggle-truncate-lines 0)
