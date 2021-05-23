@@ -158,16 +158,23 @@
     (when (member 'eglot--managed-mode minor-mode-list)
       (eglot-format-buffer)))
 
+  (defun eglot-find-mix-project (dir)
+    "Try to locate a Elixir project root by 'mix.exs' above DIR."
+    (let ((mix_root (locate-dominating-file dir "mix.exs")))
+      (message "Found Elixir project root in '%s' starting from '%s'" mix_root dir)
+      (if (stringp mix_root) `(transient . ,mix_root) nil)))
+
   :config
   (add-to-list 'eglot-server-programs
                `(elixir-mode ,(elixir-get-lsp-server-path)))
+  (add-hook 'project-find-functions 'eglot-find-mix-project)
 
   :bind
   (:map eglot-mode-map
         ("C-c C-d" . eldoc-doc-buffer))
 
   :hook
-  (elixir-mode . eglot)
+  (elixir-mode . eglot-ensure)
   (before-save . eglot-format-elixir-buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
