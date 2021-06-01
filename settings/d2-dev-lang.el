@@ -128,7 +128,7 @@
 
   :bind
   (:map alchemist-mode-map
-        ("C-c C-k" . alchemist-compile-this-buffer)
+        ("C-c C-k" . alchemist-iex-compile-this-buffer)
         ("C-c C-b" . alchemist-iex-send-buffer)
         ("C-c C-r" . alchemist-iex-send-region)
         ("C-x C-e" . alchemist-iex-send-last-sexp)
