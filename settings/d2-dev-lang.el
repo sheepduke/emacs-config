@@ -160,9 +160,11 @@
 
   (defun eglot-find-mix-project (dir)
     "Try to locate a Elixir project root by 'mix.exs' above DIR."
-    (let ((mix_root (locate-dominating-file dir "mix.exs")))
-      (message "Found Elixir project root in '%s' starting from '%s'" mix_root dir)
-      (if (stringp mix_root) `(transient . ,mix_root) nil)))
+    (when (or (string-suffix-p ".ex" (buffer-name))
+              (string-suffix-p ".exs" (buffer-name)))
+      (let ((mix_root (locate-dominating-file dir "mix.exs")))
+        (message "Found Elixir project root in '%s' starting from '%s'" mix_root dir)
+        (if (stringp mix_root) `(transient . ,mix_root) nil))))
 
   :config
   (add-to-list 'eglot-server-programs
