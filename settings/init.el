@@ -29,13 +29,10 @@
 ;; Load settings.
 (mapc 'load
       (mapcar (lambda (filename) (expand-file-name filename "~/.emacs.d/settings/"))
-              (remove "init.elc"
-                      (directory-files "~/.emacs.d/settings/" nil "^[a-zA-Z0-9].*.elc$"))))
+              (cl-remove-if (lambda (filename) (string-equal (file-name-base filename) "init"))
+                            (directory-files "~/.emacs.d/settings/" nil "^[a-zA-Z0-9].*.elc$"))))
 
 ;; Start Emacs server.
 (server-start)
-
-;; You may change it to any theme you favorite theme.
-(load-theme 'kaolin-breeze t)
 
 ;;; init.el ends here
