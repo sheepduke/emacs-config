@@ -22,6 +22,7 @@
 
 ;; Load gentoo related functions.
 (when (file-exists-p "/usr/share/emacs/site-lisp/site-gentoo.el")
+  (load "/usr/share/emacs/site-lisp/site-gentoo.el")
   (require 'site-gentoo))
 
 ;; Share the clipboard with the outside X world.
