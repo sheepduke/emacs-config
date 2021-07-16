@@ -173,6 +173,7 @@
 ;; Show hot keys when prefix keys are pressed.
 (use-package which-key
   :ensure
+  :delight ""
 
   :init
   (setq which-key-idle-delay 0.5)
