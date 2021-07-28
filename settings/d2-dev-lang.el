@@ -180,6 +180,8 @@
   (elixir-mode . eglot-ensure)
   (before-save . eglot-format-elixir-buffer))
 
+(use-package elixir-yasnippets :ensure)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Rust                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
