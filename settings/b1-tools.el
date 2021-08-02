@@ -105,29 +105,13 @@
 
 
 ;; Built-in input method.
-(use-package pyim
-  :ensure
-  :init
-  (require 'pyim)
-  ;; 设定默认输入法
-  (setq default-input-method "pyim")
-
-  ;; 中文使用全角标点，英文使用半角标点。
-  (setq pyim-punctuation-translate-p '(auto yes no))
-  ;; 作为五笔用户，我觉得自己完全不需要选词框。
-  (setq pyim-page-tooltip 'minibuffer)
-  ;; 同上，取消词库。
-  (setq pyim-dcache-auto-update nil)
-
-  :bind
-  ("C-`" . toggle-input-method))
-
-(use-package pyim-wbdict :ensure
-  :init
-  (setq pyim-default-scheme 'wubi)
-
+(use-package rime :ensure
   :config
-  (pyim-wbdict-v98-enable))
+  ;; Use mini-buffer as the prompt.
+  (setq rime-show-candidate 'minibuffer)
+
+  ;; Use ibus Rime data.
+  (setq rime-user-data-dir "~/.config/ibus/rime"))
 
 ;; Show Nyan cat in progress bar.
 (use-package nyan-mode
