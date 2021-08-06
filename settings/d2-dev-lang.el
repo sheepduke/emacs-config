@@ -155,7 +155,7 @@
   (defun eglot-format-elixir-buffer ()
     "Sort the buffer using eglot when in elixir mode."
     (interactive)
-    (when (member 'eglot--managed-mode minor-mode-list)
+    (when (member major-mode '(elixir-mode))
       (eglot-format-buffer)))
 
   (defun eglot-find-mix-project (dir)
