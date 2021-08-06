@@ -106,12 +106,18 @@
 
 ;; Built-in input method.
 (use-package rime :ensure
-  :config
+  :custom
+  ;; Set Rime as the default input method.
+  (default-input-method "rime")
+
+  ;; Set the emacs-module.h header file.
+  (rime-emacs-module-header-root (get-emacs-module-header-file))
+
   ;; Use mini-buffer as the prompt.
-  (setq rime-show-candidate 'minibuffer)
+  (rime-show-candidate 'minibuffer)
 
   ;; Use ibus Rime data.
-  (setq rime-user-data-dir "~/.config/ibus/rime"))
+  (rime-user-data-dir "~/.config/ibus/rime"))
 
 ;; Show Nyan cat in progress bar.
 (use-package nyan-mode

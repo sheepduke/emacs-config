@@ -103,4 +103,10 @@ ARGS are arguments passed to FUNC."
   (kill-ring-save (point-min) (point-max))
   (message "Buffer content saved to kill ring"))
 
+(defun get-emacs-module-header-file ()
+  "Get the absolute path to emacs-module.h header file.
+Return NIL if nothing found."
+  (cl-find-if (lambda (path) (file-exists-p (concat path "emacs-module.h")))
+           *emacs-module-header-roots*))
+
 ;;; a1-functions.el ends here

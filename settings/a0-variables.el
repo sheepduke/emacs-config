@@ -24,4 +24,8 @@
 (defvar *backup-dir* "~/backup/"
   "Path to backup directory.")
 
+(defvar *emacs-module-header-roots*
+  '("/usr/include/emacs-27/")
+  "A list of possible files of emacs-module.h.")
+
 ;;; a0-variables.el ends here
