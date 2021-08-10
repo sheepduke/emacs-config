@@ -213,8 +213,8 @@ EXPORTER is provided by Org Mode."
 	  ;; match
 	  (while (setq start
                    (string-match "^.+INLINE_STYLE.*:.*\.css$" content start))
-		(incf start)
-		(let ((filename (second (split-string (match-string 0 content)
+		(cl-incf start)
+		(let ((filename (cl-second (split-string (match-string 0 content)
                                               ":" t " "))))
 		  (if (file-exists-p filename)
 			  (setq org-html-head (concat
@@ -278,24 +278,28 @@ EXPORTER is provided by Org Mode."
 ;;;;                           Journal                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package org-journal
-  :ensure
-  :init
+(use-package org-journal :ensure
+  :custom
   ;; Set root directory.
-  (setq org-journal-dir
-        (concat org-directory "journal/"))
+  (org-journal-dir (concat org-directory "journal/"))
+  
   ;; Set file format.
-  (setq org-journal-file-format "%Y-%m-%d.org")
+  (org-journal-file-format "%Y-%m-%d.org")
+  
   ;; Set format of title in each journal file.
-  (setq org-journal-date-format "%Y-%m-%d (%A)")
+  (org-journal-date-format "%Y-%m-%d (%A)")
+  
   ;; Use find-file in order to open new journal file in current window.
-  (setq org-journal-find-file 'find-file)
+  (org-journal-find-file 'find-file)
+  
   ;; Automatically adds current and future journals to agenda.
-  (setq org-journal-enable-agenda-integration t)
+  (org-journal-enable-agenda-integration t)
+  
   ;; Delete empty journal file.
-  (setq org-journal-carryover-delete-empty-journal 'always)
+  (org-journal-carryover-delete-empty-journal 'always)
+  
   ;; Automatically carry over TODO items.
-  (setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"HOLD\"")
+  (org-journal-carryover-items "TODO=\"TODO\"|TODO=\"HOLD\"")
   
   :bind
   ("C-c C-j" . nil)
