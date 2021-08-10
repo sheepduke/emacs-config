@@ -265,10 +265,8 @@
   (push 'sly-repl-ansi-color sly-contribs)
 
   ;; Set the location of HyperSpec.
-  (setq common-lisp-hyperspec-root
-        (concat "file://"
-                (expand-file-name "~/documents/manuals/lisp/HyperSpec/")))
-
+  (load "~/.roswell/lisp/quicklisp/clhs-use-local.el" t)
+  
   :bind
   (:map sly-mode-map
         ("C-c i" . nil)
@@ -282,8 +280,12 @@
   :hook
   (lisp-mode . sly-editing-mode))
 
-(use-package sly-repl-ansi-color
-  :ensure)
+(use-package sly-repl-ansi-color :ensure)
+
+(use-package lispy :ensure
+  :hook
+  (emacs-lisp-mode . lispy-mode)
+  (lisp-mode . lispy-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Emacs Lisp                            ;;;;
@@ -864,7 +866,6 @@
 											 (company-auctex-macros
 											  company-auctex-symbols
 											  company-auctex-environments)))
-	(company-mode-setup-yasnippet-backend)
 	;; Disable idle completion.
 	(set (make-local-variable 'company-idle-delay) nil))
 
