@@ -119,32 +119,6 @@
 
   :delight "")
 
-(use-package fill-column-indicator
-  :ensure
-  :after company
-
-  :preface
-  (defvar-local company-fci-mode-on-p nil
-    "Used by hack between company-mode and fci-mode inside dev-common.el")
-
-  (defun company-turn-off-fci (&rest ignore)
-    (when (boundp 'fci-mode)
-      (setq company-fci-mode-on-p fci-mode)
-      (when fci-mode (call-when-defined 'fci-mode -1))))
-
-  (defun company-maybe-turn-on-fci (&rest ignore)
-    (when company-fci-mode-on-p (call-when-defined 'fci-mode 1)))
-
-  :init
-  (setq-default fill-column 79)
-  ;; Do not truncate long lines.
-  (setq fci-handle-truncate-lines nil)
-
-  :hook
-  (company-completion-started . company-turn-off-fci)
-  (company-completion-finished . company-maybe-turn-on-fci)
-  (company-completion-cancelled . company-maybe-turn-on-fci))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         HS Mode                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
