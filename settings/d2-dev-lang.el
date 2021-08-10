@@ -283,6 +283,10 @@
 (use-package sly-repl-ansi-color :ensure)
 
 (use-package lispy :ensure
+  :bind
+  (:map lispy-mode-map
+        ("M-o" . nil))
+
   :hook
   (emacs-lisp-mode . lispy-mode)
   (lisp-mode . lispy-mode))
