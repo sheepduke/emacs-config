@@ -19,11 +19,11 @@
 
   ;; Show info at mode-line.
   (require 'emms-mode-line)
-  (emms-mode-line 1)
+  (emms-mode-line-mode 1)
 
   ;; Show time of music.
   (require 'emms-playing-time)
-  (emms-playing-time 1)
+  (emms-playing-time-mode 1)
 
   ;; Auto identify encode.
   (require 'emms-i18n)
