@@ -8,178 +8,183 @@
 ;;;;                        Customization                         ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'org)
-(require 'org-agenda)
-
-;; Set the default directory for all notes.
-(setq org-directory "~/notes/")
-
-;; Default table size.
-(setq org-table-default-size "2x2")
-
-;; Show everything on startup.
-(setq org-startup-folded nil)
-
-;; Do indenting during start-up.
-(setq org-startup-indented t)
-
-;; Fontify code blocks.
-(setq org-src-fontify-natively t)
-
-;; Don't show all the leading stars.
-(setq org-hide-leading-stars t)
-
-;; Set the format of captured email link.
-(setq org-link-email-description-format "Email: %s")
-
-;; Enable bold, italic etc inside Chinese context.
-(setf (nth 0 org-emphasis-regexp-components)
-      "-[:space:]('\"{[:multibyte:]")
-(setf (nth 1 org-emphasis-regexp-components)
-      "-[:space:].,:!?;'\")}\\[[:multibyte:]")
-(org-set-emph-re 'org-emphasis-regexp-components
-                 org-emphasis-regexp-components)
-
-;; Always insert a new line before new item.
-(setq org-blank-before-new-entry '((heading . t)
-                                   (plain-list-item . auto)))
-
-(defun org-insert-table ()
-  "Insert a 2x2 table to current position."
-  (interactive)
-  (save-excursion
-    (insert "|---+---|
+(use-package org
+  :preface
+  (defun org-insert-table ()
+    "Insert a 2x2 table to current position."
+    (interactive)
+    (save-excursion
+      (insert "|---+---|
 |   |   |
 |---+---|
 |   |   |
 |---+---|")))
 
+  :custom
+  ;; Set the default directory for all notes.
+  (org-directory "~/notes/")
+
+  ;; Default table size.
+  (org-table-default-size "2x2")
+
+  ;; Show everything on startup.
+  (org-startup-folded nil)
+
+  ;; Do indenting during start-up.
+  (org-startup-indented t)
+
+  ;; Fontify code blocks.
+  (org-src-fontify-natively t)
+
+  ;; Don't show all the leading stars.
+  (org-hide-leading-stars t)
+
+  ;; Set the format of captured email link.
+  (org-link-email-description-format "Email: %s")
+
+  ;; Always insert a new line before new item.
+  (org-blank-before-new-entry '((heading . t)
+                                (plain-list-item . auto)))
+  
+  :init
+  ;; Enable bold, italic etc inside Chinese context.
+  (setf (nth 0 org-emphasis-regexp-components)
+        "-[:space:]('\"{[:multibyte:]")
+  (setf (nth 1 org-emphasis-regexp-components)
+        "-[:space:].,:!?;'\")}\\[[:multibyte:]")
+  (org-set-emph-re 'org-emphasis-regexp-components
+                   org-emphasis-regexp-components)
+
+  :hook
+  (org-mode . disable-truncate-lines)
+  (org-mode . flyspell-mode)
+
+  :bind-keymap
+  ("C-'" . nil)
+  ("M-q" . org-fill-paragraph)
+  ("C-c C-," . org-promote-subtree)
+  ("C-c C-." . org-demote-subtree)
+  ("C-c C-l" . org-toggle-link-display)
+  ("C-c C-i" . org-mark-ring-goto)
+  ("C-<tab>" . org-force-cycle-archived))
+
+;; TODO move it to use-package.
 (defun org-mode-hook-function ()
   "Setup."
-  (toggle-truncate-lines 0)
-  
   (make-local-variable 'company-backends)
   (setq company-backends '((company-dabbrev :with company-yasnippet)))
 
   (make-local-variable 'company-idle-delay)
-  (setq company-idle-delay 0.5)
-
-  (setq fill-column 78))
+  (setq company-idle-delay 0.5))
 (add-hook 'org-mode-hook 'org-mode-hook-function)
-(add-hook 'org-mode-hook 'flyspell-mode)
 
-;; Some hot keys.
-(define-key org-mode-map (kbd "C-'") nil)
-(define-key org-mode-map (kbd "M-q") 'org-fill-paragraph)
-(define-key org-mode-map (kbd "C-c C-,") 'org-promote-subtree)
-(define-key org-mode-map (kbd "C-c C-.") 'org-demote-subtree)
-(define-key org-mode-map (kbd "C-c C-l") 'org-toggle-link-display)
-(define-key org-mode-map (kbd "C-c C-i") 'org-mark-ring-goto)
-(define-key org-mode-map (kbd "C-<tab>") 'org-force-cycle-archived)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Modules                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Org modules loaded with org mode itself
-(setq org-modules
-      '(org-notmuch org-bbdb org-habit org-bibtex org-docview org-info))
-
-(use-package org-bullets
-  :ensure
-  :init
-  (add-hook 'org-mode-hook 'org-bullets-mode))
-
-(use-package org-habit
-  :ensure org-plus-contrib
-
-  :init
-  ;; Habit tracking
-  (require 'org-habit)
-  ;; Do not spam my timeline with it.
-  (setq org-habit-show-habits-only-for-today t)
+(use-package org-habit :ensure org-plus-contrib
+  :custom
+  (org-habit-show-habits-only-for-today t)
+  
   ;; Show my habits no matter whether it is scheduled today.
-  (setq org-habit-show-all-today t))
+  (org-habit-show-all-today t)
+
+  ;; Org modules loaded with org mode itself
+  (org-modules '(org-bbdb
+                 org-bibtex
+                 org-docview
+                 org-habit
+                 org-notmuch
+                 org-info)))
+
+;; Bigger calendar.
+(use-package calfw :ensure)
+
+;; Display org items in calfw.
+(use-package calfw-org :ensure
+  :bind
+  ("C-c o" . cfw:open-org-calendar))
+
+;; Chinese localization
+(use-package cal-china-x :ensure)
+
+;; Show leading stars as bullets.
+(use-package org-bullets :ensure
+  :hook
+  (org-mode . org-bullets-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                       Localization                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Display org in a bigger calendar!
-(use-package calfw
-  :ensure)
+(use-package calendar
+  :custom
+  ;; Use Chinese month name.
+  (setq calendar-month-name-array
+        ["一月" "二月" "三月" "四月" "五月" "六月"
+         "七月" "八月" "九月" "十月" "十一月" "十二月"])
 
-(use-package calfw-org
-  :ensure)
+  ;; Use Chinese weekday name.
+  (setq calendar-day-name-array
+        ["日" "一" "二" "三" "四" "五" "六"])
 
-;; Chinese localization
-(use-package cal-china-x
-  :ensure)
+  ;; Use Monday as the first day of week.
+  (setq calendar-week-start-day 0)
 
-;; Use Chinese month name.
-(setq calendar-month-name-array
-      ["一月" "二月" "三月" "四月" "五月" "六月"
-       "七月" "八月" "九月" "十月" "十一月" "十二月"])
-;; Use Chinese weekday name.
-(setq calendar-day-name-array
-      ["日" "一" "二" "三" "四" "五" "六"])
-;; Use Monday as the first day of week.
-(setq calendar-week-start-day 0)
+  ;; Holidays
+  (calendar-holidays
+   '(;;公历节日
+     (holiday-fixed 1 1 "元旦")
+     (holiday-fixed 2 14 "情人节")
+     (holiday-fixed 3 8 "妇女节")
+     (holiday-fixed 5 1 "劳动节")
+     (holiday-float 5 0 2 "母亲节")
+     (holiday-fixed 6 1 "儿童节")
+     (holiday-float 6 0 3 "父亲节")
+     (holiday-fixed 9 10 "教师节")
+     (holiday-fixed 10 1 "国庆节")
+     (holiday-fixed 12 25 "圣诞节")
+     ;; 农历节日
+     (holiday-lunar 12 23 "祭灶" 0)
+     (holiday-lunar 12 30 "除夕" 0)
+     (holiday-lunar 1 1 "春节" 0)
+     (holiday-lunar 1 15 "元宵" 0)
+     (holiday-lunar 5 5 "端午" 0)
+     (holiday-lunar 7 7 "七夕" 0)
+     (holiday-lunar 8 15 "中秋" 0)
+     (holiday-lunar 9 9 "重阳" 0)
+     ;; 节气
+     (holiday-solar-term "小寒" "小寒")
+     (holiday-solar-term "大寒" "大寒")
+     (holiday-solar-term "立春" "立春")
+     (holiday-solar-term "雨水" "雨水")
+     (holiday-solar-term "惊蛰" "惊蛰")
+     (holiday-solar-term "春分" "春分")
+     (holiday-solar-term "清明" "清明")
+     (holiday-solar-term "谷雨" "谷雨")
+     (holiday-solar-term "立夏" "立夏")
+     (holiday-solar-term "小满" "小满")
+     (holiday-solar-term "芒种" "芒种")
+     (holiday-solar-term "夏至" "夏至")
+     (holiday-solar-term "小暑" "小暑")
+     (holiday-solar-term "大暑" "大暑")
+     (holiday-solar-term "立秋" "立秋")
+     (holiday-solar-term "处暑" "处暑")
+     (holiday-solar-term "白露" "白露")
+     (holiday-solar-term "秋分" "秋分")
+     (holiday-solar-term "寒露" "寒露")
+     (holiday-solar-term "霜降" "霜降")
+     (holiday-solar-term "立冬" "立冬")
+     (holiday-solar-term "小雪" "小雪")
+     (holiday-solar-term "大雪" "大雪")
+     (holiday-solar-term "冬至" "冬至")))
 
-;; Holidays
-(setq calendar-holidays
-      '(;;公历节日
-        (holiday-fixed 1 1 "元旦")
-        (holiday-fixed 2 14 "情人节")
-        (holiday-fixed 3 8 "妇女节")
-        (holiday-fixed 5 1 "劳动节")
-        (holiday-float 5 0 2 "母亲节")
-        (holiday-fixed 6 1 "儿童节")
-        (holiday-float 6 0 3 "父亲节")
-        (holiday-fixed 9 10 "教师节")
-        (holiday-fixed 10 1 "国庆节")
-        (holiday-fixed 12 25 "圣诞节")
-        ;; 农历节日
-        (holiday-lunar 12 23 "祭灶" 0)
-        (holiday-lunar 12 30 "除夕" 0)
-        (holiday-lunar 1 1 "春节" 0)
-        (holiday-lunar 1 15 "元宵" 0)
-        (holiday-lunar 5 5 "端午" 0)
-        (holiday-lunar 7 7 "七夕" 0)
-        (holiday-lunar 8 15 "中秋" 0)
-        (holiday-lunar 9 9 "重阳" 0)
-        ;; 节气
-        (holiday-solar-term "小寒" "小寒")
-        (holiday-solar-term "大寒" "大寒")
-        (holiday-solar-term "立春" "立春")
-        (holiday-solar-term "雨水" "雨水")
-        (holiday-solar-term "惊蛰" "惊蛰")
-        (holiday-solar-term "春分" "春分")
-        (holiday-solar-term "清明" "清明")
-        (holiday-solar-term "谷雨" "谷雨")
-        (holiday-solar-term "立夏" "立夏")
-        (holiday-solar-term "小满" "小满")
-        (holiday-solar-term "芒种" "芒种")
-        (holiday-solar-term "夏至" "夏至")
-        (holiday-solar-term "小暑" "小暑")
-        (holiday-solar-term "大暑" "大暑")
-        (holiday-solar-term "立秋" "立秋")
-        (holiday-solar-term "处暑" "处暑")
-        (holiday-solar-term "白露" "白露")
-        (holiday-solar-term "秋分" "秋分")
-        (holiday-solar-term "寒露" "寒露")
-        (holiday-solar-term "霜降" "霜降")
-        (holiday-solar-term "立冬" "立冬")
-        (holiday-solar-term "小雪" "小雪")
-        (holiday-solar-term "大雪" "大雪")
-        (holiday-solar-term "冬至" "冬至")
-        ))
-
-;; Key bindings for calendar.
-(define-key calendar-mode-map (kbd "M-f") 'calendar-forward-month)
-(define-key calendar-mode-map (kbd "M-b") 'calendar-backward-month)
-(global-set-key (kbd "C-c O") 'calendar)
-(global-set-key (kbd "C-c o") 'cfw:open-org-calendar)
+  :bind
+  ("C-c O" . calendar)
+  (:map calendar-mode-map
+        (("M-f" . calendar-forward-month)
+         ("M-b" . calendar-backward-month))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Export                            ;;;;
@@ -368,8 +373,7 @@ EXPORTER is provided by Org Mode."
 ;; Set it to NIL because super-agenda is used.
 (setq org-agenda-todo-ignore-scheduled nil)
 
-(use-package org-super-agenda
-  :ensure
+(use-package org-super-agenda :ensure
   :init
   (call-when-defined 'org-super-agenda-mode 1)
 
