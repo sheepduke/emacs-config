@@ -23,14 +23,20 @@
 (setq load-prefer-newer t)
 (require 'use-package)
 
+;; Set load path.
+(add-to-list 'load-path "~/.emacs.d/plugins/")
+(add-to-list 'load-path "~/.emacs.d/plugins/ebuild-mode/")
+(add-to-list 'load-path "~/.emacs.d/settings/")
+
 ;; Load custom plugins.
-(mapc 'load (directory-files "~/.emacs.d/settings/plugins/" t "^[a-zA-Z0-9].*.elc$"))
+(mapc 'load
+      (mapcar (lambda (filename) (file-name-base filename))
+              (directory-files "~/.emacs.d/plugins/" nil ".*.el$")))
 
 ;; Load settings.
 (mapc 'load
-      (mapcar (lambda (filename) (expand-file-name filename "~/.emacs.d/settings/"))
-              (cl-remove-if (lambda (filename) (string-equal (file-name-base filename) "init"))
-                            (directory-files "~/.emacs.d/settings/" nil "^[a-zA-Z0-9].*.elc$"))))
+      (mapcar (lambda (filename) (file-name-base filename))
+              (directory-files "~/.emacs.d/settings/" nil "^[a-zA-Z][0-9]-.*.el$")))
 
 ;; Start Emacs server.
 (server-start)

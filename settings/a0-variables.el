@@ -4,10 +4,6 @@
 
 ;;; Code:
 
-(defvar *settings-path* "~/.emacs.d/settings/")
-
-(defvar *plugins-path* (concat *settings-path* "plugins/"))
-
 (defvar *data-path* "~/.emacs.d/data/"
   "Location of Emacs data.")
 

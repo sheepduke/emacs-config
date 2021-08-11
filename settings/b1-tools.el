@@ -17,10 +17,7 @@
 (use-package ebuild-mode
   :mode "\\.use\\'"
   :mode "\\.mask\\'"
-  :mode "\\.unmask\\'"
-
-  :config
-  (add-to-list 'load-path (concat *plugins-path* "ebuild-mode")))
+  :mode "\\.unmask\\'")
 
 
 ;; Make undo like a tree.
