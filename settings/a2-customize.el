@@ -367,11 +367,16 @@ This works like Vim 'w!'."
   ;; Set the temporary directory.
   (flycheck-temp-prefix "/tmp/flycheck"))
 
-(use-package ispell
-  :functions (windows?)
 
-  :unless (and (windows?)
-               (not (executable-find "hunspell")))
+(use-package ispell
+  :custom
+  ;; Set the personal dictionary.
+  (ispell-personal-dictionary (concat *data-path* "aspell.en.pws")))
+
+
+(use-package ispell
+  :if (and (windows?)
+           (executable-find "hunspell"))
 
   :custom
   (ispell-program-name (executable-find "hunspell"))
@@ -384,11 +389,7 @@ This works like Vim 'w!'."
                                     nil
                                     nil
                                     nil
-                                    utf-8)))
-
-  ;; Set the personal dictionary.
-  (ispell-personal-dictionary (concat *data-path* "aspell.en.pws")))
-
+                                    utf-8))))
 
 
 ;; Do not use any GUI pinentry for GPG!
