@@ -86,7 +86,14 @@ Returns a boolean value indicating the result."
 (use-package notmuch
   :ensure
 
-  :preface
+  :functions (notmuch-search-get-tags
+              notmuch-search-tag
+              notmuch-tree-get-tags
+              notmuch-tree-tag
+              notmuch-show-get-tags
+              notmuch-show-tag)
+
+  :config
   (defun notmuch-mark-all-as-read ()
     "Mark all unread mails as read."
     (interactive)
@@ -113,30 +120,6 @@ Returns a boolean value indicating the result."
     (interactive)
     (notmuch-toggle-flagged #'notmuch-show-get-tags #'notmuch-show-tag))
 
-  :init
-  ;; The number of recent searches to display.
-  (setq notmuch-hello-recent-searches-max 10)
-  ;; Do not save to "sent" file
-  (setq notmuch-fcc-dirs nil)
-  ;; Show new emails first.
-  (setq notmuch-search-oldest-first nil)
-
-  ;; Set the saved searchers.
-  (setq notmuch-saved-searches
-        '((:name "Unread Gmail" :query "tag:unread AND tag:gmail")
-          (:name "Unread Other" :query "tag:unread AND NOT tag:gmail" :key "u")
-          (:name "Drafts" :query "tag:draft" :key "d")
-          (:name "Flagged" :query "tag:flagged" :key "f")
-          (:name "Gmail" :query "tag:gmail" :key "g")
-          (:name "Feed" :query "tag:feed")
-          (:name "Me" :query "tag:me")
-          (:name "Inbox" :query "tag:inbox" :key "i")
-          (:name "Ecnu" :query "tag:ecnu")
-          (:name "Gentoo User" :query "tag:gentoo-user")
-          (:name "Emacs User" :query "tag:emacs-user")
-          (:name "Emacs Devel" :query "tag:emacs-devel")
-          (:name "CL Cookbook" :query "tag:cl-cookbook")))
-
   (defun notmuch-hello-init-cursor-position ()
     "Move cursor place to the first position of saved searches."
     (if (and (eq (point) (point-min))
@@ -144,24 +127,46 @@ Returns a boolean value indicating the result."
         (progn
           (forward-line)
           (widget-forward 1))))
-      ;; (if (eq (widget-type (widget-at)) 'editable-field)
-      ;;     (beginning-of-line))))
-  (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-init-cursor-position)
 
-  :bind
-  ("C-c m" . notmuch)
-  (:map notmuch-hello-mode-map
-        ("g" . notmuch-refresh-this-buffer)
-        ("M r" . notmuch-mark-all-as-read))
-  (:map notmuch-search-mode-map
-        ("g" . notmuch-refresh-this-buffer)
-        ("f" . notmuch-search-toggle-flagged)
-        ("M r" . notmuch-mark-all-as-read))
-  (:map notmuch-tree-mode-map
-        ("f" . notmuch-tree-toggle-flagged))
-  (:map notmuch-show-mode-map
-        ("f" . notmuch-show-toggle-flagged)
-        ("C-c C-o" . browse-url-at-point)))
+  :hook (notmuch-hello-refresh . notmuch-hello-init-cursor-position)
+
+  :bind (("C-c m" . notmuch)
+         (:map notmuch-hello-mode-map
+               ("g" . notmuch-refresh-this-buffer)
+               ("M r" . notmuch-mark-all-as-read))
+         (:map notmuch-search-mode-map
+               ("g" . notmuch-refresh-this-buffer)
+               ("f" . notmuch-search-toggle-flagged)
+               ("M r" . notmuch-mark-all-as-read))
+         (:map notmuch-tree-mode-map
+               ("f" . notmuch-tree-toggle-flagged))
+         (:map notmuch-show-mode-map
+               ("f" . notmuch-show-toggle-flagged)
+               ("C-c C-o" . browse-url-at-point)))
+
+  :custom
+  ;; The number of recent searches to display.
+  (notmuch-hello-recent-searches-max 10)
+  ;; Do not save to "sent" file
+  (notmuch-fcc-dirs nil)
+  ;; Show new emails first.
+  (notmuch-search-oldest-first nil)
+
+  ;; Set the saved searchers.
+  (notmuch-saved-searches
+   '((:name "Unread Gmail" :query "tag:unread AND tag:gmail")
+     (:name "Unread Other" :query "tag:unread AND NOT tag:gmail" :key "u")
+     (:name "Drafts" :query "tag:draft" :key "d")
+     (:name "Flagged" :query "tag:flagged" :key "f")
+     (:name "Gmail" :query "tag:gmail" :key "g")
+     (:name "Feed" :query "tag:feed")
+     (:name "Me" :query "tag:me")
+     (:name "Inbox" :query "tag:inbox" :key "i")
+     (:name "Ecnu" :query "tag:ecnu")
+     (:name "Gentoo User" :query "tag:gentoo-user")
+     (:name "Emacs User" :query "tag:emacs-user")
+     (:name "Emacs Devel" :query "tag:emacs-devel")
+     (:name "CL Cookbook" :query "tag:cl-cookbook"))))
 
 
 ;;; f4-mail.el ends here

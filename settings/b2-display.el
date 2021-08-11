@@ -8,12 +8,6 @@
 ;;;;                            Fonts                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun font-exist-p (fontname)
-  "Test if given FONTNAME is exist or not."
-  (if (or (not fontname) (string= fontname ""))
-      nil
-    (if (not (x-list-fonts fontname)) nil t)))
-
 (defun set-font (english-font-list chinese-font-list size-pair)
   "Setup Emacs English and Chinese font on x window system.
 ENGLISH-FONT-LIST and CHINESE-FONT-LIST are lists of fonts.
@@ -68,15 +62,17 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Provide GNU screen like screen facility in Emacs.
 (use-package elscreen
-  :ensure
-  :init
-  ;; Don't display the tab on the top
-  (setq elscreen-display-tab nil)
-  (call-when-defined 'elscreen-start)
+  :ensure t
 
-  :bind
-  ("C-z \"" . elscreen-goto)
-  ("C-z '" . elscreen-select-and-goto))
+  :init
+  (elscreen-start)
+
+  :bind ("C-z \"" . elscreen-goto)
+         ("C-z '" . elscreen-select-and-goto)
+
+  :custom
+  ;; Don't display the tab on the top
+  (elscreen-display-tab nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Shackle                              ;;;;
@@ -84,25 +80,26 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Force window behavior.
 (use-package shackle
-  :ensure
-  :init
+  :ensure t
+  
+  :custom
   ;; one of below, above, left, right
-  (setq shackle-default-alignment 'below)
+  (shackle-default-alignment 'below)
   ;; Don't reuse windows by default.
-  (setq shackle-select-reused-windows nil)
+  (shackle-select-reused-windows nil)
   ;; Define shackle rules!
-  (setq shackle-rules
-		'(("*Bookmark List*" :select t :inhibit-window-quit t :same t)
-          ("*Calendar*" :select t :inhibit-window-quit nil :size 0.3 :align below)
-          ("Capture" :regexp t :select t :inhibit-window-quit t :same t)
-		  ("*Completions*" :select nil :inhibit-window-quit nil)
-		  ("*grep*" :select t)
-		  ("*Help*" :select t :inhibit-window-quit nil)
-          ("*slime-description*" :select t :inhibit-window-quit t :same t)
-		  ("*toc*" :select t :inhibit-window-quit t :same t :size 0.5)))
+  (shackle-rules
+   '(("*Bookmark List*" :select t :inhibit-window-quit t :same t)
+     ("*Calendar*" :select t :inhibit-window-quit nil :size 0.3 :align below)
+     ("Capture" :regexp t :select t :inhibit-window-quit t :same t)
+     ("*Completions*" :select nil :inhibit-window-quit nil)
+     ("*grep*" :select t)
+     ("*Help*" :select t :inhibit-window-quit nil)
+     ("*slime-description*" :select t :inhibit-window-quit t :same t)
+     ("*toc*" :select t :inhibit-window-quit t :same t :size 0.5)))
 
   :config
-  (call-when-defined 'shackle-mode))
+  (shackle-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -110,22 +107,21 @@ A dedicated window can't be switched or modified by some commands."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package delight
-  :ensure
-  :init
+  :ensure t
+  
+  :config
   ;; Disable auto-fill mode line.
-  (call-when-defined 'delight 'auto-fill-function "" t)
+  (delight 'auto-fill-function "" t)
 
   :config
-  (call-when-defined
-   'delight
-   '(;; Major modes
-	 (emacs-lisp-mode "ELisp" :major)
-	 ;; Globally enabled modes.
-	 (auto-revert-mode "" auto-revert)
-	 (autopair-mode "" autopair)
-	 (eldoc-mode "" eldoc)
-     ;; Dired
-     (dired-async-mode "" dired-async))))
+  (delight '(;; Major modes
+             (emacs-lisp-mode "ELisp" :major)
+             ;; Globally enabled modes.
+             (auto-revert-mode "" auto-revert)
+             (autopair-mode "" autopair)
+             (eldoc-mode "" eldoc)
+             ;; Dired
+             (dired-async-mode "" dired-async))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                           Tools                              ;;;;
@@ -133,36 +129,38 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Redo or undo window configuration.
 (use-package winner
-  :ensure
-  :bind
-  ("C-c w p" . winner-undo)
-  ("C-c w n" . winner-redo)
+  :ensure t
 
   :config
-  (call-when-defined 'winner-mode 1))
+  (winner-mode 1)
+
+  :bind (("C-c w p" . winner-undo)
+         ("C-c w n" . winner-redo)))
 
 
 ;; Fast switching windows.
 (use-package ace-window
-  :ensure
-  :init
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :ensure t
 
   :bind
-  ("M-o" . ace-window)
-  ("M-O" . ace-swap-window))
+  (("M-o" . ace-window)
+   ("M-O" . ace-swap-window))
+
+  :custom
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
 
 ;; Quickly move between windows like a agility snake.
 (use-package windmove
-  :ensure
-  :init
-  (setq windmove-wrap-around t)
-  
-  :bind
-  ("M-P" . windmove-up)
-  ("M-N" . windmove-down)
-  ("M-L" . windmove-right)
-  ("M-H" . windmove-left))
+  :ensure t
+
+  :bind (("M-P" . windmove-up)
+         ("M-N" . windmove-down)
+         ("M-L" . windmove-right)
+         ("M-H" . windmove-left))
+
+  :custom
+  (windmove-wrap-around t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Theme                             ;;;;
@@ -171,9 +169,7 @@ A dedicated window can't be switched or modified by some commands."
 (use-package tangotango-theme :ensure)
 (use-package ample-theme :ensure)
 (use-package moe-theme :ensure)
-(use-package spacemacs-common
-  :ensure spacemacs-theme
-  :defer t)
+(use-package spacemacs-common :ensure spacemacs-theme)
 (use-package kaolin-themes :ensure)
 
 ;;; b2-display.el ends here

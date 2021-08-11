@@ -28,8 +28,10 @@
 ;; Share the clipboard with the outside X world.
 (setq select-enable-clipboard t)
 
-;; Don't cycle through completions.
-(setq pcomplete-cycle-completions nil)
+(use-package pcomplete
+  :custom
+  ;; Don't cycle through completions.
+  (pcomplete-cycle-completions nil))
 
 ;; Fix the position of cursor while scrolling window.
 (setq scroll-preserve-screen-position t)
@@ -53,35 +55,42 @@
 ;; Force to use Unix UTF-8 coding system.
 (setq-default buffer-file-coding-system 'utf-8-unix)
 
+;; Set default directory.
 (setq-default default-directory (getenv "HOME"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Backup                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Control where to put backup files.
-(setq backup-by-copying t)
-(setq backup-directory-alist `(("." . ,*backup-dir*)))
-;; Don't delete the old version.
-(setq delete-old-versions t)
-(setq kept-new-versions 2)
-(setq kept-old-versions 4)
-;; Enable open control.
-(setq version-control t)
+(use-package files
+  :custom
+  ;; Control where to put backup files.
+  (backup-by-copying t)
+  (backup-directory-alist `(("." . ,*backup-dir*)))
 
-;; Don't ask me via dialog box!
-(setq use-dialog-box nil)
+  ;; Don't keep the outdated version.
+  (delete-old-versions t)
+  (kept-new-versions 2)
+  (kept-old-versions 4)
 
-;; Set the default tab width to 4.
-(setq-default tab-width 4)
-;; Always use space to do indention.
-(setq indent-tabs-mode nil)
+  ;; Enable open control.
+  (version-control t)
 
-;; Set bookmark file.
-(setq bookmark-default-file (concat *data-path* "bookmarks"))
-;; Save bookmark whenever it is changed.
-(setq bookmark-save-flag 1)
+  ;; Don't ask me via dialog box!
+  (use-dialog-box nil)
 
+  ;; Set the default tab width to 4.
+  (tab-width 4)
+  ;; Always use space to do indention.
+  (indent-tabs-mode nil))
+
+(use-package bookmark
+  :custom
+  ;; Set bookmark file.
+  (bookmark-default-file (concat *data-path* "bookmarks"))
+
+  ;; Save bookmark whenever it is changed.
+  (bookmark-save-flag 1))
 
 ;; Toggle on-the-fly re-indentation
 (electric-indent-mode)
@@ -92,20 +101,28 @@
 
 ;; Show column number.
 (column-number-mode 1)
+
 ;; Show line number.
 (line-number-mode 1)
+
 ;; Show matched parenthesis.
 (show-paren-mode 1)
+
 ;; Disable menu bar.
 (menu-bar-mode 0)
+
 ;; Disable tool bar.
 (tool-bar-mode 0)
+
 ;; Disable scroll bar.
-(call-when-defined 'scroll-bar-mode 0)
+(scroll-bar-mode 0)
+
 ;; Automatically revert modified buffer.
 (global-auto-revert-mode)
+
 ;; Save cursor place of file after exiting Emacs.
 (save-place-mode 1)
+
 ;; Disable vc-mode.
 (setq vc-handled-backends '())
 
@@ -113,24 +130,37 @@
 ;;;;                           Time                               ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Display time.
-(display-time-mode t)
-;; Set time format
-(setq display-time-format "(%Y/%m/%d %H:%M:%S)")
-;; Don't display load average
-(setq display-time-default-load-average nil)
-;; Use email icon to notify the new email.
-(setq display-time-use-mail-icon t)
-;; Refresh time every 1 second.
-(setq display-time-interval 1)
-(display-time)
+(use-package time
+  :custom
+  ;; Display time.
+  (display-time-mode t)
+
+  ;; Set time format
+  (display-time-format "(%Y/%m/%d %H:%M:%S)")
+
+  ;; Don't display load average
+  (display-time-default-load-average nil)
+
+  ;; Use email icon to notify the new email.
+  (display-time-use-mail-icon t)
+
+  ;; Refresh time every 1 second.
+  (display-time-interval 1)
+
+  :config
+  (display-time))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                           shell                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package eshell
-  :init
+  :defines (eshell-aliases-file
+            eshell-mode-map
+            *data-path*)
+  :functions (eshell-send-input)
+
+  :config
   (setq eshell-aliases-file (concat *data-path* "eshell-alias"))
 
   (defun eshell-clear-buffer ()
@@ -146,37 +176,36 @@ output."
     (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
     (setenv "PAGER" "/bin/cat"))
 
-  (add-hook 'eshell-mode-hook 'eshell-mode-setup))
+  :bind (("C-c s" . eshell)
+         (:map eshell-mode-map
+               ("C-M-l" . eshell-clear-buffer)))
 
-(add-to-list 'load-path (concat *plugins-path* "aweshell"))
-(use-package aweshell
-  :bind
-  ("C-c s" . aweshell-switch-buffer)
-  ("C-c S" . aweshell-new))
+  :hook (eshell-mode . eshell-mode-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Dired                               ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Dired
-(require 'dired)
-;; Human readable size display
-(setq dired-listing-switches "-alh")
-;; dired guesses the target directory
-(setq dired-dwim-target t)
+(use-package dired
+  :custom
+  ;; Human readable size display
+  (dired-listing-switches "-alh")
 
-(require 'dired-x)
-(setq dired-omit-files "^\\.?#\\|^\\.")
-(define-key dired-mode-map (kbd "h") 'dired-omit-mode)
+  ;; dired guesses the target directory
+  (dired-dwim-target t)
 
-(defun sudo-find-file (file-name)
-  "Open FILE-NAME like `find-file', but opens the file as root."
-  (interactive "FSudo Find File: ")
-  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
-    (find-file tramp-file-name)))
+  :bind (:map dired-mode-map
+              ("," . dired-kill-subdir)))
 
-(define-key dired-mode-map (kbd ",") 'dired-kill-subdir)
-(global-set-key (kbd "C-x M-f") 'sudo-find-file)
+(use-package dired-x
+  :after dired
+  
+  :custom
+  ;; Set omit regex in omit mode.
+  (setq dired-omit-files "^\\.?#\\|^\\.")
+
+  :bind (:map dired-mode-map
+              ("h" . dired-omit-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Commands                            ;;;;
@@ -233,20 +262,23 @@ This works like Vim 'w!'."
 ;;;;                            ediff                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Do not use frame!
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-;; Split window horizontally instead of vertically.
-(setq ediff-split-window-function 'split-window-horizontally)
+(use-package ediff
+  :custom
+  ;; Do not use frame!
+  (ediff-window-setup-function 'ediff-setup-windows-plain)
+
+  ;; Split window horizontally instead of vertically.
+  (ediff-split-window-function 'split-window-horizontally))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             eww                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package eww
-  :init
-  (setq eww-download-directory "~/downloads/")
-  (setq eww-bookmarks-directory (concat *data-path* "eww/"))
-  (setq browse-url-browser-function '((".*" . browse-url-default-browser))))
+  :custom
+  (eww-download-directory "~/downloads/")
+  (eww-bookmarks-directory (concat *data-path* "eww/"))
+  (browse-url-browser-function '((".*" . browse-url-default-browser))))
 
 (use-package eww-plus
   :after eww
@@ -263,6 +295,11 @@ This works like Vim 'w!'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package calendar
+  :bind (("C-c O" . calendar)
+         (:map calendar-mode-map
+               (("M-f" . calendar-forward-month)
+                ("M-b" . calendar-backward-month))))
+
   :custom
   ;; Use Chinese month name.
   (calendar-month-name-array ["一月" "二月" "三月" "四月" "五月" "六月"
@@ -319,45 +356,45 @@ This works like Vim 'w!'."
                        (holiday-solar-term "立冬" "立冬")
                        (holiday-solar-term "小雪" "小雪")
                        (holiday-solar-term "大雪" "大雪")
-                       (holiday-solar-term "冬至" "冬至")))
-
-  :bind
-  ("C-c O" . calendar)
-  (:map calendar-mode-map
-        (("M-f" . calendar-forward-month)
-         ("M-b" . calendar-backward-month))))
+                       (holiday-solar-term "冬至" "冬至"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Set the temporary directory.
-(setq flycheck-temp-prefix "/tmp/flycheck")
+(use-package flycheck
+  :custom
+  ;; Set the temporary directory.
+  (flycheck-temp-prefix "/tmp/flycheck"))
 
-(when (and (windows?)
-           (executable-find "hunspell"))
-  (setq ispell-program-name (executable-find "hunspell"))
-  (setq ispell-local-dictionary "en_US")
-  (setq ispell-hunspell-dict-paths-alist
-        '(("en_US" "c:/Hunspell/en_US.aff")))
-  (setq ispell-local-dictionary-alist '(("en_US"
-                                         "[[:alpha:]]"
-                                         "[^[:alpha:]]"
-                                         "[']"
-                                         nil
-                                         nil
-                                         nil
-                                         utf-8))))
+(use-package ispell
+  :functions (windows?)
 
-;; Set the personal dictionary.
-(setq ispell-personal-dictionary
-      (concat *data-path* "aspell.en.pws"))
+  :unless (and (windows?)
+               (not (executable-find "hunspell")))
+
+  :custom
+  (ispell-program-name (executable-find "hunspell"))
+  (ispell-local-dictionary "en_US")
+  (ispell-hunspell-dict-paths-alist '(("en_US" "c:/Hunspell/en_US.aff")))
+  (ispell-local-dictionary-alist '(("en_US"
+                                    "[[:alpha:]]"
+                                    "[^[:alpha:]]"
+                                    "[']"
+                                    nil
+                                    nil
+                                    nil
+                                    utf-8)))
+
+  ;; Set the personal dictionary.
+  (ispell-personal-dictionary (concat *data-path* "aspell.en.pws")))
+
+
 
 ;; Do not use any GUI pinentry for GPG!
-
-(if (< (emacs-version-main) 27)
-    (setq-default epa-pinentry-mode 'loopback)
-  (setq-default epg-pinentry-mode 'loopback))
+(use-package epg-config
+  :custom
+  (epa-pinentry-mode 'loopback))
 
 ;; Set the default method of tramp.
 (setq tramp-default-method "ssh")
@@ -373,23 +410,22 @@ This works like Vim 'w!'."
 (global-set-key (kbd "C-x H") 'copy-whole-buffer)
 
 (use-package master
-  :bind
-  (:map master-mode-map
-        ("C-c C-l" . master-set-slave)))
+  :bind (:map master-mode-map
+              ("C-c C-l" . master-set-slave)))
 
 (use-package webjump
-  :init
+  :defines (webjump-file)
+  :functions (webjump-setup)
+  
+  :config
   (require 'webjump-plus)
   (setq webjump-file (concat *data-path* "webjump.el"))
   (webjump-setup)
 
-  (global-set-key (kbd "C-c 1") 'webjump)
-  (global-set-key (kbd "C-c 2") 'webjump-add))
+  :bind (("C-c 1" . webjump)
+         ("C-c 2" . webjump-add)))
 
 (use-package linum
-  :hook
-  (text-mode . turn-linum-mode-on)
-  (fundamental-mode . turn-linum-mode-on)
-  (prog-mode . turn-linum-mode-on))
+  :hook ((text-mode fundamental-mode prog-mode) . linum-mode))
 
 ;;; a2-customize.el ends here

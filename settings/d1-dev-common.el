@@ -8,71 +8,69 @@
 ;;;;                          Company                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package company :ensure
-  :delight " CO"
-  
-  :preface
-  (cl-defun company-mode-setup-yasnippet (hook-name)
-    (setq company-backends
-          (mapcar (lambda (backend)
-                    (if (and (listp backend)
-                             (member 'company-yasnippet backend))
-                        backend
-                      (flatten-list `(,backend :with company-yasnippet))))
-                  company-backends)))
-
-  :init
-  ;; Make company mode complete immediately.
-  (setq company-idle-delay 0)
+(use-package company
+  :ensure t
 
   :bind
   (:map company-mode-map
-  		("<tab>" . company-indent-or-complete-common))
+        ("<tab>" . company-indent-or-complete-common))
 
   :hook
   ;; Enable company-mode for all programming languages.
-  (prog-mode . company-mode))
+  (prog-mode . company-mode)
+
+  :delight " CO"
+
+  :custom
+  ;; Make company mode complete immediately.
+  (company-idle-delay 0))
+
 
 (use-package company-quickhelp
-  :ensure
-  :init
-  (setq company-quickhelp-delay 0)
+  :ensure t
 
   :config
-  (call-when-defined 'company-quickhelp-mode 1))
+  (company-quickhelp-mode 1)
+
+  :custom
+  (company-quickhelp-delay 0))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         projectile                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package projectile
-  :ensure
-  :delight (projectile "")
-  
-  :init
-  ;; Offline SVN.
-  (setq projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
+  :ensure t
 
   :config
-  (call-when-defined 'projectile-mode 1))
+  (call-when-defined 'projectile-mode 1)
+
+  :custom
+  ;; Offline SVN.
+  (projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
+
+  :delight (projectile ""))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Yasnippet                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yasnippet
-  :ensure
-  :init
-  (setq yas-snippet-dirs (list (concat *data-path* "yasnippets")))
+  :ensure t
+
+  :config
+  (yas-global-mode 1)
 
   :bind
   (:map yas-keymap
         ("<tab>" . nil))
 
-  :config
-  (call-when-defined 'yas-global-mode 1)
+  :delight ""
 
-  :delight (yasnippet ""))
+  :custom
+  (yas-snippet-dirs (list (concat *data-path* "yasnippets"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -90,7 +88,9 @@
 ;;;;                        Spell Checking                        ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package flyspell :ensure
+(use-package flyspell
+  :ensure t
+  
   :config
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
@@ -102,53 +102,44 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package highlight-indent-guides
-  :ensure
-  :init
-  (setq highlight-indent-guides-method 'character)
-  ;; Set how obvious the indicator character is. Higher, more obvious.
-  (setq highlight-indent-guides-auto-character-face-perc 10)
+  :ensure t
 
-  :preface
+  :hook
+  (prog-mode . enable-highlight-indent-guides)
+
+  :config
   (defun enable-highlight-indent-guides ()
     "Conditionally enable highlight-indent-guides-mode when under X system."
     (when (x?)
       (highlight-indent-guides-mode 1)))
 
-  :hook
-  (prog-mode . enable-highlight-indent-guides)
+  :delight ""
 
-  :delight "")
+  :custom
+  (highlight-indent-guides-method 'character)
+  ;; Set how obvious the indicator character is. Higher, more obvious.
+  (highlight-indent-guides-auto-character-face-perc 10))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         HS Mode                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'hideshow)
 (use-package hideshow
-  :ensure
-  
   :hook
   (prog-mode . hs-minor-mode)
   
-  :bind
-  (:map hs-minor-mode-map
-        ("C-c h S" . hs-show-all)
-        ("C-c h H" . hs-hide-all)
-        ("C-c h h" . hs-toggle-hiding))
-
-  :delight (hideshow "HS"))
+  :bind (:map hs-minor-mode-map
+              ("C-c h S" . hs-show-all)
+              ("C-c h H" . hs-hide-all)
+              ("C-c h h" . hs-toggle-hiding)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package prog-mode
-  :bind
-  (:map prog-mode-map
-        ("<return>" . newline-smart-comment))
-
-  :hook
-  (prog-mode . turn-linum-mode-on))
+  :bind (:map prog-mode-map
+              ("<return>" . newline-smart-comment)))
 
 
 ;;; d1-dev-common.el ends here

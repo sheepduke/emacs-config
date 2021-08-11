@@ -6,27 +6,15 @@
 
 ;; When smex is installed, ivy will behave differently.
 (use-package smex
-  :ensure
+  :ensure t
+  
   :config
-  (call-when-defined 'smex-initialize))
+  (smex-initialize))
 
 (use-package ivy
-  :ensure
-  :init
-  ;; Add `recentf-mode' and bookmarks to `ivy-switch-buffer'.
-  (setq ivy-use-virtual-buffers t)
-  
-  ;; Number of result lines to display
-  (setq ivy-height 10)
-  
-  ;; Change the way ivy displays the count of alternatives.
-  (setq ivy-count-format "(%d/%d) ")
+  :ensure t
 
-  ;; Set regex engine for different scenario.
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-plus)))
-
-  ;; Enable Ivy mode.
+  :config
   (ivy-mode 1)
 
   :bind
@@ -54,13 +42,28 @@
         ("C-x 8 <return>" . counsel-unicode-char)
         ("C-c C-j" . counsel-outline))
 
-  :delight)
+  :delight
 
-(use-package ivy-rich :ensure
+  :custom
+  ;; Add `recentf-mode' and bookmarks to `ivy-switch-buffer'.
+  (ivy-use-virtual-buffers t)
+
+  ;; Number of result lines to display
+  (ivy-height 10)
+
+  ;; Change the way ivy displays the count of alternatives.
+  (ivy-count-format "(%d/%d) ")
+
+  ;; Set regex engine for different scenario.
+  (ivy-re-builders-alist '((t . ivy--regex-plus))))
+
+(use-package ivy-rich
+  :ensure t
   :config
   (ivy-rich-mode 1))
 
-(use-package counsel-projectile :ensure
+(use-package counsel-projectile
+  :ensure t
   :after projectile
 
   :bind

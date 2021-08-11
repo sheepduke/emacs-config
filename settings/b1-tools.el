@@ -7,105 +7,120 @@
 ;; This is built-in in Emacs 24 or something.
 ;; Used to automatically pair brackets.
 (use-package electric
-  :ensure
+  :ensure t
+  
   :config
-  (electric-pair-mode))
+  (electric-pair-mode 1))
 
 
 ;; Ebuild mode, for Gentoo users.
 (use-package ebuild-mode
   :mode "\\.use\\'"
   :mode "\\.mask\\'"
-  :mode "\\.unmask\\'")
+  :mode "\\.unmask\\'"
+
+  :config
+  (add-to-list 'load-path (concat *plugins-path* "ebuild-mode")))
 
 
 ;; Make undo like a tree.
-(use-package undo-tree :ensure
-  :init
-  ;; Show diffs when browsing through the undo tree
-  (setq undo-tree-visualizer-diff t)
-  ;; Don't show relative times in the undo tree visualizer
-  (setq undo-tree-visualizer-timestamps nil)
-  ;; Don't save history to a file
-  (setq undo-tree-auto-save-history nil)
-
-  :bind
-  ("C-/" . undo-tree-undo)
-  ("C-?" . undo-tree-redo)
-  ("C-x u" . undo-tree-visualize)
-
+(use-package undo-tree
+  :ensure t
   :delight
 
   :config
-  (call-when-defined 'global-undo-tree-mode))
+  (global-undo-tree-mode)
+
+  :bind (("C-/" . undo-tree-undo)
+         ("C-?" . undo-tree-redo)
+         ("C-x u" . undo-tree-visualize))
+
+  :custom
+  ;; Show diffs when browsing through the undo tree
+  (undo-tree-visualizer-diff t)
+
+  ;; Don't show relative times in the undo tree visualizer
+  (undo-tree-visualizer-timestamps nil)
+
+  ;; Don't save history to a file
+  (undo-tree-auto-save-history nil))
 
 
 ;; Replace the original doc-view for PDF files.
-(unless (windows?)
-  (use-package pdf-tools :ensure
-    :config
-    (call-when-defined 'pdf-tools-install)))
+(use-package pdf-tools
+  :ensure t
+  :functions (windows?)
+  :unless (windows?)
+
+  :config
+  (pdf-tools-install))
+
 
 ;; Open epub files.
 (use-package nov
-  :ensure
-  :init
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+  :ensure t
+
+  :mode ("\\.epub\\'" . nov-mode))
 
 
 ;; Edit multiple places at the same time.
 (use-package multiple-cursors
-  :ensure
-  :init
-  (setq mc/always-run-for-all t)
-  :bind
-  ("C-x r e" . mc/edit-lines))
+  :ensure t
+
+  :bind ("C-x r e" . mc/edit-lines)
+
+  :custom
+  (mc/always-run-for-all t))
 
 
 ;; It's Magit! Git inside Emacs.
 (use-package magit
-  :ensure
+  :ensure t
   :bind ("C-x v" . magit-status)
-  :config
-  (add-hook 'git-commit-mode-hook 'flyspell-mode))
+
+  :hook (git-commit-mode . flyspell-mode))
 
 
 ;; Jump to character from 2 leading chars.
 (use-package avy
-  :ensure
+  :ensure t
 
-  :init
+  :bind (("C-'" . avy-goto-char-timer)
+         ("M-g g" . avy-goto-line))
+
+  :custom
   ;; Set the timeout to a very short time.
-  (setq avy-timeout-seconds 0.2)
+  (avy-timeout-seconds 0.2)
   ;; Do not directly jump to the only candidate.
-  (setq avy-single-candidate-jump nil)
-
-  :bind
-  ("C-'" . avy-goto-char-timer)
-  ("M-g g" . avy-goto-line))
+  (avy-single-candidate-jump nil))
 
 
 ;; Automatically compile Emacs Lisp libraries
 (use-package auto-compile
-  :ensure
+  :ensure t
+  
   :config
-  (call-when-defined 'auto-compile-on-load-mode)
-  (call-when-defined 'auto-compile-on-save-mode))
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
 
 
 ;; Execute asynchronous commands.
 (use-package async
-  :ensure
-  :init
+  :ensure t
+
+  :config
   (dired-async-mode 1)
-  
+  (async-bytecomp-package-mode 1)
+
+  :custom
   ;; Compile packages asynchronously.
-  (setq async-bytecomp-allowed-packages '(all))
-  (async-bytecomp-package-mode 1))
+  (async-bytecomp-allowed-packages '(all)))
 
 
 ;; Built-in input method.
-(use-package rime :ensure
+(use-package rime
+  :ensure t
+  
   :custom
   ;; Set Rime as the default input method.
   (default-input-method "rime")
@@ -119,61 +134,63 @@
   ;; Use ibus Rime data.
   (rime-user-data-dir "~/.config/ibus/rime"))
 
+
 ;; Show Nyan cat in progress bar.
 (use-package nyan-mode
-  :ensure
-  :init
-  (setq nyan-bar-length 10)
+  :ensure t
+  :functions (nyan-start-animation)
   
   :config
-  (call-when-defined 'nyan-mode 1)
-  (call-when-defined 'nyan-start-animation))
+  (nyan-mode 1)
+  (nyan-start-animation)
+  
+  :custom
+  (nyan-bar-length 10))
 
 
 ;; Emacs interface for `cheat.sh'.
 (use-package cheat-sh
-  :ensure)
+  :ensure t)
 
 
 ;; Provides extra information for EShell prompt.
 (use-package eshell-prompt-extras
-  :ensure
-  :init
+  :ensure t
+
+  :custom
   ;; Setup prompt.
-  (setq eshell-highlight-prompt t
-        eshell-prompt-function 'epe-theme-lambda))
+  (eshell-highlight-prompt t)
+  (eshell-prompt-function 'epe-theme-lambda))
 
 
 ;; Disable font displaying effects when the lines are too long,
 (use-package so-long
-  :init
+  :custom
   ;; Set the max columns that will trigger so-long mode.
-  (setq so-long-threshold 500)
-
-  (add-to-list 'so-long-target-modes 'sql-mode)
+  (so-long-threshold 500)
+  
   :config
-  (so-long-enable))
+  (global-so-long-mode))
 
 
 ;; Toggle layout of 2 windows between vertical and horizontal.
 (use-package toggle-window-split
-  :bind
-  ("C-x *" . toggle-window-split))
+  :bind ("C-x *" . toggle-window-split))
 
 ;; Show hot keys when prefix keys are pressed.
 (use-package which-key
-  :ensure
-  :delight ""
-
-  :init
-  (setq which-key-idle-delay 0.5)
+  :ensure t
+  :delight
 
   :config
-  (which-key-mode 1))
+  (which-key-mode 1)
+
+  :custom
+  (which-key-idle-delay 0.5))
 
 ;; AutoHotkey mode.
 ;; Only for Windows.
-(when (windows?)
-  (use-package ahk-mode :ensure))
+(use-package ahk-mode
+  :ensure t)
 
 ;;; b1-tools.el ends here

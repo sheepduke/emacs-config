@@ -20,6 +20,28 @@
 |   |   |
 |---+---|")))
 
+  :config
+  ;; Enable bold, italic etc inside Chinese context.
+  (setf (nth 0 org-emphasis-regexp-components)
+        "-[:space:]('\"{[:multibyte:]")
+  (setf (nth 1 org-emphasis-regexp-components)
+        "-[:space:].,:!?;'\")}\\[[:multibyte:]")
+  (org-set-emph-re 'org-emphasis-regexp-components
+                   org-emphasis-regexp-components)
+
+  :hook
+  (org-mode . disable-truncate-lines)
+  (org-mode . flyspell-mode)
+
+  :bind (:map org-mode-map
+              ("C-'" . nil)
+              ("M-q" . org-fill-paragraph)
+              ("C-c C-," . org-promote-subtree)
+              ("C-c C-." . org-demote-subtree)
+              ("C-c C-l" . org-toggle-link-display)
+              ("C-c C-i" . org-mark-ring-goto)
+              ("C-<tab>" . org-force-cycle-archived))
+
   :custom
   ;; Set the default directory for all notes.
   (org-directory "~/notes/")
@@ -44,29 +66,7 @@
 
   ;; Always insert a new line before new item.
   (org-blank-before-new-entry '((heading . t)
-                                (plain-list-item . auto)))
-  
-  :init
-  ;; Enable bold, italic etc inside Chinese context.
-  (setf (nth 0 org-emphasis-regexp-components)
-        "-[:space:]('\"{[:multibyte:]")
-  (setf (nth 1 org-emphasis-regexp-components)
-        "-[:space:].,:!?;'\")}\\[[:multibyte:]")
-  (org-set-emph-re 'org-emphasis-regexp-components
-                   org-emphasis-regexp-components)
-
-  :hook
-  (org-mode . disable-truncate-lines)
-  (org-mode . flyspell-mode)
-
-  :bind-keymap
-  ("C-'" . nil)
-  ("M-q" . org-fill-paragraph)
-  ("C-c C-," . org-promote-subtree)
-  ("C-c C-." . org-demote-subtree)
-  ("C-c C-l" . org-toggle-link-display)
-  ("C-c C-i" . org-mark-ring-goto)
-  ("C-<tab>" . org-force-cycle-archived))
+                                (plain-list-item . auto))))
 
 ;; TODO move it to use-package.
 (defun org-mode-hook-function ()

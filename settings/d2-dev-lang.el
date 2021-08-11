@@ -9,9 +9,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package cc-mode
-  :ensure
+  :ensure t
 
-  :preface
+  :config
   (defun c/c++-mode-setup-company ()
 	(company-mode 1)
 	(make-local-variable 'company-backends)
@@ -23,7 +23,7 @@
 	(setq comment-start "//")
 	(setq comment-end ""))
 
-  :init  
+  ;; Add personal style.
   (c-add-style "sheep"
                '("stroustrup"
                  (c-basic-offset . 2)))
@@ -31,66 +31,71 @@
   ;; Use "sheep" coding style.
   (setq c-default-style "sheep")
 
-  :bind
-  (:map c++-mode-map
-		("C-c C-v" . compile)
-		("C-c C-b" . recompile)
-		:map c-mode-map
-		("C-c C-v" . compile)
-		("C-c C-b" . recompile))
-
-  :config
-  (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+  :mode ("\\.tpp\\'" . c++-mode)
 
   :hook
   (c++-mode . ggtags-mode)
   (c++-mode . c/c++-mode-setup-company)
-  (c-mode . c/c++-mode-setup-company))
+  (c-mode . c/c++-mode-setup-company)
+  
+  :bind (:map c++-mode-map
+              ("C-c C-v" . compile)
+              ("C-c C-b" . recompile)
+              :map c-mode-map
+              ("C-c C-v" . compile)
+              ("C-c C-b" . recompile)))
+
 
 (use-package cmake-mode
-  :ensure
+  :ensure t
   :mode "CMakeLists\\.txt\\'"
   :mode "\\.cmake\\'")
 
+
 ;; Add completion for C headers.
-(use-package company-c-headers :ensure)
+(use-package company-c-headers
+  :ensure t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Java                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package cc-mode
-  :preface
+(use-package java-mode
+  :hook
+  (java-mode . java-mode-setup)
+
+  :config
   (defun java-mode-setup ()
     "Setup Java mode."
-    (setq fill-column 120))
-  
-  :hook
-  (java-mode . java-mode-setup))
+    (setq fill-column 120)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Kotlin                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package kotlin-mode
-  :ensure)
+  :ensure t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Erlang                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package erlang
-  :ensure
-  
-  :init
-  ;; Set indentation level.
-  (setq erlang-indent-level 2)
+  :ensure t
+
+  :config
   (require 'erlang-start)
 
-  :bind
-  (:map erlang-mode-map
-        ("<f5>" . recompile)
-        ("C-<f5>" . compile)))
+  :bind (:map erlang-mode-map
+              ("<f5>" . recompile)
+              ("C-<f5>" . compile))
+
+  :custom
+  (erlang-indent-level 2))
+
 
 (use-package company-erlang
   :ensure
@@ -99,15 +104,18 @@
   (erlang-mode . company-mode)
   (erlang-mode . company-erlang-init))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Elixir                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package alchemist
-  :ensure
+  :ensure t
   :after elixir-mode
 
-  :preface
+  :functions (alchemist-iex-clear-buffer)
+
+  :config
   (defun alchemist-iex-send-buffer ()
     "Send current buffer."
     (interactive)
@@ -126,26 +134,30 @@
     (with-current-buffer alchemist-iex-buffer
       (alchemist-iex-clear-buffer)))
 
-  :bind
-  (:map alchemist-mode-map
-        ("C-c C-k" . alchemist-iex-compile-this-buffer)
-        ("C-c C-b" . alchemist-iex-send-buffer)
-        ("C-c C-r" . alchemist-iex-send-region)
-        ("C-x C-e" . alchemist-iex-send-last-sexp)
-        ("C-c C-c" . alchemist-iex-send-current-line)
-        ("C-c C-p" . alchemist-run-iex-dwim)
-        ("C-M-l" . alchemist-clear-buffer-anywhere)
-        ("M-P" . nil)
-        ("M-N" . nil)
-        ("M-." . nil)
-        ("C-c a" . nil))
-  
+  :bind (:map alchemist-mode-map
+              ("C-c C-k" . alchemist-iex-compile-this-buffer)
+              ("C-c C-b" . alchemist-iex-send-buffer)
+              ("C-c C-r" . alchemist-iex-send-region)
+              ("C-x C-e" . alchemist-iex-send-last-sexp)
+              ("C-c C-c" . alchemist-iex-send-current-line)
+              ("C-c C-p" . alchemist-run-iex-dwim)
+              ("C-M-l" . alchemist-clear-buffer-anywhere)
+              ("M-P" . nil)
+              ("M-N" . nil)
+              ("M-." . nil)
+              ("C-c a" . nil))
+
   :hook
   (elixir-mode . alchemist-mode)
   (alchemist-mode . flyspell-prog-mode))
 
-(use-package eglot :ensure
-  :preface
+
+(use-package eglot
+  :ensure t
+
+  :functions (eglot-format-buffer)
+
+  :config
   (defun elixir-get-lsp-server-path ()
     "Get LSP server path."
     (format "%s/software/elixir-ls/language_server.%s"
@@ -167,84 +179,91 @@
         (message "Found Elixir project root in '%s' starting from '%s'" mix_root dir)
         (if (stringp mix_root) `(transient . ,mix_root) nil))))
 
-  :config
   (add-to-list 'eglot-server-programs
                `(elixir-mode ,(elixir-get-lsp-server-path)))
-  (add-hook 'project-find-functions 'eglot-find-mix-project)
 
-  :bind
-  (:map eglot-mode-map
-        ("C-c C-d" . eldoc-doc-buffer))
+  (add-hook 'project-find-functions 'eglot-find-mix-project)
 
   :hook
   (elixir-mode . eglot-ensure)
-  (before-save . eglot-format-elixir-buffer))
+  (before-save . eglot-format-elixir-buffer)
 
-(use-package elixir-yasnippets :ensure)
+  :bind (:map eglot-mode-map
+              ("C-c C-d" . eldoc-doc-buffer)))
+
+
+(use-package elixir-yasnippets
+  :ensure t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Rust                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package rust-mode
-  :ensure
-  
-  :preface
+  :ensure t
+
+  :config
   (defun rust-mode-setup ()
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
-		 "cargo test"))
+         "cargo test"))
 
-  :init
-  ;; Format rust code before save.
-  (setq rust-format-on-save t)
+  :hook
+  (rust-mode . rust-mode-setup)
 
   :bind
   (:map rust-mode-map
         ("C-c C-b" . recompile)
         ("C-c C-v" . compile))
 
-  :hook
-  ((rust-mode . rust-mode-setup)))
+  :custom
+  ;; Format rust code before save.
+  (rust-format-on-save t))
+
 
 (use-package cargo
-  :ensure
+  :ensure t
   
   :hook
   (rust-mode . cargo-minor-mode))
 
+
 (use-package racer
-  :ensure
+  :ensure t
   
   :hook
   (rust-mode . racer-mode)
   (rust-mode . eldoc-mode))
 
+
 (use-package flycheck-rust
-  :ensure
+  :ensure t
   
   :hook
   (flycheck-mode . flycheck-rust-setup))
 
+
 (use-package company-racer
-  :ensure
-  
-  :preface
-  (defun company-racer-setup ()
-	(make-local-variable 'company-backends)
-	(setq company-backends '((company-racer :with company-yasnippet))))
+  :ensure t
 
   :hook
-  (rust-mode . company-racer-setup))
+  (rust-mode . company-racer-setup)
+
+  :config
+  (defun company-racer-setup ()
+    (make-local-variable 'company-backends)
+    (setq company-backends '((company-racer :with company-yasnippet)))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                       Common Lisp                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package sly
-  :ensure
-  
-  :preface
+  :ensure t
+
+  :config
   (defun sly-repl-clear-buffer-anywhere ()
     "Clear Sly buffer from anywhere."
     (interactive)
@@ -256,16 +275,17 @@
         (call-when-defined 'sly-mrepl-clear-repl)
         (goto-char (point-max)))))
 
-  :init
-  ;; set common lisp REPL
-  (setq inferior-lisp-program "ros run")
-  ;; Use classic completion style.
-  (setq sly-complete-symbol-function 'sly-flex-completions)
-
-  (push 'sly-repl-ansi-color sly-contribs)
-
   ;; Set the location of HyperSpec.
   (load "~/.roswell/lisp/quicklisp/clhs-use-local.el" t)
+
+  :custom
+  ;; set common lisp REPL
+  (inferior-lisp-program "ros run")
+
+  ;; Use classic completion style.
+  (sly-complete-symbol-function 'sly-flex-completions)
+
+  :hook (lisp-mode . sly-editing-mode)
   
   :bind
   (:map sly-mode-map
@@ -275,34 +295,36 @@
         ("C-c C-l" . sly-eval-defun)
         ("C-c C-p" . sly-eval-print-last-expression)
         ("C-c C-d d" . hyperspec-lookup)
-        ("C-M-l" . sly-repl-clear-buffer-anywhere))
+        ("C-M-l" . sly-repl-clear-buffer-anywhere)))
 
-  :hook
-  (lisp-mode . sly-editing-mode))
 
-(use-package sly-repl-ansi-color :ensure)
+(use-package sly-repl-ansi-color
+  :ensure t)
 
-(use-package lispy :ensure
-  :bind
-  (:map lispy-mode-map
-        ("M-o" . nil))
 
-  :hook
-  (emacs-lisp-mode . lispy-mode)
-  (lisp-mode . lispy-mode))
+(use-package lispy
+  :ensure t
+  :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
+
+  :bind (:map lispy-mode-map
+              ("M-o" . nil))
+
+  :config
+  (push 'sly-repl-ansi-color sly-contribs))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Emacs Lisp                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package elisp-mode
+  :hook
+  (emacs-lisp-mode . eldoc-mode)
+
   :bind
   (:map emacs-lisp-mode-map
         ("C-c C-r" . eval-region)
-		("C-c C-b" . eval-buffer))
-
-  :hook
-  (emacs-lisp-mode . eldoc-mode))
+        ("C-c C-b" . eval-buffer)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -310,26 +332,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package cider
-  :ensure
-  
-  :preface
+  :ensure t
+
+  :config
   (defun cider-eval-buffer-content ()
     "Eval buffer content without having to save it."
     (interactive)
     (call-when-defined 'cider-eval-region (point-min) (point-max)))
-  
-  :bind
-  (:map cider-mode-map
-        ("C-c C-b" . cider-eval-buffer-content)
-        ("C-c C-r" . cider-eval-region)
-        ("C-c C-l" . cider-eval-defun-at-point)
-        ("C-c C-k" . cider-interrupt)
-        ("C-M-l" . cider-find-and-clear-repl-output))
-  (:map cider-repl-mode-map
-        ("C-M-l" . cider-repl-clear-buffer))
 
-  :hook
-  (clojure-mode . cider-mode))
+  :hook (clojure-mode . cider-mode)
+
+  :bind ((:map cider-mode-map
+               ("C-c C-b" . cider-eval-buffer-content)
+               ("C-c C-r" . cider-eval-region)
+               ("C-c C-l" . cider-eval-defun-at-point)
+               ("C-c C-k" . cider-interrupt)
+               ("C-M-l" . cider-find-and-clear-repl-output))
+         (:map cider-repl-mode-map
+               ("C-M-l" . cider-repl-clear-buffer))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -337,24 +357,33 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package geiser
-  :ensure
-  
-  :init
-  ;; Set racket to be the only implementation.
-  (setq geiser-active-implementations '(racket))
-  ;; Don't record duplicated command in history.
-  (setq geiser-repl-history-no-dups-p t)
+  :ensure t
 
   :hook
   (geiser-mode . disable-company-quickhelp-mode)
-  (scheme-mode . geiser-mode))
+  (scheme-mode . geiser-mode)
+
+  :custom
+  ;; Set racket to be the only implementation.
+  (geiser-active-implementations '(racket))
+  ;; Don't record duplicated command in history.
+  (geiser-repl-history-no-dups-p t))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                           Haskell                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package haskell-mode :ensure
-  :preface
+(use-package haskell-mode
+  :ensure t
+  
+  :defines (interactive-haskell-mode-map
+            haskell-interactive-mode-map)
+  :functions (haskell-session-interactive-buffer
+              haskell-interactive-handle-expr
+              haskell-interactive-copy-to-prompt)
+  
+  :config
   (defun interactive-haskell-do-eval ()
     "Evaluate the current expression in Haskell REPL."
     (with-current-buffer (haskell-session-interactive-buffer (haskell-session))
@@ -366,51 +395,56 @@
     (haskell-interactive-copy-to-prompt)
     (interactive-haskell-do-eval))
 
-  :init
-  (require 'haskell)
+  :hook (haskell-mode . interactive-haskell-mode)
 
-  :bind
-  (:map interactive-haskell-mode-map
-        ("C-c C-c" . interactive-haskell-eval-current-line)
-        ("C-M-l" . haskell-interactive-mode-clear))
-  (:map haskell-interactive-mode-map
-        ("C-c C-b" . haskell-interactive-switch-back)
-        ("C-M-l" . haskell-interactive-mode-clear))
-  :hook
-  (haskell-mode . interactive-haskell-mode))
+  :bind ((:map interactive-haskell-mode-map
+               ("C-c C-c" . interactive-haskell-eval-current-line)
+               ("C-M-l" . haskell-interactive-mode-clear))
+         (:map haskell-interactive-mode-map
+               ("C-c C-b" . haskell-interactive-switch-back)
+               ("C-M-l" . haskell-interactive-mode-clear))))
 
-(use-package hindent :ensure
-  :preface
+
+
+(use-package hindent
+  :ensure t
+
+  :config
   (defun my-setup-hindent-mode ()
     "Setup HIndent mode."
     (hindent-mode 1))
 
-  :init
-  (setq hindent-reformat-buffer-on-save t)
-  
-  :hook
-  (haskell-mode . my-setup-hindent-mode))
+  :hook (haskell-mode . my-setup-hindent-mode)
+
+  :custom
+  (hindent-reformat-buffer-on-save t))
+
 
 ;; FlyCheck setup.
 ;; 
-(use-package flycheck-haskell :ensure
-  :preface
+(use-package flycheck-haskell
+  :ensure t
+
+  :hook
+  (haskell-mode . my-flycheck-haskell-setup)
+
+  :config
   (defun my-flycheck-haskell-setup ()
     "Setup FlyCheck mode for Haskell."
     (flycheck-haskell-setup)
     (setq flycheck-check-syntax-automatically '(idle-change))
-    (setq flycheck-idle-change-delay 1))
+    (setq flycheck-idle-change-delay 1)))
 
-  :hook
-  (haskell-mode . my-flycheck-haskell-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               OCaml                              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Major mode for editing OCaml files.
-(use-package tuareg :ensure
-  :preface
+(use-package tuareg
+  :ensure t
+  
+  :config
   (defun tuareg-insert-comment-block ()
     (interactive)
     (let* ((comment (read-string "Comment: "))
@@ -425,72 +459,83 @@
                               (make-string space-after-comment ?\s))
                       comment-line)))))
 
+
 ;;; Auto completion and more.
-(use-package merlin :ensure
+(use-package merlin
+  :ensure t
   :after tuareg
-  
-  :hook
-  (tuareg-mode . merlin-mode))
+
+  :hook (tuareg-mode . merlin-mode))
+
 
 ;; Consistent indentation.
-(use-package ocp-indent :ensure
+(use-package ocp-indent
+  :ensure t
   :after tuareg
 
-  :preface
+  :functions (ocp-indent-buffer)
+
+  :config
   (defun ocp-indent-tuareg-buffer ()
     "Indent buffer only when it is in tuareg mode."
     (interactive)
     (when (equal major-mode 'tuareg-mode)
       (ocp-indent-buffer)))
-  
+
   :hook
   (tuareg-mode . ocp-setup-indent)
   (before-save . ocp-indent-tuareg-buffer))
 
+
 ;;; Type tips.
-(use-package merlin-eldoc :ensure
+(use-package merlin-eldoc
+  :ensure t
   :after merlin
-  
-  :hook
-  (tuareg-mode . merlin-eldoc-setup))
+
+  :hook (tuareg-mode . merlin-eldoc-setup))
+
 
 ;;; Build system.
-(use-package dune :ensure)
+(use-package dune
+  :ensure t)
 
-(use-package utop :ensure
+
+(use-package utop
+  :ensure t
   :after tuareg
 
-  :hook
-  (tuareg-mode . utop-minor-mode))
+  :hook (tuareg-mode . utop-minor-mode))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Julia                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package julia-mode
-  :ensure
-  
-  :preface
+  :ensure t
+
+  :config
   (defun julia-mode-setup ()
     "Setup Julia mode."
     ;; Set fill column.
     (setq fill-column 92)
     ;; Set company source.
     (make-local-variable 'company-backends)
-	(setq company-backends
-		  '(company-dabbrev :with 'company-yasnippet)))
-  :init
-  ;; Set indentation level.
-  (setq julia-indent-offset 4)
+    (setq company-backends
+          '(company-dabbrev :with 'company-yasnippet)))
 
-  :hook
-  (julia-mode . julia-mode-setup))
+  :hook (julia-mode . julia-mode-setup)
+
+  :custom
+  ;; Set indentation level.
+  (julia-indent-offset 4))
+
   
 (use-package julia-repl
-  :ensure
+  :ensure t
   :after julia-mode
 
-  :preface
+  :config
   (defun julia-repl-send-buffer-content ()
     "Send buffer to Julia REPL."
     (interactive)
@@ -516,26 +561,25 @@
     (forward-line -1)
     (end-of-line))
 
-  :bind
-  (:map julia-mode-map
-        ("C-<return>" . julia-newline-with-end)
-        ("C-c r" . julia-repl-send-region-or-line)
-        ("C-c b" . julia-repl-send-buffer-content)
-        ("C-c C-c" . julia-repl-send-line-content)))
+  :bind (:map julia-mode-map
+              ("C-<return>" . julia-newline-with-end)
+              ("C-c r" . julia-repl-send-region-or-line)
+              ("C-c b" . julia-repl-send-buffer-content)
+              ("C-c C-c" . julia-repl-send-line-content)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Web                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package web-mode
-  :ensure
-  
+  :ensure t
+
   :mode "\\.html\\'"
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
   :mode "\\.vue\\'"
 
-  :preface
+  :config
   (defun web-mode-setup ()
     (setq web-mode-comment-formats
           '(("java" . "/*")
@@ -543,117 +587,125 @@
             ("php" . "/*")
             ("css" . "/*"))))
 
-  :init
-  ;; Set offset to 2.
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-indent-style 2)
-  
-  ;; Set padding to 0.
-  (setq web-mode-script-padding 0)
-  (setq web-mode-part-padding 0)
-  (setq web-mode-style-padding 0)
-  (setq css-indent-offset 2)
-
   (flycheck-add-mode 'javascript-eslint 'web-mode)
 
   :hook
-  (web-mode . web-mode-setup))
+  (web-mode . web-mode-setup)
+
+  :custom
+  ;; Set offset to 2.
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2)
+  (web-mode-indent-style 2)
+
+  ;; Set padding to 0.
+  (web-mode-script-padding 0)
+  (web-mode-part-padding 0)
+  (web-mode-style-padding 0)
+  (css-indent-offset 2))
+
 
 (use-package emmet-mode
-  :ensure
-
-  :bind
-  (:map emmet-mode-keymap
-        ("C-j" . emmet-expand-line)
-        ("C-M-j" . emmet-expand-yas))
+  :ensure t
 
   :hook
-  (web-mode . emmet-mode))
+  (web-mode . emmet-mode)
+
+  :bind (:map emmet-mode-keymap
+              ("C-j" . emmet-expand-line)
+              ("C-M-j" . emmet-expand-yas)))
+
 
 (use-package company-web
-  :ensure)
+  :ensure t)
+
 
 (use-package rainbow-mode
-  :ensure
+  :ensure t
   :after web-mode
-  
-  :hook
-  (web-mode . rainbow-mode))
+
+  :hook (web-mode . rainbow-mode))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         JavaScript                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package js2-mode
-  :ensure
-  
-  :preface
+  :ensure t
+
+  :config
   (defun setup-js2-mode ()
     (when (equal major-mode 'js-mode)
       (call-when-defined 'js2-minor-mode)))
 
-  :init
+  :hook (js-mode . setup-js2-mode)
+
+  :custom
   ;; Set indent to 2.
-  (setq js-indent-level 2)
+  (js-indent-level 2)
   ;; Do not warn me for missing ';'.
-  (setq js2-strict-missing-semi-warning nil)
+  (js2-strict-missing-semi-warning nil)
 
-  (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(javascript-jshint json-jsonlist)))
+  (flycheck-disabled-checkers (append flycheck-disabled-checkers
+                                      '(javascript-jshint json-jsonlist))))
 
-  :hook
-  (js-mode . setup-js2-mode))
 
-(use-package typescript-mode :ensure
-  :init
-  (setq typescript-indent-level 2))
+(use-package typescript-mode
+  :ensure t
+  
+  :custom
+  (typescript-indent-level 2))
+
 
 ;; IDE for JavaScript.
 (use-package tide
-  :ensure
+  :ensure t
 
-  :hook
-  ((typescript-mode . tide-setup)
-   (typescript-mode . tide-hl-identifier-mode)
-   (js-mode . tide-setup)
-   (js-mode . tide-hl-identifier-mode)))
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (js-mode . tide-setup)
+         (js-mode . tide-hl-identifier-mode)))
+
 
 ;; REPL for JavaScript.
 (use-package js-comint
-  :ensure
+  :ensure t
 
-  :init
-  (setq js-comint-prompt "==> ")
+  :bind (:map js-mode-map
+              ("C-x C-e" . js-comint-send-last-sexp)
+              ("C-c C-r" . js-comint-send-region)
+              ("C-c C-b" . js-comint-send-buffer)
+              ("C-M-l" . js-comint-clear))
 
-  :bind
-  (:map js-mode-map
-        ("C-x C-e" . js-comint-send-last-sexp)
-        ("C-c C-r" . js-comint-send-region)
-        ("C-c C-b" . js-comint-send-buffer)
-        ("C-M-l" . js-comint-clear)))
+  :custom
+  (js-comint-prompt "==> "))
+
 
 ;; REPL for TypeScript.
 ;; First install the REPL via ~npm install -g tsun~.
-(use-package ts-comint :ensure
-  :preface
+(use-package ts-comint
+  :ensure t
+  
+  :config
   (defun ts-comint-clear ()
     "Clear the TypeScript REPL buffer."
     (interactive)
     (with-current-buffer ts-comint-buffer
       (erase-buffer)))
 
-  :bind
-  (:map typescript-mode-map
-        ("C-x C-e" . ts-send-last-sexp)
-        ("C-c C-r" . ts-send-region)
-        ("C-c C-b" . ts-send-buffer)
-        ("C-M-l" . ts-comint-clear)))
+  :bind (:map typescript-mode-map
+              ("C-x C-e" . ts-send-last-sexp)
+              ("C-c C-r" . ts-send-region)
+              ("C-c C-b" . ts-send-buffer)
+              ("C-M-l" . ts-comint-clear)))
 
-(use-package flycheck :ensure
-  :preface
+
+(use-package flycheck
+  :ensure t
+
+  :config
   (defun flycheck-use-local-eslint ()
     (let* ((root (locate-dominating-file
                   (or (buffer-file-name) default-directory)
@@ -664,36 +716,38 @@
       (when (and eslint (file-executable-p eslint))
         (setq-local flycheck-javascript-eslint-executable eslint))))
 
-  :hook
-  (flycheck-mode . flycheck-use-local-eslint))
+  :hook (flycheck-mode . flycheck-use-local-eslint))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Python                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package python
-  :ensure
+  :ensure t
   
-  :init
+  :custom
   ;; Use Python 3 instead of Python 2.
-  (setq python-shell-interpreter "python3")
-  (setq flycheck-python-pycompile-executable "python3"))
+  (python-shell-interpreter "python3")
+  (flycheck-python-pycompile-executable "python3"))
+
 
 ;; For setup elpy, run:
 ;; pip install jedi flake8 autopep8
 (use-package elpy
-  :ensure
+  :ensure t
   :after python
 
-  :preface
+  :config
   (defun elpy-shell-send-current-line ()
     "Send current line to Python shell."
     (interactive)
-    (call-when-defined 'python-shell-send-string (thing-at-point 'line)))
+    (python-shell-send-string (thing-at-point 'line)))
 
-  :init
-  (setq elpy-rpc-python-command "python3")
-  (call-when-defined 'elpy-enable)
+  (elpy-enable)
+
+  :hook
+  (elpy-mode . (lambda () (highlight-indentation-mode -1)))
 
   :bind
   (:map elpy-mode-map
@@ -702,70 +756,69 @@
         ("C-c C-b" . elpy-shell-send-region-or-buffer)
         ("C-c C-c" . elpy-shell-send-current-line))
 
-  :hook
-  (elpy-mode . (lambda () (highlight-indentation-mode -1))))
+  :custom
+  (elpy-rpc-python-command "python3"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Ruby                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package ruby-mode
-  :ensure
-  
-  :preface
+  :ensure t
+
+  :config
   (defun ruby-insert-end ()
-	"Insert `end' accordingly."
-	(interactive)
-	(let ((text (save-excursion
-				  (forward-line 0)
-				  (if (looking-at "^[ \t]*$")
-					  "end"
-					(if (looking-at ".*{[^}]*$")
-						"\n}"
-					  "\nend")))))
-	  (insert text)
-	  (indent-region (line-beginning-position)
-					 (line-end-position))))
-  
-  :bind
-  (:map ruby-mode-map
-		("C-c C-f" . ruby-insert-end)
-		("C-c b" . ruby-send-buffer)))
+    "Insert `end' accordingly."
+    (interactive)
+    (let ((text (save-excursion
+                  (forward-line 0)
+                  (if (looking-at "^[ \t]*$")
+                      "end"
+                    (if (looking-at ".*{[^}]*$")
+                        "\n}"
+                      "\nend")))))
+      (insert text)
+      (indent-region (line-beginning-position)
+                     (line-end-position))))
+
+  :bind (:map ruby-mode-map
+              ("C-c C-f" . ruby-insert-end)
+              ("C-c b" . ruby-send-buffer)))
+
 
 (use-package inf-ruby
-  :ensure
-  
-  :preface
+  :ensure t
+
+  :config
   (defun inf-ruby-restart (&optional impl)
-	(interactive)
-	(catch 'return
-	  ;; If ruby buffer does not exist, just start a new one.
-	  (unless (and inf-ruby-buffer
-				   (buffer-name inf-ruby-buffer))
+    (interactive)
+    (catch 'return
+      ;; If ruby buffer does not exist, just start a new one.
+      (unless (and inf-ruby-buffer
+                   (buffer-name inf-ruby-buffer))
         (call-when-defined 'inf-ruby)
-		(throw 'return nil))
-	  ;; If ruby buffer exists, kill current ruby process and
-	  ;; start a new one in same window position.
-	  (with-selected-window (get-buffer-window inf-ruby-buffer)
-		(kill-buffer inf-ruby-buffer)
-		(setq inf-ruby-buffer nil)
-		(let ((config (current-window-configuration)))
+        (throw 'return nil))
+      ;; If ruby buffer exists, kill current ruby process and
+      ;; start a new one in same window position.
+      (with-selected-window (get-buffer-window inf-ruby-buffer)
+        (kill-buffer inf-ruby-buffer)
+        (setq inf-ruby-buffer nil)
+        (let ((config (current-window-configuration)))
           (call-when-defined 'inf-ruby)
-		  (set-window-configuration config))
-		(switch-to-buffer inf-ruby-buffer)))
-	(message "inf-ruby process restarted. Happy hacking!"))
+          (set-window-configuration config))
+        (switch-to-buffer inf-ruby-buffer)))
+    (message "inf-ruby process restarted. Happy hacking!"))
 
-  :bind
-  (:map inf-ruby-minor-mode-map
-		("C-c C-s" . inf-ruby-restart))
+  :hook (ruby-mode . inf-ruby-minor-mode)
 
-  :hook
-  (ruby-mode . inf-ruby-minor-mode))
+  :bind (:map inf-ruby-minor-mode-map
+              ("C-c C-s" . inf-ruby-restart)))
+
 
 (use-package company-inf-ruby
-  :ensure
+  :ensure t
   
-  :init
+  :config
   (add-to-list 'company-backends 'company-inf-ruby)
 
   :hook
@@ -777,9 +830,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package go-mode
-  :ensure
-  
-  :preface
+  :ensure t
+
+  :config
   (defun optimize-and-save ()
     (interactive)
     (call-when-defined 'gofmt)
@@ -787,19 +840,19 @@
     (call-when-defined 'go-remove-unused-imports nil)
     (save-buffer-readonly))
 
-  :bind
-  (:map go-mode-map
-        ("C-x C-s" . optimize-and-save)))
+  :bind (:map go-mode-map
+              ("C-x C-s" . optimize-and-save)))
+
 
 (use-package go-eldoc
-  :ensure
+  :ensure t
   :after go-mode
 
-  :hook
-  (go-mode . go-eldoc-setup))
+  :hook (go-mode . go-eldoc-setup))
+
 
 (use-package company-go
-  :ensure
+  :ensure t
   :after go-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -807,74 +860,73 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package latex
-  :preface
+  :config
   (defun LaTeX-mode-setup ()
-	"Hook function for LaTeX mode."
-	;; Enable auto-fill.
-	(auto-fill-mode)
-	;; Disable flycheck mode.
-	(call-when-defined flycheck-mode -1)
-	;; Enable toc viewer.
-	(turn-on-reftex)
-	;; Stop using default completion.
-	(setq completion-at-point-functions 'complete-or-indent))
-  
-  :init
-  ;; Add Chinese support.
-  (setq pdf-latex-command "xelatex")
-  ;; Automatically save the style.
-  (setq TeX-auto-save t)
-  ;; Parse file after loading.
-  (setq TeX-parse-self t)
-  ;; Don't ask me if I want to save.
-  (setq TeX-save-query nil)
-  ;; Enable all the features of LaTeX mode.
-  (setq LaTeX-section-hook '(LaTeX-section-heading
-							 LaTeX-section-title
-							 LaTeX-section-toc
-							 LaTeX-section-section
-							 LaTeX-section-label))
+    "Hook function for LaTeX mode."
+    ;; Enable auto-fill.
+    (auto-fill-mode)
+    ;; Disable flycheck mode.
+    (call-when-defined flycheck-mode -1)
+    ;; Enable toc viewer.
+    (turn-on-reftex)
+    ;; Stop using default completion.
+    (setq completion-at-point-functions 'complete-or-indent))
 
-  :hook
-  (LaTeX-mode . LaTeX-mode-setup))
+  :hook (LaTeX-mode . LaTeX-mode-setup)
+
+  :custom
+  ;; Add Chinese support.
+  (pdf-latex-command "xelatex")
+  ;; Automatically save the style.
+  (TeX-auto-save t)
+  ;; Parse file after loading.
+  (TeX-parse-self t)
+  ;; Don't ask me if I want to save.
+  (TeX-save-query nil)
+  ;; Enable all the features of LaTeX mode.
+  (LaTeX-section-hook '(LaTeX-section-heading
+                        LaTeX-section-title
+                        LaTeX-section-toc
+                        LaTeX-section-section
+                        LaTeX-section-label)))
 
 
 (use-package latex-preview-pane
-  :ensure
+  :ensure t
 
-  :bind
-  (:map latex-preview-pane-mode-map
-		("M-P" . nil))
+  :bind (:map latex-preview-pane-mode-map
+              ("M-P" . nil))
 
   :delight " Pane")
 
-(use-package reftex-toc
-  :ensure
 
-  :init
-  ;; Enable on-the-fly table-of-content.
-  (setq reftex-plug-into-AUCTeX t)
+(use-package reftex-toc
+  :ensure t
 
   :bind (:map reftex-toc-mode-map
-			  ("q" . delete-window))
+              ("q" . delete-window))
 
-  :delight (reftex ""))
+  :delight (reftex "")
+
+  :custom
+  ;; Enable on-the-fly table-of-content.
+  (reftex-plug-into-AUCTeX t))
+
 
 (use-package company-auctex
-  :ensure
-  
-  :preface
-  (defun LaTeX-mode-setup-company ()
-	(make-local-variable 'company-backends)
-	(setq company-backends '(company-dabbrev company-auctex-bibs
-											 (company-auctex-macros
-											  company-auctex-symbols
-											  company-auctex-environments)))
-	;; Disable idle completion.
-	(set (make-local-variable 'company-idle-delay) nil))
+  :ensure t
 
-  :hook
-  (LaTeX-mode . LaTeX-mode-setup-company))
+  :custom
+  (defun LaTeX-mode-setup-company ()
+    (make-local-variable 'company-backends)
+    (setq company-backends '(company-dabbrev company-auctex-bibs
+                                             (company-auctex-macros
+                                              company-auctex-symbols
+                                              company-auctex-environments)))
+    ;; Disable idle completion.
+    (set (make-local-variable 'company-idle-delay) nil))
+
+  :hook (LaTeX-mode . LaTeX-mode-setup-company))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -882,9 +934,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package markdown-mode
-  :ensure
+  :ensure t
 
-  :preface
+  :config
   (defun markdown-mode-setup ()
     (add-hook 'after-save-hook 'markdown-live-preview-w3m-reload))
 
@@ -902,65 +954,65 @@
                (get-buffer "*w3m*"))
       (call-when-defined 'w3m-reload-all-pages)))
 
-  :init
+  :custom
   ;; Use pandoc as markdown generator.
-  (setq markdown-command "pandoc")
-  ;; Use w3m to preview markdown.
-  (setq markdown-live-preview-window-function
-        'markdown-live-preview-window-w3m)
-  (add-to-list 'browse-url-browser-function
-               '("HyperSpec" . w3m-goto-url-new-session))
+  (markdown-command "pandoc")
   
-  :hook
-  (markdown-mode . flyspell-mode)
-  (markdown-mode . toggle-word-wrap)
-  (markdown-mode . markdown-mode-setup))
+  ;; Use w3m to preview markdown.
+  (markdown-live-preview-window-function 'markdown-live-preview-window-w3m)
+
+  :hook ((markdown-mode . flyspell-mode)
+         (markdown-mode . toggle-word-wrap)
+         (markdown-mode . markdown-mode-setup)))
+
 
 (use-package poly-markdown
-  :ensure)
-(remove-hook 'markdown-mode-hook 'poly-markdown-mode)
+  :ensure t
+
+  :config
+  (remove-hook 'markdown-mode-hook 'poly-markdown-mode))
+
 
 (use-package flymd
-  :ensure
+  :ensure t
   :after markdown-mode
 
-  :init
-  (setq flymd-output-directory "/tmp/"))
+  :custom
+  (flymd-output-directory "/tmp/"))
 
 (use-package markdown-toc
-  :ensure
+  :ensure t
   :after markdown-mode
 
-  :bind
-  (:map markdown-mode-map
-        ("C-c =" . markdown-toc-generate-or-refresh-toc)))
+  :bind (:map markdown-mode-map
+              ("C-c =" . markdown-toc-generate-or-refresh-toc)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package nxml-mode
-  :hook
-  (nxml-mode . highlight-indent-guides-mode))
+  :hook (nxml-mode . highlight-indent-guides-mode))
+
 
 (use-package yaml-mode
-  :ensure
+  :ensure t
 
   :mode "\\.yml\\'"
   :mode "\\.yml.j2\\'"
 
-  :hook
-  (yaml-mode . highlight-indent-guides-mode)
+  :hook (yaml-mode . highlight-indent-guides-mode)
 
-  :bind
-  (:map yaml-mode-map
-        ("<return>" . newline-smart-comment)))
+  :bind (:map yaml-mode-map
+              ("<return>" . newline-smart-comment)))
+
 
 (use-package conf-mode
-  :ensure
-  :bind
-  (:map conf-mode-map
-        ("<return>" . newline-smart-comment)))
+  :ensure t
+
+  :bind (:map conf-mode-map
+              ("<return>" . newline-smart-comment)))
 
 (use-package json-mode :ensure)
 
@@ -972,8 +1024,5 @@
 
 (use-package csharp-mode :ensure)
 
-(use-package ebuild-mode
-  :preface
-  (add-to-list 'load-path (concat *plugins-path* "ebuild-mode")))
 
 ;;; d2-dev-lang.el ends here

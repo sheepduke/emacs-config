@@ -45,6 +45,12 @@ Otherwise, call `comment-dwin' with optional ARG."
           (indent-new-comment-line)))
 	(newline-and-indent)))
 
+(defun font-exist-p (fontname)
+  "Test if given FONTNAME is exist or not."
+  (if (or (not fontname) (string= fontname ""))
+      nil
+    (if (not (x-list-fonts fontname)) nil t)))
+
 (defun get-available-font (font-list)
   "Return the first available font in FONT-LIST.
 If no one was found, NIL is returned."
