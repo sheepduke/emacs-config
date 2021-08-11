@@ -61,7 +61,8 @@
 ;;;;                            Java                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package java-mode
+;; Yes, it is strange: java-mode is defined in cc-mode module.
+(use-package cc-mode
   :hook
   (java-mode . java-mode-setup)
 
@@ -263,6 +264,8 @@
 (use-package sly
   :ensure t
 
+  :functions (sly-mrepl-clear-repl)
+
   :config
   (defun sly-repl-clear-buffer-anywhere ()
     "Clear Sly buffer from anywhere."
@@ -272,7 +275,7 @@
                                                          (buffer-name buffer)))
                                       (buffer-list)))
       (with-current-buffer buffer
-        (call-when-defined 'sly-mrepl-clear-repl)
+        (sly-mrepl-clear-repl)
         (goto-char (point-max)))))
 
   ;; Set the location of HyperSpec.
@@ -338,7 +341,7 @@
   (defun cider-eval-buffer-content ()
     "Eval buffer content without having to save it."
     (interactive)
-    (call-when-defined 'cider-eval-region (point-min) (point-max)))
+    (cider-eval-region (point-min) (point-max)))
 
   :hook (clojure-mode . cider-mode)
 
@@ -549,7 +552,7 @@
     "Send line to Julia REPL."
     (interactive)
     (save-excursion
-      (call-when-defined 'julia-repl-send-line)))
+      (julia-repl-send-line)))
 
   (defun julia-newline-with-end ()
     "Insert an end keyword and move cursor to the next line."
@@ -638,7 +641,7 @@
   :config
   (defun setup-js2-mode ()
     (when (equal major-mode 'js-mode)
-      (call-when-defined 'js2-minor-mode)))
+      (js2-minor-mode)))
 
   :hook (js-mode . setup-js2-mode)
 
@@ -796,7 +799,7 @@
       ;; If ruby buffer does not exist, just start a new one.
       (unless (and inf-ruby-buffer
                    (buffer-name inf-ruby-buffer))
-        (call-when-defined 'inf-ruby)
+        (inf-ruby)
         (throw 'return nil))
       ;; If ruby buffer exists, kill current ruby process and
       ;; start a new one in same window position.
@@ -804,7 +807,7 @@
         (kill-buffer inf-ruby-buffer)
         (setq inf-ruby-buffer nil)
         (let ((config (current-window-configuration)))
-          (call-when-defined 'inf-ruby)
+          (inf-ruby)
           (set-window-configuration config))
         (switch-to-buffer inf-ruby-buffer)))
     (message "inf-ruby process restarted. Happy hacking!"))
@@ -835,9 +838,9 @@
   :config
   (defun optimize-and-save ()
     (interactive)
-    (call-when-defined 'gofmt)
+    (gofmt)
     (save-buffer-readonly)
-    (call-when-defined 'go-remove-unused-imports nil)
+    (go-remove-unused-imports nil)
     (save-buffer-readonly))
 
   :bind (:map go-mode-map
@@ -866,7 +869,7 @@
     ;; Enable auto-fill.
     (auto-fill-mode)
     ;; Disable flycheck mode.
-    (call-when-defined flycheck-mode -1)
+    (flycheck-mode -1)
     ;; Enable toc viewer.
     (turn-on-reftex)
     ;; Stop using default completion.
@@ -952,7 +955,7 @@
     "Reload generated HTML."
     (when (and markdown-live-preview-mode
                (get-buffer "*w3m*"))
-      (call-when-defined 'w3m-reload-all-pages)))
+      (w3m-reload-all-pages)))
 
   :custom
   ;; Use pandoc as markdown generator.

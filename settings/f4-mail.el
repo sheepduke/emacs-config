@@ -43,7 +43,7 @@ Returns a boolean value indicating the result."
 		bbdb-completion-display-record nil)
   
   :config
-  (call-when-defined 'bbdb-initialize 'message))
+  (bbdb-initialize 'message))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -72,8 +72,8 @@ Returns a boolean value indicating the result."
   "Find the sender (i.e. myself) and add him to Bcc list."
   (interactive)
   (save-excursion
-    (call-when-defined 'message-goto-from)
-    (call-when-defined 'message-add-header
+    (message-goto-from)
+    (message-add-header
                        (concat "Bcc: " (substring (current-line-content) 6) "\n"))))
 
 (add-hook 'message-send-hook 'message-bcc-sender)
@@ -97,7 +97,7 @@ Returns a boolean value indicating the result."
   (defun notmuch-mark-all-as-read ()
     "Mark all unread mails as read."
     (interactive)
-    (call-when-defined 'notmuch-tag "tag:unread" '("-unread")))
+    (notmuch-tag "tag:unread" '("-unread")))
 
   (defun notmuch-toggle-flagged (get-tag-fun change-tag-fun)
     (funcall change-tag-fun

@@ -59,12 +59,6 @@ If no one was found, NIL is returned."
       (when (font-exist-p font)
         (throw 'found font)))))
 
-(defun call-when-defined (func &rest args)
-  "Call function FUNC when it is bound.
-ARGS are arguments passed to FUNC."
-  (when (fboundp func)
-    (apply func args)))
-
 (defun emacs-version-main ()
   "Extract main version number of running Emacs."
   (let* ((version (emacs-version))

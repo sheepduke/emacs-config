@@ -304,7 +304,7 @@ EXPORTER is provided by Org Mode."
 
 (use-package org-super-agenda :ensure
   :init
-  (call-when-defined 'org-super-agenda-mode 1)
+  (org-super-agenda-mode 1)
 
   ;; Set the separator between blocks.
   (setq org-super-agenda-header-separator "\n●")

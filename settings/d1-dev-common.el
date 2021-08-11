@@ -44,7 +44,7 @@
   :ensure t
 
   :config
-  (call-when-defined 'projectile-mode 1)
+  (projectile-mode 1)
 
   :custom
   ;; Offline SVN.
@@ -79,7 +79,7 @@
 
 (use-package flycheck :ensure
   :config
-  (call-when-defined 'global-flycheck-mode)
+  (global-flycheck-mode)
 
   :delight " FC")
 
