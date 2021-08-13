@@ -307,13 +307,16 @@
 
 (use-package lispy
   :ensure t
+  :config
+  (push 'sly-repl-ansi-color sly-contribs)
+
   :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
 
   :bind (:map lispy-mode-map
               ("M-o" . nil))
 
-  :config
-  (push 'sly-repl-ansi-color sly-contribs))
+  :custom
+  (lispy-colon-p nil))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
