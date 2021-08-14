@@ -329,6 +329,9 @@
   (lispy-use-sly t)
   (lispy-colon-p nil))
 
+(use-package common-lisp-snippets
+  :ensure t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Emacs Lisp                            ;;;;
