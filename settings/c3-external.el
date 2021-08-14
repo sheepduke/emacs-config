@@ -130,6 +130,15 @@
   :ensure t
   :if (executable-find "w3m")
 
+  :config
+  (defun w3m-bury-all-buffers ()
+    "Bury all w3m related buffers."
+    (interactive)
+    (let ((buffers (w3m-list-buffers t)))
+      (dolist (buffer buffers)
+        (bury-buffer buffer)))
+    (switch-to-other-buffer))
+
   :bind (("C-c 3" . w3m)
          :map w3m-mode-map
          ("C-<return>" . w3m-view-this-url-new-session)
@@ -137,18 +146,8 @@
          ("C-M-l" . w3m-next-buffer)
          ("H" . w3m-view-previous-page)
          ("L" . w3m-view-next-page)
-         ("h" . w3m-db-history))
-
-  :config
-  (defun w3m-bury-all-buffers ()
-    "Bury all w3m related buffers."
-    (interactive)
-    (mapcar (lambda (buffer)
-              (bury-buffer buffer))
-            (cl-remove-if-not (lambda (buffer)
-                                (string-match "\\*w3m\\*"
-                                              (buffer-name buffer)))
-                              (buffer-list))))
+         ("h" . w3m-db-history)
+         ("q" . w3m-bury-all-buffers))
 
   :custom
   (w3m-home-page "about://bookmark/")
