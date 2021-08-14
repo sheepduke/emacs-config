@@ -179,7 +179,7 @@
 
   ;; Set w3m as the default browser inside Emacs.
   (browse-url-browser-function '(("HyperSpec" . w3m-goto-url-new-session)
-                                 (".*" . browse-url-generic)))
+                                 (".*" . browse-url-default-browser)))
 
   ;; Set duckduckgo as the default search engine.
   (w3m-search-default-engine "duckduckgo")
