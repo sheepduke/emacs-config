@@ -176,9 +176,7 @@ output."
     (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
     (setenv "PAGER" "/bin/cat"))
 
-  :bind (("C-c s" . eshell)
-         (:map eshell-mode-map
-               ("C-M-l" . eshell-clear-buffer)))
+  :bind ("C-c s" . eshell)
 
   :hook (eshell-mode . eshell-mode-setup))
 
