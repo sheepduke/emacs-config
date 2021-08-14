@@ -86,12 +86,13 @@ Returns a boolean value indicating the result."
 (use-package notmuch
   :ensure
 
-  :functions (notmuch-search-get-tags
-              notmuch-search-tag
-              notmuch-tree-get-tags
-              notmuch-tree-tag
-              notmuch-show-get-tags
-              notmuch-show-tag)
+  :commands (notmuch-search-get-tags
+             notmuch-search-tag
+             notmuch-tree-get-tags
+             notmuch-tree-tag
+             notmuch-show-get-tags
+             notmuch-show-tag)
+  :functions (notmuch-tag)
 
   :config
   (defun notmuch-mark-all-as-read ()

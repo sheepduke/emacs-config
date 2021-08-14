@@ -114,7 +114,7 @@
   :ensure t
   :after elixir-mode
 
-  :functions (alchemist-iex-clear-buffer)
+  :commands (alchemist-iex-clear-buffer)
 
   :config
   (defun alchemist-iex-send-buffer ()
@@ -156,7 +156,7 @@
 (use-package eglot
   :ensure t
 
-  :functions (eglot-format-buffer)
+  :commands (eglot-format-buffer)
 
   :config
   (defun elixir-get-lsp-server-path ()
@@ -312,12 +312,12 @@
   :ensure t
 
   :config
-  (defun lispy--eval-lisp (str)
-    "Eval STR as Common Lisp code."
+  (defun lispy--eval-lisp-fix (str)
     (let ((result (sly-interactive-eval str)))
       (concat (propertize result 'face 'font-lock-string-face)
               "\n\n"
               result)))
+  (advice-add 'lispy--eval-lisp :override #'lispy--eval-lisp-fix)
 
   :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
 
@@ -490,7 +490,7 @@
   :ensure t
   :after tuareg
 
-  :functions (ocp-indent-buffer)
+  :commands (ocp-indent-buffer)
 
   :config
   (defun ocp-indent-tuareg-buffer ()
@@ -551,6 +551,7 @@
 (use-package julia-repl
   :ensure t
   :after julia-mode
+  :commands (julia-repl-send-line)
 
   :config
   (defun julia-repl-send-buffer-content ()
@@ -848,7 +849,8 @@
 
 (use-package go-mode
   :ensure t
-
+  :commands (gofmt go-remove-unused-imports)
+  
   :config
   (defun optimize-and-save ()
     (interactive)
@@ -952,7 +954,8 @@
 
 (use-package markdown-mode
   :ensure t
-
+  :commands (w3m-reload-all-pages)
+  
   :config
   (defun markdown-mode-setup ()
     (add-hook 'after-save-hook 'markdown-live-preview-w3m-reload))
