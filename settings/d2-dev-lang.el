@@ -311,6 +311,14 @@
 (use-package lispy
   :ensure t
 
+  :config
+  (defun lispy--eval-lisp (str)
+    "Eval STR as Common Lisp code."
+    (let ((result (sly-interactive-eval str)))
+      (concat (propertize result 'face 'font-lock-string-face)
+              "\n\n"
+              result)))
+
   :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
 
   :bind (:map lispy-mode-map
@@ -318,6 +326,7 @@
               ("M-i" . nil))
 
   :custom
+  (lispy-use-sly t)
   (lispy-colon-p nil))
 
 
