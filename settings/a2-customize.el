@@ -200,7 +200,7 @@ output."
   
   :custom
   ;; Set omit regex in omit mode.
-  (setq dired-omit-files "^\\.?#\\|^\\.")
+  (dired-omit-files "^\\.?#\\|^\\.")
 
   :bind (:map dired-mode-map
               ("h" . dired-omit-mode)))
