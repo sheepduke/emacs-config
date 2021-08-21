@@ -63,10 +63,6 @@
   :config
   (yas-global-mode 1)
 
-  :bind
-  (:map yas-keymap
-        ("<tab>" . nil))
-
   :delight ""
 
   :custom
