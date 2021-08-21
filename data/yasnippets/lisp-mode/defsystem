@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: defsystem
+# key: defsystem
+# --
+(defsystem $1
+  :version "0.1.0"
+  :description "$2"
+  :license "MIT"
+  :author "YUE Daian"
+  :depends-on (#:alexandria
+               #:serapeum)
+  :serial t
+  :components ((:module "src"
+                :components
+                ((:file "packages")
+                 (:file "$1"))))
+  :in-order-to ((test-op (test-op :$1/test))))
+
+(defsystem $1/test
+  :version "0.1.0"
+  :license "MIT"
+  :author "YUE Daian"
+  :depends-on (#:$1
+               #:fiveam)
+  :serial t
+  :components ((:module "test"
+                :components
+                ((:file "packages")
+                 (:file "$1"))))
+  :perform (test-op (op c)
+                    (symbol-call :fiveam :run!
+                                 (find-symbol* :$1 :$1-test))))
