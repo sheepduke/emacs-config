@@ -318,6 +318,7 @@
               "\n\n"
               result)))
   (advice-add 'lispy--eval-lisp :override #'lispy--eval-lisp-fix)
+  (setq lispy-colon-p nil)
 
   :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
 
@@ -326,8 +327,7 @@
               ("M-i" . nil))
 
   :custom
-  (lispy-use-sly t)
-  (lispy-colon-p nil))
+  (lispy-use-sly t))
 
 (use-package common-lisp-snippets
   :ensure t)
