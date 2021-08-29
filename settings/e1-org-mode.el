@@ -220,8 +220,8 @@ EXPORTER is provided by Org Mode."
 (global-set-key (kbd "C-c l i") 'org-insert-link)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "HOLD(h@/!)" "PROJ" "|"
-                  "DONE(d@/!)" "STOP(s@/!)")))
+      '((sequence "TODO(t!)" "HOLD(h!)" "PROJ" "|"
+                  "DONE(d!)" "STOP(s!)")))
 
 (setq org-todo-keyword-faces
       '(("PROJ" :foreground "tomato" :weight bold)
