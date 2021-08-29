@@ -292,7 +292,6 @@
   
   :bind
   (:map sly-mode-map
-        ("C-c i" . nil)
         ("C-c C-k" . sly-interrupt)
         ("C-c C-b" . sly-eval-buffer)
         ("C-c C-l" . sly-eval-defun)
