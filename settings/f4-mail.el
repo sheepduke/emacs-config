@@ -143,7 +143,8 @@ Returns a boolean value indicating the result."
                ("f" . notmuch-tree-toggle-flagged))
          (:map notmuch-show-mode-map
                ("f" . notmuch-show-toggle-flagged)
-               ("C-c C-o" . browse-url-at-point)))
+               ("C-c C-o" . browse-url-at-point)
+               ("M" . w3m-view-url-with-browse-url)))
 
   :custom
   ;; The number of recent searches to display.
