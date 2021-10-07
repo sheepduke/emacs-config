@@ -12,11 +12,10 @@
   :serial t
   :components ((:module "src"
                 :components
-                ((:file "packages")
-                 (:file "$1"))))
-  :in-order-to ((test-op (test-op :$1/test))))
+                ((:file "$1"))))
+  :in-order-to ((test-op (test-op :$1-tests))))
 
-(defsystem $1/test
+(defsystem $1-tests
   :version "0.1.0"
   :license "MIT"
   :author "YUE Daian"
@@ -25,8 +24,7 @@
   :serial t
   :components ((:module "test"
                 :components
-                ((:file "packages")
-                 (:file "$1"))))
+                ((:file "$1"))))
   :perform (test-op (op c)
                     (symbol-call :fiveam :run!
-                                 (find-symbol* :$1 :$1-test))))
+                                 (find-symbol* :$1 :$1-tests))))

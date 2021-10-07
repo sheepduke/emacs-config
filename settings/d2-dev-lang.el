@@ -289,13 +289,14 @@
   (sly-complete-symbol-function 'sly-flex-completions)
 
   :hook (lisp-mode . sly-editing-mode)
-  
+
   :bind
   (:map sly-mode-map
         ("C-c C-k" . sly-interrupt)
         ("C-c C-b" . sly-eval-buffer)
         ("C-c C-l" . sly-eval-defun)
         ("C-c C-p" . sly-eval-print-last-expression)
+        ("C-c X" . sly-export-class)
         ("C-c C-d d" . hyperspec-lookup)
         ("C-M-l" . sly-repl-clear-buffer-anywhere)))
 
@@ -331,6 +332,9 @@
 (use-package common-lisp-snippets
   :ensure t)
 
+(use-package cl-easy-defclass
+  :bind (:map lisp-mode-map
+              ("C-i" . lisp-import-symbol-and-defpackage)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Emacs Lisp                            ;;;;
