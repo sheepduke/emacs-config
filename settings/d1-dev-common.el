@@ -125,9 +125,9 @@
   (prog-mode . hs-minor-mode)
   
   :bind (:map hs-minor-mode-map
-              ("C-c h S" . hs-show-all)
-              ("C-c h H" . hs-hide-all)
-              ("C-c h h" . hs-toggle-hiding)))
+              ("C-c h s" . hs-show-all)
+              ("C-c h h" . hs-hide-all)
+              ("C-c h i" . hs-toggle-hiding)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Misc                              ;;;;
