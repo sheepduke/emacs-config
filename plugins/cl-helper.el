@@ -1,4 +1,4 @@
-;;; Package --- cl-easy-defclass
+;;; Package --- cl-helper
 
 ;;; Commentary:
 ;;; Provide functions to create slot definition for Common Lisp.
@@ -7,14 +7,29 @@
 
 (defun lisp-import-symbol-and-defpackage ()
   (interactive)
+  (sly-import-symbol-at-point)
+  (lisp-eval-defpackage)
+  (forward-sexp))
+
+(defun lisp-export-symbol-and-defpackage ()
+  (interactive)
+  (sly-import-symbol-at-point)
+  (lisp-eval-defpackage)
+  (forward-sexp))
+
+(defun lisp-export-class-and-defpackage ()
+  (interactive)
+  (sly-export-class)
+  (lisp-eval-defpackage)
+  (forward-sexp))
+
+(defun lisp-eval-defpackage ()
   (save-excursion
-    (sly-import-symbol-at-point)
     (goto-char (point-min))
     (search-forward "(defpackage")
     (backward-char 11)
     (forward-sexp)
-    (sly-eval-last-expression))
-  (forward-sexp))
+    (sly-eval-last-expression)))
 
 (defun lisp-insert-slot ()
   "Insert slot definition accoring to user input."
@@ -74,4 +89,4 @@
     (?w ":writer")
     (?\s nil)))
 
-(provide 'cl-easy-defclass)
+(provide 'cl-helper)

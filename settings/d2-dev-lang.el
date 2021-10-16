@@ -332,9 +332,11 @@
 (use-package common-lisp-snippets
   :ensure t)
 
-(use-package cl-easy-defclass
+(use-package cl-helper
   :bind (:map lisp-mode-map
-              ("C-i" . lisp-import-symbol-and-defpackage)))
+              ("C-c i" . lisp-import-symbol-and-defpackage)
+              ("C-c x" . lisp-export-symbol-and-defpackage)
+              ("C-c X" . lisp-export-class-and-defpackage)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Emacs Lisp                            ;;;;
