@@ -261,6 +261,9 @@
 ;;;;                       Common Lisp                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package lisp-mode
+  :hook (lisp-mode . 'disable-semantic-mode))
+
 (use-package sly
   :ensure t
 
@@ -345,12 +348,23 @@
 (use-package elisp-mode
   :hook
   (emacs-lisp-mode . eldoc-mode)
-
+  (emacs-lisp-mode . 'disable-semantic-mode)
+  
   :bind
   (:map emacs-lisp-mode-map
         ("C-c C-r" . eval-region)
-        ("C-c C-b" . eval-buffer)))
+        ("C-c C-b" . eval-buffer))
 
+  :config
+  (setq-default flycheck-disabled-checkers
+                '(javascript-jshint json-jsonlist emacs-lisp-checkdoc)))
+
+(use-package nameless :ensure
+  :hook
+  (emacs-lisp-mode . nameless-mode)
+
+  :custom
+  (nameless-private-prefix t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Clojure                             ;;;;
