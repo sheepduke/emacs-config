@@ -113,4 +113,7 @@ Return NIL if nothing found."
   "Turn off truncate lines mode."
   (toggle-truncate-lines 0))
 
+(defun disable-semantic-mode ()
+  (semantic-mode -1))
+
 ;;; a1-functions.el ends here
