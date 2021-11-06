@@ -327,7 +327,8 @@
 
   :bind (:map lispy-mode-map
               ("M-o" . nil)
-              ("M-i" . nil))
+              ("M-i" . nil)
+              ("_" . nil))
 
   :custom
   (lispy-use-sly t))
@@ -353,25 +354,13 @@
 (setq-default flycheck-disabled-checkers
               '(javascript-jshint json-jsonlist emacs-lisp-checkdoc))
 
-
-;; (use-package emacs-lisp-mode
-;;   :hook
-;;   (emacs-lisp-mode . eldoc-mode)
-;;   (emacs-lisp-mode . 'disable-semantic-mode)
-  
-;;   :bind
-;;   (:map emacs-lisp-mode-map
-;;         ("C-c C-r" . eval-region)
-;;         ("C-c C-b" . eval-buffer))
-
-;;   :config
-;;   (setq-default flycheck-disabled-checkers
-;;                 '(javascript-jshint json-jsonlist emacs-lisp-checkdoc)))
-
 (use-package nameless :ensure
   :hook
   (emacs-lisp-mode . nameless-mode)
 
+  :bind ((:map nameless-mode-map
+               ("_" . nameless-insert-name-or-self-insert)))
+  
   :custom
   (nameless-private-prefix t))
 
