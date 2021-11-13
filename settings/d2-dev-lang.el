@@ -328,7 +328,7 @@
   :bind (:map lispy-mode-map
               ("M-o" . nil)
               ("M-i" . nil)
-              ("_" . nil))
+              ("-" . nil))
 
   :custom
   (lispy-use-sly t))
@@ -359,9 +359,10 @@
   (emacs-lisp-mode . nameless-mode)
 
   :bind ((:map nameless-mode-map
-               ("_" . nameless-insert-name-or-self-insert)))
+               ("-" . nameless-insert-name-or-self-insert)))
   
   :custom
+  (nameless-prefix "%")
   (nameless-private-prefix t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
