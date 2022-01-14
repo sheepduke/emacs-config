@@ -1,5 +1,6 @@
-personal_ws-1.1 en 196 
+personal_ws-1.1 en 198 
 ZSH
+accessor
 accessors
 ack
 acknowledgement
@@ -34,6 +35,7 @@ codebuild
 comparator
 comparators
 conf
+config
 css
 customizable
 daian
