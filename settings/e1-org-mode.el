@@ -192,6 +192,7 @@ EXPORTER is provided by Org Mode."
   
   :bind
   ("C-c C-j" . nil)
+  ("C-c j o" . org-journal-open-current-journal-file)
   ("C-c j s" . org-journal-search)
   ("C-c j j" . org-journal-new-entry)
   ("C-c j k" . org-journal-new-scheduled-entry)
