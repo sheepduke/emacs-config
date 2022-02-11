@@ -20,6 +20,14 @@
 |   |   |
 |---+---|")))
 
+  (defun org-mode-setup ()
+    "Setup."
+    (make-local-variable 'company-backends)
+    (setq company-backends '((company-dabbrev :with company-yasnippet)))
+
+    (make-local-variable 'company-idle-delay)
+    (setq company-idle-delay 0.5))
+
   :config
   ;; Enable bold, italic etc inside Chinese context.
   (setf (nth 0 org-emphasis-regexp-components)
@@ -32,6 +40,7 @@
   :hook
   (org-mode . disable-truncate-lines)
   (org-mode . flyspell-mode)
+  (org-mode . org-mode-setup)
 
   :bind (:map org-mode-map
               ("C-'" . nil)
@@ -68,25 +77,14 @@
   (org-blank-before-new-entry '((heading . t)
                                 (plain-list-item . auto))))
 
-;; TODO move it to use-package.
-(defun org-mode-hook-function ()
-  "Setup."
-  (make-local-variable 'company-backends)
-  (setq company-backends '((company-dabbrev :with company-yasnippet)))
-
-  (make-local-variable 'company-idle-delay)
-  (setq company-idle-delay 0.5))
-(add-hook 'org-mode-hook 'org-mode-hook-function)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Modules                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package org-habit :ensure org-plus-contrib
+(use-package org
   :custom
   (org-habit-show-habits-only-for-today t)
-  
+
   ;; Show my habits no matter whether it is scheduled today.
   (org-habit-show-all-today t)
 
@@ -202,8 +200,6 @@ EXPORTER is provided by Org Mode."
 ;;;;                          Workflow                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'org-depend)
-
 ;; Keep track of done things.
 (setq org-log-done 'time)
 ;; Keep the task dependency.
@@ -211,8 +207,8 @@ EXPORTER is provided by Org Mode."
 ;; Archive to "archive.org" file.
 (setq org-archive-location
       (format "%s/archive.org::" org-directory))
+
 ;; Record clock information of both running and history clocks.
-(setq org-clock-persist t)
 (org-clock-persistence-insinuate)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
