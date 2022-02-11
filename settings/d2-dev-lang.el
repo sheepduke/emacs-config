@@ -56,7 +56,6 @@
 (use-package company-c-headers
   :ensure t)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Java                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -71,14 +70,12 @@
     "Setup Java mode."
     (setq fill-column 120)))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Kotlin                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package kotlin-mode
   :ensure t)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Erlang                            ;;;;
@@ -104,7 +101,6 @@
   :hook
   (erlang-mode . company-mode)
   (erlang-mode . company-erlang-init))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Elixir                              ;;;;
@@ -452,21 +448,16 @@
     (define-key (symbol-value 'interactive-haskell-mode-map)
       (kbd "C-c C-c")
       'interactive-haskell-eval-current-line)
+    (define-key (symbol-value 'interactive-haskell-mode-map)
+      (kbd "C-M-l")
+      'haskell-interactive-mode-clear)
     (highlight-indent-guides-mode 0))
 
   :init
   (require 'haskell-interactive-mode)
   
   :hook
-  (haskell-mode . haskell-setup-hooks)
-
-  ;; :bind (:map interactive-haskell-mode-map
-  ;;             ;; ("C-c C-c" . interactive-haskell-eval-current-line)
-  ;;             ("C-M-l" . haskell-interactive-mode-clear))
-  )
-
-;; (with-eval-after-load 'haskell-mode
-;;   (define-key interactive-haskell-mode-map (kbd "C-c C-c") 'haskell-mode-show-type-at))
+  (haskell-mode . haskell-setup-hooks))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               OCaml                              ;;
