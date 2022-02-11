@@ -1,4 +1,4 @@
-personal_ws-1.1 en 198 
+personal_ws-1.1 en 199 
 ZSH
 accessor
 accessors
@@ -109,6 +109,7 @@ oom
 oop
 osi
 pacman
+parsers
 pdf
 performant
 persistency
