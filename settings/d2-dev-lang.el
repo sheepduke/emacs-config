@@ -413,67 +413,60 @@
 ;;;;                           Haskell                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package lsp-haskell
+  :ensure t
+  :functions (lsp-format-buffer
+              lsp-organize-imports)
+
+  :preface
+  (defun lsp-haskell-install-save-hooks ()
+    (add-hook 'before-save-hook 'lsp-format-buffer t t)
+    (add-hook 'before-save-hook 'lsp-organize-imports t t))
+
+  :hook
+  (haskell-mode . lsp)
+  (haskell-literate-mode . lsp)
+  (haskell-mode . lsp-haskell-install-save-hooks))
+
 (use-package haskell-mode
   :ensure t
-  
-  :defines (interactive-haskell-mode-map
-            haskell-interactive-mode-map)
+
   :functions (haskell-session-interactive-buffer
               haskell-interactive-handle-expr
               haskell-interactive-copy-to-prompt)
-  
-  :config
+
+  :preface
   (defun interactive-haskell-do-eval ()
     "Evaluate the current expression in Haskell REPL."
     (with-current-buffer (haskell-session-interactive-buffer (haskell-session))
       (haskell-interactive-handle-expr)))
-
+  
   (defun interactive-haskell-eval-current-line ()
     "Evaluate current line."
     (interactive)
     (haskell-interactive-copy-to-prompt)
     (interactive-haskell-do-eval))
 
-  :hook (haskell-mode . interactive-haskell-mode)
+  (defun haskell-setup-hooks ()
+    (interactive-haskell-mode 1)
+    (define-key (symbol-value 'interactive-haskell-mode-map)
+      (kbd "C-c C-c")
+      'interactive-haskell-eval-current-line)
+    (highlight-indent-guides-mode 0))
 
-  :bind ((:map interactive-haskell-mode-map
-               ("C-c C-c" . interactive-haskell-eval-current-line)
-               ("C-M-l" . haskell-interactive-mode-clear))
-         (:map haskell-interactive-mode-map
-               ("C-c C-b" . haskell-interactive-switch-back)
-               ("C-M-l" . haskell-interactive-mode-clear))))
-
-
-
-(use-package hindent
-  :ensure t
-
-  :config
-  (defun my-setup-hindent-mode ()
-    "Setup HIndent mode."
-    (hindent-mode 1))
-
-  :hook (haskell-mode . my-setup-hindent-mode)
-
-  :custom
-  (hindent-reformat-buffer-on-save t))
-
-
-;; FlyCheck setup.
-;; 
-(use-package flycheck-haskell
-  :ensure t
-
+  :init
+  (require 'haskell-interactive-mode)
+  
   :hook
-  (haskell-mode . my-flycheck-haskell-setup)
+  (haskell-mode . haskell-setup-hooks)
 
-  :config
-  (defun my-flycheck-haskell-setup ()
-    "Setup FlyCheck mode for Haskell."
-    (flycheck-haskell-setup)
-    (setq flycheck-check-syntax-automatically '(idle-change))
-    (setq flycheck-idle-change-delay 1)))
+  ;; :bind (:map interactive-haskell-mode-map
+  ;;             ;; ("C-c C-c" . interactive-haskell-eval-current-line)
+  ;;             ("C-M-l" . haskell-interactive-mode-clear))
+  )
 
+;; (with-eval-after-load 'haskell-mode
+;;   (define-key interactive-haskell-mode-map (kbd "C-c C-c") 'haskell-mode-show-type-at))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               OCaml                              ;;
