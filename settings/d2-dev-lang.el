@@ -451,6 +451,12 @@
     (define-key (symbol-value 'interactive-haskell-mode-map)
       (kbd "C-M-l")
       'haskell-interactive-mode-clear)
+    (define-key (symbol-value 'haskell-interactive-mode-map)
+      (kbd "C-c C-b")
+      'haskell-interactive-switch-back)
+    (define-key (symbol-value 'haskell-interactive-mode-map)
+      (kbd "C-M-l")
+      'haskell-interactive-mode-clear)
     (highlight-indent-guides-mode 0))
 
   :init
