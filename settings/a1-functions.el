@@ -36,14 +36,19 @@ Otherwise, call `comment-dwin' with optional ARG."
   (interactive)
   (if (line-in-comment?)
       (let ((line (string-trim-left (current-line-content))))
+        ;; Handle multi-line comment for C++ etc.
         (if (or (string-prefix-p "/*" line)
                 (string-prefix-p "* " line))
             (progn (newline-and-indent)
                    (insert "* ")
                    (indent-region (line-beginning-position)
                                   (line-end-position)))
+          ;; Just insert the comment line.
           (indent-new-comment-line)))
-	(newline-and-indent)))
+    ;; Just insert newline.
+    (cl-case major-mode
+      ('haskell-mode (electric-newline-and-maybe-indent))
+      (t (newline-and-indent)))))
 
 (defun font-exist-p (fontname)
   "Test if given FONTNAME is exist or not."
