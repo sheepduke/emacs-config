@@ -1043,6 +1043,8 @@
 (use-package conf-mode
   :ensure t
 
+  :hook (conf-mode . linum-mode)
+
   :bind (:map conf-mode-map
               ("<return>" . newline-smart-comment)))
 
