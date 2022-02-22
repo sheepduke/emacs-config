@@ -192,12 +192,19 @@
 ;;;;                         Silver Brain                         ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'load-path "~/.silver-brain/emacs/")
 (use-package silver-brain
-  :init
-  (setq silver-brain-server-port 5000)
+  :load-path "~/.silver-brain/emacs/"
+  
+  :config
+  (silver-brain-install)
 
   :bind
-  ("C-c b" . silver-brain))
+  ("C-c b b" . silver-brain)
+  ("C-c b o" . silver-brain-open)
+  ("C-c b n" . silver-brain-new-concept)
+
+  :custom
+  (silver-brain-database-name "silver-brain")
+  (silver-brain-server-port 5000))
 
 ;;; c3-external.el ends here
