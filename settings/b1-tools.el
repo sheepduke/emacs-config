@@ -113,6 +113,21 @@
   ;; Compile packages asynchronously.
   (async-bytecomp-allowed-packages '(all)))
 
+(use-package openwith
+  :hook
+  (dired-mode . openwith-mode)
+
+  :config
+  (define-advice abort-if-file-too-large
+      (:around (orig-fn size op-type filename &optional offer-raw) unless-openwith-handles-it)
+    "Do not abort if FILENAME is handled by Openwith."
+    (let ((my-ok-large-file-types (mapconcat 'car openwith-associations "\\|")))
+      (unless (string-match-p my-ok-large-file-types filename)
+        (funcall orig-fn size op-type filename offer-raw))))
+
+  :custom
+  (openwith-associations '(("\\.mp4\\'" "mpv" (file)))))
+
 
 ;; Built-in input method.
 (use-package rime
