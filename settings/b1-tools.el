@@ -126,7 +126,8 @@
         (funcall orig-fn size op-type filename offer-raw))))
 
   :custom
-  (openwith-associations '(("\\.mp4\\'" "mpv" (file)))))
+  (openwith-associations '(("\\.mp4\\'" "mpv" (file))
+                           ("\\.m4v\\'" "mpv" (file)))))
 
 
 ;; Built-in input method.
