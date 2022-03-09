@@ -148,19 +148,6 @@
   (rime-user-data-dir "~/.config/ibus/rime"))
 
 
-;; Show Nyan cat in progress bar.
-(use-package nyan-mode
-  :ensure t
-  :functions (nyan-start-animation)
-  
-  :config
-  (nyan-mode 1)
-  (nyan-start-animation)
-  
-  :custom
-  (nyan-bar-length 10))
-
-
 ;; Emacs interface for `cheat.sh'.
 (use-package cheat-sh
   :ensure t)
