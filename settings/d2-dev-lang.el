@@ -446,9 +446,7 @@
   (defun interactive-haskell-run-r ()
     "Run the function defined as 'r'."
     (interactive)
-    (haskell-process-reload)
     (with-current-buffer (haskell-session-interactive-buffer (haskell-session))
-      (haskell-interactive-mode-clear)
       (insert "r\n")
       (haskell-interactive-mode-return)))
 
