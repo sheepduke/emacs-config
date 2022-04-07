@@ -455,10 +455,8 @@
     (let ((mode-map (symbol-value 'interactive-haskell-mode-map))
           (repl-mode-map (symbol-value 'haskell-interactive-mode-map)))
       (define-key mode-map (kbd "C-c C-c") 'interactive-haskell-eval-current-line)
-      (define-key mode-map (kbd "C-c C-r") 'interactive-haskell-run-r)
-      (define-key mode-map (kbd "C-M-l") 'haskell-interactive-mode-clear)
-      (define-key repl-mode-map (kbd "C-c C-b") 'haskell-interactive-switch-back)
-      (define-key repl-mode-map (kbd "C-M-l") 'haskell-interactive-mode-clear))
+      (define-key mode-map (kbd "C-c C-o") 'interactive-haskell-run-r)
+      (define-key repl-mode-map (kbd "C-c C-b") 'haskell-interactive-switch-back))
     (highlight-indent-guides-mode 0))
 
   :init
