@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: iq
+# key: iq
+# --
+import qualified $1 as $2
