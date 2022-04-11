@@ -46,9 +46,7 @@ Otherwise, call `comment-dwin' with optional ARG."
           ;; Just insert the comment line.
           (indent-new-comment-line)))
     ;; Just insert newline.
-    (cl-case major-mode
-      ('haskell-mode (electric-newline-and-maybe-indent))
-      (t (newline-and-indent)))))
+    (newline-and-indent)))
 
 (defun font-exist-p (fontname)
   "Test if given FONTNAME is exist or not."
