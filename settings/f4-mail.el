@@ -34,7 +34,6 @@ Returns a boolean value indicating the result."
 
 ;; Contact database supporting Gnus contact completion.
 (use-package bbdb
-  :ensure
   :init
   ;; set bbdb database location.
   (setq bbdb-file (concat *data-path* "bbdb"))
@@ -84,8 +83,6 @@ Returns a boolean value indicating the result."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package notmuch
-  :ensure
-
   :commands (notmuch-search-get-tags
              notmuch-search-tag
              notmuch-tree-get-tags
@@ -168,7 +165,8 @@ Returns a boolean value indicating the result."
      (:name "Gentoo User" :query "tag:gentoo-user")
      (:name "Emacs User" :query "tag:emacs-user")
      (:name "Emacs Devel" :query "tag:emacs-devel")
-     (:name "CL Cookbook" :query "tag:cl-cookbook"))))
+     (:name "CL Cookbook" :query "tag:cl-cookbook")
+     (:name "Notmuch Dev" :query "tag:notmuch"))))
 
 
 ;;; f4-mail.el ends here

@@ -7,14 +7,13 @@
 ;; This is built-in in Emacs 24 or something.
 ;; Used to automatically pair brackets.
 (use-package electric
-  :ensure t
-  
   :config
   (electric-pair-mode 1))
 
 
 ;; Ebuild mode, for Gentoo users.
 (use-package ebuild-mode
+  :ensure nil
   :mode "\\.use\\'"
   :mode "\\.mask\\'"
   :mode "\\.unmask\\'")
@@ -22,7 +21,6 @@
 
 ;; Make undo like a tree.
 (use-package undo-tree
-  :ensure t
   :delight
 
   :config
@@ -45,7 +43,6 @@
 
 ;; Replace the original doc-view for PDF files.
 (use-package pdf-tools
-  :ensure t
   :functions (windows?)
   :unless (windows?)
 
@@ -55,15 +52,11 @@
 
 ;; Open epub files.
 (use-package nov
-  :ensure t
-
   :mode ("\\.epub\\'" . nov-mode))
 
 
 ;; Edit multiple places at the same time.
 (use-package multiple-cursors
-  :ensure t
-
   :bind ("C-x r e" . mc/edit-lines)
 
   :custom
@@ -72,7 +65,6 @@
 
 ;; It's Magit! Git inside Emacs.
 (use-package magit
-  :ensure t
   :bind ("C-x v" . magit-status)
 
   :hook (git-commit-mode . flyspell-mode))
@@ -80,8 +72,6 @@
 
 ;; Jump to character from 2 leading chars.
 (use-package avy
-  :ensure t
-
   :bind (("C-'" . avy-goto-char-timer)
          ("M-g g" . avy-goto-line))
 
@@ -94,8 +84,6 @@
 
 ;; Automatically compile Emacs Lisp libraries
 (use-package auto-compile
-  :ensure t
-  
   :config
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode))
@@ -103,8 +91,6 @@
 
 ;; Execute asynchronous commands.
 (use-package async
-  :ensure t
-
   :config
   (dired-async-mode 1)
   (async-bytecomp-package-mode 1)
@@ -130,14 +116,11 @@
                            ("\\.m4v\\'" "mpv" (file)))))
 
 ;; Emacs interface for `cheat.sh'.
-(use-package cheat-sh
-  :ensure t)
+(use-package cheat-sh)
 
 
 ;; Provides extra information for EShell prompt.
 (use-package eshell-prompt-extras
-  :ensure t
-
   :custom
   ;; Setup prompt.
   (eshell-highlight-prompt t)
@@ -156,11 +139,11 @@
 
 ;; Toggle layout of 2 windows between vertical and horizontal.
 (use-package toggle-window-split
+  :ensure nil
   :bind ("C-x *" . toggle-window-split))
 
 ;; Show hot keys when prefix keys are pressed.
 (use-package which-key
-  :ensure t
   :delight
 
   :config
@@ -171,7 +154,6 @@
 
 ;; AutoHotkey mode.
 ;; Only for Windows.
-(use-package ahk-mode
-  :ensure t)
+(use-package ahk-mode)
 
 ;;; b1-tools.el ends here

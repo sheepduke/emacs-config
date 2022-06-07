@@ -63,6 +63,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package files
+  :ensure nil
   :custom
   ;; Control where to put backup files.
   (backup-by-copying t)
@@ -185,6 +186,7 @@ output."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package dired
+  :ensure nil
   :custom
   ;; Human readable size display
   (dired-listing-switches "-alh")
@@ -196,6 +198,7 @@ output."
               ("," . dired-kill-subdir)))
 
 (use-package dired-x
+  :ensure nil
   :after dired
   
   :custom
@@ -279,6 +282,7 @@ This works like Vim 'w!'."
   (browse-url-browser-function '((".*" . browse-url-default-browser))))
 
 (use-package eww-plus
+  :ensure nil
   :after eww
 
   :init
@@ -392,6 +396,7 @@ This works like Vim 'w!'."
 
 ;; Do not use any GUI pinentry for GPG!
 (use-package epg-config
+  :ensure nil
   :custom
   (epa-pinentry-mode 'loopback))
 

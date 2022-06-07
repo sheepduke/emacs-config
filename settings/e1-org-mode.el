@@ -97,18 +97,18 @@
                  org-info)))
 
 ;; Bigger calendar.
-(use-package calfw :ensure)
+(use-package calfw)
 
 ;; Display org items in calfw.
-(use-package calfw-org :ensure
+(use-package calfw-org
   :bind
   ("C-c o" . cfw:open-org-calendar))
 
 ;; Chinese localization
-(use-package cal-china-x :ensure)
+(use-package cal-china-x)
 
 ;; Show leading stars as bullets.
-(use-package org-bullets :ensure
+(use-package org-bullets
   :hook
   (org-mode . org-bullets-mode))
 
@@ -165,7 +165,7 @@ EXPORTER is provided by Org Mode."
 ;;;;                           Journal                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package org-journal :ensure
+(use-package org-journal
   :custom
   ;; Set root directory.
   (org-journal-dir (concat org-directory "journal/"))
@@ -268,7 +268,7 @@ EXPORTER is provided by Org Mode."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-pomodoro
-  :ensure
+ 
 
   :init
   ;; Length of pomodoro cycle.
@@ -299,7 +299,7 @@ EXPORTER is provided by Org Mode."
 ;; Set it to NIL because super-agenda is used.
 (setq org-agenda-todo-ignore-scheduled nil)
 
-(use-package org-super-agenda :ensure
+(use-package org-super-agenda
   :init
   (org-super-agenda-mode 1)
 

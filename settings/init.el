@@ -21,6 +21,8 @@
 (setq load-prefer-newer t)
 (require 'use-package)
 
+(setq use-package-always-ensure t)
+
 ;; Set load path.
 (add-to-list 'load-path "~/.emacs.d/plugins/")
 (add-to-list 'load-path "~/.emacs.d/plugins/ebuild-mode/")

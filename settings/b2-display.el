@@ -62,8 +62,6 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Provide GNU screen like screen facility in Emacs.
 (use-package elscreen
-  :ensure t
-
   :init
   (elscreen-start)
 
@@ -80,8 +78,6 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Force window behavior.
 (use-package shackle
-  :ensure t
-  
   :custom
   ;; one of below, above, left, right
   (shackle-default-alignment 'below)
@@ -107,8 +103,6 @@ A dedicated window can't be switched or modified by some commands."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package delight
-  :ensure t
-  
   :config
   ;; Disable auto-fill mode line.
   (delight 'auto-fill-function "" t)
@@ -129,8 +123,6 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Redo or undo window configuration.
 (use-package winner
-  :ensure t
-
   :config
   (winner-mode 1)
 
@@ -140,8 +132,6 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Fast switching windows.
 (use-package ace-window
-  :ensure t
-
   :bind
   (("M-o" . ace-window)
    ("M-O" . ace-swap-window))
@@ -152,8 +142,6 @@ A dedicated window can't be switched or modified by some commands."
 
 ;; Quickly move between windows like a agility snake.
 (use-package windmove
-  :ensure t
-
   :bind (("M-P" . windmove-up)
          ("M-N" . windmove-down)
          ("M-L" . windmove-right)
@@ -166,10 +154,10 @@ A dedicated window can't be switched or modified by some commands."
 ;;;;                            Theme                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package tangotango-theme :ensure)
-(use-package ample-theme :ensure)
-(use-package moe-theme :ensure)
+(use-package tangotango-theme)
+(use-package ample-theme)
+(use-package moe-theme)
 (use-package spacemacs-common :ensure spacemacs-theme)
-(use-package kaolin-themes :ensure)
+(use-package kaolin-themes)
 
 ;;; b2-display.el ends here

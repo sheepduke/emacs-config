@@ -9,7 +9,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package emms
-  :ensure
   :init
   (require 'emms-setup)
 
@@ -56,7 +55,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package sdcv
-  :ensure t
   :if (executable-find "sdcv")
   :bind ("C-c d" . sdcv-search-input))
 
@@ -66,7 +64,6 @@
 
 ;; Image processing
 (use-package image+
-  :ensure t
   :if (executable-find "convert")
 
   :functions (image-rotate-original)
@@ -127,7 +124,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package w3m
-  :ensure t
   :if (executable-find "w3m")
 
   :config
@@ -193,8 +189,6 @@
 
 ;; Built-in input method.
 (use-package rime
-  :ensure t
-  
   :custom
   ;; Set Rime as the default input method.
   (default-input-method "rime")

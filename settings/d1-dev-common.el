@@ -9,8 +9,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package company
-  :ensure t
-
   :bind
   (:map company-mode-map
         ("<tab>" . company-indent-or-complete-common))
@@ -27,8 +25,6 @@
 
 
 (use-package company-quickhelp
-  :ensure t
-
   :config
   (company-quickhelp-mode 1)
 
@@ -41,8 +37,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package projectile
-  :ensure t
-
   :config
   (projectile-mode 1)
 
@@ -58,8 +52,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yasnippet
-  :ensure t
-
   :config
   (yas-global-mode 1)
 
@@ -77,7 +69,7 @@
 ;;;;                        Syntax Checking                       ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package flycheck :ensure
+(use-package flycheck
   :config
   (global-flycheck-mode)
 
@@ -89,8 +81,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package flyspell
-  :ensure t
-  
   :config
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
@@ -102,8 +92,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package highlight-indent-guides
-  :ensure t
-
   :hook
   (prog-mode . enable-highlight-indent-guides)
 
@@ -138,8 +126,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package lsp-mode
-  :ensure t
-  
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
@@ -148,16 +134,13 @@
   :commands lsp)
 
 (use-package lsp-ui
-  :ensure t
   :commands lsp-ui-mode)
 
 ;; if you are ivy user
 (use-package lsp-ivy
-  :ensure t
   :commands lsp-ivy-workspace-symbol)
 
 (use-package lsp-treemacs
-  :ensure t
   :commands lsp-treemacs-errors-list)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -165,6 +148,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package prog-mode
+  :ensure nil
   :bind (:map prog-mode-map
               ("<return>" . newline-smart-comment)))
 

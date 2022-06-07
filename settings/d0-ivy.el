@@ -6,14 +6,10 @@
 
 ;; When smex is installed, ivy will behave differently.
 (use-package smex
-  :ensure t
-  
   :config
   (smex-initialize))
 
 (use-package ivy
-  :ensure t
-
   :config
   (ivy-mode 1)
 
@@ -58,12 +54,10 @@
   (ivy-re-builders-alist '((t . ivy--regex-plus))))
 
 (use-package ivy-rich
-  :ensure t
   :config
   (ivy-rich-mode 1))
 
 (use-package counsel-projectile
-  :ensure t
   :after projectile
 
   :bind

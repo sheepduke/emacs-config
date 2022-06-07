@@ -9,8 +9,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package cc-mode
-  :ensure t
-
   :config
   (defun c/c++-mode-setup-company ()
 	(company-mode 1)
@@ -47,14 +45,12 @@
 
 
 (use-package cmake-mode
-  :ensure t
   :mode "CMakeLists\\.txt\\'"
   :mode "\\.cmake\\'")
 
 
 ;; Add completion for C headers.
-(use-package company-c-headers
-  :ensure t)
+(use-package company-c-headers)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Java                              ;;;;
@@ -74,16 +70,13 @@
 ;;;;                            Kotlin                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package kotlin-mode
-  :ensure t)
+(use-package kotlin-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Erlang                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package erlang
-  :ensure t
-
   :config
   (require 'erlang-start)
 
@@ -96,8 +89,6 @@
 
 
 (use-package company-erlang
-  :ensure
-  
   :hook
   (erlang-mode . company-mode)
   (erlang-mode . company-erlang-init))
@@ -107,7 +98,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package alchemist
-  :ensure t
   :after elixir-mode
 
   :commands (alchemist-iex-clear-buffer)
@@ -150,8 +140,6 @@
 
 
 (use-package eglot
-  :ensure t
-
   :commands (eglot-format-buffer)
 
   :config
@@ -189,8 +177,7 @@
               ("C-c C-d" . eldoc-doc-buffer)))
 
 
-(use-package elixir-yasnippets
-  :ensure t)
+(use-package elixir-yasnippets)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -198,8 +185,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package rust-mode
-  :ensure t
-
   :config
   (defun rust-mode-setup ()
     "Setup rust mode."
@@ -220,30 +205,22 @@
 
 
 (use-package cargo
-  :ensure t
-  
   :hook
   (rust-mode . cargo-minor-mode))
 
 
 (use-package racer
-  :ensure t
-  
   :hook
   (rust-mode . racer-mode)
   (rust-mode . eldoc-mode))
 
 
 (use-package flycheck-rust
-  :ensure t
-  
   :hook
   (flycheck-mode . flycheck-rust-setup))
 
 
 (use-package company-racer
-  :ensure t
-
   :hook
   (rust-mode . company-racer-setup)
 
@@ -258,11 +235,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package lisp-mode
+  :ensure nil
   :hook (lisp-mode . disable-semantic-mode))
 
 (use-package sly
-  :ensure t
-
   :functions (sly-mrepl-clear-repl)
 
   :config
@@ -302,15 +278,11 @@
 
 
 (use-package sly-repl-ansi-color
-  :ensure t
-
   :config
   (push 'sly-repl-ansi-color sly-contribs))
 
 
 (use-package lispy
-  :ensure t
-
   :config
   (defun lispy--eval-lisp-fix (str)
     (let ((result (sly-interactive-eval str)))
@@ -330,10 +302,10 @@
   :custom
   (lispy-use-sly t))
 
-(use-package common-lisp-snippets
-  :ensure t)
+(use-package common-lisp-snippets)
 
 (use-package cl-helper
+  :ensure nil
   :bind (:map lisp-mode-map
               ("C-c i" . lisp-import-symbol-and-defpackage)
               ("C-c x" . lisp-export-symbol-and-defpackage)
@@ -351,7 +323,7 @@
 (setq-default flycheck-disabled-checkers
               '(javascript-jshint json-jsonlist emacs-lisp-checkdoc))
 
-(use-package nameless :ensure
+(use-package nameless
   :hook
   (emacs-lisp-mode . nameless-mode)
 
@@ -367,8 +339,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package cider
-  :ensure t
-
   :config
   (defun cider-eval-buffer-content ()
     "Eval buffer content without having to save it."
@@ -392,8 +362,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package geiser
-  :ensure t
-
   :hook
   (geiser-mode . disable-company-quickhelp-mode)
   (scheme-mode . geiser-mode)
@@ -410,7 +378,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package lsp-haskell
-  :ensure t
   :functions (lsp-format-buffer
               lsp-organize-imports)
 
@@ -425,8 +392,6 @@
   (haskell-mode . lsp-haskell-install-save-hooks))
 
 (use-package haskell-mode
-  :ensure t
-
   :functions (haskell-session-interactive-buffer
               haskell-interactive-handle-expr
               haskell-interactive-copy-to-prompt)
@@ -471,8 +436,6 @@
 
 ;;; Major mode for editing OCaml files.
 (use-package tuareg
-  :ensure t
-  
   :config
   (defun tuareg-insert-comment-block ()
     (interactive)
@@ -491,7 +454,6 @@
 
 ;;; Auto completion and more.
 (use-package merlin
-  :ensure t
   :after tuareg
 
   :hook (tuareg-mode . merlin-mode))
@@ -499,7 +461,6 @@
 
 ;; Consistent indentation.
 (use-package ocp-indent
-  :ensure t
   :after tuareg
 
   :commands (ocp-indent-buffer)
@@ -518,19 +479,16 @@
 
 ;;; Type tips.
 (use-package merlin-eldoc
-  :ensure t
   :after merlin
 
   :hook (tuareg-mode . merlin-eldoc-setup))
 
 
 ;;; Build system.
-(use-package dune
-  :ensure t)
+(use-package dune)
 
 
 (use-package utop
-  :ensure t
   :after tuareg
 
   :hook (tuareg-mode . utop-minor-mode))
@@ -541,8 +499,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package julia-mode
-  :ensure t
-
   :config
   (defun julia-mode-setup ()
     "Setup Julia mode."
@@ -561,7 +517,6 @@
 
   
 (use-package julia-repl
-  :ensure t
   :after julia-mode
   :commands (julia-repl-send-line)
 
@@ -602,8 +557,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package web-mode
-  :ensure t
-
   :mode "\\.html\\'"
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
@@ -637,8 +590,6 @@
 
 
 (use-package emmet-mode
-  :ensure t
-
   :hook
   (web-mode . emmet-mode)
 
@@ -647,12 +598,10 @@
               ("C-M-j" . emmet-expand-yas)))
 
 
-(use-package company-web
-  :ensure t)
+(use-package company-web)
 
 
 (use-package rainbow-mode
-  :ensure t
   :after web-mode
 
   :hook (web-mode . rainbow-mode))
@@ -663,8 +612,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package js2-mode
-  :ensure t
-
   :config
   (defun setup-js2-mode ()
     (when (equal major-mode 'js-mode)
@@ -683,16 +630,12 @@
 
 
 (use-package typescript-mode
-  :ensure t
-  
   :custom
   (typescript-indent-level 2))
 
 
 ;; IDE for JavaScript.
 (use-package tide
-  :ensure t
-
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
          (js-mode . tide-setup)
@@ -701,8 +644,6 @@
 
 ;; REPL for JavaScript.
 (use-package js-comint
-  :ensure t
-
   :bind (:map js-mode-map
               ("C-x C-e" . js-comint-send-last-sexp)
               ("C-c C-r" . js-comint-send-region)
@@ -716,8 +657,6 @@
 ;; REPL for TypeScript.
 ;; First install the REPL via ~npm install -g tsun~.
 (use-package ts-comint
-  :ensure t
-  
   :config
   (defun ts-comint-clear ()
     "Clear the TypeScript REPL buffer."
@@ -733,8 +672,6 @@
 
 
 (use-package flycheck
-  :ensure t
-
   :config
   (defun flycheck-use-local-eslint ()
     (let* ((root (locate-dominating-file
@@ -754,8 +691,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package python
-  :ensure t
-  
   :custom
   ;; Use Python 3 instead of Python 2.
   (python-shell-interpreter "python3")
@@ -765,7 +700,6 @@
 ;; For setup elpy, run:
 ;; pip install jedi flake8 autopep8
 (use-package elpy
-  :ensure t
   :after python
 
   :config
@@ -794,8 +728,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package ruby-mode
-  :ensure t
-
   :config
   (defun ruby-insert-end ()
     "Insert `end' accordingly."
@@ -817,8 +749,6 @@
 
 
 (use-package inf-ruby
-  :ensure t
-
   :config
   (defun inf-ruby-restart (&optional impl)
     (interactive)
@@ -846,8 +776,6 @@
 
 
 (use-package company-inf-ruby
-  :ensure t
-  
   :config
   (add-to-list 'company-backends 'company-inf-ruby)
 
@@ -860,7 +788,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package go-mode
-  :ensure t
   :commands (gofmt go-remove-unused-imports)
   
   :config
@@ -876,14 +803,12 @@
 
 
 (use-package go-eldoc
-  :ensure t
   :after go-mode
 
   :hook (go-mode . go-eldoc-setup))
 
 
 (use-package company-go
-  :ensure t
   :after go-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -891,6 +816,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package latex
+  :ensure nil
   :config
   (defun LaTeX-mode-setup ()
     "Hook function for LaTeX mode."
@@ -923,8 +849,6 @@
 
 
 (use-package latex-preview-pane
-  :ensure t
-
   :bind (:map latex-preview-pane-mode-map
               ("M-P" . nil))
 
@@ -932,8 +856,6 @@
 
 
 (use-package reftex-toc
-  :ensure t
-
   :bind (:map reftex-toc-mode-map
               ("q" . delete-window))
 
@@ -945,8 +867,6 @@
 
 
 (use-package company-auctex
-  :ensure t
-
   :custom
   (defun LaTeX-mode-setup-company ()
     (make-local-variable 'company-backends)
@@ -965,7 +885,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package markdown-mode
-  :ensure t
   :commands (w3m-reload-all-pages)
   
   :config
@@ -999,21 +918,17 @@
 
 
 (use-package poly-markdown
-  :ensure t
-
   :config
   (remove-hook 'markdown-mode-hook 'poly-markdown-mode))
 
 
 (use-package flymd
-  :ensure t
   :after markdown-mode
 
   :custom
   (flymd-output-directory "/tmp/"))
 
 (use-package markdown-toc
-  :ensure t
   :after markdown-mode
 
   :bind (:map markdown-mode-map
@@ -1025,12 +940,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package nxml-mode
+  :ensure nil
   :hook (nxml-mode . highlight-indent-guides-mode))
 
 
 (use-package yaml-mode
-  :ensure t
-
   :mode "\\.yml\\'"
   :mode "\\.yml.j2\\'"
 
@@ -1041,22 +955,20 @@
 
 
 (use-package conf-mode
-  :ensure t
-
   :hook (conf-mode . linum-mode)
 
   :bind (:map conf-mode-map
               ("<return>" . newline-smart-comment)))
 
-(use-package json-mode :ensure)
+(use-package json-mode)
 
-(use-package toml-mode :ensure)
+(use-package toml-mode)
 
-(use-package powershell :ensure)
+(use-package powershell)
 
-(use-package systemd :ensure)
+(use-package systemd)
 
-(use-package csharp-mode :ensure)
+(use-package csharp-mode)
 
 
 ;;; d2-dev-lang.el ends here
