@@ -129,25 +129,6 @@
   (openwith-associations '(("\\.mp4\\'" "mpv" (file))
                            ("\\.m4v\\'" "mpv" (file)))))
 
-
-;; Built-in input method.
-(use-package rime
-  :ensure t
-  
-  :custom
-  ;; Set Rime as the default input method.
-  (default-input-method "rime")
-
-  ;; Set the emacs-module.h header file.
-  (rime-emacs-module-header-root (get-emacs-module-header-file))
-
-  ;; Use mini-buffer as the prompt.
-  (rime-show-candidate 'minibuffer)
-
-  ;; Use ibus Rime data.
-  (rime-user-data-dir "~/.config/ibus/rime"))
-
-
 ;; Emacs interface for `cheat.sh'.
 (use-package cheat-sh
   :ensure t)

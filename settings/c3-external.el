@@ -187,6 +187,26 @@
   ;; Use w3m to render HTML mails.
   (mm-text-html-renderer 'w3m))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                             Rime                             ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Built-in input method.
+(use-package rime
+  :ensure t
+  
+  :custom
+  ;; Set Rime as the default input method.
+  (default-input-method "rime")
+
+  ;; Set the emacs-module.h header file.
+  (rime-emacs-module-header-root (get-emacs-module-header-file))
+
+  ;; Use mini-buffer as the prompt.
+  (rime-show-candidate 'minibuffer)
+
+  ;; Use ibus Rime data.
+  (rime-user-data-dir "~/.config/ibus/rime"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Silver Brain                         ;;;;
