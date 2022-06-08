@@ -73,6 +73,26 @@
 (use-package kotlin-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                            Scala                             ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package scala-mode
+  :mode "\\.scala\\'"
+  :mode "\\.sc\\'")
+
+(use-package lsp-metals
+  :preface
+  (defun lsp-metals-setup-hooks ()
+    (add-hook 'before-save-hook 'lsp-format-buffer))
+
+  :custom
+  (lsp-metals-server-args '("-J-Dmetals.allow-multiline-string-formatting=off"))
+
+  :hook
+  (scala-mode . lsp)
+  (scala-mode . lsp-metals-setup-hooks))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Erlang                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
