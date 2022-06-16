@@ -96,6 +96,7 @@
 
 (use-package sbt-anywhere
   :ensure nil
+  :after scala-mode
   
   :bind (:map scala-mode-map
               ("C-c C-l" . sbt-anywhere-enter-repl)
