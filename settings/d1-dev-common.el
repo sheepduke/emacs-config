@@ -153,4 +153,9 @@
   :bind (:map prog-mode-map
               ("<return>" . newline-smart-comment)))
 
+(use-package comint-mode
+  :ensure nil
+  :bind (:map comint-mode-map
+              ("C-M-l" . comint-clear-buffer)))
+
 ;;; d1-dev-common.el ends here
