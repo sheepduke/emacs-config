@@ -83,6 +83,7 @@
 (use-package lsp-metals
   :preface
   (defun lsp-metals-setup-hooks ()
+    (add-hook 'before-save-hook 'lsp-organize-imports)
     (add-hook 'before-save-hook 'lsp-format-buffer))
 
   :custom
