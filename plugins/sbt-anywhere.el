@@ -38,4 +38,9 @@
   (interactive)
   (sbt-anywhere-send-region (point-min) (point-max)))
 
+(defun sbt-anywhere-do-restart ()
+  "Send reStart command from spray plugin."
+  (interactive)
+  (sbt-anywhere-send-string "reStart"))
+
 (provide 'sbt-anywhere)

@@ -110,6 +110,7 @@
               ("C-c c r" . sbt-do-run)
               ("C-c c l" . sbt-do-clean)
               ("C-c c p" . sbt-do-package)
+              ("C-c c s" . sbt-anywhere-do-restart)
               ("C-M-l" . sbt-clear)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
