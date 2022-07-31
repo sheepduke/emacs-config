@@ -213,8 +213,6 @@ EXPORTER is provided by Org Mode."
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c k") 'org-capture)
-(global-set-key (kbd "C-c l l") 'org-store-link)
-(global-set-key (kbd "C-c l i") 'org-insert-link)
 
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "HOLD(h!)" "PROJ" "|"
