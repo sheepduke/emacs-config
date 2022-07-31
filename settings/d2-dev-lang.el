@@ -111,6 +111,7 @@
               ("C-c c l" . sbt-do-clean)
               ("C-c c p" . sbt-do-package)
               ("C-c c s" . sbt-anywhere-do-restart)
+              ("C-c c a" . sbt-anywhere-do-assembly)
               ("C-M-l" . sbt-clear)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

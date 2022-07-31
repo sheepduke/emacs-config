@@ -43,4 +43,9 @@
   (interactive)
   (sbt-anywhere-send-string "reStart"))
 
+(defun sbt-anywhere-do-assembly ()
+  "Send assembly command from spray plugin."
+  (interactive)
+  (sbt-anywhere-send-string "assembly"))
+
 (provide 'sbt-anywhere)
