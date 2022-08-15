@@ -28,6 +28,10 @@
     (make-local-variable 'company-idle-delay)
     (setq company-idle-delay 0.5))
 
+  (defun enable-word-wrap ()
+    "Enable word wrap."
+    (toggle-word-wrap 1))
+
   :config
   ;; Enable bold, italic etc inside Chinese context.
   (setf (nth 0 org-emphasis-regexp-components)
@@ -41,6 +45,7 @@
   (org-mode . disable-truncate-lines)
   (org-mode . flyspell-mode)
   (org-mode . org-mode-setup)
+  (org-mode . enable-word-wrap)
 
   :bind (:map org-mode-map
               ("C-'" . nil)
