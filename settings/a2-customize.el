@@ -180,7 +180,7 @@ output."
     (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
     (setenv "PAGER" "/bin/cat"))
 
-  :bind ("C-c s" . eshell)
+  :bind ("C-c S" . eshell)
 
   :hook (eshell-mode . eshell-mode-setup))
 
@@ -247,6 +247,7 @@ This works like Vim 'w!'."
   (switch-to-buffer (other-buffer)))
 
 (defun switch-to-scratch-buffer ()
+  (interactive)
   (switch-to-buffer "*scratch*"))
 
 (global-set-key (kbd "C-c r") 'rename-buffer)
