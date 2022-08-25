@@ -17,6 +17,9 @@
 ;; Don't show the startup message.
 (setq inhibit-startup-message t)
 
+;; Content of *scratch* buffer.
+(setq initial-scratch-message "")
+
 ;; When quiting Emacs, confirm.
 (setq confirm-kill-emacs 'yes-or-no-p)
 
@@ -243,8 +246,12 @@ This works like Vim 'w!'."
   (interactive)
   (switch-to-buffer (other-buffer)))
 
+(defun switch-to-scratch-buffer ()
+  (switch-to-buffer "*scratch*"))
+
 (global-set-key (kbd "C-c r") 'rename-buffer)
 (global-set-key (kbd "C-x C-b") 'switch-to-other-buffer)
+(global-set-key (kbd "C-c s") 'switch-to-scratch-buffer)
 (global-set-key (kbd "C-x C-k") 'bury-buffer)
 (global-set-key (kbd "C-x C-s") 'save-buffer-readonly)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
