@@ -437,7 +437,4 @@ This works like Vim 'w!'."
   :bind (("C-c 1" . webjump)
          ("C-c 2" . webjump-add)))
 
-(use-package linum
-  :hook ((text-mode fundamental-mode prog-mode) . linum-mode))
-
 ;;; a2-customize.el ends here

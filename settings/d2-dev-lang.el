@@ -997,8 +997,6 @@
 
 
 (use-package conf-mode
-  :hook (conf-mode . linum-mode)
-
   :bind (:map conf-mode-map
               ("<return>" . newline-smart-comment)))
 
