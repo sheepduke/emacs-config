@@ -130,11 +130,6 @@
   (erlang-indent-level 2))
 
 
-(use-package company-erlang
-  :hook
-  (erlang-mode . company-mode)
-  (erlang-mode . company-erlang-init))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Elixir                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -179,45 +174,6 @@
   :hook
   (elixir-mode . alchemist-mode)
   (alchemist-mode . flyspell-prog-mode))
-
-
-(use-package eglot
-  :commands (eglot-format-buffer)
-
-  :config
-  (defun elixir-get-lsp-server-path ()
-    "Get LSP server path."
-    (format "%s/software/elixir-ls/language_server.%s"
-            (getenv "HOME")
-            (if (windows?) "bat" "sh")))
-
-  (defun eglot-format-elixir-buffer ()
-    "Sort the buffer using eglot when in elixir mode."
-    (interactive)
-    (when (member major-mode '(elixir-mode))
-      (eglot-format-buffer)))
-
-  (defun eglot-find-mix-project (dir)
-    "Try to locate a Elixir project root by 'mix.exs' above DIR."
-    (when (or (string-suffix-p ".ex" (buffer-file-name))
-              (string-suffix-p ".exs" (buffer-file-name)))
-      (message "Finding ")
-      (let ((mix_root (locate-dominating-file dir "mix.exs")))
-        (message "Found Elixir project root in '%s' starting from '%s'" mix_root dir)
-        (if (stringp mix_root) `(transient . ,mix_root) nil))))
-
-  (add-to-list 'eglot-server-programs
-               `(elixir-mode ,(elixir-get-lsp-server-path)))
-
-  (add-hook 'project-find-functions 'eglot-find-mix-project)
-
-  :hook
-  (elixir-mode . eglot-ensure)
-  (before-save . eglot-format-elixir-buffer)
-
-  :bind (:map eglot-mode-map
-              ("C-c C-d" . eldoc-doc-buffer)))
-
 
 (use-package elixir-yasnippets)
 
