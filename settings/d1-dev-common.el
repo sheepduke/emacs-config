@@ -147,7 +147,9 @@
 (use-package prog-mode
   :ensure nil
   :bind (:map prog-mode-map
-              ("<return>" . newline-smart-comment)))
+              ("<return>" . newline-smart-comment))
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 (use-package comint-mode
   :ensure nil
