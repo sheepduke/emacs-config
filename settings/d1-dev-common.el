@@ -137,10 +137,6 @@
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
-;; if you are ivy user
-(use-package lsp-ivy
-  :commands lsp-ivy-workspace-symbol)
-
 (use-package lsp-treemacs
   :commands lsp-treemacs-errors-list)
 
