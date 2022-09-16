@@ -290,7 +290,7 @@
   (advice-add 'lispy--eval-lisp :override #'lispy--eval-lisp-fix)
   (setq lispy-colon-p nil)
 
-  :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
+  ;; :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
 
   :bind (:map lispy-mode-map
               ("M-o" . nil)
@@ -299,6 +299,19 @@
 
   :custom
   (lispy-use-sly t))
+
+(use-package paredit
+  :bind
+  (:map paredit-mode-map
+        ("M-s" . nil)
+        ("M-S" . paredit-splice-sexp)
+        ("C-<" . paredit-backward-slurp-sexp)
+        ("C->" . paredit-backward-barf-sexp)
+        ("C-M-<" . paredit-forward-barf-sexp)
+        ("C-M->" . paredit-forward-slurp-sexp))
+
+  :hook
+  ((emacs-lisp-mode lisp-mode) . paredit-mode))
 
 (use-package common-lisp-snippets)
 
