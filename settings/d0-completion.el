@@ -106,6 +106,9 @@
   (:map company-active-map
         ("C-i" . consult-company)))
 
+(use-package consult-lsp
+  :after (lsp))
+
 ;; Action menu for completions.
 (use-package embark
   :bind
