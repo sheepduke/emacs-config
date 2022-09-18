@@ -174,6 +174,9 @@
   (w3m-bookmark-file (concat *data-path* "w3m/bookmark.html"))
 
   ;; Set w3m as the default browser inside Emacs.
+  (browse-url-alist)
+  (browse-url-browser-function '(("HyperSpec" . w3m-goto-url-new-session)
+                                 (".*" . browse-url-default-browser)))
   (browse-url-handlers '(("HyperSpec" . w3m-goto-url-new-session)
                          (".*" . browse-url-default-browser)))
 
