@@ -292,10 +292,12 @@
 
   ;; :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
 
-  :bind (:map lispy-mode-map
-              ("M-o" . nil)
-              ("M-i" . nil)
-              ("-" . nil))
+  :bind
+  ("C-M-i" . lispy-tab)
+  (:map lispy-mode-map
+        ("M-o" . nil)
+        ("M-i" . nil)
+        ("-" . nil))
 
   :custom
   (lispy-use-sly t))
