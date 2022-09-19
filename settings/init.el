@@ -9,12 +9,11 @@
 (setq package-archives
       '(;; Choose whatever you like.
         ;; --- Default
-        ;; ("gnu" . "https://elpa.gnu.org/packages/")
-        ;; ("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
         ;; --- TUNA mirror
-        ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-        ;; ---
+        ;; ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ;; ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
         ))
 
 (package-initialize)
