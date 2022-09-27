@@ -126,7 +126,7 @@
 (use-package w3m
   :if (executable-find "w3m")
 
-  :config
+  :preface
   (defun w3m-bury-all-buffers ()
     "Bury all w3m related buffers."
     (interactive)
@@ -134,6 +134,13 @@
       (dolist (buffer buffers)
         (bury-buffer buffer)))
     (switch-to-other-buffer))
+
+  (defun w3m-browse-url-in-browser (url &rest args)
+    (if (wsl?)
+        (let ((browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe")
+              (browse-url-generic-args '("/c" "start")))
+          (browse-url-generic url))
+      (browse-url-default-browser url)))
 
   :bind (("C-c 3" . w3m)
          :map w3m-mode-map
@@ -174,11 +181,10 @@
   (w3m-bookmark-file (concat *data-path* "w3m/bookmark.html"))
 
   ;; Set w3m as the default browser inside Emacs.
-  (browse-url-alist)
   (browse-url-browser-function '(("HyperSpec" . w3m-goto-url-new-session)
-                                 (".*" . browse-url-default-browser)))
+                                 (".*" . w3m-browse-url-in-browser)))
   (browse-url-handlers '(("HyperSpec" . w3m-goto-url-new-session)
-                         (".*" . browse-url-default-browser)))
+                         (".*" . w3m-browse-url-in-browser)))
 
   ;; Set duckduckgo as the default search engine.
   (w3m-search-default-engine "duckduckgo")
