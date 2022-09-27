@@ -96,6 +96,10 @@ If no one was found, NIL is returned."
   "Return T if current OS is Windows."
   (equal system-type 'windows-nt))
 
+(defun wsl? ()
+  "Return T if current OS is WSL(2)."
+  (string-match "-[Mm]icrosoft" (shell-command-to-string "uname -a")))
+
 (defun x? ()
   "Return TRUE if we are under X system."
   (getenv "DISPLAY"))
