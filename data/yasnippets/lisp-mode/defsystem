@@ -7,8 +7,8 @@
   :description "$2"
   :license "MIT"
   :author "YUE Daian"
-  :depends-on (#:alexandria
-               #:serapeum)
+  :depends-on (:alexandria
+               :serapeum)
   :serial t
   :components ((:module "src"
                 :components
@@ -19,8 +19,8 @@
   :version "0.1.0"
   :license "MIT"
   :author "YUE Daian"
-  :depends-on (#:$1
-               #:fiveam)
+  :depends-on (:$1
+               :fiveam)
   :serial t
   :components ((:module "test"
                 :components
