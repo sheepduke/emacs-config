@@ -132,6 +132,9 @@
 :not(pre) > code {
   background: #d4d3d3; border-radius: 2px; padding: 2px
 }​
+image {
+  max-width: 100%
+}
 </style>
 ")
 
