@@ -322,7 +322,8 @@
   :bind (:map lisp-mode-map
               ("C-c i" . lisp-import-symbol-and-defpackage)
               ("C-c x" . lisp-export-symbol-and-defpackage)
-              ("C-c X" . lisp-export-class-and-defpackage)))
+              ("C-c X" . lisp-export-class-and-defpackage)
+              ("C-c 5" . lisp-toggle-5am-run-test-when-defined)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Emacs Lisp                            ;;;;

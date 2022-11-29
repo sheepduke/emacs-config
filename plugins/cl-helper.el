@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(require 'sly)
+
 (defun lisp-import-symbol-and-defpackage ()
   (interactive)
   (sly-import-symbol-at-point)
@@ -88,5 +90,22 @@
     (?r ":reader")
     (?w ":writer")
     (?\s nil)))
+
+(defun lisp-fiveam-run-test-when-defined ()
+  (interactive)
+)
+
+(defcustom lisp-5am-run-test-when-defined nil
+  "T to run tests when defined.")
+
+(defun lisp-toggle-5am-run-test-when-defined ()
+  "Toggle running FiveAM tests when defined."
+  (interactive)
+  (let ((new-value (not lisp-5am-run-test-when-defined)))
+    (with-temp-buffer
+      (insert (format "(setf 5am:*run-test-when-defined* %s)"
+                      new-value))
+      (sly-eval-buffer))
+    (setq lisp-5am-run-test-when-defined new-value)))
 
 (provide 'cl-helper)
