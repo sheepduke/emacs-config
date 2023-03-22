@@ -209,7 +209,9 @@
   (rime-show-candidate 'minibuffer)
 
   ;; Use ibus Rime data.
-  (rime-user-data-dir "~/.config/ibus/rime"))
+  (rime-user-data-dir (if (file-directory-p "~/.local/share/fcitx5/rime")
+                          "~/.local/share/fcitx5/rime"
+                        "~/.config/ibus/rime")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Silver Brain                         ;;;;
