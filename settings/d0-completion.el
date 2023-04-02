@@ -43,9 +43,9 @@
    ("C-x r b" . consult-bookmark)
 
    ;; Register.
-   ("M-#" . consult-register-store)
-   ("M-'" . consult-register)
-   ("M-\"" . consult-register-load)
+   ("C-c SPC" . consult-register-store)
+   ("C-c C-SPC" . consult-register-load)
+   ("C-c M-SPC" . consult-register)
 
    ;; Yank.
    ("M-y" . consult-yank-pop)
@@ -70,10 +70,9 @@
    ("M-s G" . consult-git-grep)
    ("M-s r" . consult-ripgrep)
    ("M-s l" . consult-line-multi)
-   ("M-s m" . consult-multi-occur)
    ("M-s k" . consult-keep-lines)
    ("M-s u" . consult-focus-lines)
-   ("C-s" . consult-line)
+   ("C-S-s" . consult-line)
 
    ;; Isearch integration
    :map isearch-mode-map
