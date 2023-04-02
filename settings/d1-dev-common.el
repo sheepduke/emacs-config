@@ -158,4 +158,8 @@
   :bind (:map comint-mode-map
               ("C-M-l" . comint-clear-buffer)))
 
+(use-package linum
+  :hook
+  (prog-mode . linum-mode))
+
 ;;; d1-dev-common.el ends here
