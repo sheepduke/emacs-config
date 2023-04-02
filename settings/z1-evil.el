@@ -73,8 +73,8 @@
         ;; Org - O
         ("o a" . #'org-agenda)
         ("o c" . #'org-capture)
-        ("o j" . #'org-journal-open-current-journal-file)
-        ("o n" . org-journal-new-entry)
+        ("o o" . #'org-journal-open-current-journal-file)
+        ("o j" . #'org-journal-new-entry)
 
         ;; Tools - T
         ("t f" . #'auto-fill-mode)
