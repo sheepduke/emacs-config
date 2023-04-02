@@ -81,6 +81,7 @@
   :mode "\\.sc\\'")
 
 (use-package lsp-metals
+  :disabled
   :preface
   (defun lsp-metals-setup-hooks ()
     (add-hook 'before-save-hook 'lsp-organize-imports)
@@ -96,6 +97,7 @@
 (use-package sbt-mode)
 
 (use-package sbt-anywhere
+  :disabled
   :ensure nil
   :after scala-mode
   
@@ -135,6 +137,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package alchemist
+  :disabled
   :after elixir-mode
 
   :commands (alchemist-iex-clear-buffer)
@@ -208,17 +211,20 @@
 
 
 (use-package racer
+  :disabled
   :hook
   (rust-mode . racer-mode)
   (rust-mode . eldoc-mode))
 
 
 (use-package flycheck-rust
+  :disabled
   :hook
   (flycheck-mode . flycheck-rust-setup))
 
 
 (use-package company-racer
+  :disabled
   :hook
   (rust-mode . company-racer-setup)
 
@@ -317,6 +323,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package cider
+  :disabled
   :config
   (defun cider-eval-buffer-content ()
     "Eval buffer content without having to save it."
@@ -340,6 +347,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package geiser
+  :disabled
   :hook
   (geiser-mode . disable-company-quickhelp-mode)
   (scheme-mode . geiser-mode)
@@ -356,6 +364,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package lsp-haskell
+  :disabled
   :functions (lsp-format-buffer
               lsp-organize-imports)
 
@@ -432,6 +441,7 @@
 
 ;;; Auto completion and more.
 (use-package merlin
+  :disabled
   :after tuareg
 
   :hook (tuareg-mode . merlin-mode))
@@ -439,6 +449,7 @@
 
 ;; Consistent indentation.
 (use-package ocp-indent
+  :disabled
   :after tuareg
 
   :commands (ocp-indent-buffer)
@@ -457,6 +468,7 @@
 
 ;;; Type tips.
 (use-package merlin-eldoc
+  :disabled
   :after merlin
 
   :hook (tuareg-mode . merlin-eldoc-setup))
@@ -467,6 +479,7 @@
 
 
 (use-package utop
+  :disabled
   :after tuareg
 
   :hook (tuareg-mode . utop-minor-mode))
@@ -495,6 +508,7 @@
 
   
 (use-package julia-repl
+  :disabled
   :after julia-mode
   :commands (julia-repl-send-line)
 
@@ -678,6 +692,7 @@
 ;; For setup elpy, run:
 ;; pip install jedi flake8 autopep8
 (use-package elpy
+  :disabled
   :after python
 
   :config
@@ -727,6 +742,7 @@
 
 
 (use-package inf-ruby
+  :disabled
   :config
   (defun inf-ruby-restart (&optional impl)
     (interactive)
@@ -754,6 +770,7 @@
 
 
 (use-package company-inf-ruby
+  :disabled
   :config
   (add-to-list 'company-backends 'company-inf-ruby)
 
@@ -781,12 +798,14 @@
 
 
 (use-package go-eldoc
+  :disabled
   :after go-mode
 
   :hook (go-mode . go-eldoc-setup))
 
 
 (use-package company-go
+  :disabled
   :after go-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
