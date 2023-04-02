@@ -50,9 +50,6 @@
    ;; Yank.
    ("M-y" . consult-yank-pop)
 
-   ;; Help.
-   ("<help> a" . consult-apropos)
-
    ;; M-g bindings (goto-map)
    ("M-g e" . consult-compile-error)
    ("M-g f" . consult-flymake)   ;; Alternative: consult-flycheck
