@@ -10,15 +10,6 @@
   :config
   (electric-pair-mode 1))
 
-
-;; Ebuild mode, for Gentoo users.
-(use-package ebuild-mode
-  :ensure nil
-  :mode "\\.use\\'"
-  :mode "\\.mask\\'"
-  :mode "\\.unmask\\'")
-
-
 ;; Make undo like a tree.
 (use-package undo-tree
   :delight
@@ -53,14 +44,6 @@
 ;; Open epub files.
 (use-package nov
   :mode ("\\.epub\\'" . nov-mode))
-
-
-;; Edit multiple places at the same time.
-(use-package multiple-cursors
-  :bind ("C-x r e" . mc/edit-lines)
-
-  :custom
-  (mc/always-run-for-all t))
 
 
 ;; It's Magit! Git inside Emacs.
@@ -147,9 +130,5 @@
 
   :custom
   (which-key-idle-delay 0.5))
-
-;; AutoHotkey mode.
-;; Only for Windows.
-(use-package ahk-mode)
 
 ;;; b1-tools.el ends here

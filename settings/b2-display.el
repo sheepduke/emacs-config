@@ -142,10 +142,6 @@ A dedicated window can't be switched or modified by some commands."
 ;;;;                            Theme                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package tangotango-theme)
-(use-package ample-theme)
-(use-package moe-theme)
-(use-package spacemacs-common :ensure spacemacs-theme)
 (use-package kaolin-themes)
 
 ;;; b2-display.el ends here

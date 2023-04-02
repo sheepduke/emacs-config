@@ -280,6 +280,7 @@
   (push 'sly-repl-ansi-color sly-contribs))
 
 (use-package lispy
+  :disabled
   :config
   (defun lispy--eval-lisp-fix (str)
     (let ((result (sly-interactive-eval str)))
@@ -982,5 +983,13 @@
 
 (use-package csharp-mode)
 
+(use-package ahk-mode)
+
+;; Ebuild mode, for Gentoo users.
+(use-package ebuild-mode
+  :ensure nil
+  :mode "\\.use\\'"
+  :mode "\\.mask\\'"
+  :mode "\\.unmask\\'")
 
 ;;; d2-dev-lang.el ends here
