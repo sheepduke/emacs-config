@@ -3,10 +3,23 @@
 
   :init
   (setq evil-want-keybinding nil)
+  (global-undo-tree-mode 1)
 
   ;; Define the leader-map.
   (define-prefix-command 'evil-leader-map)
 
+  :custom
+  ;; Regex to match buffer name and the initial state. State can be one of:
+  ;; normal, insert, visual, replace, operator, motion, emacs and nil
+  (evil-buffer-regexps '(("\\*w3m" . nil)))
+
+  ;; Use C-u to delete to indentation in editing mode.
+  (evil-want-C-u-delete t)
+
+  ;; Use undo-tree as the undo system.
+  (evil-undo-system 'undo-tree)
+
+  :config
   (defun evil-setup-emacs-lisp-mode-keymap()
     "Setup keymap for emacs-lisp-mode."
     (evil-local-set-key 'normal (kbd "<SPC>lb") #'eval-buffer)
@@ -25,64 +38,57 @@
     (evil-local-set-key 'normal (kbd "<SPC>lc") #'sly-repl-clear-buffer-anywhere)
     (evil-local-set-key 'insert (kbd "<SPC>lc") #'sly-repl-clear-buffer-anywhere))
 
-  :custom
-  ;; Regex to match buffer name and the initial state. State can be one of:
-  ;; normal, insert, visual, replace, operator, motion, emacs and nil
-  (evil-buffer-regexps '(("\\*w3m" . nil)))
-
-  ;; Use C-u to delete to indentation in editing mode.
-  (evil-want-C-u-delete t)
-
-  ;; Use undo-tree as the undo system.
-  (evil-undo-system 'undo-tree)
-
-  :config
   (evil-set-leader 'normal (kbd "SPC"))
+  (evil-ex-define-cmd "q[uit]" #'kill-this-buffer)
   (evil-mode 1)
 
   :bind
   (:map evil-leader-map
         ;; Buffer - B
-        ("bq" . #'bury-buffer)
-        ("bb" . #'consult-bookmark)
-        ("bl" . #'consult-buffer)
-        ("bk" . #'kill-this-buffer)
+        ("b q" . #'bury-buffer)
+        ("b b" . #'consult-bookmark)
+        ("b l" . #'consult-buffer)
+        ("b p" . #'consult-projectile)
+        ("b d" . #'dired)
+        ("b f" . #'find-file)
+        ("b k" . #'kill-this-buffer)
 
         ;; Editing - E
-        ("ec" . #'copy-whole-buffer)
+        ("e c" . #'copy-whole-buffer)
         
-        ;; File - F
-        ("fo" . #'find-file)
-        ("fd" . #'dired)
-
         ;; Goto - G
-        ("gl" . #'avy-goto-line)
-        ("gs" . #'consult-line)
-        ("gm" . #'consult-mark)
-        ("go" . #'consult-outline)
-        ("gp" . #'consult-projectile)
+        ("g l" . #'avy-goto-line)
+        ("g s" . #'consult-line)
+        ("g m" . #'consult-mark)
+        ("g o" . #'consult-outline)
 
         ;; Help - H
-        ("hf" . #'describe-function)
-        ("hk" . #'describe-key)
-        ("hm" . #'describe-mode)
-        ("hs" . #'describe-symbol)
-        ("hv" . #'describe-variable)
-        ("hi" . #'info)
+        ("h f" . #'describe-function)
+        ("h k" . #'describe-key)
+        ("h m" . #'describe-mode)
+        ("h s" . #'describe-symbol)
+        ("h v" . #'describe-variable)
+        ("h i" . #'info)
+
+        ;; Org - O
+        ("o a" . #'org-agenda)
+        ("o c" . #'org-capture)
+        ("o j" . #'org-journal-open-current-journal-file)
+        ("o n" . org-journal-new-entry)
 
         ;; Tools - T
-        ("tf" . #'auto-fill-mode)
-        ("tc" . #'calendar)
-        ("tn" . #'compose-mail)
-        ("te" . #'eshell)
-        ("tl" . #'linum-mode)
-        ("tv" . #'magit)
-        ("tm" . #'notmuch)
-        ("ts" . #'sdcv-search-input)
-        ("td" . #'toggle-debug-on-error)
-        ("tt" . #'toggle-truncate-lines)
-        ("tw" . #'toggle-word-wrap)
-        ("tu" . #'undo-tree-visualize)
+        ("t f" . #'auto-fill-mode)
+        ("t c" . #'calendar)
+        ("t n" . #'compose-mail)
+        ("t e" . #'eshell)
+        ("t l" . #'linum-mode)
+        ("t v" . #'magit)
+        ("t m" . #'notmuch)
+        ("t s" . #'sdcv-search-input)
+        ("t d" . #'toggle-debug-on-error)
+        ("t t" . #'toggle-truncate-lines)
+        ("t w" . #'toggle-word-wrap)
+        ("t u" . #'undo-tree-visualize)
 
         ;; Command - X
         ("x" . #'execute-extended-command))

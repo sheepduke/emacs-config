@@ -15,7 +15,7 @@
   :delight
 
   :config
-  (global-undo-tree-mode)
+  (global-undo-tree-mode 1)
 
   :bind (("C-/" . undo-tree-undo)
          ("C-?" . undo-tree-redo)
