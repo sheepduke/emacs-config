@@ -415,15 +415,10 @@ This works like Vim 'w!'."
 (global-set-key (kbd "C-c t d") 'toggle-debug-on-error)
 (global-set-key (kbd "C-c t i") 'auto-revert-tail-mode)
 (global-set-key (kbd "C-c t l") 'linum-mode)
-(global-set-key (kbd "C-c t m") 'master-mode)
 (global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c t w") 'toggle-word-wrap)
 (global-set-key (kbd "C-c t v") 'visual-line-mode)
 (global-set-key (kbd "C-x H") 'copy-whole-buffer)
-
-(use-package master
-  :bind (:map master-mode-map
-              ("C-c C-l" . master-set-slave)))
 
 (use-package webjump
   :defines (webjump-file)
