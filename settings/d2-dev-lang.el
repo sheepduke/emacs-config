@@ -279,43 +279,6 @@
   :config
   (push 'sly-repl-ansi-color sly-contribs))
 
-(use-package lispy
-  :disabled
-  :config
-  (defun lispy--eval-lisp-fix (str)
-    (let ((result (sly-interactive-eval str)))
-      (concat (propertize result 'face 'font-lock-string-face)
-              "\n\n"
-              result)))
-  (advice-add 'lispy--eval-lisp :override #'lispy--eval-lisp-fix)
-  (setq lispy-colon-p nil)
-
-  :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
-
-  :bind
-  ("C-M-i" . lispy-tab)
-  (:map lispy-mode-map
-        ("M-o" . nil)
-        ("M-i" . nil)
-        ("-" . nil))
-
-  :custom
-  (lispy-use-sly t))
-
-(use-package paredit
-  :disabled
-  :bind
-  (:map paredit-mode-map
-        ("M-s" . nil)
-        ("M-S" . paredit-splice-sexp)
-        ("C-<" . paredit-backward-slurp-sexp)
-        ("C->" . paredit-backward-barf-sexp)
-        ("C-M-<" . paredit-forward-barf-sexp)
-        ("C-M->" . paredit-forward-slurp-sexp))
-
-  :hook
-  ((emacs-lisp-mode lisp-mode) . paredit-mode))
-
 (use-package common-lisp-snippets)
 
 (use-package cl-helper
