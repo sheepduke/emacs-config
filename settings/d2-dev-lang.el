@@ -279,7 +279,6 @@
   :config
   (push 'sly-repl-ansi-color sly-contribs))
 
-
 (use-package lispy
   :config
   (defun lispy--eval-lisp-fix (str)
@@ -290,7 +289,7 @@
   (advice-add 'lispy--eval-lisp :override #'lispy--eval-lisp-fix)
   (setq lispy-colon-p nil)
 
-  ;; :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
+  :hook ((emacs-lisp-mode lisp-mode) . lispy-mode)
 
   :bind
   ("C-M-i" . lispy-tab)
@@ -303,6 +302,7 @@
   (lispy-use-sly t))
 
 (use-package paredit
+  :disabled
   :bind
   (:map paredit-mode-map
         ("M-s" . nil)
