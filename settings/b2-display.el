@@ -60,18 +60,6 @@ A dedicated window can't be switched or modified by some commands."
    (current-buffer)))
 (global-set-key (kbd "C-c w w") 'toggle-window-dedicated)
 
-;; Provide GNU screen like screen facility in Emacs.
-(use-package elscreen
-  :init
-  (elscreen-start)
-
-  :bind ("C-z \"" . elscreen-goto)
-         ("C-z '" . elscreen-select-and-goto)
-
-  :custom
-  ;; Don't display the tab on the top
-  (elscreen-display-tab nil))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Shackle                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
