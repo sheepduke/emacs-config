@@ -115,10 +115,6 @@
   (openwith-associations '(("\\.mp4\\'" "mpv" (file))
                            ("\\.m4v\\'" "mpv" (file)))))
 
-;; Emacs interface for `cheat.sh'.
-(use-package cheat-sh)
-
-
 ;; Provides extra information for EShell prompt.
 (use-package eshell-prompt-extras
   :custom
