@@ -131,6 +131,7 @@
   :custom
   (which-key-idle-delay 0.5))
 
+;; Manage buffers and window layouts into dynamic workspaces.
 (use-package perspective
   :custom
   ;; The leader key. Not used because of evil-mode.
@@ -149,5 +150,8 @@
   :bind
   (:map perspective-map
         ("b" . #'switch-to-buffer)))
+
+;; Function to show a dedicated sidebar for dired.
+(use-package dired-sidebar)
 
 ;;; b1-tools.el ends here
