@@ -133,6 +133,8 @@
 
 ;; Manage buffers and window layouts into dynamic workspaces.
 (use-package perspective
+  :defer nil
+  
   :custom
   ;; The leader key. Not used because of evil-mode.
   (persp-mode-prefix-key (kbd "C-x M-p"))
@@ -145,7 +147,10 @@
 
   :config
   (persp-mode 1)
-  (add-hook 'kill-emacs-hook #'persp-state-save)
+  (persp-state-load persp-state-default-file)
+
+  :hook
+  (kill-emacs-hook . #'persp-state-save)
 
   :bind
   (:map perspective-map
