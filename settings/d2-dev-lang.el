@@ -178,8 +178,6 @@
   (elixir-mode . alchemist-mode)
   (alchemist-mode . flyspell-prog-mode))
 
-(use-package elixir-yasnippets)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Rust                              ;;;;
@@ -284,8 +282,6 @@
 (use-package sly-repl-ansi-color
   :config
   (push 'sly-repl-ansi-color sly-contribs))
-
-(use-package common-lisp-snippets)
 
 (use-package cl-helper
   :ensure nil
