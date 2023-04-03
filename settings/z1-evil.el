@@ -77,6 +77,9 @@
         ("o o" . #'org-journal-open-current-journal-file)
         ("o j" . #'org-journal-new-entry)
 
+        ;; Perspecitve - P
+        ("p" . #'perspective-map)
+
         ;; Tools - T
         ("t f" . #'auto-fill-mode)
         ("t c" . #'calendar)

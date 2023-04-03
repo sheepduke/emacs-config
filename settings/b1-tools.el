@@ -131,4 +131,22 @@
   :custom
   (which-key-idle-delay 0.5))
 
+(use-package perspective
+  :custom
+  ;; The leader key. Not used because of evil-mode.
+  (persp-mode-prefix-key (kbd "C-x M-p"))
+
+  (persp-sort 'access)
+
+  ;; File used to load and save state file.
+  (persp-state-default-file "~/.emacs.d/data/perspective.dat")
+
+  :config
+  (persp-mode 1)
+  (add-hook 'kill-emacs-hook #'persp-state-save)
+
+  :bind
+  (:map perspective-map
+        ("b" . #'switch-to-buffer)))
+
 ;;; b1-tools.el ends here
