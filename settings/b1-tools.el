@@ -136,7 +136,8 @@
   ;; The leader key. Not used because of evil-mode.
   (persp-mode-prefix-key (kbd "C-x M-p"))
 
-  (persp-sort 'access)
+  ;; Method used to sort perspectives.
+  (persp-sort 'name)
 
   ;; File used to load and save state file.
   (persp-state-default-file "~/.emacs.d/data/perspective.dat")
