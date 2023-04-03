@@ -89,7 +89,7 @@
         ("t v" . #'magit)
         ("t m" . #'notmuch)
         ("t s" . #'sdcv-search-input)
-        ("t d" . #'toggle-debug-on-error)
+        ("t d" . #'dired-sidebar-jump-to-sidebar)
         ("t t" . #'toggle-truncate-lines)
         ("t w" . #'toggle-word-wrap)
         ("t u" . #'undo-tree-visualize)
