@@ -46,8 +46,9 @@
   (:map evil-leader-map
         ;; Buffer - B
         ("b q" . #'bury-buffer)
-        ("b b" . #'consult-bookmark)
-        ("b l" . #'consult-buffer)
+        ("b b" . #'switch-to-buffer)
+        ("b o" . #'switch-to-other-buffer)
+        ("b l" . #'consult-bookmark)
         ("b p" . #'consult-projectile)
         ("b d" . #'dired)
         ("b f" . #'find-file)
@@ -147,3 +148,8 @@
   :hook
   (emacs-lisp-mode . #'lispyville-mode)
   (lisp-mode . #'lispyville-mode))
+
+
+;; We have to load perspectives at the end of start process.
+(persp-mode 1)
+(persp-state-load persp-state-default-file)

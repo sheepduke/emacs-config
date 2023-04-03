@@ -134,6 +134,11 @@
 ;; Manage buffers and window layouts into dynamic workspaces.
 (use-package perspective
   :defer nil
+
+  :preface
+  (defun persp-start-and-load ()
+    (persp-mode 1)
+    (persp-state-load persp-state-default-file))
   
   :custom
   ;; The leader key. Not used because of evil-mode.
@@ -146,15 +151,9 @@
   (persp-state-default-file "~/.emacs.d/data/perspective.dat")
 
   :config
-  (persp-mode 1)
-  (persp-state-load persp-state-default-file)
-
-  :hook
-  (kill-emacs-hook . #'persp-state-save)
-
-  :bind
-  (:map perspective-map
-        ("b" . #'switch-to-buffer)))
+  (remove-hook 'after-init-hook 'perspective-mode)
+  (remove-hook 'kill-emacs-hook 'perspective-mode)
+  (add-hook 'kill-emacs-hook 'persp-state-save))
 
 ;; Function to show a dedicated sidebar for dired.
 (use-package dired-sidebar)
