@@ -39,7 +39,8 @@
     (evil-local-set-key 'insert (kbd "<SPC>lc") #'sly-repl-clear-buffer-anywhere))
 
   (evil-set-leader 'normal (kbd "SPC"))
-  (evil-ex-define-cmd "q[uit]" #'kill-this-buffer)
+  (evil-ex-define-cmd "q" #'kill-this-buffer)
+  (evil-ex-define-cmd "wq" #'save-and-kill-this-buffer)
   (evil-mode 1)
 
   :bind
@@ -124,10 +125,14 @@
                                   operator
                                   replace))
   :config
-  (general-define-key
-   :states '(normal visual motion)
-   :keymaps 'override
-   "SPC" 'evil-leader-map))
+  (general-define-key :states '(normal visual motion)
+                      :keymaps 'override
+                      "SPC"
+                      'evil-leader-map)
+
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "g k" #'dired-kill-subdir
+    "a" #'dired-find-alternate-file))
 
 (use-package lispyville
   :disabled

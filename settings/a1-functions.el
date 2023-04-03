@@ -110,6 +110,11 @@ If no one was found, NIL is returned."
   (kill-ring-save (point-min) (point-max))
   (message "Buffer content saved to kill ring"))
 
+(defun save-and-kill-this-buffer()
+  (interactive)
+  (save-buffer-readonly)
+  (kill-this-buffer))
+
 (defun get-emacs-module-header-file ()
   "Get the absolute path to emacs-module.h header file.
 Return NIL if nothing found."
