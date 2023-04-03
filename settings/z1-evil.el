@@ -24,7 +24,7 @@
     "Setup keymap for emacs-lisp-mode."
     (evil-local-set-key 'normal (kbd "<SPC>lb") #'eval-buffer)
     (evil-local-set-key 'normal (kbd "<SPC>ld") #'eval-defun)
-    (evil-local-set-key 'normal (kbd "<SPC>le") #'eval-last-sexp)
+    (evil-local-set-key 'normal (kbd "<SPC>ll") #'eval-last-sexp)
     (evil-local-set-key 'normal (kbd "<SPC>lr") #'eval-region))
 
   (defun evil-setup-lisp-mode-keymap()
@@ -32,10 +32,16 @@
     (evil-local-set-key 'normal (kbd "<SPC>lh") #'hyperspec-lookup)
     (evil-local-set-key 'normal (kbd "<SPC>lb") #'sly-eval-buffer)
     (evil-local-set-key 'normal (kbd "<SPC>ld") #'sly-eval-defun)
-    (evil-local-set-key 'normal (kbd "<SPC>le") #'sly-eval-last-expression)
+    (evil-local-set-key 'normal (kbd "<SPC>ll") #'sly-eval-last-expression)
     (evil-local-set-key 'normal (kbd "<SPC>lp") #'sly-eval-print-last-expression)
     (evil-local-set-key 'normal (kbd "<SPC>lD") #'sly-delete-package)
     (evil-local-set-key 'normal (kbd "<SPC>lc") #'sly-repl-clear-buffer-anywhere))
+
+  (defun evil-setup-fsharp-mode-keymap ()
+    "Setup keymap for F#."
+    (evil-local-set-key 'normal (kbd "<SPC>lb") #'fsharp-eval-buffer)
+    (evil-local-set-key 'normal (kbd "<SPC>ll") #'fsharp-eval-phrase)
+    (evil-local-set-key 'normal (kbd "<SPC>lr") #'fsharp-eval-region))
 
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-ex-define-cmd "q" #'kill-this-buffer)
@@ -111,6 +117,7 @@
 
   :hook
   (emacs-lisp-mode . evil-setup-emacs-lisp-mode-keymap)
+  (fsharp-mode . evil-setup-fsharp-mode-keymap)
   (lisp-mode . evil-setup-lisp-mode-keymap))
 
 (use-package evil-collection
