@@ -35,8 +35,7 @@
     (evil-local-set-key 'normal (kbd "<SPC>le") #'sly-eval-last-expression)
     (evil-local-set-key 'normal (kbd "<SPC>lp") #'sly-eval-print-last-expression)
     (evil-local-set-key 'normal (kbd "<SPC>lD") #'sly-delete-package)
-    (evil-local-set-key 'normal (kbd "<SPC>lc") #'sly-repl-clear-buffer-anywhere)
-    (evil-local-set-key 'insert (kbd "<SPC>lc") #'sly-repl-clear-buffer-anywhere))
+    (evil-local-set-key 'normal (kbd "<SPC>lc") #'sly-repl-clear-buffer-anywhere))
 
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-ex-define-cmd "q" #'kill-this-buffer)
@@ -94,6 +93,9 @@
         ("t w" . #'toggle-word-wrap)
         ("t u" . #'undo-tree-visualize)
 
+        ;; Window - W
+        ("w" . #'evil-window-map)
+
         ;; Command - X
         ("x" . #'execute-extended-command))
   
@@ -107,7 +109,8 @@
         ("SPC" . evil-leader-map))
 
   :hook
-  (emacs-lisp-mode . evil-setup-emacs-lisp-mode-keymap))
+  (emacs-lisp-mode . evil-setup-emacs-lisp-mode-keymap)
+  (lisp-mode . evil-setup-lisp-mode-keymap))
 
 (use-package evil-collection
   :after evil
