@@ -560,6 +560,7 @@
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
   :mode "\\.vue\\'"
+  :mode "fsproj" ; For F# project file.
 
   :config
   (defun web-mode-setup ()

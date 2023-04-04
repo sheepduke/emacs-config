@@ -145,7 +145,7 @@
                       'evil-leader-map)
 
   (evil-collection-define-key 'normal 'dired-mode-map
-    "g k" #'dired-kill-subdir
+    "gk" #'dired-kill-subdir
     "a" #'dired-find-alternate-file))
 
 (use-package lispyville
