@@ -484,13 +484,18 @@
 ;;;;                              F#                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; F# development support.
+;; Key bindings in evil settings.
 (use-package fsharp-mode
   :defer t
 
   :preface
   (defun fsharp-eval-buffer ()
     (interactive)
-    (fsharp-eval-region (point-min) (point-max))))
+    (fsharp-eval-region (point-min) (point-max)))
+
+  :hook
+  (fsharp-mode . lsp))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Julia                            ;;;;
