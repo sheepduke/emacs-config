@@ -52,6 +52,7 @@
   (:map evil-leader-map
         ;; Buffer - B
         ("b q" . #'bury-buffer)
+        ("b s" . #'save-buffer)
         ("b b" . #'switch-to-buffer)
         ("b o" . #'switch-to-other-buffer)
         ("b l" . #'consult-bookmark)
