@@ -3,6 +3,7 @@
 *~
 
 !.gitignore
+!.gitmodules
 !README.org
 !LICENSE
 !settings

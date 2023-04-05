@@ -1,0 +1,3 @@
+[submodule "emacs-elpa"]
+	path = elpa
+	url = git@github.com:/sheepduke/emacs-elpa
