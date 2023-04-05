@@ -565,7 +565,6 @@
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
   :mode "\\.vue\\'"
-  :mode "fsproj" ; For F# project file.
 
   :config
   (defun web-mode-setup ()
@@ -977,6 +976,8 @@
 (use-package systemd)
 
 (use-package csharp-mode)
+
+(use-package csproj-mode)
 
 (use-package ahk-mode)
 
