@@ -156,8 +156,3 @@
   :hook
   (emacs-lisp-mode . #'lispyville-mode)
   (lisp-mode . #'lispyville-mode))
-
-
-;; We have to load perspectives at the end of start process.
-(persp-mode 1)
-(persp-state-load persp-state-default-file)

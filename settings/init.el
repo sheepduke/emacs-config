@@ -39,6 +39,11 @@
       (mapcar (lambda (filename) (file-name-base filename))
               (directory-files "~/.emacs.d/settings/" nil "^[a-zA-Z][0-9]-.*.el$")))
 
+;; Load Perspective session.
+(persp-mode 1)
+(when (file-exists-p persp-state-default-file)
+  (persp-state-load persp-state-default-file))
+
 ;; Start Emacs server.
 (server-start)
 
