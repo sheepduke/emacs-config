@@ -41,7 +41,8 @@
     "Setup keymap for F#."
     (evil-local-set-key 'normal (kbd "<SPC>lb") #'fsharp-eval-buffer)
     (evil-local-set-key 'normal (kbd "<SPC>ll") #'fsharp-eval-phrase)
-    (evil-local-set-key 'normal (kbd "<SPC>lr") #'fsharp-eval-region))
+    (evil-local-set-key 'normal (kbd "<SPC>lr") #'fsharp-eval-region)
+    (evil-local-set-key 'normal (kbd "<SPC>lf") #'lsp-format-buffer))
 
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-ex-define-cmd "q" #'kill-this-buffer)
