@@ -494,8 +494,15 @@
     (interactive)
     (fsharp-eval-region (point-min) (point-max)))
 
+  (defun fsharp-format-buffer()
+    (interactive)
+    (message "This function invoked.")
+    (when (equal major-mode 'fsharp-mode)
+      (lsp-format-buffer)))
+
   :hook
-  (fsharp-mode . lsp))
+  (fsharp-mode . lsp)
+  (before-save . fsharp-format-buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Julia                            ;;;;

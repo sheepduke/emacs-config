@@ -39,10 +39,12 @@
 
   (defun evil-setup-fsharp-mode-keymap ()
     "Setup keymap for F#."
+    (evil-local-set-key 'normal (kbd "<SPC>lf") #'fsharp-load-buffer-file)
     (evil-local-set-key 'normal (kbd "<SPC>lb") #'fsharp-eval-buffer)
     (evil-local-set-key 'normal (kbd "<SPC>ll") #'fsharp-eval-phrase)
     (evil-local-set-key 'normal (kbd "<SPC>lr") #'fsharp-eval-region)
-    (evil-local-set-key 'normal (kbd "<SPC>lf") #'lsp-format-buffer))
+    (evil-local-set-key 'visual (kbd "<SPC>lr") #'fsharp-eval-region)
+    (evil-local-set-key 'normal (kbd "<SPC>li") #'lsp-format-buffer))
 
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-ex-define-cmd "q" #'kill-this-buffer)
@@ -60,7 +62,8 @@
         ("b s" . #'save-buffer)
         ("b b" . #'switch-to-buffer)
         ("b o" . #'switch-to-other-buffer)
-        ("b l" . #'consult-bookmark)
+        ("b r" . #'consult-bookmark)
+        ("b l" . #'consult-buffer)
         ("b p" . #'consult-projectile)
         ("b d" . #'dired)
         ("b f" . #'find-file)
