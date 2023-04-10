@@ -47,6 +47,10 @@
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-ex-define-cmd "q" #'kill-this-buffer)
   (evil-ex-define-cmd "wq" #'save-and-kill-this-buffer)
+
+  ;; Initial states.
+  (evil-set-initial-state 'sdcv-mode 'emacs)
+  
   (evil-mode 1)
 
   :bind
