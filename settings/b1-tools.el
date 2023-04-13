@@ -155,6 +155,12 @@
   (remove-hook 'kill-emacs-hook 'perspective-mode)
   (add-hook 'kill-emacs-hook 'persp-state-save))
 
+(use-package multiple-cursors
+  :bind ("C-x r e" . mc/edit-lines)
+
+  :custom
+  (mc/always-run-for-all t))
+
 ;; Function to show a dedicated sidebar for dired.
 (use-package dired-sidebar)
 
