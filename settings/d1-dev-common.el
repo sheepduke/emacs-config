@@ -59,7 +59,7 @@
 
   :bind
   (:map yas-minor-mode-map
-        ("C-M-/" . yas-expand))
+        ("M-/" . yas-expand))
 
   :custom
   (yas-snippet-dirs (list (concat *data-path* "yasnippets"))))

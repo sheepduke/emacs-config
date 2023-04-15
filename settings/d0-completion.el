@@ -93,7 +93,10 @@
   ("C-x p h" . consult-projectile))
 
 (use-package consult-yasnippet
-  :after (consult yasnippet))
+  :after (consult yasnippet)
+
+  :bind
+  ("C-M-/" . consult-yasnippet))
 
 (use-package consult-company
   :after (consult company)
