@@ -128,4 +128,8 @@ Return NIL if nothing found."
 (defun disable-semantic-mode ()
   (semantic-mode -1))
 
+(defun ensure-directory-exists (path)
+  (unless (file-exists-p path)
+    (make-directory path)))
+
 ;;; a1-functions.el ends here
