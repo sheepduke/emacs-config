@@ -43,10 +43,6 @@
 (when (file-exists-p persp-state-default-file)
   (persp-state-load persp-state-default-file))
 
-;; Ensure all the yasnippet dirs exist.
-(loop for dir in yas-snippet-dirs
-      do (ensure-directory-exists dir))
-
 ;; Start Emacs server.
 (server-start)
 
