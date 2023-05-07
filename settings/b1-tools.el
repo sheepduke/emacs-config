@@ -150,10 +150,11 @@
   ;; File used to load and save state file.
   (persp-state-default-file "~/.emacs.d/data/perspective.dat")
 
-  :config
-  (remove-hook 'after-init-hook 'perspective-mode)
-  (remove-hook 'kill-emacs-hook 'perspective-mode)
-  (add-hook 'kill-emacs-hook 'persp-state-save))
+  ;; :config
+  ;; (remove-hook 'after-init-hook 'perspective-mode)
+  ;; (remove-hook 'kill-emacs-hook 'perspective-mode)
+  ;; (add-hook 'kill-emacs-hook 'persp-state-save)
+  )
 
 (use-package multiple-cursors
   :bind ("C-x r e" . mc/edit-lines)

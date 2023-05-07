@@ -41,8 +41,6 @@
 
 ;; Load Perspective session.
 (persp-mode 1)
-(when (file-exists-p persp-state-default-file)
-  (persp-state-load persp-state-default-file))
 
 ;; Start Emacs server.
 (server-start)
