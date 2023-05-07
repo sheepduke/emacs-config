@@ -42,10 +42,10 @@
     (evil-local-set-key 'normal (kbd "<SPC>lf") #'fsharp-load-buffer-file)
     (evil-local-set-key 'normal (kbd "<SPC>lb") #'fsharp-eval-buffer)
     (evil-local-set-key 'normal (kbd "<SPC>ll") #'fsharp-eval-phrase)
-    (evil-local-set-key 'normal (kbd "<SPC>lr") #'fsharp-eval-region)
-    (evil-local-set-key 'visual (kbd "<SPC>lr") #'fsharp-eval-region)
+    (evil-local-set-key 'visual (kbd "<SPC>ll") #'fsharp-eval-region)
     (evil-local-set-key 'normal (kbd "<SPC>li") #'lsp-format-buffer)
-    (evil-local-set-key 'visual (kbd "<SPC>lR") #'lsp-rename))
+    (evil-local-set-key 'normal (kbd "<SPC>lr") #'lsp-rename)
+    (evil-local-set-key 'visual (kbd "<SPC>lr") #'lsp-rename))
 
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-ex-define-cmd "q" #'kill-this-buffer)

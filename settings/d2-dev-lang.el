@@ -496,13 +496,34 @@
 
   (defun fsharp-format-buffer()
     (interactive)
-    (message "This function invoked.")
     (when (equal major-mode 'fsharp-mode)
       (lsp-format-buffer)))
+
+  (defun fsharp-return-and-indent ()
+    (interactive)
+    (newline-smart-comment)
+    (insert "    "))
+
+  (defun fsharp-return-and-unindent ()
+    (interactive)
+    (newline-smart-comment)
+    (backward-delete-char 4))
+
+  (defun fsharp-add-indent ()
+    (interactive)
+    (insert "    "))
+
+  :bind
+  (:map fsharp-mode-map
+        ("C-<return>" . fsharp-return-and-indent)
+        ("M-<return>" . fsharp-return-and-unindent)
+        ("C-<tab>" . #'fsharp-add-indent)
+        ("<backtab>" . #'indent-for-tab-command))
 
   :hook
   (fsharp-mode . lsp)
   (before-save . fsharp-format-buffer))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                             Julia                            ;;;;
