@@ -29,15 +29,15 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/ebuild-mode/")
 (add-to-list 'load-path "~/.emacs.d/settings/")
 
-;; Load custom plugins.
-(mapc 'load
-      (mapcar (lambda (filename) (file-name-base filename))
-              (directory-files "~/.emacs.d/plugins/" nil ".*.el$")))
-
 ;; Load settings.
 (mapc 'load
       (mapcar (lambda (filename) (file-name-base filename))
               (directory-files "~/.emacs.d/settings/" nil "^[a-zA-Z][0-9]-.*.el$")))
+
+;; Load custom plugins.
+(mapc 'load
+      (mapcar (lambda (filename) (file-name-base filename))
+              (directory-files "~/.emacs.d/plugins/" nil ".*.el$")))
 
 ;; Load Perspective session.
 (persp-mode 1)

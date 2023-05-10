@@ -411,6 +411,10 @@ This works like Vim 'w!'."
 ;; Set the default method of tramp.
 (setq tramp-default-method "ssh")
 
+;; Disable Windows cursor type.
+(when (windows?)
+  (setq w32-use-visible-system-caret nil))
+
 (global-set-key (kbd "C-c t a") 'auto-fill-mode)
 (global-set-key (kbd "C-c t d") 'toggle-debug-on-error)
 (global-set-key (kbd "C-c t i") 'auto-revert-tail-mode)
