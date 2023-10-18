@@ -208,30 +208,6 @@
   (rust-mode . cargo-minor-mode))
 
 
-(use-package racer
-  :disabled
-  :hook
-  (rust-mode . racer-mode)
-  (rust-mode . eldoc-mode))
-
-
-(use-package flycheck-rust
-  :disabled
-  :hook
-  (flycheck-mode . flycheck-rust-setup))
-
-
-(use-package company-racer
-  :disabled
-  :hook
-  (rust-mode . company-racer-setup)
-
-  :config
-  (defun company-racer-setup ()
-    (make-local-variable 'company-backends)
-    (setq company-backends '((company-racer :with company-yasnippet)))))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                       Common Lisp                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1035,8 +1011,6 @@
 (use-package powershell)
 
 (use-package systemd)
-
-(use-package csharp-mode)
 
 (use-package csproj-mode)
 
