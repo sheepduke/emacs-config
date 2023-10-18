@@ -9,6 +9,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package emms
+  :defer t
+  
   :init
   (require 'emms-setup)
 
@@ -35,28 +37,15 @@
   ;; Don't repeat playlist.
   (setq emms-repeat-playlist nil)
   ;; Set default music directory.
-  (setq emms-source-file-default-directory "~/music")
-
-  :bind
-  ("C-c e g" . emms-play-directory)
-  ("C-c e e" . emms-play-file)
-
-  ("C-c e d" . emms-play-dired)
-  ("C-c e f" . emms-shuffle)
-  ("C-c e l" . emms-playlist-mode-go)
-  ("C-c e x" . emms-start)
-  ("C-c e SPC" . emms-pause)
-  ("C-c e s" . emms-stop)
-  ("C-c e n" . emms-next)
-  ("C-c e p" . emms-previous))
+  (setq emms-source-file-default-directory "~/music"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         Dictionary                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package sdcv
-  :if (executable-find "sdcv")
-  :bind ("C-c d" . sdcv-search-input))
+  :defer t
+  :if (executable-find "sdcv"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Image+                              ;;;;
@@ -64,6 +53,7 @@
 
 ;; Image processing
 (use-package image+
+  :defer t
   :if (executable-find "convert")
 
   :functions (image-rotate-original)
@@ -142,8 +132,7 @@
           (browse-url-generic url))
       (browse-url-default-browser url)))
 
-  :bind (("C-c 3" . w3m)
-         :map w3m-mode-map
+  :bind (:map w3m-mode-map
          ("C-<return>" . w3m-view-this-url-new-session)
          ("C-M-h" . w3m-previous-buffer)
          ("C-M-l" . w3m-next-buffer)

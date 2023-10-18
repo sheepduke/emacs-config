@@ -33,21 +33,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                         projectile                           ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package projectile
-  :config
-  (projectile-mode 1)
-
-  :custom
-  ;; Offline SVN.
-  (projectile-svn-command "find . -type f -not -iwholename '*.svn/*' -print0")
-
-  :delight (projectile ""))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Yasnippet                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -95,22 +80,12 @@
 ;;;;                        Indentation                           ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package highlight-indent-guides
-  :hook
-  (prog-mode . enable-highlight-indent-guides)
-
-  :config
-  (defun enable-highlight-indent-guides ()
-    "Conditionally enable highlight-indent-guides-mode when under X system."
-    (when (x?)
-      (highlight-indent-guides-mode 1)))
-
+(use-package indent-guide
+  :defer t
   :delight ""
 
-  :custom
-  (highlight-indent-guides-method 'character)
-  ;; Set how obvious the indicator character is. Higher, more obvious.
-  (highlight-indent-guides-auto-character-face-perc 10))
+  :hook
+  (prog-mode . indent-guide-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         HS Mode                              ;;;;
@@ -162,8 +137,8 @@
   :bind (:map comint-mode-map
               ("C-M-l" . comint-clear-buffer)))
 
-(use-package linum
+(use-package emacs
   :hook
-  (prog-mode . linum-mode))
+  (prog-mode . display-line-numbers-mode))
 
 ;;; d1-dev-common.el ends here

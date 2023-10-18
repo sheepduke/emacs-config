@@ -30,7 +30,7 @@ SIZE-PAIR is a cons pair indicating font size."
 ;; Note that Chinese font size must be 2 larger than English font for
 ;; alignment.
 (when window-system
-  (set-font '("DejaVu Sans Mono" "Consolas")
+  (set-font '("FiraCode Nerd Font Mono" "DejaVu Sans Mono" "Consolas")
             '("Microsoft Yahei" "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
             (cl-case (display-pixel-height)
               (2160 '(25 . 30))

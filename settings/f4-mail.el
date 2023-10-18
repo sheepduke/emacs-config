@@ -128,8 +128,7 @@ Returns a boolean value indicating the result."
 
   :hook (notmuch-hello-refresh . notmuch-hello-init-cursor-position)
 
-  :bind (("C-c m" . notmuch)
-         (:map notmuch-hello-mode-map
+  :bind ((:map notmuch-hello-mode-map
                ("g" . notmuch-refresh-this-buffer)
                ("M r" . notmuch-mark-all-as-read))
          (:map notmuch-search-mode-map

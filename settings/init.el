@@ -46,3 +46,4 @@
 (server-start)
 
 ;;; init.el ends here
+(require 'project)

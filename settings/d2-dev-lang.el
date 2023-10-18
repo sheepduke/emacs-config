@@ -238,7 +238,9 @@
 
 (use-package lisp-mode
   :ensure nil
-  :hook (lisp-mode . disable-semantic-mode))
+  :hook
+  (lisp-mode . disable-semantic-mode)
+  (lisp-mode . paredit-mode))
 
 (use-package sly
   :functions (sly-mrepl-clear-repl)
@@ -296,9 +298,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-hook 'emacs-lisp-mode-hook 'disable-semantic-mode)
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
-(define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
-(define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)
+(define-key emacs-lisp-mode-map (kbd "C-c l r") 'eval-region)
+(define-key emacs-lisp-mode-map (kbd "C-c l b") 'eval-buffer)
 
 (setq-default flycheck-disabled-checkers
               '(javascript-jshint json-jsonlist emacs-lisp-checkdoc))
@@ -487,8 +490,6 @@
 ;; F# development support.
 ;; Key bindings in evil settings.
 (use-package fsharp-mode
-  :defer t
-
   :preface
   (defun fsharp-setup ()
     (interactive)

@@ -106,8 +106,7 @@
 
 ;; Display org items in calfw.
 (use-package calfw-org
-  :bind
-  ("C-c o" . cfw:open-org-calendar))
+  :defer nil)
 
 ;; Chinese localization
 (use-package cal-china-x)
@@ -194,15 +193,7 @@ EXPORTER is provided by Org Mode."
   (org-journal-carryover-delete-empty-journal 'always)
   
   ;; Automatically carry over TODO items.
-  (org-journal-carryover-items "TODO=\"TODO\"|TODO=\"HOLD\"")
-  
-  :bind
-  ("C-c C-j" . nil)
-  ("C-c j o" . org-journal-open-current-journal-file)
-  ("C-c j s" . org-journal-search)
-  ("C-c j j" . org-journal-new-entry)
-  ("C-c j k" . org-journal-new-scheduled-entry)
-  ("C-c j v" . org-journal-schedule-view))
+  (org-journal-carryover-items "TODO=\"TODO\"|TODO=\"HOLD\""))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Workflow                            ;;;;

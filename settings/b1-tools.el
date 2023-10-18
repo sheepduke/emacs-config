@@ -34,7 +34,7 @@
 
 ;; Replace the original doc-view for PDF files.
 (use-package pdf-tools
-  :functions (windows?)
+  :defer t
   :unless (windows?)
 
   :config
@@ -52,74 +52,6 @@
 
   :hook (git-commit-mode . flyspell-mode))
 
-
-;; Jump to character from 2 leading chars.
-(use-package avy
-  :bind (("C-'" . avy-goto-char-timer)
-         ("M-g g" . avy-goto-line))
-
-  :custom
-  ;; Set the timeout to a very short time.
-  (avy-timeout-seconds 0.2)
-  ;; Do not directly jump to the only candidate.
-  (avy-single-candidate-jump nil))
-
-
-;; Automatically compile Emacs Lisp libraries
-(use-package auto-compile
-  :config
-  (auto-compile-on-load-mode)
-  (auto-compile-on-save-mode))
-
-
-;; Execute asynchronous commands.
-(use-package async
-  :config
-  (dired-async-mode 1)
-  (async-bytecomp-package-mode 1)
-
-  :custom
-  ;; Compile packages asynchronously.
-  (async-bytecomp-allowed-packages '(all)))
-
-(use-package openwith
-  :hook
-  (dired-mode . openwith-mode)
-
-  :config
-  (define-advice abort-if-file-too-large
-      (:around (orig-fn size op-type filename &optional offer-raw) unless-openwith-handles-it)
-    "Do not abort if FILENAME is handled by Openwith."
-    (let ((my-ok-large-file-types (mapconcat 'car openwith-associations "\\|")))
-      (unless (string-match-p my-ok-large-file-types filename)
-        (funcall orig-fn size op-type filename offer-raw))))
-
-  :custom
-  (openwith-associations '(("\\.mp4\\'" "mpv" (file))
-                           ("\\.m4v\\'" "mpv" (file)))))
-
-;; Provides extra information for EShell prompt.
-(use-package eshell-prompt-extras
-  :custom
-  ;; Setup prompt.
-  (eshell-highlight-prompt t)
-  (eshell-prompt-function 'epe-theme-lambda))
-
-
-;; Disable font displaying effects when the lines are too long,
-(use-package so-long
-  :custom
-  ;; Set the max columns that will trigger so-long mode.
-  (so-long-threshold 500)
-  
-  :config
-  (global-so-long-mode))
-
-
-;; Toggle layout of 2 windows between vertical and horizontal.
-(use-package toggle-window-split
-  :ensure nil
-  :bind ("C-x *" . toggle-window-split))
 
 ;; Show hot keys when prefix keys are pressed.
 (use-package which-key
@@ -139,20 +71,56 @@
   (defun persp-start-and-load ()
     (persp-mode 1)
     (persp-state-load persp-state-default-file))
-  
+
+  (defun persp-switch-to-1 ()
+    (interactive)
+    (persp-switch-by-number 1))
+
+  (defun persp-switch-to-2 ()
+    (interactive)
+    (persp-switch-by-number 2))
+
+  (defun persp-switch-to-3 ()
+    (interactive)
+    (persp-switch-by-number 3))
+
+  (defun persp-switch-to-4 ()
+    (interactive)
+    (persp-switch-by-number 4))
+
+  (defun persp-switch-to-5 ()
+    (interactive)
+    (persp-switch-by-number 5))
+
+  (defun persp-switch-to-6 ()
+    (interactive)
+    (persp-switch-by-number 6))
+
+  (defun persp-switch-to-7 ()
+    (interactive)
+    (persp-switch-by-number 7))
+
+  (defun persp-switch-to-8 ()
+    (interactive)
+    (persp-switch-by-number 8))
+
+  (defun persp-switch-to-9 ()
+    (interactive)
+    (persp-switch-by-number 9))
+
   :custom
-  ;; The leader key. Not used because of evil-mode.
-  (persp-mode-prefix-key (kbd "C-x M-p"))
+  (persp-mode-prefix-key (kbd "C-c p"))
+
+  ;; The default name of frame.
+  (persp-initial-frame-name "1. main")
 
   ;; Method used to sort perspectives.
-  (persp-sort 'created)
+  (persp-sort 'name)
 
   ;; File used to load and save state file.
   (persp-state-default-file "~/.emacs.d/data/perspective.dat"))
 
 (use-package multiple-cursors
-  :bind ("C-x r e" . mc/edit-lines)
-
   :custom
   (mc/always-run-for-all t))
 

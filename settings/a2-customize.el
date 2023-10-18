@@ -127,9 +127,6 @@
 ;; Save cursor place of file after exiting Emacs.
 (save-place-mode 1)
 
-;; Disable vc-mode.
-(setq vc-handled-backends '())
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                           Time                               ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -179,8 +176,6 @@ output."
     (setq pcomplete-cycle-completions nil)
     (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
     (setenv "PAGER" "/bin/cat"))
-
-  :bind ("C-c S" . eshell)
 
   :hook (eshell-mode . eshell-mode-setup))
 
@@ -250,23 +245,6 @@ This works like Vim 'w!'."
   (interactive)
   (switch-to-buffer "*scratch*"))
 
-(global-set-key (kbd "C-c r") 'rename-buffer)
-(global-set-key (kbd "C-x C-b") 'switch-to-other-buffer)
-(global-set-key (kbd "C-c s") 'switch-to-scratch-buffer)
-(global-set-key (kbd "C-x C-k") 'bury-buffer)
-(global-set-key (kbd "C-x C-s") 'save-buffer-readonly)
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
-(global-set-key (kbd "C-M-r") 'replace-string)
-(global-set-key (kbd "C-M-S-r") 'replace-regexp)
-(global-set-key (kbd "M-u") 'upcase-initials-region)
-(global-set-key (kbd "M-<") 'beginning-of-buffer)
-(global-set-key (kbd "M->") 'end-of-buffer)
-(global-set-key (kbd "M-;") 'toggle-comment-in-line)
-
-;; auto fill
-(global-set-key (kbd "M-q") 'fill-paragraph)
-(global-set-key (kbd "C-M-q") 'fill-region)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            ediff                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -284,6 +262,7 @@ This works like Vim 'w!'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package eww
+  :defer t
   :custom
   (eww-download-directory "~/downloads/")
   (eww-bookmarks-directory (concat *data-path* "eww/"))
@@ -291,6 +270,7 @@ This works like Vim 'w!'."
 
 (use-package eww-plus
   :ensure nil
+  :defer t
   :after eww
 
   :init
@@ -415,16 +395,8 @@ This works like Vim 'w!'."
 (when (windows?)
   (setq w32-use-visible-system-caret nil))
 
-(global-set-key (kbd "C-c t a") 'auto-fill-mode)
-(global-set-key (kbd "C-c t d") 'toggle-debug-on-error)
-(global-set-key (kbd "C-c t i") 'auto-revert-tail-mode)
-(global-set-key (kbd "C-c t l") 'linum-mode)
-(global-set-key (kbd "C-c t t") 'toggle-truncate-lines)
-(global-set-key (kbd "C-c t w") 'toggle-word-wrap)
-(global-set-key (kbd "C-c t v") 'visual-line-mode)
-(global-set-key (kbd "C-x H") 'copy-whole-buffer)
-
 (use-package webjump
+  :defer t
   :defines (webjump-file)
   :functions (webjump-setup)
   

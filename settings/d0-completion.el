@@ -1,8 +1,7 @@
 (use-package emacs
   :custom
   (savehist-additional-variables
-   '(projectile-project-command-history
-     kill-ring
+   '(kill-ring
      register-alist
      search-ring regexp-search-ring))
 
@@ -38,40 +37,7 @@
   (setq register-preview-function #'consult-register-format)
   
   :bind
-  (;; Buffer.
-   ("C-x b" . consult-buffer)
-   ("C-x r b" . consult-bookmark)
-
-   ;; Register.
-   ("C-c SPC" . consult-register-store)
-   ("C-c C-SPC" . consult-register-load)
-   ("C-c M-SPC" . consult-register)
-
-   ;; Yank.
-   ("M-y" . consult-yank-pop)
-
-   ;; M-g bindings (goto-map)
-   ("M-g e" . consult-compile-error)
-   ("M-g f" . consult-flymake)   ;; Alternative: consult-flycheck
-   ("M-g M-g" . consult-goto-line) ;; orig. goto-line
-   ("M-g o" . consult-outline)     ;; Alternative: consult-org-heading
-   ("M-g m" . consult-mark)
-   ("M-g k" . consult-global-mark)
-   ("M-g i" . consult-imenu)
-   ("M-g I" . consult-imenu-multi)
-
-   ;; M-S bindings (search-map)
-   ("M-s d" . consult-find)
-   ("M-s D" . consult-locate)
-   ("M-s g" . consult-grep)
-   ("M-s G" . consult-git-grep)
-   ("M-s r" . consult-ripgrep)
-   ("M-s l" . consult-line-multi)
-   ("M-s k" . consult-keep-lines)
-   ("M-s u" . consult-focus-lines)
-   ("C-S-s" . consult-line)
-
-   ;; Isearch integration
+  (;; Isearch integration
    :map isearch-mode-map
    ("M-e" . consult-isearch-history) ;; orig. isearch-edit-string
    ("M-s e" . consult-isearch-history) ;; orig. isearch-edit-string
@@ -86,17 +52,8 @@
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref))
 
-(use-package consult-projectile
-  :after (consult projectile)
-  
-  :bind
-  ("C-x p h" . consult-projectile))
-
 (use-package consult-yasnippet
-  :after (consult yasnippet)
-
-  :bind
-  ("C-M-/" . consult-yasnippet))
+  :after (consult yasnippet))
 
 (use-package consult-company
   :after (consult company)
