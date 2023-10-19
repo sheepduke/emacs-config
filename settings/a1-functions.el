@@ -88,10 +88,6 @@ If no one was found, NIL is returned."
             (make-string comment-char-count comment-char)
             (make-string comment-line-length comment-char))))
 
-(defun turn-linum-mode-on ()
-  "Turn linum-mode-on."
-  (linum-mode 1))
-
 (defun windows? ()
   "Return T if current OS is Windows."
   (equal system-type 'windows-nt))

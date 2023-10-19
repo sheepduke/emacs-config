@@ -70,7 +70,7 @@
   :custom
   ;; Control where to put backup files.
   (backup-by-copying t)
-  (backup-directory-alist `(("." . ,*backup-dir*)))
+  (backup-directory-alist `(("." . ,(locate-user-emacs-file "backup/"))))
 
   ;; Don't keep the outdated version.
   (delete-old-versions t)

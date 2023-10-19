@@ -127,4 +127,6 @@
 ;; Function to show a dedicated sidebar for dired.
 (use-package dired-sidebar)
 
+(use-package avy)
+
 ;;; b1-tools.el ends here
