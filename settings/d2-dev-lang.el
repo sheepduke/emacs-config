@@ -502,16 +502,16 @@
         (insert char-content)
         (previous-line)
         (end-of-line))
-       (t (newline-smart-comment)))))
+       (t (default-indent-new-line)))))
 
   (defun fsharp-return-and-indent ()
     (interactive)
-    (newline-smart-comment)
+    (default-indent-new-line)
     (insert "    "))
  
   (defun fsharp-return-and-unindent ()
     (interactive)
-    (newline-smart-comment)
+    (default-indent-new-line)
     (backward-delete-char 4))
 
   (defun fsharp-add-indent ()
@@ -976,12 +976,12 @@
   :hook (yaml-mode . highlight-indent-guides-mode)
 
   :bind (:map yaml-mode-map
-              ("<return>" . newline-smart-comment)))
+              ("<return>" . default-indent-new-line)))
 
 
 (use-package conf-mode
   :bind (:map conf-mode-map
-              ("<return>" . newline-smart-comment)))
+              ("<return>" . default-indent-new-line)))
 
 (use-package json-mode)
 

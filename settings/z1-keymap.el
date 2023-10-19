@@ -3,7 +3,6 @@
   ("C-x b" . switch-to-buffer)
   ("C-x B" . persp-switch-to-scratch-buffer)
   ("C-x f" . find-file)
-  ("C-x H" . copy-whole-buffer)
   ("C-x k" . kill-this-buffer)
   ("C-x o" . switch-to-other-buffer)
 
@@ -63,7 +62,6 @@
   ("M-9" . persp-switch-to-9)
   
   ("M-u" . upcase-initials-region)
-  ("M-;" . toggle-comment-in-line)
   ("M-q" . fill-paragraph)
   ("M-y" . consult-yank-pop)
   ("M-g e" . consult-compile-error)
