@@ -115,13 +115,6 @@ If no one was found, NIL is returned."
   "Turn off truncate lines mode."
   (toggle-truncate-lines 0))
 
-(defun disable-semantic-mode ()
-  (semantic-mode -1))
-
-(defun ensure-directory-exists (path)
-  (unless (file-exists-p path)
-    (make-directory path)))
-
 (defun locate-user-data-file (new-name &optional old-name)
   (locate-user-emacs-file (concat "data/" new-name)
                           (if old-name (concat "data/" old-name) nil)))

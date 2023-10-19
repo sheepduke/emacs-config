@@ -219,7 +219,6 @@
 (use-package lisp-mode
   :ensure nil
   :hook
-  (lisp-mode . disable-semantic-mode)
   (lisp-mode . paredit-mode))
 
 (use-package sly
@@ -277,7 +276,6 @@
 ;;;;                        Emacs Lisp                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'emacs-lisp-mode-hook 'disable-semantic-mode)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
 (define-key emacs-lisp-mode-map (kbd "C-c l r") 'eval-region)
