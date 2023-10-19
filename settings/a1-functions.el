@@ -111,10 +111,6 @@ If no one was found, NIL is returned."
   (save-buffer-readonly)
   (kill-this-buffer))
 
-(defun disable-truncate-lines ()
-  "Turn off truncate lines mode."
-  (toggle-truncate-lines 0))
-
 (defun locate-user-data-file (new-name &optional old-name)
   (locate-user-emacs-file (concat "data/" new-name)
                           (if old-name (concat "data/" old-name) nil)))

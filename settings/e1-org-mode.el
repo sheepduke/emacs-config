@@ -42,7 +42,6 @@
                    org-emphasis-regexp-components)
 
   :hook
-  (org-mode . disable-truncate-lines)
   (org-mode . flyspell-mode)
   (org-mode . org-mode-setup)
   (org-mode . enable-word-wrap)
@@ -77,6 +76,9 @@
 
   ;; Set the format of captured email link.
   (org-link-email-description-format "Email: %s")
+
+  ;; Do not truncate lines.
+  (org-startup-truncated nil)
 
   ;; Always insert a new line before new item.
   (org-blank-before-new-entry '((heading . t)
