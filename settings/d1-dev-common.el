@@ -40,10 +40,6 @@
   :config
   (yas-global-mode 1)
 
-  ;; Ensure all the yasnippet dirs exist.
-  (loop for dir in yas-snippet-dirs
-      do (ensure-directory-exists dir))
-
   :delight ""
 
   :bind
