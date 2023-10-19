@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: block
-# key: block
-# --
-`(insert-comment-block ?# 2)`

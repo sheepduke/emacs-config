@@ -1,9 +1,3 @@
-;;; Package --- Utility functions.
-
-;;; Commentary:
-
-;; Code:
-
 (cl-defun insert-comment-block (comment-char &optional (comment-char-count 2))
   "Return a block with COMMENT inside."
   (interactive)
@@ -40,4 +34,31 @@
   (locate-user-emacs-file (concat "data/" new-name)
                           (if old-name (concat "data/" old-name) nil)))
 
-;;; a1-functions.el ends here
+(defun save-buffer-readonly ()
+  "If buffer is read-only, temporally change its permission and write to it.
+This works like Vim 'w!'."
+  (interactive)
+  (let* ((filename (buffer-file-name))
+         (original-file-modes (file-modes (buffer-file-name))))
+    (condition-case nil
+        (save-buffer)
+      (error (set-file-modes filename (+ original-file-modes #o222))
+             (save-buffer)
+             (set-file-modes filename original-file-modes)))))
+
+(defun switch-to-other-buffer ()
+  "Switch between 2 buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer)))
+
+(defun toggle-window-dedicated ()
+  "Toggle whether the current active window is dedicated or not.
+A dedicated window can't be switched or modified by some commands."
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         (set-window-dedicated-p window
+                                 (not (window-dedicated-p window))))
+       "Window '%s' is dedicated"
+     "Window '%s' is normal")
+   (current-buffer)))

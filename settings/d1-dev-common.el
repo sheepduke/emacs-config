@@ -37,9 +37,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yasnippet
-  :config
-  (yas-global-mode 1)
-
+  :demand t
   :delight ""
 
   :bind
@@ -47,8 +45,10 @@
         ("M-/" . yas-expand))
 
   :custom
-  (yas-snippet-dirs (list (locate-user-data-file "yasnippets"))))
+  (yas-snippet-dirs (list (locate-user-data-file "snippets")))
 
+  :config
+  (yas-global-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                        Spell Checking                        ;;;;
@@ -90,7 +90,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package prog-mode
-  :ensure nil
   :bind (:map prog-mode-map
               ("<return>" . default-indent-new-line)))
 
@@ -99,7 +98,6 @@
   (prog-mode . rainbow-delimiters-mode))
 
 (use-package comint-mode
-  :ensure nil
   :bind (:map comint-mode-map
               ("C-M-l" . comint-clear-buffer)))
 

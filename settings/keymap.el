@@ -1,20 +1,21 @@
 (use-package emacs
   :bind
+  ;; Buffer.
   ("C-x b" . switch-to-buffer)
   ("C-x B" . persp-switch-to-scratch-buffer)
-  ("C-x f" . find-file)
   ("C-x k" . kill-this-buffer)
+  ("C-x C-k" . bury-buffer)
   ("C-x o" . switch-to-other-buffer)
-
-  ("C-x r b" . consult-bookmark)
-  ("C-x r e" . mc/edit-lines)
-
   ("C-x s" . save-buffer)
+
+  ;; File.
+  ("C-x f" . find-file)
+
+  ;; Bookmark.
+  ("C-x r b" . consult-bookmark)
+
   ("C-'" . avy-goto-char-timer)
   ("C-x *" . toggle-window-split)
-
-
-  ("C-x C-k" . bury-buffer)
 
   ("C-c C-SPC" . consult-register-store)
   ("C-c SPC" . consult-register)
@@ -42,13 +43,17 @@
   ("C-c j v" . org-journal-schedule-view)
 
   ("C-c o" . cfw:open-org-calendar)
+  ("C-c O" . calendar)
   ("C-c s" . shell)
+
+  ("C-x r e" . mc/edit-line)
 
   ("C-c t a" . auto-fill-mode)
   ("C-c t d" . toggle-debug-on-error)
   ("C-c t i" . auto-revert-tail-mode)
   ("C-c t t" . toggle-truncate-lines)
   ("C-c t w" . toggle-word-wrap)
+  ("C-c t W" . toggle-window-dedicated)
   ("C-c t v" . visual-line-mode)
 
   ("M-1" . persp-switch-to-1)
@@ -61,9 +66,18 @@
   ("M-8" . persp-switch-to-8)
   ("M-9" . persp-switch-to-9)
   
+  ("M-o" . ace-window)
+  ("M-O" . ace-swap-window)
+   
+  ("M-P" . windmove-up)
+  ("M-N" . windmove-down)
+  ("M-L" . windmove-right)
+  ("M-H" . windmove-left)
+         
   ("M-u" . upcase-initials-region)
   ("M-q" . fill-paragraph)
   ("M-y" . consult-yank-pop)
+  
   ("M-g e" . consult-compile-error)
   ("M-g f" . consult-flymake)
   ("M-g g" . avy-goto-line)
@@ -91,5 +105,7 @@
 )
 
 (use-package devil
+  :demand t
+  
   :config
   (global-devil-mode 1))

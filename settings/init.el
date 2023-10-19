@@ -1,9 +1,3 @@
-;;; Package --- Init file for Emacs
-;;;
-;;; Commentary:
-;;; 
-;;; Code:
-
 (require 'package)
 
 (setq package-archives
@@ -20,14 +14,23 @@
 (package-initialize)
 (setq load-prefer-newer t)
 
-(setq use-package-always-ensure t)
-
 ;; Set load path.
 (add-to-list 'load-path "~/.emacs.d/plugins/")
 (add-to-list 'load-path "~/.emacs.d/plugins/ebuild-mode/")
 (add-to-list 'load-path "~/.emacs.d/settings/")
 
 ;; Load settings.
+;; Always load prelude first.
+(load "prelude")
+
+;; Load other modules - order does not matter.
+(load "display")
+(load "editing")
+(load "file-directory")
+(load "interaction")
+(load "tools")
+(load "keymap")
+
 (mapc 'load
       (mapcar (lambda (filename) (file-name-base filename))
               (directory-files "~/.emacs.d/settings/" nil "^[a-zA-Z][0-9]-.*.el$")))
@@ -42,6 +45,3 @@
 
 ;; Start Emacs server.
 (server-start)
-
-;;; init.el ends here
-(require 'project)

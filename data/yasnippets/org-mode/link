@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: link
-# key: link
-# --
-\color{blue} _$0_

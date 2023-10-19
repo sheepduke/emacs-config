@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: radd
-# --
-$router->add("$1", "$2", "$3");

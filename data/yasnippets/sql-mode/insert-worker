@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: insert-worker
-# key: insert-worker
-# --
-insert into employee values(${1:ID}, '${2:First Name}', '${3:Last Name}', 'Some Place', '00000000');
-insert into users values($1, $1, '${2:$(downcase yas-text)}', '5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8', 'W');

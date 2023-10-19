@@ -98,7 +98,6 @@
 
 (use-package sbt-anywhere
   :disabled
-  :ensure nil
   :after scala-mode
   
   :bind (:map scala-mode-map
@@ -217,7 +216,6 @@
 (use-package paredit)
 
 (use-package lisp-mode
-  :ensure nil
   :hook
   (lisp-mode . paredit-mode))
 
@@ -265,7 +263,6 @@
   (push 'sly-repl-ansi-color sly-contribs))
 
 (use-package cl-helper
-  :ensure nil
   :bind (:map lisp-mode-map
               ("C-c i" . lisp-import-symbol-and-defpackage)
               ("C-c x" . lisp-export-symbol-and-defpackage)
@@ -839,7 +836,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package latex
-  :ensure nil
   :config
   (defun LaTeX-mode-setup ()
     "Hook function for LaTeX mode."
@@ -964,7 +960,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package nxml-mode
-  :ensure nil
   :hook (nxml-mode . highlight-indent-guides-mode))
 
 
@@ -994,9 +989,11 @@
 
 (use-package ahk-mode)
 
+(use-package site-gentoo
+  :if (locate-library "site-gentoo"))
+
 ;; Ebuild mode, for Gentoo users.
 (use-package ebuild-mode
-  :ensure nil
   :mode "\\.use\\'"
   :mode "\\.mask\\'"
   :mode "\\.unmask\\'")
