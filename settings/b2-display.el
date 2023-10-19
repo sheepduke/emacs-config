@@ -8,12 +8,26 @@
 ;;;;                            Fonts                             ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun font-exists? (fontname)
+  "Test if given FONTNAME is exist or not."
+  (if (or (not fontname) (string= fontname ""))
+      nil
+    (if (not (x-list-fonts fontname)) nil t)))
+
+(defun get-first-available-font (font-list)
+  "Return the first available font in FONT-LIST.
+If no one was found, NIL is returned."
+  (catch 'found
+    (dolist (font font-list)
+      (when (font-exists? font)
+        (throw 'found font)))))
+
 (defun set-font (english-font-list chinese-font-list size-pair)
   "Setup Emacs English and Chinese font on x window system.
 ENGLISH-FONT-LIST and CHINESE-FONT-LIST are lists of fonts.
 SIZE-PAIR is a cons pair indicating font size."
-  (let ((english-font (get-available-font english-font-list))
-        (chinese-font (get-available-font chinese-font-list)))
+  (let ((english-font (get-first-available-font english-font-list))
+        (chinese-font (get-first-available-font chinese-font-list)))
     (if english-font
         (set-frame-font (font-spec :family english-font
                                    :size (car size-pair)))

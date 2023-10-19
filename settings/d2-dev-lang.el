@@ -323,7 +323,6 @@
 (use-package geiser
   :disabled
   :hook
-  (geiser-mode . disable-company-quickhelp-mode)
   (scheme-mode . geiser-mode)
 
   :custom
