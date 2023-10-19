@@ -7,12 +7,10 @@
   ("C-x o" . switch-to-other-buffer)
 
   ("C-x r b" . consult-bookmark)
-  ("C-x r e" . mc/edit-lines)
 
   ("C-x s" . save-buffer)
   ("C-'" . avy-goto-char-timer)
   ("C-x *" . toggle-window-split)
-
 
   ("C-x C-k" . bury-buffer)
 
@@ -91,5 +89,6 @@
 )
 
 (use-package devil
+  :ensure t
   :config
   (global-devil-mode 1))

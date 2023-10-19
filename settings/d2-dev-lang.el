@@ -994,6 +994,9 @@
 
 (use-package ahk-mode)
 
+(use-package site-gentoo
+  :if (locate-library "site-gentoo"))
+
 ;; Ebuild mode, for Gentoo users.
 (use-package ebuild-mode
   :ensure nil

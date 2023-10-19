@@ -1,9 +1,3 @@
-;;; Package --- Utility functions.
-
-;;; Commentary:
-
-;; Code:
-
 (cl-defun insert-comment-block (comment-char &optional (comment-char-count 2))
   "Return a block with COMMENT inside."
   (interactive)
@@ -40,4 +34,9 @@
   (locate-user-emacs-file (concat "data/" new-name)
                           (if old-name (concat "data/" old-name) nil)))
 
-;;; a1-functions.el ends here
+(defvar-keymap custom-global-keymap)
+
+(define-minor-mode custom-global-keymap-mode
+  "Minor mode for defining custom global hotkeys.")
+
+(add-to-list 'minor-mode-map-alist custom-global-keymap)

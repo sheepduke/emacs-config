@@ -1,15 +1,54 @@
-;;; Package --- Functions with external programs
+;; ============================================================
+;;  Eshell
+;; ============================================================
 
-;;; Commentary:
+(use-package eshell
+  :config
+  (setq eshell-aliases-file (locate-user-data-file "eshell-alias"))
 
-;;; Code:
+  (defun eshell-clear-buffer ()
+    "Clear the buffer and delete everything. Handy if you have too much
+output."
+    (interactive)
+    (let ((inhibit-read-only t))
+      (erase-buffer)
+      (eshell-send-input)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                             emms                             ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun eshell-mode-setup ()
+    (setq pcomplete-cycle-completions nil)
+    (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
+    (setenv "PAGER" "/bin/cat"))
+
+  :hook (eshell-mode . eshell-mode-setup))
+
+;; ============================================================
+;;  PDF
+;; ============================================================
+
+;; Replace the original doc-view for PDF files.
+(use-package pdf-tools
+  :ensure t
+  :defer t
+  :unless (windows?)
+
+  :config
+  (pdf-tools-install))
+
+;; ============================================================
+;;  Book Reader
+;; ============================================================
+
+;; Open epub files.
+(use-package nov
+  :ensure t
+  :mode ("\\.epub\\'" . nov-mode))
+
+;; ============================================================
+;;  Music
+;; ============================================================
 
 (use-package emms
-  :defer t
+  :ensure t
   
   :init
   (require 'emms-setup)
@@ -39,81 +78,20 @@
   ;; Set default music directory.
   (setq emms-source-file-default-directory "~/music"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                         Dictionary                           ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ============================================================
+;;  Dictionary
+;; ============================================================
 
 (use-package sdcv
-  :defer t
+  :ensure t
   :if (executable-find "sdcv"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                          Image+                              ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Image processing
-(use-package image+
-  :defer t
-  :if (executable-find "convert")
-
-  :functions (image-rotate-original)
-  
-  :hook
-  (after-init . imagex-global-sticky-mode)
-  (imagex-sticky-mode . imagex-auto-adjust-mode)
-
-  :bind (:map image-mode-map
-              ("=" . imagex-sticky-zoom-in)
-              ("-" . imagex-sticky-zoom-out)
-              ("o" . imagex-sticky-restore-original)
-              ("m" . imagex-sticky-maximize)
-              ("D" . image-delete-original-file)
-              ("r" . imagex-sticky-rotate-right)
-              ("R" . image-rotate-original-right)
-              ("l" . imagex-sticky-rotate-left)
-              ("L" . image-rotate-original-left)
-              ("S" . imagex-sticky-save-image))
-
-  :custom
-  ;; Stop showing annoying warnings.
-  (imagex-quiet-error t)
-
-  ;; Use feh to view image externally.
-  (image-dired-external-viewer "feh")
-
-  :config
-  (defun image-rotate-original (degree)
-    "Rotate original image file with given DEGREE."
-    (interactive)
-    (let ((file (buffer-file-name)))
-      (shell-command
-       (format "convert -rotate %d \"%s\" \"%s\"" degree file file)))
-    (revert-buffer nil t)
-    (message "Image rotated."))
-
-  (defun image-rotate-original-left ()
-    (interactive)
-    (image-rotate-original 270))
-
-  (defun image-rotate-original-right ()
-    (interactive)
-    (image-rotate-original 90))
-
-  (defun image-delete-original-file ()
-    "Delete original file from disk."
-    (interactive
-     (if (yes-or-no-p "File will be deleted forever. Continue? ")
-         (let ((file-to-delete (buffer-file-name)))
-           (image-next-file)
-           (delete-file file-to-delete)
-           (message "File deleted."))
-       (message "Aborted.")))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                             w3m                              ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ============================================================
+;;  Browser
+;; ============================================================
 
 (use-package w3m
+  :ensure t
   :if (executable-find "w3m")
 
   :preface
@@ -181,12 +159,12 @@
   ;; Use w3m to render HTML mails.
   (mm-text-html-renderer 'w3m))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                             Rime                             ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ============================================================
+;;  Input Method
+;; ============================================================
 
-;; Built-in input method.
 (use-package rime
+  :ensure t
   :custom
   ;; Set Rime as the default input method.
   (default-input-method "rime")
@@ -199,9 +177,9 @@
                           "~/.local/share/fcitx5/rime"
                         "~/.config/ibus/rime")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                         Silver Brain                         ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ============================================================
+;;  Silver Brain
+;; ============================================================
 
 (use-package silver-brain
   :load-path "~/.silver-brain/emacs/"
@@ -217,5 +195,3 @@
   :custom
   (silver-brain-database-name "silver-brain")
   (silver-brain-server-port 5000))
-
-;;; c3-external.el ends here

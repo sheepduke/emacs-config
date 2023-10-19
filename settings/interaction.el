@@ -1,60 +1,10 @@
-;;; Package --- Small tools that enhances Emacs
-
-;;; Commentary:
-
-;;; Code:
-
-;; This is built-in in Emacs 24 or something.
-;; Used to automatically pair brackets.
-(use-package electric
-  :config
-  (electric-pair-mode 1))
-
-;; Make undo like a tree.
-(use-package undo-tree
-  :delight
-
-  :config
-  (global-undo-tree-mode 1)
-
-  :bind (("C-/" . undo-tree-undo)
-         ("C-?" . undo-tree-redo)
-         ("C-x u" . undo-tree-visualize))
-
-  :custom
-  ;; Show diffs when browsing through the undo tree
-  (undo-tree-visualizer-diff t)
-
-  ;; Don't show relative times in the undo tree visualizer
-  (undo-tree-visualizer-timestamps nil)
-
-  ;; Don't save history to a file
-  (undo-tree-auto-save-history nil))
-
-
-;; Replace the original doc-view for PDF files.
-(use-package pdf-tools
-  :defer t
-  :unless (windows?)
-
-  :config
-  (pdf-tools-install))
-
-
-;; Open epub files.
-(use-package nov
-  :mode ("\\.epub\\'" . nov-mode))
-
-
-;; It's Magit! Git inside Emacs.
-(use-package magit
-  :bind ("C-x v" . magit-status)
-
-  :hook (git-commit-mode . flyspell-mode))
-
+;; ============================================================
+;;  Which Key
+;; ============================================================
 
 ;; Show hot keys when prefix keys are pressed.
 (use-package which-key
+  :ensure
   :delight
 
   :config
@@ -62,6 +12,10 @@
 
   :custom
   (which-key-idle-delay 0.5))
+
+;; ============================================================
+;;  Perspective
+;; ============================================================
 
 ;; Manage buffers and window layouts into dynamic workspaces.
 (use-package perspective
@@ -119,14 +73,3 @@
 
   ;; File used to load and save state file.
   (persp-state-default-file "~/.emacs.d/data/perspective.dat"))
-
-(use-package multiple-cursors
-  :custom
-  (mc/always-run-for-all t))
-
-;; Function to show a dedicated sidebar for dired.
-(use-package dired-sidebar)
-
-(use-package avy)
-
-;;; b1-tools.el ends here

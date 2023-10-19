@@ -8,85 +8,19 @@
 ;;;;                       Default Behavior                       ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Replace "yes or no" with "y or n"
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; When pressing 'return', do the action.
-(define-key query-replace-map (kbd "return") 'act)
-
-;; Don't show the startup message.
-(setq inhibit-startup-message t)
-
-;; Content of *scratch* buffer.
-(setq initial-scratch-message "")
-
-;; When quiting Emacs, confirm.
-(setq confirm-kill-emacs 'yes-or-no-p)
-
-;; Load gentoo related functions.
-(when (file-exists-p "/usr/share/emacs/site-lisp/site-gentoo.el")
-  (load "/usr/share/emacs/site-lisp/site-gentoo.el")
-  (require 'site-gentoo))
-
-;; Share the clipboard with the outside X world.
-(setq select-enable-clipboard t)
-
-(use-package pcomplete
+(use-package emacs
   :custom
-  ;; Don't cycle through completions.
-  (pcomplete-cycle-completions nil))
+  ;; Content of *scratch* buffer.
+  (initial-scratch-message "")
 
-;; Fix the position of cursor while scrolling window.
-(setq scroll-preserve-screen-position t)
+  ;; Share the clipboard with the outside X world.
+  (select-enable-clipboard t)
 
-;; Increase the warning threshold to 15M.
-(setq large-file-warning-threshold 15000000)
+  ;; Fix the position of cursor while scrolling window.
+  (scroll-preserve-screen-position t)
 
-;; Tune GC threshold to speed it up.
-(setq gc-cons-threshold (eval-when-compile (* 100 1024 1024)))
-(run-with-idle-timer 2 t (lambda () (garbage-collect)))
-
-;; Don't use <TAB>
-(setq-default indent-tabs-mode nil)
-
-;; Disable recursive mini buffers.
-(setq enable-recursive-minibuffers nil)
-
-;; Ignore all ring bell.
-(setq ring-bell-function 'ignore)
-
-;; Force to use Unix UTF-8 coding system.
-(setq-default buffer-file-coding-system 'utf-8-unix)
-
-;; Set default directory.
-(setq-default default-directory (getenv "HOME"))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                          Backup                              ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package files
-  :ensure nil
-  :custom
-  ;; Control where to put backup files.
-  (backup-by-copying t)
-  (backup-directory-alist `(("." . ,(locate-user-emacs-file "backup/"))))
-
-  ;; Don't keep the outdated version.
-  (delete-old-versions t)
-  (kept-new-versions 2)
-  (kept-old-versions 4)
-
-  ;; Enable open control.
-  (version-control t)
-
-  ;; Don't ask me via dialog box!
-  (use-dialog-box nil)
-
-  ;; Set the default tab width to 4.
-  (tab-width 4)
-  ;; Always use space to do indention.
-  (indent-tabs-mode nil))
+  ;; Do not use any GUI pinentry for GPG!
+  (epg-pinentry-mode 'loopback))
 
 (use-package bookmark
   :custom
@@ -99,107 +33,6 @@
 ;; Toggle on-the-fly re-indentation
 (electric-indent-mode)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                            Modes                             ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Show column number.
-(column-number-mode 1)
-
-;; Show line number.
-(line-number-mode 1)
-
-;; Show matched parenthesis.
-(show-paren-mode 1)
-
-;; Disable menu bar.
-(menu-bar-mode 0)
-
-;; Disable tool bar.
-(tool-bar-mode 0)
-
-;; Disable scroll bar.
-(scroll-bar-mode 0)
-
-;; Automatically revert modified buffer.
-(global-auto-revert-mode)
-
-;; Save cursor place of file after exiting Emacs.
-(save-place-mode 1)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                           Time                               ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package time
-  :custom
-  ;; Display time.
-  (display-time-mode t)
-
-  ;; Set time format
-  (display-time-format "(%Y/%m/%d %H:%M:%S)")
-
-  ;; Don't display load average
-  (display-time-default-load-average nil)
-
-  ;; Use email icon to notify the new email.
-  (display-time-use-mail-icon t)
-
-  ;; Refresh time every 1 second.
-  (display-time-interval 1)
-
-  :config
-  (display-time))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                           shell                              ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package eshell
-  :config
-  (setq eshell-aliases-file (locate-user-data-file "eshell-alias"))
-
-  (defun eshell-clear-buffer ()
-    "Clear the buffer and delete everything. Handy if you have too much
-output."
-    (interactive)
-    (let ((inhibit-read-only t))
-      (erase-buffer)
-      (eshell-send-input)))
-
-  (defun eshell-mode-setup ()
-    (setq pcomplete-cycle-completions nil)
-    (local-set-key (kbd "C-M-l") 'eshell-clear-buffer)
-    (setenv "PAGER" "/bin/cat"))
-
-  :hook (eshell-mode . eshell-mode-setup))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                          Dired                               ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package dired
-  :ensure nil
-  :custom
-  ;; Human readable size display
-  (dired-listing-switches "-alh")
-
-  ;; dired guesses the target directory
-  (dired-dwim-target t)
-
-  :bind (:map dired-mode-map
-              ("," . dired-kill-subdir)))
-
-(use-package dired-x
-  :ensure nil
-  :after dired
-  
-  :custom
-  ;; Set omit regex in omit mode.
-  (dired-omit-files "^\\.?#\\|^\\.")
-
-  :bind (:map dired-mode-map
-              ("h" . dired-omit-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Commands                            ;;;;
@@ -235,10 +68,6 @@ This works like Vim 'w!'."
   "Switch between 2 buffers."
   (interactive)
   (switch-to-buffer (other-buffer)))
-
-(defun switch-to-scratch-buffer ()
-  (interactive)
-  (switch-to-buffer "*scratch*"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            ediff                             ;;;;
@@ -371,11 +200,7 @@ This works like Vim 'w!'."
                                     utf-8))))
 
 
-;; Do not use any GUI pinentry for GPG!
-(use-package epg-config
-  :ensure nil
-  :custom
-  (epa-pinentry-mode 'loopback))
+
 
 ;; Set the default method of tramp.
 (setq tramp-default-method "ssh")
