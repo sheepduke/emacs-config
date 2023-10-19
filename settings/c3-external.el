@@ -166,8 +166,8 @@
   (w3m-confirm-leaving-secure-page nil)
 
   ;; Storage
-  (w3m-default-save-directory (concat *data-path* "w3m/saved/"))
-  (w3m-bookmark-file (concat *data-path* "w3m/bookmark.html"))
+  (w3m-default-save-directory (locate-user-data-file "w3m/saved/"))
+  (w3m-bookmark-file (locate-user-data-file "w3m/bookmark.html"))
 
   ;; Set w3m as the default browser inside Emacs.
   (browse-url-browser-function '(("HyperSpec" . w3m-goto-url-new-session)

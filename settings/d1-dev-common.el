@@ -51,7 +51,7 @@
         ("M-/" . yas-expand))
 
   :custom
-  (yas-snippet-dirs (list (concat *data-path* "yasnippets"))))
+  (yas-snippet-dirs (list (locate-user-data-file "yasnippets"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -122,4 +122,8 @@ If no one was found, NIL is returned."
   (unless (file-exists-p path)
     (make-directory path)))
 
+(defun locate-user-data-file (new-name &optional old-name)
+  (locate-user-emacs-file (concat "data/" new-name)
+                          (if old-name (concat "data/" old-name) nil)))
+
 ;;; a1-functions.el ends here

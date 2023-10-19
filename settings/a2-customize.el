@@ -91,7 +91,7 @@
 (use-package bookmark
   :custom
   ;; Set bookmark file.
-  (bookmark-default-file (concat *data-path* "bookmarks"))
+  (bookmark-default-file (locate-user-data-file "bookmarks"))
 
   ;; Save bookmark whenever it is changed.
   (bookmark-save-flag 1))
@@ -156,13 +156,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package eshell
-  :defines (eshell-aliases-file
-            eshell-mode-map
-            *data-path*)
-  :functions (eshell-send-input)
-
   :config
-  (setq eshell-aliases-file (concat *data-path* "eshell-alias"))
+  (setq eshell-aliases-file (locate-user-data-file "eshell-alias"))
 
   (defun eshell-clear-buffer ()
     "Clear the buffer and delete everything. Handy if you have too much
@@ -265,7 +260,7 @@ This works like Vim 'w!'."
   :defer t
   :custom
   (eww-download-directory "~/downloads/")
-  (eww-bookmarks-directory (concat *data-path* "eww/"))
+  (eww-bookmarks-directory (locate-user-data-file "eww/"))
   (browse-url-browser-function '((".*" . browse-url-default-browser))))
 
 (use-package eww-plus
@@ -355,7 +350,7 @@ This works like Vim 'w!'."
 (use-package ispell
   :custom
   ;; Set the personal dictionary.
-  (ispell-personal-dictionary (concat *data-path* "aspell.en.pws")))
+  (ispell-personal-dictionary (locate-user-data-file "aspell.en.pws")))
 
 
 (use-package ispell
@@ -396,7 +391,7 @@ This works like Vim 'w!'."
   
   :config
   (require 'webjump-plus)
-  (setq webjump-file (concat *data-path* "webjump.el"))
+  (setq webjump-file (locate-user-data-file "webjump.el"))
   (webjump-setup)
 
   :bind (("C-c 1" . webjump)

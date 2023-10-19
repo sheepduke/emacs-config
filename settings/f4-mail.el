@@ -37,7 +37,7 @@ Returns a boolean value indicating the result."
 (use-package bbdb
   :init
   ;; set bbdb database location.
-  (setq bbdb-file (concat *data-path* "bbdb"))
+  (setq bbdb-file (locate-user-data-file "bbdb"))
   ;; add support for gnus
   (setq bbdb-complete-mail-allow-cycling t
 		bbdb-completion-display-record nil)
