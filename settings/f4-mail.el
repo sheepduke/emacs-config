@@ -11,20 +11,21 @@
 (defun check-new-mail ()
   "Check all sub-maildir under *MAILBOX-DIR* for new mails.
 Returns a boolean value indicating the result."
-  (if (file-directory-p *mailbox-dir*)
-      (let* ((sub-maildirs (cl-remove-if-not
-                            #'file-directory-p
-                            (directory-files *mailbox-dir* t "^[a-z]")))
-             (new-mail-dirs (cl-remove-if-not
-                             #'file-directory-p
-                             (mapcar (lambda (dir) (concat dir "/new"))
-                                     sub-maildirs)))
-             (mails (apply #'append
-                           (mapcar (lambda (dir) (directory-files dir t "^[0-9A-Za-z]"))
-                                   new-mail-dirs)))
-             (mail-count (length mails)))
-        (> mail-count 0))
-    nil))
+  (let ((mailbox-dir "~/mailbox/"))
+    (if (file-directory-p mailbox-dir)
+        (let* ((sub-maildirs (cl-remove-if-not
+                              #'file-directory-p
+                              (directory-files mailbox-dir t "^[a-z]")))
+               (new-mail-dirs (cl-remove-if-not
+                               #'file-directory-p
+                               (mapcar (lambda (dir) (concat dir "/new"))
+                                       sub-maildirs)))
+               (mails (apply #'append
+                             (mapcar (lambda (dir) (directory-files dir t "^[0-9A-Za-z]"))
+                                     new-mail-dirs)))
+               (mail-count (length mails)))
+          (> mail-count 0))
+      nil)))
 
 (setq display-time-mail-function 'check-new-mail)
 
