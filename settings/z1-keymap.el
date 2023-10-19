@@ -67,7 +67,7 @@
   ("M-q" . fill-paragraph)
   ("M-y" . consult-yank-pop)
   ("M-g e" . consult-compile-error)
-  ("M-g f" . consult-flymake)   ;; Alternative: consult-flycheck
+  ("M-g f" . consult-flymake)
   ("M-g g" . avy-goto-line)
   ("M-g M-g" . consult-goto-line) ;; orig. goto-line
   ("M-g i" . consult-imenu)

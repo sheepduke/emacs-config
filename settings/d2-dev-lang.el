@@ -184,6 +184,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package rust-mode
+  :mode "\\.rs"
+
   :config
   (defun rust-mode-setup ()
     "Setup rust mode."
@@ -211,6 +213,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                       Common Lisp                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package paredit)
 
 (use-package lisp-mode
   :ensure nil
@@ -278,9 +282,6 @@
 
 (define-key emacs-lisp-mode-map (kbd "C-c l r") 'eval-region)
 (define-key emacs-lisp-mode-map (kbd "C-c l b") 'eval-buffer)
-
-(setq-default flycheck-disabled-checkers
-              '(javascript-jshint json-jsonlist emacs-lisp-checkdoc))
 
 (use-package nameless
   :hook
@@ -610,8 +611,6 @@
             ("php" . "/*")
             ("css" . "/*"))))
 
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-
   :hook
   (web-mode . web-mode-setup)
 
@@ -663,10 +662,7 @@
   ;; Set indent to 2.
   (js-indent-level 2)
   ;; Do not warn me for missing ';'.
-  (js2-strict-missing-semi-warning nil)
-
-  (flycheck-disabled-checkers (append flycheck-disabled-checkers
-                                      '(javascript-jshint json-jsonlist))))
+  (js2-strict-missing-semi-warning nil))
 
 
 (use-package typescript-mode
@@ -676,6 +672,7 @@
 
 ;; IDE for JavaScript.
 (use-package tide
+  :disabled
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
          (js-mode . tide-setup)
@@ -711,21 +708,6 @@
               ("C-M-l" . ts-comint-clear)))
 
 
-(use-package flycheck
-  :config
-  (defun flycheck-use-local-eslint ()
-    (let* ((root (locate-dominating-file
-                  (or (buffer-file-name) default-directory)
-                  "node_modules"))
-           (eslint (and root
-                        (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                          root))))
-      (when (and eslint (file-executable-p eslint))
-        (setq-local flycheck-javascript-eslint-executable eslint))))
-
-  :hook (flycheck-mode . flycheck-use-local-eslint))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            Python                            ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -733,8 +715,7 @@
 (use-package python
   :custom
   ;; Use Python 3 instead of Python 2.
-  (python-shell-interpreter "python3")
-  (flycheck-python-pycompile-executable "python3"))
+  (python-shell-interpreter "python3"))
 
 
 ;; For setup elpy, run:
@@ -867,10 +848,10 @@
     "Hook function for LaTeX mode."
     ;; Enable auto-fill.
     (auto-fill-mode)
-    ;; Disable flycheck mode.
-    (flycheck-mode -1)
+
     ;; Enable toc viewer.
     (turn-on-reftex)
+
     ;; Stop using default completion.
     (setq completion-at-point-functions 'complete-or-indent))
 

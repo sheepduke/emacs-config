@@ -352,12 +352,6 @@ This works like Vim 'w!'."
 ;;;;                            Misc                              ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package flycheck
-  :custom
-  ;; Set the temporary directory.
-  (flycheck-temp-prefix "/tmp/flycheck"))
-
-
 (use-package ispell
   :custom
   ;; Set the personal dictionary.
