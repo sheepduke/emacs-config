@@ -74,7 +74,7 @@ Returns a boolean value indicating the result."
   (save-excursion
     (message-goto-from)
     (message-add-header
-                       (concat "Bcc: " (substring (current-line-content) 6) "\n"))))
+     (concat "Bcc: " (substring (thing-at-point 'line) 6) "\n"))))
 
 (add-hook 'message-send-hook 'message-bcc-sender)
 

@@ -2,51 +2,11 @@
 
 ;;; Commentary:
 
-;;; Code:
-
-(defun line-in-comment? ()
-  "Return T if current line is commented."
-  (nth 4 (syntax-ppss)))
-
-(defun current-line-content ()
-  "Return line content in string."
-  (buffer-substring (line-beginning-position)
-					(line-end-position)))
-
-(defun line-empty? ()
-  "Return T if the line contain only spaces or nothing."
-  (string-empty-p (string-trim (current-line-content))))
-
-(defun toggle-comment-in-line (&optional arg)
-  "If there is no content after CHAR, delete the comment char.
-Otherwise, call `comment-dwin' with optional ARG."
-  (interactive "*P")
-  (if (or (use-region-p)
-		  (string-empty-p (string-trim (current-line-content))))
-	  (comment-dwim arg)
-	(comment-or-uncomment-region (line-beginning-position)
-								 (line-end-position))))
+;; Code:
 
 (defun disable-company-quickhelp-mode ()
   "Disable quickhelp-mode of company-mode."
   (company-quickhelp-local-mode 0))
-
-(defun newline-smart-comment ()
-  "Insert comment to next line if current line is commented."
-  (interactive)
-  (if (line-in-comment?)
-      (let ((line (string-trim-left (current-line-content))))
-        ;; Handle multi-line comment for C++ etc.
-        (if (or (string-prefix-p "/*" line)
-                (string-prefix-p "* " line))
-            (progn (newline-and-indent)
-                   (insert "* ")
-                   (indent-region (line-beginning-position)
-                                  (line-end-position)))
-          ;; Just insert the comment line.
-          (indent-new-comment-line)))
-    ;; Just insert newline.
-    (newline-and-indent)))
 
 (defun font-exist-p (fontname)
   "Test if given FONTNAME is exist or not."
@@ -99,17 +59,6 @@ If no one was found, NIL is returned."
 (defun x? ()
   "Return TRUE if we are under X system."
   (getenv "DISPLAY"))
-
-(defun copy-whole-buffer ()
-  "Copy content of whole buffer to kill ring."
-  (interactive)
-  (kill-ring-save (point-min) (point-max))
-  (message "Buffer content saved to kill ring"))
-
-(defun save-and-kill-this-buffer()
-  (interactive)
-  (save-buffer-readonly)
-  (kill-this-buffer))
 
 (defun locate-user-data-file (new-name &optional old-name)
   (locate-user-emacs-file (concat "data/" new-name)

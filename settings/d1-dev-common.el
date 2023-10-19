@@ -92,7 +92,7 @@
 (use-package prog-mode
   :ensure nil
   :bind (:map prog-mode-map
-              ("<return>" . newline-smart-comment)))
+              ("<return>" . default-indent-new-line)))
 
 (use-package rainbow-delimiters
   :hook
