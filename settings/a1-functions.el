@@ -111,12 +111,6 @@ If no one was found, NIL is returned."
   (save-buffer-readonly)
   (kill-this-buffer))
 
-(defun get-emacs-module-header-file ()
-  "Get the absolute path to emacs-module.h header file.
-Return NIL if nothing found."
-  (cl-find-if (lambda (path) (file-exists-p (concat path "emacs-module.h")))
-              *emacs-module-header-roots*))
-
 (defun disable-truncate-lines ()
   "Turn off truncate lines mode."
   (toggle-truncate-lines 0))

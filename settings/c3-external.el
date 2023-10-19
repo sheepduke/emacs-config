@@ -191,9 +191,6 @@
   ;; Set Rime as the default input method.
   (default-input-method "rime")
 
-  ;; Set the emacs-module.h header file.
-  (rime-emacs-module-header-root (get-emacs-module-header-file))
-
   ;; Use mini-buffer as the prompt.
   (rime-show-candidate 'minibuffer)
 

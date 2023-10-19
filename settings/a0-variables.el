@@ -10,8 +10,4 @@
 (defvar *mailbox-dir* "~/mailbox/"
   "Location of mail box.")
 
-(defvar *emacs-module-header-roots*
-  '("/usr/include/emacs-27/")
-  "A list of possible files of emacs-module.h.")
-
 ;;; a0-variables.el ends here
