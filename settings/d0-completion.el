@@ -1,4 +1,5 @@
-(use-package emacs
+;; Save history.
+(use-package savehist
   :custom
   (savehist-additional-variables
    '(kill-ring
@@ -9,17 +10,15 @@
   (savehist-mode 1))
 
 ;; Completion UI (vertical completions).
-(use-package selectrum
+(use-package vertico
   :config
-  (selectrum-mode 1))
+  (vertico-mode 1))
 
 ;; Filtering and sorting library.
 (use-package prescient
   :custom
   (completion-styles '(prescient basic)))
 
-;; Compatibility patch.
-(use-package selectrum-prescient)
 
 ;; Enable rich annotations.
 (use-package marginalia
