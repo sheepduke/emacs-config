@@ -4,30 +4,6 @@
 
 ;; Code:
 
-(defun disable-company-quickhelp-mode ()
-  "Disable quickhelp-mode of company-mode."
-  (company-quickhelp-local-mode 0))
-
-(defun font-exist-p (fontname)
-  "Test if given FONTNAME is exist or not."
-  (if (or (not fontname) (string= fontname ""))
-      nil
-    (if (not (x-list-fonts fontname)) nil t)))
-
-(defun get-available-font (font-list)
-  "Return the first available font in FONT-LIST.
-If no one was found, NIL is returned."
-  (catch 'found
-    (dolist (font font-list)
-      (when (font-exist-p font)
-        (throw 'found font)))))
-
-(defun emacs-version-main ()
-  "Extract main version number of running Emacs."
-  (let* ((version (emacs-version))
-         (start (string-match "[0-9]\\{2\\}" version)))
-    (string-to-number (substring version start (+ 2 start)))))
-
 (cl-defun insert-comment-block (comment-char &optional (comment-char-count 2))
   "Return a block with COMMENT inside."
   (interactive)
