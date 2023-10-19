@@ -10,7 +10,6 @@
 !plugins
 
 !data
-!elpa
 data/*
 !data/eshell-alias
 !data/yasnippets
