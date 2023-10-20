@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: setter
+# --
+public function set_$1($$1)
+{
+    $this->$1 = $$1;
+}

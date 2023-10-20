@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: block
+# key: block
+# --
+`(tuareg-insert-comment-block)`
+$0

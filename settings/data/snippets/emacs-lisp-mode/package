@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: package
+# key: package
+# --
+;;; Package --- $1
+
+;;; Commentary:
+
+;;; Code:
+
+$0
+
+;;; `(file-name-nondirectory buffer-file-name)` ends here

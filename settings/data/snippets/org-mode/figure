@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: figure
+# key: figure
+# --
+#+CAPTION: $1
+#+NAME: fig:$2
+#+ATTR_ORG: :width 300px
+[[$0]]

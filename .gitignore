@@ -1,20 +1,12 @@
-/*
-*.elc
-*~
+*
 
 !.gitignore
 !.gitmodules
 !README.org
 !LICENSE
-!lisp
-!lisp/**/*
-!plugins
 
-!data
-data/*
-!data/eshell-alias
-!data/yasnippets
-!data/aspell.en.pws
+!settings
+!settings/**/*
 
 !elpa
 !elpa/**/*
