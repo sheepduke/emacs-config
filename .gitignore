@@ -6,7 +6,8 @@
 !.gitmodules
 !README.org
 !LICENSE
-!settings
+!lisp
+!lisp/**/*
 !plugins
 
 !data
