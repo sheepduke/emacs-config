@@ -40,7 +40,7 @@
           "file-directory"
           "interaction"
           "keymap"
-          "org"
+          "org-mode"
           "tools"))
 
 ;; Start Emacs server.
