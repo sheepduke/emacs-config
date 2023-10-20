@@ -4,11 +4,9 @@
 
 (use-package time
   :custom
-  ;; Display time.
-  (display-time-mode nil)
-
   ;; Set time format
-  (display-time-format "(%Y/%m/%d %H:%M:%S)")
+  ;; (display-time-format "(%Y/%m/%d %H:%M:%S)")
+  (display-time-format " %H:%M")
 
   ;; Don't display load average
   (display-time-default-load-average nil)
@@ -17,11 +15,10 @@
   (display-time-use-mail-icon t)
 
   ;; Refresh time every 1 second.
-  (display-time-interval 1)
+  (display-time-interval 60)
 
   :config
-  ;; (display-time)
-  )
+  (display-time))
 
 ;; ============================================================
 ;;  Bars
@@ -116,5 +113,6 @@ SIZE-PAIR is a cons pair indicating font size."
              (auto-revert-mode "" auto-revert)
              (autopair-mode "" autopair)
              (eldoc-mode "" eldoc)
+             (yas-minor-mode "" yasnippet)
              ;; Dired
              (dired-async-mode "" dired-async))))

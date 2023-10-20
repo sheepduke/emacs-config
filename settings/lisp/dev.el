@@ -12,7 +12,6 @@
 
 (use-package yasnippet
   :demand t
-  :delight ""
 
   :bind
   (:map yas-minor-mode-map
