@@ -194,10 +194,10 @@
   (vertico-mode 1))
 
 ;; Filtering and sorting library.
-(use-package prescient
+(use-package orderless
   :custom
-  (completion-styles '(prescient basic)))
-
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;; Enable rich annotations.
 (use-package marginalia
