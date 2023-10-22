@@ -5,7 +5,8 @@
   (defun rust-mode-setup ()
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
-         "cargo check"))
+         "cargo check")
+    (add-hook 'before-save-hook 'eglot-format-buffer nil t))
 
   :hook
   (rust-ts-mode . rust-mode-setup)
