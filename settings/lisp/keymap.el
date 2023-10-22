@@ -47,7 +47,7 @@
   ("C-c O" . calendar)
   ("C-c s" . shell)
 
-  ("C-x r e" . mc/edit-line)
+  ("C-x r e" . mc/edit-lines)
   ("C-x v" . magit)
 
   ("C-c t a" . auto-fill-mode)
