@@ -11,11 +11,11 @@
   :hook (yaml-mode . indent-guide-mode)
 
   :bind (:map yaml-mode-map
-              ("<return>" . default-indent-new-line)))
+              ("<return>" . smart-newline)))
 
 (use-package conf-mode
   :bind (:map conf-mode-map
-              ("<return>" . default-indent-new-line)))
+              ("<return>" . smart-newline)))
 
 (use-package powershell
   :mode "\\.ps1\\'")

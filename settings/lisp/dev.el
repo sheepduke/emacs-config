@@ -86,7 +86,7 @@
 (use-package prog-mode
   :bind
   (:map prog-mode-map
-        ("<return>" . default-indent-new-line)))
+        ("<return>" . smart-newline)))
 
 (use-package emacs
   :hook

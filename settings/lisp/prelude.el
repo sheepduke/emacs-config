@@ -42,3 +42,14 @@ A dedicated window can't be switched or modified by some commands."
        "Window '%s' is dedicated"
      "Window '%s' is normal")
    (current-buffer)))
+
+(defun line-in-comment? ()
+  "Return T if current line is commented."
+  (nth 4 (syntax-ppss)))
+
+(defun smart-newline ()
+  "Insert comment to next line if current line is commented."
+  (interactive)
+  (if (line-in-comment?)
+      (default-indent-new-line)
+    (newline-and-indent)))

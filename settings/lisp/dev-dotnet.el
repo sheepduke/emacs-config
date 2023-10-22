@@ -40,16 +40,16 @@
         (insert char-content)
         (previous-line)
         (end-of-line))
-       (t (default-indent-new-line)))))
+       (t (smart-newline)))))
 
   (defun fsharp-return-and-indent ()
     (interactive)
-    (default-indent-new-line)
+    (smart-newline)
     (insert "    "))
  
   (defun fsharp-return-and-unindent ()
     (interactive)
-    (default-indent-new-line)
+    (smart-newline)
     (backward-delete-char 4))
 
   (defun fsharp-add-indent ()
