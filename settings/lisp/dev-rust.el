@@ -5,13 +5,14 @@
   (defun rust-mode-setup ()
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
-         "cargo test"))
+         "cargo check"))
 
   :hook
-  (rust-mode . rust-mode-setup)
+  (rust-ts-mode . rust-mode-setup)
+  (rust-ts-mode . eglot-ensure)
 
   :bind
-  (:map rust-mode-map
+  (:map rust-ts-mode-map
         ("C-c C-b" . recompile)
         ("C-c C-v" . compile))
 
@@ -22,4 +23,4 @@
 
 (use-package cargo
   :hook
-  (rust-mode . cargo-minor-mode))
+  (rust-ts-mode . cargo-minor-mode))
