@@ -127,3 +127,16 @@
      (yaml . ("https://github.com/ikatyang/tree-sitter-yaml"))
      (toml . ("https://github.com/tree-sitter/tree-sitter-toml"))
      (zig . ("https://github.com/GrayJack/tree-sitter-zig")))))
+
+(use-package eglog
+  :preface
+  (defun eglot-setup ()
+    (eglot-inlay-hints-mode -1))
+
+  :bind
+  ("M-[" . eglot-inlay-hints-mode)
+  ("M-]" . eglot-code-actions)
+  ("C-]" . eglot-find-typeDefinition)
+
+  :hook
+  (eglot-managed-mode . eglot-setup))

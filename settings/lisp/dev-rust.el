@@ -6,11 +6,11 @@
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
          "cargo check")
-    (add-hook 'before-save-hook 'eglot-format-buffer nil t))
+    (add-hook 'before-save-hook 'eglot-format-buffer nil t)
+    (eglot-ensure))
 
   :hook
   (rust-ts-mode . rust-mode-setup)
-  (rust-ts-mode . eglot-ensure)
 
   :bind
   (:map rust-ts-mode-map
