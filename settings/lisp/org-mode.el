@@ -299,42 +299,43 @@ EXPORTER is provided by Org Mode."
 (setq org-agenda-todo-ignore-scheduled nil)
 
 (use-package org-super-agenda
-  :init
+  :config
   (org-super-agenda-mode 1)
 
+  :custom
   ;; Set the separator between blocks.
-  (setq org-super-agenda-header-separator "\n●")
+  (org-super-agenda-header-separator "\n●")
 
-  (setq org-agenda-custom-commands
-        `(("n" "Super Agenda"
-           ((agenda "" nil)
-            (todo "HOLD"
-                  ((org-agenda-overriding-header "On Hold")))
-            (todo "PROJ"
-                  ((org-agenda-overriding-header "Projects")))
-            (todo ""
-                  ((org-agenda-overriding-header "TASKS")
-                   (org-super-agenda-groups
-                    '((:discard (:scheduled t))
-                      (:discard (:todo "HOLD"))
-                      (:discard (:todo "PROJ"))
-                      (:discard (:tag "capture"))
-                      (:discard (:tag "someday"))
-                      (:name "Projects"
-                             :auto-parent)
-                      (:name "Priority"
-                             :auto-priority)))))
-            (tags "capture"
-                  ((org-agenda-overriding-header "INBOX")
-                   (org-super-agenda-groups
-                    '((:name "Capture"
-                             :tag "capture")))))))
+  (org-agenda-custom-commands
+   `(("n" "Super Agenda"
+      ((agenda "" nil)
+       (todo "HOLD"
+             ((org-agenda-overriding-header "On Hold")))
+       (todo "PROJ"
+             ((org-agenda-overriding-header "Projects")))
+       (todo ""
+             ((org-agenda-overriding-header "TASKS")
+              (org-super-agenda-groups
+               '((:discard (:scheduled t))
+                 (:discard (:todo "HOLD"))
+                 (:discard (:todo "PROJ"))
+                 (:discard (:tag "capture"))
+                 (:discard (:tag "someday"))
+                 (:name "Projects"
+                        :auto-parent)
+                 (:name "Priority"
+                        :auto-priority)))))
+       (tags "capture"
+             ((org-agenda-overriding-header "INBOX")
+              (org-super-agenda-groups
+               '((:name "Capture"
+                        :tag "capture")))))))
 
-          ("u" "Scheduled Tasks"
-           ((todo ""
-                  ((org-super-agenda-groups
-                    '((:name "Scheduled Tasks"
-                             :scheduled t)
-                      (:discard (:not (:scheduled t))))))))))))
+     ("u" "Scheduled Tasks"
+      ((todo ""
+             ((org-super-agenda-groups
+               '((:name "Scheduled Tasks"
+                        :scheduled t)
+                 (:discard (:not (:scheduled t))))))))))))
   
 ;;; e1-org-mode.el ends here
