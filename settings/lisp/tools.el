@@ -280,6 +280,10 @@ output."
                        (holiday-solar-term "大雪" "大雪")
                        (holiday-solar-term "冬至" "冬至"))))
 
+(use-package calfw)
+
+(use-package calfw-org)
+
 ;; ============================================================
 ;;  Silver Brain
 ;; ============================================================
