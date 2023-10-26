@@ -31,36 +31,59 @@
 ;;  Code Completion
 ;; ============================================================
 
-(use-package company
-  :bind
-  (:map company-mode-map
-        ("<tab>" . company-indent-or-complete-common))
-
-  :hook
-  ;; Enable company-mode for all programming languages.
-  (prog-mode . company-mode)
-
-  :delight " CO"
+(use-package corfu
+  :init
+  (global-corfu-mode)
 
   :custom
-  ;; Make company mode complete immediately.
-  (company-idle-delay 0))
+  ;; Enable cycling for `corfu-next/previous'
+  (corfu-cycle t)
 
-(use-package company-quickhelp
-  :after company
+  ;; Enable auto completion
+  (corfu-auto t)
 
-  :config
-  (company-quickhelp-mode 1)
+  ;; Time to wait before completion.
+  (corfu-auto-delay 0.1)
 
-  :custom
-  (company-quickhelp-delay 0))
+  ;; Orderless field separator
+  (corfu-separator ?\s)
 
-(use-package consult-company
-  :after (consult company)
+  ;; Never quit at completion boundary
+  (corfu-quit-at-boundary nil)
   
-  :bind
-  (:map company-active-map
-        ("C-i" . consult-company)))
+  ;; Never quit, even if there is no match
+  (corfu-quit-no-match 'separator)
+  
+  ;; Disable current candidate preview
+  (corfu-preview-current nil)
+  
+  ;; Preselect the prompt
+  (corfu-preselect 'prompt)
+  
+  ;; Configure handling of exact matches
+  (corfu-on-exact-match nil)
+  
+  ;; Use scroll margin)
+  (corfu-scroll-margin 5))
+
+(use-package corfu-info
+  :after corfu)
+
+;; Display more information of completion candidates.
+(use-package corfu-popupinfo
+  :after corfu-info
+
+  :init
+  (corfu-popupinfo-mode)
+  
+  :custom
+  (corfu-popupinfo-delay '(0.5 0.3)))
+
+(use-package nerd-icons-corfu
+  :after corfu
+
+  :init
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 ;; ============================================================
 ;;  Hide Show
@@ -135,9 +158,9 @@
     (eglot-inlay-hints-mode -1))
 
   :bind
-  ("M-[" . eglot-inlay-hints-mode)
-  ("M-]" . eglot-code-actions)
-  ("C-]" . eglot-find-typeDefinition)
+  (:map eglot-mode-map
+        ("M-]" . eglot-inlay-hints-mode)
+        ("C-]" . eglot-code-actions))
 
   :hook
   (eglot-managed-mode . eglot-setup))
