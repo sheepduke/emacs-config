@@ -32,7 +32,7 @@
 ;; ============================================================
 
 (use-package corfu
-  :init
+  :config
   (global-corfu-mode)
 
   :custom
@@ -73,7 +73,7 @@
 (use-package corfu-popupinfo
   :after corfu-info
 
-  :init
+  :config
   (corfu-popupinfo-mode)
   
   :custom
