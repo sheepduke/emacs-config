@@ -22,6 +22,9 @@
   ;; Set the default method of tramp.
   (tramp-default-method "ssh")
 
+  ;; Use Emacs Lisp mode for scratch buffer.
+  (initial-major-mode "emacs-lisp-mode")
+
   :config
   ;; Enable some commands.
   (mapcar (lambda (command) (put command 'disabled nil))

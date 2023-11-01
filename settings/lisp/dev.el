@@ -117,6 +117,10 @@
   (text-mode . display-line-numbers-mode)
   (prog-mode . display-line-numbers-mode))
 
+;; ============================================================
+;;  Tree-sitter
+;; ============================================================
+
 (use-package treesit
   :custom
   (treesit-font-lock-level 4)
@@ -151,6 +155,10 @@
      (yaml . ("https://github.com/ikatyang/tree-sitter-yaml"))
      (toml . ("https://github.com/tree-sitter/tree-sitter-toml"))
      (zig . ("https://github.com/GrayJack/tree-sitter-zig")))))
+
+;; ============================================================
+;;  LSP
+;; ============================================================
 
 (use-package eglog
   :preface

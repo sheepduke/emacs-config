@@ -61,9 +61,9 @@
 (use-package avy)
 
 (use-package indent-guide
-  :defer t
+  :demand t
   :delight ""
-
+  
   :hook
   (prog-mode . indent-guide-mode))
 
