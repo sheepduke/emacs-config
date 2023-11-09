@@ -23,7 +23,7 @@
   (tramp-default-method "ssh")
 
   ;; Use Emacs Lisp mode for scratch buffer.
-  (initial-major-mode "emacs-lisp-mode")
+  (initial-major-mode 'emacs-lisp-mode)
 
   :config
   ;; Enable some commands.
