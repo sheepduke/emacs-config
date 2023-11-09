@@ -235,6 +235,9 @@
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref))
 
+(use-package consult-register
+  :commands (consult-register-store consult-register-load))
+
 ;; Action menu for completions.
 (use-package embark
   :bind
