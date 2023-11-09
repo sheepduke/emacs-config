@@ -35,6 +35,10 @@
   ;; Always use y-or-n-p for confirmation.
   (defalias 'yes-or-no-p 'y-or-n-p))
 
+(use-package ansi-color
+  :hook
+  (compilation-filter . ansi-color-compilation-filter))
+
 ;; ============================================================
 ;;  Windows OS
 ;; ============================================================
@@ -53,7 +57,7 @@
 (use-package bookmark
   :custom
   ;; Set bookmark file.
-  (bookmark-default-file (locate-user-data-file "bookmarks"))
+  (bookmark-default-file (locate-user-emacs-file "bookmarks"))
 
   ;; Save bookmark whenever it is changed.
   (bookmark-save-flag 1))
@@ -242,7 +246,6 @@
 (use-package embark
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
-   ("M-." . embark-dwim)        ;; good alternative: M-.
    ("C-h b" . embark-bindings)) ;; alternative for `describe-bindings'
   
   :init
