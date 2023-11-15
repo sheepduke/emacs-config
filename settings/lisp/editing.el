@@ -76,3 +76,21 @@
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
   :delight " FS")
+
+;;; Windows specific settings.
+(use-package flyspell
+  :if (windows?)
+
+  :init
+  ;; Tell it which dictionary to use.
+  (setenv "LANG" "en_US")
+
+  ;; Use Hunspell as the spell checker.
+  (setq ispell-program-name "hunspell")
+
+  ;; Provide the dictionary path.
+  ;; 
+  ;; Note that the easiest way on Windows is to just put dictionaries
+  ;; under C:/Hunspell directory.
+  (setq ispell-hunspell-dict-paths-alist
+        `(("en_US" "C:/hunspell/en_US.aff"))))
