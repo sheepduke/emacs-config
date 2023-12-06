@@ -127,7 +127,7 @@
     (persp-switch-by-number 9))
 
   :custom
-  (persp-mode-prefix-key (kbd "C-c p"))
+  (persp-mode-prefix-key (kbd "C-z"))
 
   ;; The default name of frame.
   (persp-initial-frame-name "1. main")
