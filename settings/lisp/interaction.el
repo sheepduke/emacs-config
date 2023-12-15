@@ -25,6 +25,9 @@
   ;; Use Emacs Lisp mode for scratch buffer.
   (initial-major-mode 'emacs-lisp-mode)
 
+  ;; Do not display the welcome screen.
+  (inhibit-startup-screen t)
+
   :config
   ;; Enable some commands.
   (mapcar (lambda (command) (put command 'disabled nil))
