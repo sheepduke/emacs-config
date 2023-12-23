@@ -133,7 +133,7 @@
   (persp-mode-prefix-key (kbd "C-z"))
 
   ;; The default name of frame.
-  (persp-initial-frame-name "1. main")
+  (persp-initial-frame-name "1")
 
   ;; Method used to sort perspectives.
   (persp-sort 'name)
