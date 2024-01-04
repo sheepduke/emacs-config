@@ -1,4 +1,6 @@
 (use-package python
+  :mode ("\\.py\\'" . python-ts-mode)
+
   :custom
   ;; Use Python 3 instead of Python 2.
   (python-shell-interpreter "python3")

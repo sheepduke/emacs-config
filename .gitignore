@@ -10,3 +10,6 @@
 
 !elpa
 !elpa/**/*
+
+!tree-sitter
+!tree-sitter/**/*
