@@ -25,11 +25,7 @@
 
   :bind
   (:map interactive-haskell-mode-map
-        ("C-c C-b" . haskell-process-reload)
+        ("C-c C-b" . haskell-process-load-file)
+        ("C-c C-l" . haskell-process-reload)
         ("C-c C-c" . interactive-haskell-eval-current-line)
-        ("C-c C-l" . interactive-haskell-run-r)
-        ("C-c C-o" . haskell-interactive-switch))
-
-  :bind
-  (:map haskell-interactive-mode-map
-        ("C-c C-o" . haskell-interactive-switch-back)))
+        ("C-c C-r" . interactive-haskell-run-r)))
