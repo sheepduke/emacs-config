@@ -1,5 +1,7 @@
 (use-package haskell-mode
-  :preface
+  :mode "\\.hs\\'"
+
+  :init
   (defun interactive-haskell-do-eval ()
     "Evaluate the current expression in Haskell REPL."
     (with-current-buffer (haskell-session-interactive-buffer (haskell-session))
@@ -18,16 +20,16 @@
       (insert "r\n")
       (haskell-interactive-mode-return)))
 
-  (defun haskell-setup ()
-    (interactive-haskell-mode 1)
-    (let ((mode-map (symbol-value 'interactive-haskell-mode-map))
-          (repl-mode-map (symbol-value 'haskell-interactive-mode-map)))
-      (define-key mode-map (kbd "C-c C-c") 'interactive-haskell-eval-current-line)
-      (define-key mode-map (kbd "C-c C-o") 'interactive-haskell-run-r)
-      (define-key repl-mode-map (kbd "C-c C-b") 'haskell-interactive-switch-back)))
+  :config
+  (require 'haskell)
 
-  :init
-  (require 'haskell-interactive-mode)
-  
-  :hook
-  (haskell-mode . haskell-setup))
+  :bind
+  (:map interactive-haskell-mode-map
+        ("C-c C-b" . haskell-process-reload)
+        ("C-c C-c" . interactive-haskell-eval-current-line)
+        ("C-c C-l" . interactive-haskell-run-r)
+        ("C-c C-o" . haskell-interactive-switch))
+
+  :bind
+  (:map haskell-interactive-mode-map
+        ("C-c C-o" . haskell-interactive-switch-back)))

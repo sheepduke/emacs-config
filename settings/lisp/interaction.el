@@ -214,7 +214,7 @@
   :demand t
 
   :bind (:map minibuffer-local-map
-         ("M-a" . marginalia-cycle))
+              ("M-a" . marginalia-cycle))
 
   :config
   (marginalia-mode))
