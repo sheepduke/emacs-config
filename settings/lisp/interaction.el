@@ -236,8 +236,12 @@
    ;; Minibuffer history
    :map minibuffer-local-map
    ("M-s" . consult-history) ;; orig. next-matching-history-element
-   ("M-r" . consult-history))
+   ("M-r" . consult-history)))
 
+(use-package consult-xref
+  :demand t
+  :after consult
+  
   :custom
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref))
