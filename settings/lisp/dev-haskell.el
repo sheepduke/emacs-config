@@ -29,3 +29,10 @@
         ("C-c C-l" . haskell-process-reload)
         ("C-c C-c" . interactive-haskell-eval-current-line)
         ("C-c C-r" . interactive-haskell-run-r)))
+
+(use-package ormolu
+  :after haskell-mode
+
+  :bind
+  (:map interactive-haskell-mode
+        ("C-c C-f" . ormolu-format-buffer)))
