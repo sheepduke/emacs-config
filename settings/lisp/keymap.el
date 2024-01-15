@@ -107,9 +107,3 @@
   ("C-M-q" . fill-region)
 )
 
-(use-package devil
-  :demand t
-  :delight ""
-
-  :config
-  (global-devil-mode 1))
