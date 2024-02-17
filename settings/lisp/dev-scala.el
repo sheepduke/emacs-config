@@ -1,13 +1,13 @@
-(use-package scala-ts-mode
+(use-package scala-mode
   :mode "\\.scala\\'"
   :mode "\\.sc\\'"
 
   :config
   (add-to-list 'eglot-server-programs
-               (cons 'scala-ts-mode (cdr (assoc 'scala-mode eglot-server-programs))))
+               (cons 'scala-mode (cdr (assoc 'scala-mode eglot-server-programs))))
 
   :hook
-  (scala-ts-mode . eglot-ensure))
+  (scala-mode . eglot-ensure))
 
 ;; (use-package sbt-mode)
 
