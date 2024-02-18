@@ -12,6 +12,7 @@
 (use-package scala-repl
   :bind (:map scala-mode-map
               ("C-c C-p" . scala-repl-run)
+              ("C-c C-s" . scala-repl-restart)
               ("C-c C-b" . scala-repl-eval-buffer)
               ("C-c C-r" . scala-repl-eval-region)
               ("C-c C-c" . scala-repl-eval-current-line)))

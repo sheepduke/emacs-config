@@ -26,6 +26,16 @@
   (interactive)
   (switch-to-buffer-other-window (scala-repl--ensure-session-buffer)))
 
+(defun scala-repl-restart ()
+  "Restart the REPL session."
+  (interactive)
+  (let* ((buffer-name (scala-repl--ensure-session-buffer))
+         (process (get-buffer-process buffer-name)))
+    (while (process-live-p process)
+      (kill-process process)))
+  (message "Restarting REPL...")
+  (scala-repl--ensure-session-buffer))
+
 (defun scala-repl-eval-current-line ()
   "Send current line to the REPL and evaluate it."
   (interactive)
