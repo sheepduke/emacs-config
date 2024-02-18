@@ -1,13 +1,33 @@
 (use-package scala-mode
+  :disabled
   :mode "\\.scala\\'"
   :mode "\\.sc\\'"
 
-  :config
-  (add-to-list 'eglot-server-programs
-               (cons 'scala-mode (cdr (assoc 'scala-mode eglot-server-programs))))
-
   :hook
   (scala-mode . eglot-ensure))
+
+(use-package scala-ts-mode
+  :mode "\\.scala\\'"
+  :mode "\\.sc\\'"
+
+  :init
+  (defun scala-mode-setup ()
+    (eglot-ensure)
+    
+    (add-hook 'before-save-hook 'eglot-format-buffer)
+
+    (local-set-key (kbd "C-c C-p") 'scala-repl-run)
+    (local-set-key (kbd "C-c C-s") 'scala-repl-restart)
+    (local-set-key (kbd "C-c C-b") 'scala-repl-eval-buffer)
+    (local-set-key (kbd "C-c C-r") 'scala-repl-eval-region)
+    (local-set-key (kbd "C-c C-c") 'scala-repl-eval-current-line))
+
+  :config
+  (add-to-list 'eglot-server-programs
+               (cons 'scala-ts-mode (cdr (assoc 'scala-mode eglot-server-programs))))
+
+  :hook
+  (scala-ts-mode . scala-mode-setup))
 
 (use-package scala-repl
   :bind (:map scala-mode-map
