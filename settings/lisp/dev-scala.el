@@ -9,6 +9,14 @@
   :hook
   (scala-mode . eglot-ensure))
 
+(use-package scala-repl
+  :bind (:map scala-mode-map
+              ("C-c C-p" . scala-repl-run)
+              ("C-c C-b" . scala-repl-eval-buffer)
+              ("C-c C-r" . scala-repl-eval-region)
+              ("C-c C-c" . scala-repl-eval-current-line)))
+
+
 ;; (use-package sbt-mode)
 
 ;; (use-package sbt-anywhere
