@@ -26,6 +26,19 @@
   (interactive)
   (switch-to-buffer-other-window (scala-repl--ensure-session-buffer)))
 
+(defun scala-repl-run-custom ()
+  "Run the REPL with custom commands."
+  (interactive)
+  (call-interactively (lambda ()
+                        (interactive)
+                        (setq current-prefix-arg '(4))
+                        (call-interactively 'comint-run))))
+
+(defun scala-repl-attach (&optional buffer-name)
+  "Attach current buffer to the"
+  (interactive "bChoose REPL Buffer:")
+  (setq scala-repl-buffer-name buffer-name))
+
 (defun scala-repl-restart ()
   "Restart the REPL session."
   (interactive)
@@ -57,15 +70,17 @@
     (message "Region not active")))
 
 (defun scala-repl--ensure-session-buffer ()
-  (let* ((project-type-root (scala-repl--ensure-project-root))
-         (project-type (car project-type-root))
-         (project-root (or (cdr project-type-root) "."))
-         (buffer-name (scala-repl--get-buffer-name project-type project-root)))
-    (unless (process-live-p (get-buffer-process buffer-name))
-      (let ((default-directory project-root)
-            (command (scala-repl--get-command project-type)))
-        (apply 'make-comint-in-buffer buffer-name buffer-name (car command) nil (cdr command))))
-    buffer-name))
+  (if (boundp 'scala-repl-buffer-name)
+      scala-repl-buffer-name
+    (let* ((project-type-root (scala-repl--ensure-project-root))
+           (project-type (car project-type-root))
+           (project-root (or (cdr project-type-root) "."))
+           (buffer-name (scala-repl--get-buffer-name project-type project-root)))
+      (unless (process-live-p (get-buffer-process buffer-name))
+        (let ((default-directory project-root)
+              (command (scala-repl--get-command project-type)))
+          (apply 'make-comint-in-buffer buffer-name buffer-name (car command) nil (cdr command))))
+      buffer-name)))
 
 (defun scala-repl-eval-string (&optional string)
   "Send given string to the REPL and evaluate it."
@@ -75,11 +90,15 @@
       (comint-send-string buffer-name string))))
 
 (defun scala-repl--get-buffer-name (project-type project-root)
-  (if project-type
-      (format "*%s - %s*"
-              scala-repl-buffer-basename
-              (file-name-nondirectory project-root))
-    (format "*%s*" scala-repl-buffer-basename)))
+  (unless (boundp 'scala-repl-buffer-name)
+    (setq  scala-repl-buffer-name
+           (if project-type
+               (format "*%s - %s*"
+                       scala-repl-buffer-basename
+                       (file-name-nondirectory project-root))
+             (format "*%s*" scala-repl-buffer-basename))))
+
+  scala-repl-buffer-name)
 
 (defun scala-repl--get-command (project-type)
   (cdr (assoc (cons project-type scala-repl-console-type)
