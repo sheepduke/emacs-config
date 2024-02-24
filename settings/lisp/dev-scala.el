@@ -9,15 +9,6 @@
     (local-set-key (kbd "C-c C-r") 'scala-repl-eval-region)
     (local-set-key (kbd "C-c C-c") 'scala-repl-eval-current-line))
 
-;; (use-package scala-mode
-;;   :disabled
-;;   :after eglot
-;;   :mode "\\.scala\\'"
-;;   :mode "\\.sc\\'"
-
-;;   :hook
-;;   (scala-mode . scala-setup-buffer))
-
 (use-package scala-ts-mode
   :mode "\\.scala\\'"
   :mode "\\.sc\\'"
