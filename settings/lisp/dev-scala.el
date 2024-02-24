@@ -1,17 +1,4 @@
-(use-package scala-mode
-  :disabled
-  :mode "\\.scala\\'"
-  :mode "\\.sc\\'"
-
-  :hook
-  (scala-mode . eglot-ensure))
-
-(use-package scala-ts-mode
-  :mode "\\.scala\\'"
-  :mode "\\.sc\\'"
-
-  :init
-  (defun scala-mode-setup ()
+(defun scala-setup-buffer ()
     (eglot-ensure)
     
     (add-hook 'before-save-hook 'eglot-format-buffer)
@@ -22,21 +9,34 @@
     (local-set-key (kbd "C-c C-r") 'scala-repl-eval-region)
     (local-set-key (kbd "C-c C-c") 'scala-repl-eval-current-line))
 
-  :config
-  (add-to-list 'eglot-server-programs
-               (cons 'scala-ts-mode (cdr (assoc 'scala-mode eglot-server-programs))))
+;; (use-package scala-mode
+;;   :disabled
+;;   :after eglot
+;;   :mode "\\.scala\\'"
+;;   :mode "\\.sc\\'"
 
+;;   :hook
+;;   (scala-mode . scala-setup-buffer))
+
+(use-package scala-ts-mode
+  :mode "\\.scala\\'"
+  :mode "\\.sc\\'"
+
+  :config
+  (require 'eglot)
+  (add-to-list 'eglot-server-programs
+                   (cons 'scala-ts-mode
+                         (cdr (assoc 'scala-mode eglot-server-programs))))
+  
   :hook
-  (scala-ts-mode . scala-mode-setup))
+  (scala-ts-mode . scala-setup-buffer))
 
 (use-package scala-repl
-  :bind (:map scala-mode-map
-              ("C-c C-p" . scala-repl-run)
-              ("C-c C-s" . scala-repl-restart)
-              ("C-c C-b" . scala-repl-eval-buffer)
-              ("C-c C-r" . scala-repl-eval-region)
-              ("C-c C-c" . scala-repl-eval-current-line)))
-
+  :commands (scala-repl-run
+             scala-repl-restart
+             scala-repl-eval-buffer
+             scala-repl-eval-region
+             scala-repl-eval-current-line))
 
 ;; (use-package sbt-mode)
 
