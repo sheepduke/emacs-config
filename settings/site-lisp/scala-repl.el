@@ -52,7 +52,7 @@
 (defun scala-repl-eval-current-line ()
   "Send current line to the REPL and evaluate it."
   (interactive)
-  (scala-repl-eval-string (format "%s\n" (thing-at-point 'line))))
+  (scala-repl-eval-string (thing-at-point 'line)))
 
 (defun scala-repl-eval-buffer ()
   "Send current buffer to the REPL and evaluate it."
@@ -86,8 +86,11 @@
   "Send given string to the REPL and evaluate it."
   (interactive "MEval: ")
   (save-excursion
-    (let ((buffer-name (scala-repl--ensure-session-buffer)))
-      (comint-send-string buffer-name string))))
+    (let* ((buffer-name (scala-repl--ensure-session-buffer))
+           (input (if (string-suffix-p "\n" string)
+                      string
+                    (format "%s\n" string))))
+      (comint-send-string buffer-name input))))
 
 (defun scala-repl--get-buffer-name (project-type project-root)
   (unless (boundp 'scala-repl-buffer-name)
