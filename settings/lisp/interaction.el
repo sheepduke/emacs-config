@@ -206,6 +206,7 @@
 ;; Filtering and sorting library.
 (use-package orderless
   :custom
+  (completion-ignore-case t)
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
