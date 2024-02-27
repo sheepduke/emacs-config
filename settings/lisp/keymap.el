@@ -19,8 +19,8 @@
   ("C-'" . avy-goto-char-timer)
   ("C-x *" . toggle-window-split)
 
-  ("C-c C-SPC" . consult-register-store)
-  ("C-c SPC" . consult-register-load)
+  ("C-c SPC" . consult-register-store)
+  ("C-c C-SPC" . consult-register-load)
 
   ("C-c 3" . w3m)
   ("C-c d" . sdcv-search-input)  
