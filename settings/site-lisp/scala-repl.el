@@ -21,24 +21,39 @@
   "The alist of REPL commands."
   :group 'scala-repl)
 
-(defun scala-repl-run ()
+(defun scala-repl-run (&optional prefix)
   "Run the REPL and show it in a new window."
-  (interactive)
-  (makunbound 'scala-repl-buffer-name)
-  (switch-to-buffer-other-window (scala-repl--ensure-session-buffer)))
+  (interactive "P")
+  (scala-repl--detach)
+  (if (and prefix (> (car prefix) 0))
+      (call-interactively 'scala-repl-run-custom)
+    (switch-to-buffer-other-window (scala-repl--ensure-session-buffer)))
+  (message "REPL running. Happy hacking"))
 
-(defun scala-repl-run-custom ()
-  "Run the REPL with custom commands."
-  (interactive)
-  (call-interactively (lambda ()
-                        (interactive)
-                        (setq current-prefix-arg '(4))
-                        (call-interactively 'comint-run))))
+(defun scala-repl-run-custom (&optional command)
+  "Just run the REPL with custom commands under current directory."
+  (interactive "MREPL command: ")
+  (let* ((command (string-trim command))
+         (space-position (cl-position ?\s command))
+         (program (if space-position
+                      (substring command 0 space-position)
+                    command))
+         (switches (if space-position
+                       (split-string-and-unquote (substring command (1+ space-position)))
+                     nil)))
+    (comint-run program switches)))
 
 (defun scala-repl-attach (&optional buffer-name)
   "Attach current buffer to the"
   (interactive "bChoose REPL Buffer:")
-  (setq scala-repl-buffer-name buffer-name))
+  (setq scala-repl-buffer-name buffer-name)
+  (message "REPL %s attached" buffer-name))
+
+(defun scala-repl-detach ()
+  "Detach current buffer from any REPL buffer."
+  (interactive)
+  (scala-repl--detach)
+  (message "REPL detached"))
 
 (defun scala-repl-restart ()
   "Restart the REPL session."
@@ -107,6 +122,10 @@
              (format "*%s*" scala-repl-buffer-basename))))
 
   scala-repl-buffer-name)
+
+(defun scala-repl--detach ()
+  (interactive)
+  (makunbound 'scala-repl-buffer-name))
 
 (defun scala-repl--get-command (project-type)
   (cdr (assoc (cons project-type scala-repl-console-type)
