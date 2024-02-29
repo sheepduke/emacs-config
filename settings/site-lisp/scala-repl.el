@@ -82,11 +82,12 @@
       scala-repl-buffer-name
     (let* ((project-type-root (scala-repl--ensure-project-root))
            (project-type (car project-type-root))
-           (project-root (or (cdr project-type-root) "."))
+           (project-root (or (cdr project-type-root)
+                             (expand-file-name ".")))
            (buffer-name (scala-repl--get-buffer-name project-type project-root))
-           (default-directory project-root)
            (command (scala-repl--get-command project-type)))
-      (apply 'make-comint-in-buffer buffer-name buffer-name (car command) nil (cdr command))
+      (let ((default-directory project-root))
+        (apply 'make-comint-in-buffer buffer-name buffer-name (car command) nil (cdr command)))
       buffer-name)))
 
 (defun scala-repl-eval-string (&optional string)
