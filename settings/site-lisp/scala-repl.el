@@ -24,6 +24,7 @@
 (defun scala-repl-run ()
   "Run the REPL and show it in a new window."
   (interactive)
+  (makunbound 'scala-repl-buffer-name)
   (switch-to-buffer-other-window (scala-repl--ensure-session-buffer)))
 
 (defun scala-repl-run-custom ()
@@ -49,6 +50,13 @@
   (message "Restarting REPL...")
   (scala-repl--ensure-session-buffer))
 
+(defun scala-repl-clear ()
+  "Clear the REPL buffer."
+  (interactive)
+  (let* ((buffer-name (scala-repl--ensure-session-buffer)))
+    (with-current-buffer buffer-name
+      (comint-clear-buffer))))
+
 (defun scala-repl-eval-current-line ()
   "Send current line to the REPL and evaluate it."
   (interactive)
@@ -64,33 +72,29 @@
   (interactive)
   (if (region-active-p)
       (let ((buffer-name (scala-repl--ensure-session-buffer)))
-        (scala-repl-eval-string (format "%s\n"
-                                        (buffer-substring (region-beginning)
-                                                          (region-end)))))
+        (scala-repl-eval-string (buffer-substring (region-beginning)
+                                                  (region-end))))
     (message "Region not active")))
 
 (defun scala-repl--ensure-session-buffer ()
-  (if (boundp 'scala-repl-buffer-name)
+  (if (and (boundp 'scala-repl-buffer-name)
+           (process-live-p (get-buffer-process scala-repl-buffer-name)))
       scala-repl-buffer-name
     (let* ((project-type-root (scala-repl--ensure-project-root))
            (project-type (car project-type-root))
            (project-root (or (cdr project-type-root) "."))
-           (buffer-name (scala-repl--get-buffer-name project-type project-root)))
-      (unless (process-live-p (get-buffer-process buffer-name))
-        (let ((default-directory project-root)
-              (command (scala-repl--get-command project-type)))
-          (apply 'make-comint-in-buffer buffer-name buffer-name (car command) nil (cdr command))))
+           (buffer-name (scala-repl--get-buffer-name project-type project-root))
+           (default-directory project-root)
+           (command (scala-repl--get-command project-type)))
+      (apply 'make-comint-in-buffer buffer-name buffer-name (car command) nil (cdr command))
       buffer-name)))
 
 (defun scala-repl-eval-string (&optional string)
   "Send given string to the REPL and evaluate it."
   (interactive "MEval: ")
   (save-excursion
-    (let* ((buffer-name (scala-repl--ensure-session-buffer))
-           (input (if (string-suffix-p "\n" string)
-                      string
-                    (format "%s\n" string))))
-      (comint-send-string buffer-name input))))
+    (let* ((buffer-name (scala-repl--ensure-session-buffer)))
+      (comint-send-string buffer-name (format "{\n%s}\n" string)))))
 
 (defun scala-repl--get-buffer-name (project-type project-root)
   (unless (boundp 'scala-repl-buffer-name)
