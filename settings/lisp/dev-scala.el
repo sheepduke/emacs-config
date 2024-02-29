@@ -1,14 +1,16 @@
 (defun scala-setup-buffer ()
-    (eglot-ensure)
-    
-    (add-hook 'before-save-hook 'eglot-format-buffer)
+  (eglot-ensure)
+  
+  (add-hook 'before-save-hook 'eglot-format-buffer nil t)
 
-    (local-set-key (kbd "C-c C-p") 'scala-repl-run)
-    (local-set-key (kbd "C-c C-s") 'scala-repl-restart)
-    (local-set-key (kbd "C-c C-b") 'scala-repl-eval-buffer)
-    (local-set-key (kbd "C-c C-r") 'scala-repl-eval-region)
-    (local-set-key (kbd "C-c C-c") 'scala-repl-eval-current-line)
-    (local-set-key (kbd "C-M-l") 'scala-repl-clear))
+  (local-set-key (kbd "C-c C-a") 'scala-repl-attach)
+  (local-set-key (kbd "C-c C-d") 'scala-repl-detach)
+  (local-set-key (kbd "C-c C-p") 'scala-repl-run)
+  (local-set-key (kbd "C-c C-s") 'scala-repl-restart)
+  (local-set-key (kbd "C-c C-b") 'scala-repl-eval-buffer)
+  (local-set-key (kbd "C-c C-r") 'scala-repl-eval-region)
+  (local-set-key (kbd "C-c C-c") 'scala-repl-eval-current-line)
+  (local-set-key (kbd "C-M-l") 'scala-repl-clear))
 
 (use-package scala-ts-mode
   :mode "\\.scala\\'"
