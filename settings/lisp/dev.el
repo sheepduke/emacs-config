@@ -42,29 +42,11 @@
   ;; Enable auto completion
   (corfu-auto t)
 
-  ;; Time to wait before completion.
+  ;; Make it fast!
   (corfu-auto-delay 0.1)
 
-  ;; Orderless field separator
-  (corfu-separator ?\s)
-
-  ;; Never quit at completion boundary
-  (corfu-quit-at-boundary nil)
-  
-  ;; Never quit, even if there is no match
-  (corfu-quit-no-match 'separator)
-  
-  ;; Disable current candidate preview
-  (corfu-preview-current nil)
-  
-  ;; Preselect the prompt
-  (corfu-preselect 'prompt)
-  
-  ;; Configure handling of exact matches
-  (corfu-on-exact-match nil)
-  
-  ;; Use scroll margin)
-  (corfu-scroll-margin 5))
+  ;; How many candidates to show.
+  (corfu-count 20))
 
 (use-package corfu-info
   :after corfu)
@@ -77,7 +59,7 @@
   (corfu-popupinfo-mode)
   
   :custom
-  (corfu-popupinfo-delay '(0.5 0.3)))
+  (corfu-popupinfo-delay '(0.5 . 0.2)))
 
 (use-package nerd-icons-corfu
   :after corfu
