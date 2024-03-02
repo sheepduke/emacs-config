@@ -16,7 +16,7 @@
   '(((mill . vanilla) "mill" "-i" "_.console")
     ((mill . ammonite) "mill" "-i" "_.repl")
     ((sbt . vanilla) "sbt" "console")
-    ((nil . vanilla) "scala-cli" "repl")
+    ((nil . vanilla) "scala-cli" "repl" "-deprecation")
     ((nil . ammonite) "amm"))
   "The alist of REPL commands."
   :group 'scala-repl)
