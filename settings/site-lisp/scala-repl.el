@@ -72,12 +72,18 @@
     (with-current-buffer buffer-name
       (comint-clear-buffer))))
 
-(defun scala-repl-load-current-file ()
+(defun scala-repl-save-and-load ()
   "Load the file corresponding to current buffer."
   (interactive)
+  (save-buffer)
   (if (scala-repl--ensure-project-root)
       (message "Not implemented yet.")
     (scala-repl-eval-raw-string (format ":load %s\n" (buffer-name)))))
+
+(defun scala-repl-load-file (&optional file-name)
+  "Load the file into REPL using `:load' command."
+  (interactive "MLoad file: ")
+  (scala-repl-eval-raw-string (format ":load %s\n" (file-name))))
 
 (defun scala-repl-eval-current-line ()
   "Send current line to the REPL and evaluate it."

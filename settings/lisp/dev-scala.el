@@ -7,7 +7,7 @@
   (local-set-key (kbd "C-c C-d") 'scala-repl-detach)
   (local-set-key (kbd "C-c C-p") 'scala-repl-run)
   (local-set-key (kbd "C-c C-s") 'scala-repl-restart)
-  (local-set-key (kbd "C-c C-l") 'scala-repl-load-current-file)
+  (local-set-key (kbd "C-c C-l") 'scala-repl-save-and-load)
   (local-set-key (kbd "C-c C-b") 'scala-repl-eval-buffer)
   (local-set-key (kbd "C-c C-r") 'scala-repl-eval-region)
   (local-set-key (kbd "C-c C-c") 'scala-repl-eval-current-line)
