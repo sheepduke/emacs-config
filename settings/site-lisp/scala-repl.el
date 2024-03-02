@@ -72,6 +72,13 @@
     (with-current-buffer buffer-name
       (comint-clear-buffer))))
 
+(defun scala-repl-load-current-file ()
+  "Load the file corresponding to current buffer."
+  (interactive)
+  (if (scala-repl--ensure-project-root)
+      (message "Not implemented yet.")
+    (scala-repl-eval-raw-string (format ":load %s\n" (buffer-name)))))
+
 (defun scala-repl-eval-current-line ()
   "Send current line to the REPL and evaluate it."
   (interactive)
@@ -106,11 +113,18 @@
       buffer-name)))
 
 (defun scala-repl-eval-string (&optional string)
-  "Send given string to the REPL and evaluate it."
+  "Quote given string in braces, send it to the REPL and evaluate it."
   (interactive "MEval: ")
   (save-excursion
     (let* ((buffer-name (scala-repl--ensure-session-buffer)))
       (comint-send-string buffer-name (format "{\n%s}\n" string)))))
+
+(defun scala-repl-eval-raw-string (&optional string)
+  "Send given raw string to the REPL and evaluate it."
+  (interactive "MEval: ")
+  (save-excursion
+    (let* ((buffer-name (scala-repl--ensure-session-buffer)))
+      (comint-send-string buffer-name string))))
 
 (defun scala-repl--get-buffer-name (project-type project-root)
   (unless (boundp 'scala-repl-buffer-name)
