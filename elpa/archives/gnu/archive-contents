@@ -1249,7 +1249,7 @@
 		     (:url . "https://elpa.gnu.org/packages/elisp-benchmarks.html")
 		     (:commit . "70e38dbfa8f4acbdebfd0f417410d99f5031e05f"))])
  (ellama .
-	 [(0 8 7)
+	 [(0 8 10)
 	  ((emacs
 	    (28 1))
 	   (llm
@@ -1264,7 +1264,7 @@
 	   (:maintainer "Sergey Kostyaev" . "sskostyaev@gmail.com")
 	   (:authors
 	    ("Sergey Kostyaev" . "sskostyaev@gmail.com"))
-	   (:commit . "5acc209c299b9540265141b466900b0c36dc0ff4"))])
+	   (:commit . "6a986d7e8da11152f6b7afa6bde11e1feb448051"))])
  (emacs-gc-stats .
 		 [(1 4 2)
 		  ((emacs
@@ -1802,7 +1802,7 @@
 	     ("Sean Allred" . "code@seanallred.com"))
 	    (:commit . "b57b5ca5d2d0837e1fb4a4f30c051d5f3e643f0f"))])
  (greader .
-	  [(0 9 7)
+	  [(0 9 16)
 	   ((emacs
 	     (25)))
 	   "gnamù reader, send buffer contents to a speech engine." tar
@@ -1811,7 +1811,7 @@
 	    (:authors
 	     ("Michelangelo Rodriguez" . "michelangelo.rodriguez@gmail.com"))
 	    (:url . "https://elpa.gnu.org/packages/greader.html")
-	    (:commit . "1794001f35722e49774dbb074fcfe65f140c8e24"))])
+	    (:commit . "e15265afa0d92af2c189a53eb0d8b7e1f33252f6"))])
  (greenbar .
 	   [(1 1)
 	    nil "Mark comint output with \"greenbar\" background" single
@@ -2255,6 +2255,23 @@
 	(:authors
 	 ("Protesilaos Stavrou" . "info@protesilaos.com"))
 	(:commit . "09cf249c78385502a2ead30c4fa1468cf96939f7"))])
+ (listen .
+	 [(0 4)
+	  ((emacs
+	    (29 1))
+	   (persist
+	    (0 6))
+	   (taxy
+	    (0 10))
+	   (taxy-magit-section
+	    (0 13)))
+	  "Audio/Music player" tar
+	  ((:url . "https://github.com/alphapapa/listen.el")
+	   (:keywords "multimedia")
+	   (:maintainer "Adam Porter" . "adam@alphapapa.net")
+	   (:authors
+	    ("Adam Porter" . "adam@alphapapa.net"))
+	   (:commit . "95eb3eeb7e757d55ac4ac34882a55170b7bc94bc"))])
  (llm .
       [(0 9 1)
        ((emacs
@@ -2721,7 +2738,7 @@
 	       ("Omar Antolín Camarena" . "omar@matem.unam.mx"))
 	      (:commit . "847694e78c12d903d5e3f6cb365a5d3b984db537"))])
  (org .
-      [(9 6 19)
+      [(9 6 20)
        ((emacs
 	 (26 1)))
        "Outline-based notes management and organizer" tar
@@ -2730,7 +2747,7 @@
 	(:maintainer "Bastien Guerry" . "bzg@gnu.org")
 	(:authors
 	 ("Carsten Dominik" . "carsten.dominik@gmail.com"))
-	(:commit . "bc0e14a1ab96de1a8a35c9e12cf68010e56ecdb2"))])
+	(:commit . "fe9bc9efd127544a5cf6d1c8a49eb6152a773c02"))])
  (org-contacts .
 	       [(1 1)
 		((emacs
@@ -3194,7 +3211,7 @@
 		("Alex Schroeder" . "alex@gnu.org"))
 	       (:maintainer "Alex Schroeder" . "alex@gnu.org"))])
  (rcirc-sqlite .
-	       [(0 1 3)
+	       [(0 1 4)
 		((emacs
 		  (30 0)))
 		"rcirc logging in SQLite" tar
@@ -3203,7 +3220,7 @@
 		 (:maintainer "Matto Fransen" . "matto@matto.nl")
 		 (:authors
 		  ("Matto Fransen" . "matto@matto.nl"))
-		 (:commit . "7549f95511be4d80610714d5b957dc05aa8ee7fc"))])
+		 (:commit . "84e49e3735a84b1903679aa7577a24aa32357e2d"))])
  (realgud .
 	  [(1 5 1)
 	   ((load-relative
@@ -3982,7 +3999,7 @@
 	      ("Trevor Edwin Pogue" . "trevor.pogue@gmail.com"))
 	     (:commit . "33c2a6f0a11d1d88cdb2065c5a897e33507f4c86"))])
  (tramp .
-	[(2 6 2 1)
+	[(2 6 2 2)
 	 ((emacs
 	   (26 1)))
 	 "Transparent Remote Access, Multiple Protocol" tar
@@ -3991,7 +4008,7 @@
 	  (:maintainer "Michael Albinus" . "michael.albinus@gmx.de")
 	  (:authors
 	   ("Kai Großjohann" . "kai.grossjohann@gmx.net"))
-	  (:commit . "60000ace7314c10c76b3fbfe3a9ca80bbf21b3a1"))])
+	  (:commit . "cab3f20dcab56c116d0694ce6a5c2985616ae044"))])
  (tramp-nspawn .
 	       [(1 0 1)
 		((emacs
