@@ -168,6 +168,18 @@
 			  ("Thien-Thi Nguyen" . "ttn@gnu.org"))
 			 (:maintainer "Thien-Thi Nguyen" . "ttn@gnu.org")
 			 (:url . "http://www.gnuvola.org/software/aa2u/"))])
+ (assess .
+	 [(0 7)
+	  ((emacs
+	    (24 4))
+	   (m-buffer
+	    (0 15)))
+	  "Test support functions" tar
+	  ((:maintainer "Phillip Lord" . "phillip.lord@russet.org.uk")
+	   (:authors
+	    ("Phillip Lord" . "phillip.lord@russet.org.uk"))
+	   (:url . "https://elpa.gnu.org/packages/assess.html")
+	   (:commit . "cadeb24a5d8261fad4bdfdc09e7d571cc395a6ca"))])
  (async .
 	[(1 9 8)
 	 ((emacs
@@ -551,7 +563,7 @@
 		("Augusto Stoffel" . "arstoffel@gmail.com"))
 	       (:commit . "44546ca256f3da29e3ac884e3d699c8455acbd6e"))])
  (comint-mime .
-	      [(0 3)
+	      [(0 4)
 	       ((emacs
 		 (28 1)))
 	       "Display content of various MIME types in comint buffers" tar
@@ -560,7 +572,7 @@
 		(:maintainer "Augusto Stoffel" . "arstoffel@gmail.com")
 		(:authors
 		 ("Augusto Stoffel" . "arstoffel@gmail.com"))
-		(:commit . "91b2926d2bf40a31a55fdb80c7dc21652bcf9417"))])
+		(:commit . "9d4fe3694d1cb558e26cffb4f92f7d2ffc40498d"))])
  (compact-docstrings .
 		     [(0 2)
 		      nil "Shrink blank lines in docstrings and doc comments" single
@@ -1802,7 +1814,7 @@
 	     ("Sean Allred" . "code@seanallred.com"))
 	    (:commit . "b57b5ca5d2d0837e1fb4a4f30c051d5f3e643f0f"))])
  (greader .
-	  [(0 9 16)
+	  [(0 9 17)
 	   ((emacs
 	     (25)))
 	   "gnamù reader, send buffer contents to a speech engine." tar
@@ -1811,7 +1823,7 @@
 	    (:authors
 	     ("Michelangelo Rodriguez" . "michelangelo.rodriguez@gmail.com"))
 	    (:url . "https://elpa.gnu.org/packages/greader.html")
-	    (:commit . "e15265afa0d92af2c189a53eb0d8b7e1f33252f6"))])
+	    (:commit . "f2785979b16a659695d6dc058b8b5af53925b722"))])
  (greenbar .
 	   [(1 1)
 	    nil "Mark comint output with \"greenbar\" background" single
@@ -2226,6 +2238,20 @@
 	 (:authors
 	  ("Naoya Yamashita" . "conao3@gmail.com"))
 	 (:commit . "7cc38f9739eadc569b1179fabe7f7893167105da"))])
+ (lentic .
+	 [(0 12)
+	  ((emacs
+	    (25))
+	   (m-buffer
+	    (0 13))
+	   (dash
+	    (2 5 0)))
+	  "One buffer as a view of another" tar
+	  ((:maintainer "Phillip Lord" . "phillip.lord@russet.org.uk")
+	   (:authors
+	    ("Phillip Lord" . "phillip.lord@russet.org.uk"))
+	   (:url . "https://elpa.gnu.org/packages/lentic.html")
+	   (:commit . "180c1082c016de790f9e6596b63329657c83ce20"))])
  (let-alist .
    [(1 0 6)
     ((emacs
@@ -2273,7 +2299,7 @@
 	    ("Adam Porter" . "adam@alphapapa.net"))
 	   (:commit . "95eb3eeb7e757d55ac4ac34882a55170b7bc94bc"))])
  (llm .
-      [(0 9 1)
+      [(0 10 0)
        ((emacs
 	 (28 1)))
        "Interface to pluggable llm backends" tar
@@ -2281,7 +2307,7 @@
 	(:maintainer "Andrew Hyatt" . "ahyatt@gmail.com")
 	(:authors
 	 ("Andrew Hyatt" . "ahyatt@gmail.com"))
-	(:commit . "bed2cb774d2836a8992ad7cbf821e613d7d14ce1"))])
+	(:commit . "9c33eb4a91db4ccab5c50d9a133f03b3734beda5"))])
  (lmc .
       [(1 4)
        ((emacs
@@ -2357,6 +2383,16 @@
 	("Oleh Krehel"))
        (:url . "https://elpa.gnu.org/packages/lv.html")
        (:commit . "54e9db2b023e03b6f6b46aeec48ea74fd51d4e11"))])
+ (m-buffer .
+	   [(0 16)
+	    ((seq
+	      (2 14)))
+	    "List-Oriented, Functional Buffer Manipulation" tar
+	    ((:maintainer "Phillip Lord" . "phillip.lord@russet.rg.uk")
+	     (:authors
+	      ("Phillip Lord" . "phillip.lord@russet.org.uk"))
+	     (:url . "https://elpa.gnu.org/packages/m-buffer.html")
+	     (:commit . "8a51de3366599e7fa52e37b596c9ce226b6f04c5"))])
  (map .
       [(3 3 1)
        ((emacs
@@ -3648,16 +3684,16 @@
 	    (:maintainer "Artur Malabarba" . "emacs@endlessparentheses.com")
 	    (:url . "https://github.com/Malabarba/speed-of-thought-lisp"))])
  (spacious-padding .
-		   [(0 3 0)
+		   [(0 4 0)
 		    ((emacs
 		      (28 1)))
 		    "Increase the padding/spacing of frames and windows" tar
-		    ((:url . "https://git.sr.ht/~protesilaos/spacious-padding")
+		    ((:url . "https://github.com/protesilaos/spacious-padding")
 		     (:keywords "convenience" "focus" "writing" "presentation")
-		     (:maintainer "Protesilaos Stavrou General Issues" . "~protesilaos/general-issues@lists.sr.ht")
+		     (:maintainer "Protesilaos Stavrou" . "info@protesilaos.com")
 		     (:authors
 		      ("Protesilaos Stavrou" . "info@protesilaos.com"))
-		     (:commit . "9d96d301d5bccf192daaf00dba64bca9979dcb5a"))])
+		     (:commit . "227e6144cdd842d7d32b8cb7f587dcb53c0ea82b"))])
  (spinner .
 	  [(1 7 4)
 	   ((emacs
@@ -4299,15 +4335,17 @@
 	   ("Justin Burkett" . "justin@burkett.cc"))
 	  (:keywords "diff"))])
  (verilog-mode .
-	       [(2023 6 6 141322628)
+	       [(2024 3 1 121933719)
 		nil "major mode for editing verilog source in Emacs" tar
 		((:url . "https://www.veripool.org")
 		 (:keywords "languages")
-		 (:maintainer "Michael McNamara" . "mac@verilog.com")
+		 (:maintainer
+		  ("Michael McNamara" . "mac@verilog.com")
+		  ("Wilson Snyder" . "wsnyder@wsnyder.org"))
 		 (:authors
 		  ("Michael McNamara" . "mac@verilog.com")
 		  ("Wilson Snyder" . "wsnyder@wsnyder.org"))
-		 (:commit . "f68d962ede0cc3d7758d3304e7411a10694acce8"))])
+		 (:commit . "b2d18ff944ae374fa03579ca2574f1fba8ae2e4b"))])
  (vertico .
 	  [(1 7)
 	   ((emacs

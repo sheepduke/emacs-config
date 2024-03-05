@@ -36,3 +36,6 @@
 
 (use-package kotlin-mode
   :mode "\\.kt\\'")
+
+(use-package dockerfile-mode
+  :mode "Dockerfile")
