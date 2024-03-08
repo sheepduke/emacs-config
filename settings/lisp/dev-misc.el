@@ -17,8 +17,7 @@
   :bind (:map conf-mode-map
               ("<return>" . smart-newline)))
 
-(use-package powershell
-  :mode "\\.ps1\\'")
+(use-package powershell)
 
 (use-package systemd)
 
