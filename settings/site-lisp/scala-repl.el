@@ -154,7 +154,7 @@
 (defun scala-repl--ensure-project-root ()
   (unless (boundp 'scala-repl-project-type-root)
     (setq scala-repl-project-type-root
-          (scala-repl--locate-project-root ".")))
+          (scala-repl--locate-project-root (expand-file-name "."))))
   scala-repl-project-type-root)
 
 (defun scala-repl--locate-project-root (directory)
