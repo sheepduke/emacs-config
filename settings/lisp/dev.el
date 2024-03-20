@@ -14,10 +14,16 @@
 (use-package yasnippet
   :demand t
 
+  :config
+  (defun expand-yasnippet-or-dabbrev ()
+    (interactive)
+    (unless (yas-expand)
+      (dabbrev-completion)))
+
   :bind
   (:map yas-minor-mode-map
-        ("M-/" . yas-expand))
-
+        ("M-/" . expand-yasnippet-or-dabbrev))
+  
   :custom
   (yas-snippet-dirs (list (locate-user-data-file "snippets")))
 
@@ -26,6 +32,10 @@
 
 (use-package consult-yasnippet
   :after (consult yasnippet))
+
+(use-package dabbrev
+  :custom
+  (dabbrev-case-fold-search nil))
 
 ;; ============================================================
 ;;  Code Completion
