@@ -46,7 +46,7 @@
 (defun scala-repl-attach (&optional buffer-name)
   "Attach current buffer to the"
   (interactive "bChoose REPL Buffer:")
-  (setq scala-repl-buffer-name buffer-name)
+  (setq-local scala-repl-buffer-name buffer-name)
   (message "REPL %s attached" buffer-name))
 
 (defun scala-repl-detach ()
@@ -134,12 +134,12 @@
 
 (defun scala-repl--get-buffer-name (project-type project-root)
   (unless (boundp 'scala-repl-buffer-name)
-    (setq  scala-repl-buffer-name
-           (if project-type
-               (format "*%s - %s*"
-                       scala-repl-buffer-basename
-                       (file-name-nondirectory project-root))
-             (format "*%s*" scala-repl-buffer-basename))))
+    (setq-local scala-repl-buffer-name
+                (if project-type
+                    (format "*%s - %s*"
+                            scala-repl-buffer-basename
+                            (file-name-nondirectory project-root))
+                  (format "*%s*" scala-repl-buffer-basename))))
 
   scala-repl-buffer-name)
 
@@ -153,17 +153,18 @@
 
 (defun scala-repl--ensure-project-root ()
   (unless (boundp 'scala-repl-project-type-root)
-    (setq scala-repl-project-type-root
-          (scala-repl--locate-project-root (expand-file-name "."))))
+    (setq-local scala-repl-project-type-root
+                (scala-repl--locate-project-root ".")))
   scala-repl-project-type-root)
 
 (defun scala-repl--locate-project-root (directory)
-  (if (string= directory "/")
-      nil
-    (cond
-     ((directory-files (expand-file-name directory) t "build.sc") (cons 'mill directory))
-     ((directory-files (expand-file-name directory) t "build.sbt") (cons 'sbt directory))
-     ((directory-files (expand-file-name directory) t "project.scala") (cons 'scala-cli directory))
-     (t (scala-repl--locate-project-root (expand-file-name (format "%s/.." directory)))))))
+  (let ((directory (expand-file-name directory)))
+    (if (string= directory "/")
+        nil
+      (cond
+       ((directory-files (expand-file-name directory) t "build.sc") (cons 'mill directory))
+       ((directory-files (expand-file-name directory) t "build.sbt") (cons 'sbt directory))
+       ((directory-files (expand-file-name directory) t "project.scala") (cons 'scala-cli directory))
+       (t (scala-repl--locate-project-root (expand-file-name (format "%s/.." directory))))))))
 
 (provide 'scala-repl)
