@@ -291,6 +291,18 @@ output."
 (use-package restclient)
 
 ;; ============================================================
+;;  Tramp
+;; ============================================================
+
+(use-package tramp
+  :when (eq system-type 'windows-nt)
+  :config
+  (push '("-tt")
+        (cadr (assoc 'tramp-login-args
+                     (assoc "ssh" tramp-methods))))
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+
+;; ============================================================
 ;;  Silver Brain
 ;; ============================================================
 
