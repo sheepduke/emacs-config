@@ -7,19 +7,13 @@
   :type 'string
   :group 'scala-repl)
 
-(defcustom scala-repl-console-type 'vanilla
-  "Use Ammonite instead of vanilla REPL."
-  :type 'symbol
-  :group 'scala-repl)
-
 (defcustom scala-repl-command-alist
-  '(((mill . vanilla) "mill" "-i" "_.console")
-    ((mill . ammonite) "mill" "-i" "_.repl")
-    ((sbt . vanilla) "sbt" "console")
-    ((nil . vanilla) "scala-cli" "repl" "-deprecation")
-    ((nil . ammonite) "amm"))
+  '((mill "mill" "-i" "_.console")
+    (sbt "sbt" "console")
+    (nil "scala-cli" "repl" "-deprecation"))
   "The alist of REPL commands."
-  :group 'scala-repl)
+  :group 'scala-repl
+  :type 'alist)
 
 (defun scala-repl-run (&optional prefix)
   "Run the REPL and show it in a new window."
@@ -61,9 +55,12 @@
   (let* ((buffer-name (scala-repl--ensure-session-buffer))
          (process (get-buffer-process buffer-name)))
     (while (process-live-p process)
-      (kill-process process)))
-  (message "Restarting REPL...")
-  (scala-repl--ensure-session-buffer))
+      (kill-process process))
+    (message "Restarting REPL...")
+    (save-excursion
+      (scala-repl--ensure-session-buffer)
+      (with-current-buffer (buffer-name)
+        (goto-char (point-max))))))
 
 (defun scala-repl-clear ()
   "Clear the REPL buffer."
@@ -83,7 +80,15 @@
 (defun scala-repl-load-file (&optional file-name)
   "Load the file into REPL using `:load' command."
   (interactive "MLoad file: ")
-  (scala-repl-eval-raw-string (format ":load %s\n" (file-name))))
+  (scala-repl-eval-raw-string (format ":load %s\n" file-name)))
+
+(defun scala-repl-eval-region-or-line ()
+  "Evaluate the selected region when a region is active. Otherwise
+evaluate current line."
+  (interactive)
+  (if (region-active-p)
+      (scala-repl-eval-region)
+    (scala-repl-eval-current-line)))
 
 (defun scala-repl-eval-current-line ()
   "Send current line to the REPL and evaluate it."
@@ -148,8 +153,7 @@
   (makunbound 'scala-repl-buffer-name))
 
 (defun scala-repl--get-command (project-type)
-  (cdr (assoc (cons project-type scala-repl-console-type)
-              scala-repl-command-alist)))
+  (cdr (assoc project-type scala-repl-command-alist)))
 
 (defun scala-repl--ensure-project-root ()
   (unless (boundp 'scala-repl-project-type-root)

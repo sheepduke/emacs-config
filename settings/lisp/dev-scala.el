@@ -9,8 +9,7 @@
   (local-set-key (kbd "C-c C-s") 'scala-repl-restart)
   (local-set-key (kbd "C-c C-l") 'scala-repl-save-and-load)
   (local-set-key (kbd "C-c C-b") 'scala-repl-eval-buffer)
-  (local-set-key (kbd "C-c C-r") 'scala-repl-eval-region)
-  (local-set-key (kbd "C-c C-c") 'scala-repl-eval-current-line)
+  (local-set-key (kbd "C-c C-c") 'scala-repl-eval-region-or-line)
   (local-set-key (kbd "C-M-l") 'scala-repl-clear))
 
 (use-package scala-ts-mode
@@ -30,6 +29,7 @@
   :commands (scala-repl-run
              scala-repl-restart
              scala-repl-eval-buffer
+             scala-repl-eval-region-or-line
              scala-repl-eval-region
              scala-repl-eval-current-line))
 
