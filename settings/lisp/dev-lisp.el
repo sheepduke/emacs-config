@@ -21,8 +21,6 @@
   (emacs-lisp-mode . paredit-mode))
 
 (use-package nameless
-  :after emacs-lisp-mode
-  
   :hook
   (emacs-lisp-mode . nameless-mode)
 
@@ -30,7 +28,7 @@
                ("-" . nameless-insert-name-or-self-insert)))
   
   :custom
-  (nameless-prefix "%")
+  (nameless-prefix "@")
   (nameless-private-prefix t))
 
 ;; ============================================================
