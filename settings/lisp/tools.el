@@ -307,7 +307,7 @@ output."
 ;; ============================================================
 
 (use-package silver-brain
-  :load-path "~/.silver-brain/emacs/"
+  :load-path "~/projects/silver-brain/external/emacs/"
   
   :config
   (silver-brain-install)
@@ -318,5 +318,5 @@ output."
   ("C-c b n" . silver-brain-new-concept)
 
   :custom
-  (silver-brain-database-name "silver-brain")
-  (silver-brain-server-port 5000))
+  (silver-brain-store-name "main")
+  (silver-brain-server-port 8080))
