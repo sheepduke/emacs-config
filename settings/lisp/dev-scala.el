@@ -10,7 +10,9 @@
   (local-set-key (kbd "C-c C-l") 'scala-repl-save-and-load)
   (local-set-key (kbd "C-c C-b") 'scala-repl-eval-buffer)
   (local-set-key (kbd "C-c C-c") 'scala-repl-eval-region-or-line)
-  (local-set-key (kbd "C-M-l") 'scala-repl-clear))
+  (local-set-key (kbd "C-c C-r") 'scala-repl-eval-main-function)
+  (local-set-key (kbd "C-M-l") 'scala-repl-clear)
+  (local-set-key (kbd "C-c C-v") 'compile-dwim))
 
 (use-package scala-ts-mode
   :mode "\\.scala\\'"
@@ -31,7 +33,8 @@
              scala-repl-eval-buffer
              scala-repl-eval-region-or-line
              scala-repl-eval-region
-             scala-repl-eval-current-line))
+             scala-repl-eval-current-line
+             scala-repl-eval-main-function))
 
 ;; (use-package sbt-mode)
 
