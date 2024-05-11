@@ -164,3 +164,13 @@
 
   :hook
   (eglot-managed-mode . eglot-setup))
+
+;; ============================================================
+;;  Compilation
+;; ============================================================
+
+(defun compile-dwim (&optional prefix)
+  (interactive "P")
+  (if prefix
+      (call-interactively #'compile)
+    (recompile)))
