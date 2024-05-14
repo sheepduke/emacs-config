@@ -1,3 +1,14 @@
+(defun scala-smart-newline ()
+  (interactive)
+  (let ((comment-symbol (and (line-in-comment?)
+                             (seq-first (string-trim-left (thing-at-point 'line))))))
+    (newline-and-indent)
+    (when comment-symbol
+      (insert (cl-case comment-symbol
+                (?* "* ")
+                (?/ "//")
+                (nil ""))))))
+
 (defun scala-setup-buffer ()
   (eglot-ensure)
   
@@ -12,7 +23,8 @@
   (local-set-key (kbd "C-c C-c") 'scala-repl-eval-region-or-line)
   (local-set-key (kbd "C-c C-r") 'scala-repl-eval-main-function)
   (local-set-key (kbd "C-M-l") 'scala-repl-clear)
-  (local-set-key (kbd "C-c C-v") 'compile-dwim))
+  (local-set-key (kbd "C-c C-v") 'compile-dwim)
+  (local-set-key (kbd "<return>" 'scala-smart-newline)))
 
 (use-package scala-ts-mode
   :mode "\\.scala\\'"
