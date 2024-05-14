@@ -48,54 +48,17 @@
 ;;  Fonts
 ;; ============================================================
 
-;; Set font if X window is in use.
-;; Note that Chinese font size must be 2 larger than English font for
-;; alignment.
-(use-package emacs
-  :if (display-graphic-p)
+(defun find-first-available-font (&rest fonts)
+  (let ((installed-fonts (seq-map (lambda (x) (decode-coding-string x 'utf-8))
+                                  (font-family-list))))
+    (seq-find (lambda (font) (member font installed-fonts)) fonts)))
 
-  :preface
-  (defun font-exists? (fontname)
-    "Test if given FONTNAME is exist or not."
-    (if (or (not fontname) (string= fontname ""))
-        nil
-      (if (not (x-list-fonts fontname)) nil t)))
+(defun set-font (script &rest fonts)
+  (set-fontset-font nil script (apply #'find-first-available-font fonts)))
 
-  (defun get-first-available-font (font-list)
-    "Return the first available font in FONT-LIST.
-If no one was found, NIL is returned."
-    (catch 'found
-      (dolist (font font-list)
-        (when (font-exists? font)
-          (throw 'found font)))))
-
-  (defun set-font (english-font-list chinese-font-list size-pair)
-    "Setup Emacs English and Chinese font on x window system.
-ENGLISH-FONT-LIST and CHINESE-FONT-LIST are lists of fonts.
-SIZE-PAIR is a cons pair indicating font size."
-    (let ((english-font (get-first-available-font english-font-list))
-          (chinese-font (get-first-available-font chinese-font-list)))
-      (if english-font
-          (set-frame-font (font-spec :family english-font
-                                     :size (car size-pair)))
-        (warn "No available English font."))
-
-      (if chinese-font
-          (dolist (charset '(kana han symbol cjk-misc bopomofo))
-            (set-fontset-font (frame-parameter nil 'font) charset
-                              (font-spec :family chinese-font
-                                         :size (cdr size-pair))))
-        (warn "No available Chinese font."))))
-
-  :config
-  (set-font '("FiraCode Nerd Font Mono" "DejaVu Sans Mono" "Consolas")
-            '("Microsoft Yahei" "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
-            (cl-case (display-pixel-height)
-              (2160 '(25 . 30))
-              (1500 '(17 . 18))
-              (1445 '(17 . 20))
-              (1440 '(18 . 22))
-              (t '(14 . 16)))))
+(set-font 'latin "FiraCode Nerd Font Mono" "DejaVu Sans Mono" "Consolas")
+(set-font 'han "Microsoft Yahei" "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
+(set-font 'emoji "Noto Color Emoji")
 
 ;; ============================================================
 ;;  Icons
