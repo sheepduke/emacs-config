@@ -309,9 +309,6 @@ output."
 (use-package silver-brain
   :load-path "~/projects/silver-brain/external/emacs/"
   
-  :config
-  (silver-brain-install)
-
   :bind
   ("C-c b b" . silver-brain)
   ("C-c b o" . silver-brain-open)
