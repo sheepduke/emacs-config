@@ -6,6 +6,10 @@
   "Return T if current OS is WSL(2)."
   (string-match "-[Mm]icrosoft" (shell-command-to-string "uname -a")))
 
+(defun linux? ()
+  "Return T if current OS is Linux."
+  (equal system-type 'gnu/linux))
+
 (defun x? ()
   "Return TRUE if we are under X system."
   (getenv "DISPLAY"))

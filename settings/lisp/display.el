@@ -53,12 +53,24 @@
                                   (font-family-list))))
     (seq-find (lambda (font) (member font installed-fonts)) fonts)))
 
+(defun find-font (search)
+  (seq-filter (lambda (x) (string-match-p search x))
+              (seq-map (lambda (x) (decode-coding-string x 'utf-8))
+                       (font-family-list))))
+
 (defun set-font (script &rest fonts)
   (set-fontset-font nil script (apply #'find-first-available-font fonts)))
 
-(set-font 'latin "FiraCode Nerd Font Mono" "DejaVu Sans Mono" "Consolas")
-(set-font 'han "Microsoft Yahei" "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
-(set-font 'emoji "Noto Color Emoji")
+(when (windows?)
+  (set-font 'latin "Cascadia Code" "Consolas")
+  (set-font 'han "Microsoft YaHei")
+  (set-font 'symbol "Cascadia Code" "Segoe UI Symbol")
+  (set-font 'emoji "Segoe UI Emoji"))
+
+(when (linux?)
+  (set-font 'latin "FiraCode Nerd Font Mono" "DejaVu Sans Mono")
+  (set-font 'han "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
+  (set-font 'emoji "Noto Color Emoji"))
 
 ;; ============================================================
 ;;  Icons
