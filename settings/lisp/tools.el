@@ -27,7 +27,7 @@ output."
 
 ;; Replace the original doc-view for PDF files.
 (use-package pdf-tools
-  :defer t
+  :defer nil
   :unless (windows?)
 
   :config
@@ -46,7 +46,6 @@ output."
 ;; ============================================================
 
 (use-package emms
-  
   :init
   (require 'emms-setup)
 
