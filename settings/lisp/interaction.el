@@ -275,3 +275,14 @@
   ;; auto-updating embark collect buffer
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+
+;; ============================================================
+;;  Posframe
+;; ============================================================
+
+(use-package vertico-posframe
+  :after vertico
+  :config
+  (vertico-posframe-mode 1))
+
+
