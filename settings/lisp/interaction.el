@@ -284,5 +284,3 @@
   :after vertico
   :config
   (vertico-posframe-mode 1))
-
-

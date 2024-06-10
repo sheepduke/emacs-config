@@ -1,3 +1,7 @@
+;; ============================================================
+;;  Keymap
+;; ============================================================
+
 (use-package emacs
   :bind
   ;; Buffer.
@@ -104,6 +108,131 @@
   ("C-M-r" . replace-string)
   ("C-M-S-r" . replace-regexp)
   ("C-M-/" . consult-yasnippet)
-  ("C-M-q" . fill-region)
-)
+  ("C-M-q" . fill-region))
 
+;; ============================================================
+;;  Hydra
+;; ============================================================
+
+(use-package pretty-hydra
+  :config
+  (global-set-key (kbd "M-SPC") 'hydra-global/body)
+
+;; | color    | toggle                     |
+;; |----------+----------------------------|
+;; | red      |                            |
+;; | blue     | :exit t                    |
+;; | amaranth | :foreign-keys warn         |
+;; | teal     | :foreign-keys warn :exit t |
+;; | pink     | :foreign-keys run          |
+  (pretty-hydra-define hydra-global (:color blue)
+    ("Buffer Management"
+     (("d" hydra-workspace/body "Workspace")
+      ("w" hydra-window/body "Window")
+      ("b" hydra-buffer/body "Buffer"))
+
+     "Project"
+     (("p" hydra-project/body "Project"))
+
+     "Editing"
+     (("e" hydra-editing/body "Editing")
+      ("r" hydra-register/body "Register"))
+    
+     "Local"
+     (("l" major-mode-hydra "Local"))))
+
+  (pretty-hydra-define hydra-workspace ()
+    ("Switch to"
+     (("1" persp-switch-to-1 "1")
+      ("2" persp-switch-to-2 "2")
+      ("3" persp-switch-to-3 "3")
+      ("4" persp-switch-to-4 "4")
+      ("5" persp-switch-to-5 "5")
+      ("6" persp-switch-to-6 "6")
+      ("7" persp-switch-to-7 "7")
+      ("8" persp-switch-to-8 "8")
+      ("9" persp-switch-to-9 "9"))
+
+     "Movement"
+     (("h" persp-prev "Previous")
+      ("p" persp-prev "Previous")
+      ("l" persp-next "Next")
+      ("n" persp-next "Next"))
+
+     "Manipulation"
+     (("s" persp-switch "Switch/Create")
+      ("k" persp-kill "Kill"))))
+  
+  (pretty-hydra-define hydra-window ()
+    ("Movement"
+     (("h" windmove-left "⇦")
+      ("l" windmove-right "⇨")
+      ("p" windmove-up "⇧")
+      ("n" windmove-right "⇩"))
+
+     "Manipulation"
+     (("s" split-window-below "split below")
+      ("v" split-window-right "split right")
+      ("k" delete-window "delete this")
+      ("o" delete-other "delete other")
+      ("d" toggle-window-dedicated "toggle dedicated"))
+
+     "Layout"
+     (("]" enlarge-window-horizontally "Width +")
+      ("[" shrink-window-horizontally "Width -")
+      ("+" enlarge-window "Height +")
+      ("-" shrink-window "Height -")
+      ("=" balance-windows "Balance" "="))))
+
+  (pretty-hydra-define hydra-buffer ()
+    ("Switch to"
+     (("b" switch-to-buffer "Buffer")
+      ("s" persp-switch-to-scratch-buffer "Scratch buffer")
+      ("o" switch-to-other-buffer "Other buffer"))
+
+     "Manipulation"
+     (("f" find-file "Open File")
+      ("q" bury-buffer "Bury")
+      ("k" kill-this-buffer "Kill"))))
+
+  (pretty-hydra-define hydra-project ()
+    ("Project"
+     (("f" project-find-file "find file"))))
+  
+  (pretty-hydra-define hydra-editing ()
+    ("Character"
+     (("i" insert-char "insert")
+      ("s" what-cursor-position "inspect"))
+
+     "Occur"
+     (("o" consult-focus-lines "occur")
+      ("O" consult-keep-lines "multi occur")
+      ("f" consult-fd "fd")
+      ("g" consult-ripgrep "ripgrep"))
+
+     "Mark"
+     (("m" consult-mark)
+      ("M" consult-global-mark)
+      ("u" consult-outline))
+
+     "Toggle"
+     (("a" auto-fill-mode "auto fill")
+      ("w" toggle-word-wrap "word wrap")
+      ("t" toggle-truncate-lines "truncate lines")
+      ("n" display-line-numbers-mode "line numbers")
+      ("v" visual-line-mode "visual line"))))
+
+  (pretty-hydra-define hydra-register ()
+    ("Bookmark"
+     (("b" consult-bookmark "Jump to Bookmark")
+      ("B" list-bookmarks "List"))
+
+     "Register"
+     (("l" consult-register-load "Load")
+      ("s" consult-register-store "Store")))))
+
+(use-package hydra-posframe
+  :after hydra
+  :demand t
+  :config
+  (hydra-posframe-mode 1))
