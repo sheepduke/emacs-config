@@ -127,22 +127,22 @@
 ;; | pink     | :foreign-keys run          |
   (pretty-hydra-define hydra-global (:color blue)
     ("Buffer Management"
-     (("d" hydra-workspace/body "Workspace")
-      ("w" hydra-window/body "Window")
-      ("b" hydra-buffer/body "Buffer"))
+     (("k" hydra-workspace/body "workspace")
+      ("w" hydra-window/body "window")
+      ("b" hydra-buffer/body "buffer"))
 
-     "Project"
-     (("p" hydra-project/body "Project"))
+     "project"
+     (("p" hydra-project/body "project"))
 
-     "Editing"
-     (("e" hydra-editing/body "Editing")
-      ("r" hydra-register/body "Register"))
+     "editing"
+     (("e" hydra-editing/body "editing")
+      ("r" hydra-register/body "register"))
     
-     "Local"
-     (("l" major-mode-hydra "Local"))))
+     "local"
+     (("l" major-mode-hydra "local"))))
 
   (pretty-hydra-define hydra-workspace ()
-    ("Switch to"
+    ("switch to"
      (("1" persp-switch-to-1 "1")
       ("2" persp-switch-to-2 "2")
       ("3" persp-switch-to-3 "3")
@@ -153,15 +153,17 @@
       ("8" persp-switch-to-8 "8")
       ("9" persp-switch-to-9 "9"))
 
-     "Movement"
-     (("h" persp-prev "Previous")
-      ("p" persp-prev "Previous")
-      ("l" persp-next "Next")
-      ("n" persp-next "Next"))
+     "movement"
+     (("h" persp-prev "previous")
+      ("p" persp-prev "previous")
+      ("l" persp-next "next")
+      ("n" persp-next "next"))
 
-     "Manipulation"
-     (("s" persp-switch "Switch/Create")
-      ("k" persp-kill "Kill"))))
+     "manipulation"
+     (("c" persp-create "create")
+      ("s" persp-switch "switch")
+      ("r" persp-rename "rename")
+      ("k" persp-kill "kill"))))
   
   (pretty-hydra-define hydra-window ()
     ("Movement"
@@ -178,26 +180,28 @@
       ("d" toggle-window-dedicated "toggle dedicated"))
 
      "Layout"
-     (("]" enlarge-window-horizontally "Width +")
-      ("[" shrink-window-horizontally "Width -")
-      ("+" enlarge-window "Height +")
-      ("-" shrink-window "Height -")
-      ("=" balance-windows "Balance" "="))))
+     (("]" enlarge-window-horizontally "width +")
+      ("[" shrink-window-horizontally "width -")
+      ("+" enlarge-window "height +")
+      ("-" shrink-window "height -")
+      ("=" balance-windows "balance" "="))))
 
   (pretty-hydra-define hydra-buffer ()
     ("Switch to"
-     (("s" switch-to-buffer "Buffer")
-      ("b" persp-switch-to-scratch-buffer "Scratch buffer")
-      ("o" switch-to-other-buffer "Other buffer"))
+     (("s" switch-to-buffer "buffer")
+      ("b" persp-switch-to-scratch-buffer "scratch buffer")
+      ("o" switch-to-other-buffer "other buffer"))
 
      "Manipulation"
-     (("f" find-file "Open File")
-      ("q" bury-buffer "Bury")
-      ("k" kill-this-buffer "Kill"))))
+     (("f" find-file "open File")
+      ("q" bury-buffer "bury")
+      ("k" kill-this-buffer "kill"))))
 
   (pretty-hydra-define hydra-project ()
     ("Project"
-     (("f" project-find-file "find file"))))
+     (("f" project-find-file "find file")
+      ("p" project-switch-project "switch project")
+      ("d" project-dired "dired"))))
   
   (pretty-hydra-define hydra-editing ()
     ("Character"
@@ -224,12 +228,12 @@
 
   (pretty-hydra-define hydra-register ()
     ("Bookmark"
-     (("b" consult-bookmark "Jump to Bookmark")
-      ("B" list-bookmarks "List"))
+     (("b" consult-bookmark "jump to bookmark")
+      ("B" list-bookmarks "list"))
 
      "Register"
-     (("l" consult-register-load "Load")
-      ("s" consult-register-store "Store")))))
+     (("l" consult-register-load "load")
+      ("s" consult-register-store "store")))))
 
 (use-package hydra-posframe
   :after hydra

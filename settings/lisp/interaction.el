@@ -129,6 +129,12 @@
     (interactive)
     (persp-switch-by-number 9))
 
+  (defun persp-create ()
+    (interactive)
+    (let ((name (format "%d" (1+ (length (persp-names))))))
+      (persp-new name)
+      (persp-switch name)))
+
   :custom
   (persp-mode-prefix-key (kbd "C-z"))
 
