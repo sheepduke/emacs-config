@@ -186,8 +186,8 @@
 
   (pretty-hydra-define hydra-buffer ()
     ("Switch to"
-     (("b" switch-to-buffer "Buffer")
-      ("s" persp-switch-to-scratch-buffer "Scratch buffer")
+     (("s" switch-to-buffer "Buffer")
+      ("b" persp-switch-to-scratch-buffer "Scratch buffer")
       ("o" switch-to-other-buffer "Other buffer"))
 
      "Manipulation"
