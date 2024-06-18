@@ -306,6 +306,7 @@ output."
 ;; ============================================================
 
 (use-package silver-brain
+  :demand t
   :load-path "~/projects/silver-brain/external/emacs/"
   
   :bind

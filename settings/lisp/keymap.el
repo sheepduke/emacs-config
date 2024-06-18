@@ -137,6 +137,9 @@
      "Editing"
      (("e" hydra-editing/body "editing")
       ("r" hydra-register/body "register"))
+
+     "Tool"
+     (("s" silver-brain-hydra/body "silver brain"))
     
      "Local"
      (("l" major-mode-hydra "local"))))
