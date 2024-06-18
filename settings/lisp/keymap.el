@@ -126,23 +126,23 @@
 ;; | teal     | :foreign-keys warn :exit t |
 ;; | pink     | :foreign-keys run          |
   (pretty-hydra-define hydra-global (:color blue)
-    ("Buffer Management"
+    ("Buffer management"
      (("k" hydra-workspace/body "workspace")
       ("w" hydra-window/body "window")
       ("b" hydra-buffer/body "buffer"))
 
-     "project"
+     "Project"
      (("p" hydra-project/body "project"))
 
-     "editing"
+     "Editing"
      (("e" hydra-editing/body "editing")
       ("r" hydra-register/body "register"))
     
-     "local"
+     "Local"
      (("l" major-mode-hydra "local"))))
 
   (pretty-hydra-define hydra-workspace ()
-    ("switch to"
+    ("Switch to"
      (("1" persp-switch-to-1 "1")
       ("2" persp-switch-to-2 "2")
       ("3" persp-switch-to-3 "3")
@@ -153,13 +153,13 @@
       ("8" persp-switch-to-8 "8")
       ("9" persp-switch-to-9 "9"))
 
-     "movement"
+     "Movement"
      (("h" persp-prev "previous")
       ("p" persp-prev "previous")
       ("l" persp-next "next")
       ("n" persp-next "next"))
 
-     "manipulation"
+     "Manipulation"
      (("c" persp-create "create")
       ("s" persp-switch "switch")
       ("r" persp-rename "rename")
