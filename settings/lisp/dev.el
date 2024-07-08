@@ -163,7 +163,10 @@
         ("C-]" . eglot-code-actions))
 
   :hook
-  (eglot-managed-mode . eglot-setup))
+  (eglot-managed-mode . eglot-setup)
+
+  :custom
+  (eglot-confirm-server-initiated-edits nil))
 
 ;; ============================================================
 ;;  Compilation
