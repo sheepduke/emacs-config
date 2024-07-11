@@ -61,13 +61,13 @@
 (defun set-font (script &rest fonts)
   (set-fontset-font nil script (apply #'find-first-available-font fonts)))
 
-(when (windows?)
+(when (and (display-graphic-p) (windows?))
   (set-font 'latin "Cascadia Code" "Consolas")
   (set-font 'han "Microsoft YaHei")
   (set-font 'symbol "Cascadia Code" "Segoe UI Symbol")
   (set-font 'emoji "Segoe UI Emoji"))
 
-(when (linux?)
+(when (and (display-graphic-p) (linux?))
   (set-font 'latin "FiraCode Nerd Font Mono" "DejaVu Sans Mono")
   (set-font 'han "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
   (set-font 'emoji "Noto Color Emoji"))
