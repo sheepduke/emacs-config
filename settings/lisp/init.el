@@ -23,7 +23,7 @@
 ;; Load other modules - order does not matter.
 (mapcar (lambda (module) (load module))
         '("dev"
-          "dev-erlang"
+          "dev-elixir"
           "dev-haskell"
           "dev-lisp"
           "dev-markdown"
