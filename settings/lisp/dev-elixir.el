@@ -27,8 +27,8 @@
 
   (defun inf-elixir-clear-repl-buffer ()
     (interactive)
-    (if inf-elixir-repl-buffer
-        (with-current-buffer inf-elixir-repl-buffer
+    (if-let (repl-buffer (inf-elixir--determine-repl-buf))
+        (with-current-buffer repl-buffer
           (comint-clear-buffer))
       (message "Not attached to any REPL buffer")))
 
@@ -41,6 +41,7 @@
               ("C-c C-c" . inf-elixir-send-line)
               ("C-c C-r" . inf-elixir-send-region)
               ("C-c C-b" . inf-elixir-send-buffer)
+              ("C-c C-l" . inf-elixir-reload-module)
               ("C-M-l" . inf-elixir-clear-repl-buffer)))
 
 ;; Eglot configuration.
