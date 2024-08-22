@@ -134,6 +134,9 @@
      "Project"
      (("p" hydra-project/body "project"))
 
+     "Goto"
+     (("g" hydra-goto/body "goto"))
+
      "Editing"
      (("e" hydra-editing/body "editing")
       ("r" hydra-register/body "register"))
@@ -208,6 +211,10 @@
       ("p" project-switch-project "switch project")
       ("d" project-dired "dired"))))
   
+  (pretty-hydra-define hydra-goto ()
+    ("In Buffer"
+     (("f" consult-flymake))))
+
   (pretty-hydra-define hydra-editing ()
     ("Character"
      (("i" insert-char "insert")

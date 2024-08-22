@@ -256,6 +256,8 @@
 (use-package consult-register
   :commands (consult-register-store consult-register-load))
 
+(use-package consult-flymake)
+
 ;; Action menu for completions.
 (use-package embark
   :bind
