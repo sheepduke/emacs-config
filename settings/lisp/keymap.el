@@ -166,6 +166,7 @@
      (("c" persp-create "create")
       ("s" persp-switch "switch")
       ("r" persp-rename "rename")
+      ("m" persp-merge "merge")
       ("k" persp-kill "kill"))))
   
   (pretty-hydra-define hydra-window ()
@@ -196,7 +197,8 @@
       ("o" switch-to-other-buffer "other buffer"))
 
      "Manipulation"
-     (("f" find-file "open File")
+     (("f" find-file "open file")
+      ("r" rename-buffer "rename buffer")
       ("q" bury-buffer "bury")
       ("k" kill-this-buffer "kill"))))
 
