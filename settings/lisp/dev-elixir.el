@@ -21,9 +21,10 @@
   :init
   (defun inf-elixir-smart-repl ()
     (interactive)
-    (if (inf-elixir--find-project-root)
-        (inf-elixir-project)
-      (inf-elixir)))
+    (save-selected-window
+      (if (inf-elixir--find-project-root)
+          (inf-elixir-project)
+        (inf-elixir))))
 
   (defun inf-elixir-clear-repl-buffer ()
     (interactive)
