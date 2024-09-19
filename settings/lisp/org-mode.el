@@ -337,5 +337,11 @@ EXPORTER is provided by Org Mode."
                '((:name "Scheduled Tasks"
                         :scheduled t)
                  (:discard (:not (:scheduled t))))))))))))
-  
+
+;; ============================================================
+;;  Table of Contents Generation
+;; ============================================================
+
+(use-package toc-org)
+
 ;;; e1-org-mode.el ends here
