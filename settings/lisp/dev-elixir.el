@@ -26,6 +26,10 @@
           (inf-elixir-project)
         (inf-elixir))))
 
+  (defun inf-elixir-run-unit-tests ()
+    (interactive)
+    (inf-elixir--send "ExUnit.run()\n"))
+
   (defun inf-elixir-clear-repl-buffer ()
     (interactive)
     (if-let (repl-buffer (inf-elixir--determine-repl-buf))
@@ -43,6 +47,7 @@
               ("C-c C-r" . inf-elixir-send-region)
               ("C-c C-b" . inf-elixir-send-buffer)
               ("C-c C-l" . inf-elixir-reload-module)
+              ("C-c C-u" . inf-elixir-run-unit-tests)
               ("C-M-l" . inf-elixir-clear-repl-buffer)))
 
 ;; Eglot configuration.
