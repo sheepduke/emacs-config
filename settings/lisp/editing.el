@@ -15,7 +15,10 @@
   (global-auto-revert-mode 1)
 
   ;; Save cursor place of file after exiting Emacs.
-  (save-place-mode 1))
+  (save-place-mode 1)
+
+  ;; Highlight the current line.
+  (global-hl-line-mode 1))
 
 (use-package electric
   :config
