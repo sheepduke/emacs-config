@@ -19,49 +19,48 @@
   ;; Bookmark.
   ("C-x r b" . consult-bookmark)
 
-  ("C-," . global-devil-mode)
   ("C-'" . avy-goto-char-timer)
   ("C-x *" . toggle-window-split)
 
-  ("C-c SPC" . consult-register-store)
-  ("C-c C-SPC" . consult-register-load)
+  ;; ("C-c SPC" . consult-register-store)
+  ;; ("C-c C-SPC" . consult-register-load)
 
-  ("C-c 3" . w3m)
-  ("C-c d" . sdcv-search-input)  
+  ;; ("C-c 3" . w3m)
+  ;; ("C-c d" . sdcv-search-input)  
 
-  ("C-c e g" . emms-play-directory)
-  ("C-c e e" . emms-play-file)
-  ("C-c e d" . emms-play-dired)
-  ("C-c e f" . emms-shuffle)
-  ("C-c e l" . emms-playlist-mode-go)
-  ("C-c e x" . emms-start)
-  ("C-c e SPC" . emms-pause)
-  ("C-c e s" . emms-stop)
-  ("C-c e n" . emms-next)
-  ("C-c e p" . emms-previous)
+  ;; ("C-c e g" . emms-play-directory)
+  ;; ("C-c e e" . emms-play-file)
+  ;; ("C-c e d" . emms-play-dired)
+  ;; ("C-c e f" . emms-shuffle)
+  ;; ("C-c e l" . emms-playlist-mode-go)
+  ;; ("C-c e x" . emms-start)
+  ;; ("C-c e SPC" . emms-pause)
+  ;; ("C-c e s" . emms-stop)
+  ;; ("C-c e n" . emms-next)
+  ;; ("C-c e p" . emms-previous)
 
-  ("C-c m" . notmuch)
+  ;; ("C-c m" . notmuch)
 
-  ("C-c j o" . org-journal-open-current-journal-file)
-  ("C-c j s" . org-journal-search)
-  ("C-c j j" . org-journal-new-entry)
-  ("C-c j k" . org-journal-new-scheduled-entry)
-  ("C-c j v" . org-journal-schedule-view)
+  ;; ("C-c j o" . org-journal-open-current-journal-file)
+  ;; ("C-c j s" . org-journal-search)
+  ;; ("C-c j j" . org-journal-new-entry)
+  ;; ("C-c j k" . org-journal-new-scheduled-entry)
+  ;; ("C-c j v" . org-journal-schedule-view)
 
-  ("C-c o" . cfw:open-org-calendar)
-  ("C-c O" . calendar)
-  ("C-c s" . shell)
+  ;; ("C-c o" . cfw:open-org-calendar)
+  ;; ("C-c O" . calendar)
+  ;; ("C-c s" . shell)
 
   ("C-x r e" . mc/edit-lines)
   ("C-x v" . magit)
 
-  ("C-c t a" . auto-fill-mode)
-  ("C-c t d" . toggle-debug-on-error)
-  ("C-c t i" . auto-revert-tail-mode)
-  ("C-c t t" . toggle-truncate-lines)
-  ("C-c t w" . toggle-word-wrap)
-  ("C-c t W" . toggle-window-dedicated)
-  ("C-c t v" . visual-line-mode)
+  ;; ("C-c t a" . auto-fill-mode)
+  ;; ("C-c t d" . toggle-debug-on-error)
+  ;; ("C-c t i" . auto-revert-tail-mode)
+  ;; ("C-c t t" . toggle-truncate-lines)
+  ;; ("C-c t w" . toggle-word-wrap)
+  ;; ("C-c t W" . toggle-window-dedicated)
+  ;; ("C-c t v" . visual-line-mode)
 
   ("M-1" . persp-switch-to-1)
   ("M-2" . persp-switch-to-2)
@@ -110,6 +109,10 @@
   ("C-M-/" . consult-yasnippet)
   ("C-M-q" . fill-region))
 
+;; Unbind C-c key bindings.
+(dolist (keymap (list flyspell-mode-map))
+  (define-key keymap (kbd "C-c") nil))
+
 ;; ============================================================
 ;;  Hydra
 ;; ============================================================
@@ -131,18 +134,14 @@
       ("w" hydra-window/body "window")
       ("b" hydra-buffer/body "buffer"))
 
-     "Project"
-     (("p" hydra-project/body "project"))
-
-     "Goto"
-     (("g" hydra-goto/body "goto"))
-
      "Editing"
      (("e" hydra-editing/body "editing")
-      ("r" hydra-register/body "register"))
+      ("g" hydra-goto/body "goto"))
 
-     "Tool"
-     (("s" silver-brain-hydra/body "silver brain"))
+     "Tools"
+     (("s" silver-brain-hydra/body "silver brain")
+      ("p" hydra-project/body "project")
+      ("v" magit))
     
      "Local"
      (("l" major-mode-hydra "local"))))
@@ -195,13 +194,14 @@
 
   (pretty-hydra-define hydra-buffer ()
     ("Switch to"
-     (("s" switch-to-buffer "buffer")
-      ("b" persp-switch-to-scratch-buffer "scratch buffer")
+     (("b" switch-to-buffer "buffer")
+      ("B" persp-switch-to-scratch-buffer "scratch buffer")
       ("o" switch-to-other-buffer "other buffer"))
 
      "Manipulation"
      (("f" find-file "open file")
       ("r" rename-buffer "rename buffer")
+      ("s" save-buffer)
       ("q" bury-buffer "bury")
       ("k" kill-this-buffer "kill"))))
 
@@ -213,39 +213,41 @@
   
   (pretty-hydra-define hydra-goto ()
     ("In Buffer"
-     (("f" consult-flymake))))
+     (("k" consult-flymake))
+
+     "Directory"
+     (("f" consult-fd "file (fd)")
+      ("g" consult-ripgrep "ripgrep"))
+
+     "Bookmark"
+     (("b" consult-bookmark "jump to bookmark")
+      ("B" list-bookmarks "list"))
+
+     "Mark"
+     (("m" consult-mark)
+      ("M" consult-global-mark)
+      ("u" consult-outline))))
 
   (pretty-hydra-define hydra-editing ()
     ("Character"
      (("i" insert-char "insert")
       ("s" what-cursor-position "inspect"))
 
+     "Register"
+     (("r" consult-register-load "load")
+      ("e" consult-register-store "store"))
+
      "Occur"
      (("o" consult-focus-lines "occur")
-      ("O" consult-keep-lines "multi occur")
-      ("f" consult-fd "fd")
-      ("g" consult-ripgrep "ripgrep"))
-
-     "Mark"
-     (("m" consult-mark)
-      ("M" consult-global-mark)
-      ("u" consult-outline))
+      ("O" consult-keep-lines "multi occur"))
 
      "Toggle"
      (("a" auto-fill-mode "auto fill")
+      ("d" toggle-debug-on-error "debug on error")
       ("w" toggle-word-wrap "word wrap")
       ("t" toggle-truncate-lines "truncate lines")
       ("n" display-line-numbers-mode "line numbers")
-      ("v" visual-line-mode "visual line"))))
-
-  (pretty-hydra-define hydra-register ()
-    ("Bookmark"
-     (("b" consult-bookmark "jump to bookmark")
-      ("B" list-bookmarks "list"))
-
-     "Register"
-     (("l" consult-register-load "load")
-      ("s" consult-register-store "store")))))
+      ("v" visual-line-mode "visual line")))))
 
 (use-package hydra-posframe
   :after hydra

@@ -22,6 +22,7 @@
 
   :bind
   (:map yas-minor-mode-map
+        ("C-c" . nil)
         ("M-/" . expand-yasnippet-or-dabbrev))
   
   :custom
@@ -86,9 +87,7 @@
   (prog-mode . hs-minor-mode)
   
   :bind (:map hs-minor-mode-map
-              ("C-c h s" . hs-show-all)
-              ("C-c h h" . hs-hide-all)
-              ("C-c h i" . hs-toggle-hiding)))
+              ("C-c" . nil)))
 
 ;;; Highlight nested parens in different colors.
 (use-package rainbow-delimiters

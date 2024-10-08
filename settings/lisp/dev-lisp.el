@@ -3,7 +3,9 @@
 ;; ============================================================
 
 (use-package paredit
-  :delight "")
+  :delight ""
+  :bind (:map paredit-mode-map
+              ("C-c" . nil)))
 
 ;; ============================================================
 ;;  Emacs Lisp
@@ -25,6 +27,7 @@
   (emacs-lisp-mode . nameless-mode)
 
   :bind ((:map nameless-mode-map
+               ("C-c" . nil)
                ("-" . nameless-insert-name-or-self-insert)))
   
   :custom
