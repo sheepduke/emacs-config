@@ -5,7 +5,8 @@
 ;; It's Magit! Git inside Emacs.
 (use-package magit
   :demand t
-  :hook (git-commit-mode . flyspell-mode))
+  :hook (git-commit-mode . flyspell-mode)
+  :bind ("C-c M-g" . nil))
 
 ;; ============================================================
 ;;  Code Snippet

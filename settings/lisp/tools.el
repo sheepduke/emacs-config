@@ -178,10 +178,7 @@ output."
   :config
   (require 'webjump-plus)
   (setq webjump-file (locate-user-data-file "webjump.el"))
-  (webjump-setup)
-
-  :bind (("C-c 1" . webjump)
-         ("C-c 2" . webjump-add)))
+  (webjump-setup))
 
 ;; ============================================================
 ;;  Diff
@@ -308,11 +305,6 @@ output."
 (use-package silver-brain
   :demand t
   :load-path "~/projects/silver-brain/external/emacs/"
-  
-  :bind
-  ("C-c b b" . silver-brain)
-  ("C-c b o" . silver-brain-open)
-  ("C-c b n" . silver-brain-new-concept)
 
   :custom
   (silver-brain-store-name "main")

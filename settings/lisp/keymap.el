@@ -107,7 +107,9 @@
   ("C-M-r" . replace-string)
   ("C-M-S-r" . replace-regexp)
   ("C-M-/" . consult-yasnippet)
-  ("C-M-q" . fill-region))
+  ("C-M-q" . fill-region)
+
+  ("C-c" . major-mode-hydra))
 
 ;; Unbind C-c key bindings.
 (dolist (keymap (list flyspell-mode-map))
@@ -139,9 +141,10 @@
       ("g" hydra-goto/body "goto"))
 
      "Tools"
-     (("s" silver-brain-hydra/body "silver brain")
-      ("p" hydra-project/body "project")
-      ("v" magit))
+     (("p" hydra-project/body "project")
+      ("P" list-packages "packages")
+      ("s" silver-brain-hydra/body "silver brain")
+      ("v" magit "magit"))
     
      "Local"
      (("l" major-mode-hydra "local"))))
@@ -213,11 +216,14 @@
   
   (pretty-hydra-define hydra-goto ()
     ("In Buffer"
-     (("k" consult-flymake))
+     (("k" consult-flymake)
+      ("s" consult-line)
+      ("l" consult-goto-line)
+      ("a" avy-goto-line))
 
      "Directory"
      (("f" consult-fd "file (fd)")
-      ("g" consult-ripgrep "ripgrep"))
+      ("r" consult-ripgrep "ripgrep"))
 
      "Bookmark"
      (("b" consult-bookmark "jump to bookmark")
@@ -230,23 +236,24 @@
 
   (pretty-hydra-define hydra-editing ()
     ("Character"
-     (("i" insert-char "insert")
-      ("s" what-cursor-position "inspect"))
+     (("c" insert-char "insert")
+      ("C" what-cursor-position "inspect"))
+
+     "Lines"
+     (("s" sort-lines "sort")
+      ("o" consult-focus-lines "focus lines")
+      ("O" consult-keep-lines "keep lines"))
 
      "Register"
      (("r" consult-register-load "load")
       ("e" consult-register-store "store"))
-
-     "Occur"
-     (("o" consult-focus-lines "occur")
-      ("O" consult-keep-lines "multi occur"))
 
      "Toggle"
      (("a" auto-fill-mode "auto fill")
       ("d" toggle-debug-on-error "debug on error")
       ("w" toggle-word-wrap "word wrap")
       ("t" toggle-truncate-lines "truncate lines")
-      ("n" display-line-numbers-mode "line numbers")
+      ("l" display-line-numbers-mode "line numbers")
       ("v" visual-line-mode "visual line")))))
 
 (use-package hydra-posframe

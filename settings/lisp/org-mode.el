@@ -212,9 +212,6 @@ EXPORTER is provided by Org Mode."
 ;; Record clock information of both running and history clocks.
 (org-clock-persistence-insinuate)
 
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c k") 'org-capture)
-
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "HOLD(h!)" "PROJ" "|"
                   "DONE(d!)" "STOP(s!)")))
