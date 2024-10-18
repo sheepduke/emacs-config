@@ -49,12 +49,14 @@
              scala-repl-eval-current-line
              scala-repl-eval-main-function))
 
-(use-package sbt-mode)
-
-(require 'sbt-plus)
-(use-package sbt-plus
+(use-package sbt-mode
+  :after (scala-ts-mode)
+  
   :bind (:map scala-ts-mode-map
               ("C-M-l" . sbt-clear)))
+
+(use-package sbt-plus
+  :after (scala-ts-mode))
 
 (major-mode-hydra-define scala-ts-mode nil
   ("SBT"
