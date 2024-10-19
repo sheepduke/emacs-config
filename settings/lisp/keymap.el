@@ -218,8 +218,7 @@
     ("In Buffer"
      (("k" consult-flymake)
       ("s" consult-line)
-      ("l" consult-goto-line)
-      ("a" avy-goto-line))
+      ("l" consult-goto-line))
 
      "Directory"
      (("f" consult-fd "file (fd)")
