@@ -238,8 +238,9 @@
      (("c" insert-char "insert")
       ("C" what-cursor-position "inspect"))
 
-     "Lines"
-     (("s" sort-lines "sort")
+     "Buffer"
+     (("E" erase-buffer "erase")
+      ("s" sort-lines "sort")
       ("o" consult-focus-lines "focus lines")
       ("O" consult-keep-lines "keep lines"))
 
