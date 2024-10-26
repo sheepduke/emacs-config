@@ -61,7 +61,8 @@
 (major-mode-hydra-define scala-ts-mode nil
   ("SBT"
    (("s" sbt-start "start")
-    ("S" sbt-plus-do-restart "restart"))
+    ("S" sbt-plus-do-restart "restart")
+    ("l" sbt-plus-do-reload "reload"))
 
    "REPL"
    (("e" sbt-plus-enter-repl "enter")
@@ -74,8 +75,8 @@
 
    "Action"
    (("k" sbt-do-compile "compile")
-    ("t" sbt-do-run "run")
-    ("l" sbt-do-test "test")
+    ("R" sbt-do-run "run")
+    ("t" sbt-do-test "test")
     ("C" sbt-do-clean "clean")
     ("p" sbt-do-package "package")
     ("a" sbt-plus-do-assembly))))

@@ -38,6 +38,11 @@
   (interactive)
   (sbt-plus-send-region (point-min) (point-max)))
 
+(defun sbt-plus-do-reload ()
+  "Send reload command."
+  (interactive)
+  (sbt-plus-send-string "reload"))
+
 (defun sbt-plus-do-restart ()
   "Send reStart command from spray plugin."
   (interactive)
