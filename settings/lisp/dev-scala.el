@@ -69,13 +69,12 @@
     ("E" sbt-plus-leave-repl "leave"))
 
    "Send"
-   (("c" sbt-plus-send-line "line")
-    ("r" sbt-plus-send-region "region")
+   (("c" sbt-plus-send-line-or-region "line/region")
     ("b" sbt-plus-send-buffer "buffer"))
 
    "Action"
    (("k" sbt-do-compile "compile")
-    ("R" sbt-do-run "run")
+    ("r" sbt-do-run "run")
     ("t" sbt-do-test "test")
     ("C" sbt-do-clean "clean")
     ("p" sbt-do-package "package")

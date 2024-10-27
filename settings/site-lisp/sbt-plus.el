@@ -33,6 +33,13 @@
       (insert content)
       (comint-send-input))))
 
+(defun sbt-plus-send-line-or-region ()
+  "Send a region to REPL if the region is active, send a line otherwise."
+  (interactive)
+  (call-interactively (if (region-active-p)
+                          #'sbt-plus-send-region
+                        #'sbt-plus-send-line)))
+
 (defun sbt-plus-send-buffer ()
   "Send a buffer to REPL and evaluate it."
   (interactive)
