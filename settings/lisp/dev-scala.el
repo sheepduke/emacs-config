@@ -77,5 +77,4 @@
     ("r" sbt-do-run "run")
     ("t" sbt-do-test "test")
     ("C" sbt-do-clean "clean")
-    ("p" sbt-do-package "package")
-    ("a" sbt-plus-do-assembly))))
+    ("g" sbt-plus-do-stage "stage"))))

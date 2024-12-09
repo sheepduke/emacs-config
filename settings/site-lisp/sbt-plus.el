@@ -50,14 +50,9 @@
   (interactive)
   (sbt-plus-send-string "reload"))
 
-(defun sbt-plus-do-restart ()
-  "Send reStart command from spray plugin."
+(defun sbt-plus-do-stage ()
+  "Send stage command from sbt-native-packager plugin."
   (interactive)
-  (sbt-plus-send-string "reStart"))
-
-(defun sbt-plus-do-assembly ()
-  "Send assembly command from spray plugin."
-  (interactive)
-  (sbt-plus-send-string "assembly"))
+  (sbt-plus-send-string "stage"))
 
 (provide 'sbt-plus)
