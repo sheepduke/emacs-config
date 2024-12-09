@@ -216,7 +216,8 @@
   
   (pretty-hydra-define hydra-goto ()
     ("In Buffer"
-     (("k" consult-flymake)
+     (("g" avy-goto-line)
+      ("k" consult-flymake)
       ("s" consult-line)
       ("l" consult-goto-line))
 
