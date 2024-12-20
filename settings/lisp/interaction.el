@@ -135,6 +135,48 @@
       (persp-new name)
       (persp-switch name)))
 
+  (defun persp-swap ()
+    "Swap this perspective with selected target."
+    (interactive)
+    (let ((source-name (persp-current-name))
+          (target-name (completing-read "Swap with: " (persp-names))))
+      (persp--do-swap source-name target-name)))
+
+  (defun persp-swap-previous ()
+    "Swap this perspective with previous one."
+    (interactive)
+    (let ((source-name (persp-current-name))
+          target-name)
+      (persp-prev)
+      (setf target-name (persp-current-name))
+      (persp-next)
+      (persp--do-swap source-name target-name)))
+
+  (defun persp-swap-next ()
+    "Swap this perspective with next one."
+    (interactive)
+    (let ((source-name (persp-current-name))
+          target-name)
+      (persp-next)
+      (setf target-name (persp-current-name))
+      (persp-prev)
+      (persp--do-swap source-name target-name)))
+
+  (defun persp--do-swap (source-name target-name)
+    "Swap source perspective with given target."
+    (unless (equal source-name target-name)
+      (let ((temp-name "**__persp-rename-temp__**"))
+        ;; Rename source to temp.
+        (persp-rename temp-name)
+        
+        ;; Rename target to source.
+        (persp-switch target-name)
+        (persp-rename source-name)
+
+        ;; Rename temp to target
+        (persp-switch temp-name)
+        (persp-rename target-name))))
+  
   :custom
   (persp-mode-prefix-key (kbd "C-z"))
 

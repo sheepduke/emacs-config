@@ -172,7 +172,14 @@
       ("s" persp-switch "switch")
       ("r" persp-rename "rename")
       ("m" persp-merge "merge")
-      ("k" persp-kill "kill"))))
+      ("k" persp-kill "kill"))
+
+     "Swap"
+     (("S" persp-swap "swap")
+      ("H" persp-swap-previous "swap previous")
+      ("P" persp-swap-previous "swap previous")
+      ("L" persp-swap-next "swap next")
+      ("N" persp-swap-next "swap next"))))
   
   (pretty-hydra-define hydra-window ()
     ("Movement"
