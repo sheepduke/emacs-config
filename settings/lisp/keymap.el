@@ -226,7 +226,8 @@
      (("g" avy-goto-line)
       ("k" consult-flymake)
       ("s" consult-line)
-      ("l" consult-goto-line))
+      ("l" consult-goto-line)
+      ("o" consult-outline))
 
      "Directory"
      (("f" consult-fd "file (fd)")
