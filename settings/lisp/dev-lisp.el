@@ -28,7 +28,7 @@
 
   :bind ((:map nameless-mode-map
                ("C-c" . nil)
-               ("-" . nameless-insert-name-or-self-insert)))
+               ("_" . nameless-insert-name-or-self-insert)))
   
   :custom
   (nameless-prefix "@")
