@@ -142,9 +142,8 @@
 
      "Tools"
      (("p" hydra-project/body "project")
-      ("P" list-packages "packages")
       ("s" silver-brain-hydra/body "silver brain")
-      ("v" magit "magit"))
+      ("t" #'hydra-tool/body "other"))
     
      "Local"
      (("l" major-mode-hydra "local"))))
@@ -220,27 +219,6 @@
      (("f" project-find-file "find file")
       ("p" project-switch-project "switch project")
       ("d" project-dired "dired"))))
-  
-  (pretty-hydra-define hydra-goto ()
-    ("In Buffer"
-     (("g" avy-goto-line)
-      ("k" consult-flymake)
-      ("s" consult-line)
-      ("l" consult-goto-line)
-      ("o" consult-outline))
-
-     "Directory"
-     (("f" consult-fd "file (fd)")
-      ("r" consult-ripgrep "ripgrep"))
-
-     "Bookmark"
-     (("b" consult-bookmark "jump to bookmark")
-      ("B" list-bookmarks "list"))
-
-     "Mark"
-     (("m" consult-mark)
-      ("M" consult-global-mark)
-      ("u" consult-outline))))
 
   (pretty-hydra-define hydra-editing ()
     ("Character"
@@ -263,7 +241,38 @@
       ("w" toggle-word-wrap "word wrap")
       ("t" toggle-truncate-lines "truncate lines")
       ("l" display-line-numbers-mode "line numbers")
-      ("v" visual-line-mode "visual line")))))
+      ("v" visual-line-mode "visual line"))))
+  
+  (pretty-hydra-define hydra-goto ()
+    ("In Buffer"
+     (("g" avy-goto-line)
+      ("k" consult-flymake)
+      ("s" consult-line)
+      ("l" consult-goto-line)
+      ("o" consult-outline))
+
+     "Directory"
+     (("f" consult-fd "file (fd)")
+      ("r" consult-ripgrep "ripgrep"))
+
+     "Bookmark"
+     (("b" consult-bookmark "jump to bookmark")
+      ("B" list-bookmarks "list"))
+
+     "Mark"
+     (("m" consult-mark)
+      ("M" consult-global-mark)
+      ("u" consult-outline))))
+
+  (pretty-hydra-define hydra-tool ()
+    ("Built-in"
+     (("s" shell "shell")
+      ("p" list-packages "packages"))
+
+     "External"
+     (("d" sdcv-search-input "dictionary")
+      ("v" magit "magit")
+      ("w" w3m "w3m")))))
 
 (use-package hydra-posframe
   :after hydra
