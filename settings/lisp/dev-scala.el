@@ -29,7 +29,7 @@
 
 (use-package scala-ts-mode
   :mode "\\.scala\\'"
-  :mode "\\.CS\\'"
+  :mode "\\.sc\\'"
 
   :config
   (require 'eglot)
