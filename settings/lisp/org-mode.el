@@ -82,7 +82,10 @@
 
   ;; Always insert a new line before new item.
   (org-blank-before-new-entry '((heading . t)
-                                (plain-list-item . auto))))
+                                (plain-list-item . auto)))
+
+  ;; Do not add extra indent for source block.
+  (org-edit-src-content-indentation 0))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          Modules                             ;;;;
