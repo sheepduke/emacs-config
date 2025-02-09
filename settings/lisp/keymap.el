@@ -214,13 +214,13 @@
       ("q" bury-buffer "bury")
       ("k" kill-this-buffer "kill"))))
 
-  (pretty-hydra-define hydra-project ()
+  (pretty-hydra-define hydra-project (:color blue)
     ("Project"
      (("f" project-find-file "find file")
       ("p" project-switch-project "switch project")
       ("d" project-dired "dired"))))
 
-  (pretty-hydra-define hydra-editing ()
+  (pretty-hydra-define hydra-editing (:color blue)
     ("Character"
      (("c" insert-char "insert")
       ("C" what-cursor-position "inspect"))
@@ -243,7 +243,7 @@
       ("l" display-line-numbers-mode "line numbers")
       ("v" visual-line-mode "visual line"))))
   
-  (pretty-hydra-define hydra-goto ()
+  (pretty-hydra-define hydra-goto (:color blue)
     ("In Buffer"
      (("g" avy-goto-line)
       ("k" consult-flymake)
@@ -264,7 +264,7 @@
       ("M" consult-global-mark)
       ("u" consult-outline))))
 
-  (pretty-hydra-define hydra-tool ()
+  (pretty-hydra-define hydra-tool (:color blue)
     ("Built-in"
      (("s" shell "shell")
       ("p" list-packages "packages"))
