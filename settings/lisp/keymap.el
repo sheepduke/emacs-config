@@ -267,6 +267,7 @@
   (pretty-hydra-define hydra-tool (:color blue)
     ("Built-in"
      (("s" shell "shell")
+      ("o" org-agenda "org agenda")
       ("p" list-packages "packages"))
 
      "External"
