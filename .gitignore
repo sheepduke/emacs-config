@@ -8,6 +8,9 @@
 !settings
 !settings/**/*
 
+!data
+!data/.keep
+
 !elpa
 !elpa/**/*
 

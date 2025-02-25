@@ -18,6 +18,10 @@
   (locate-user-emacs-file (concat "settings/data/" new-name)
                           (if old-name (concat "settings/data/" old-name) nil)))
 
+(defun locate-local-data-file (name)
+  "Locate the file for local-only data."
+  (locate-user-emacs-file (concat "data/" name)))
+
 (defun save-buffer-readonly ()
   "If buffer is read-only, temporally change its permission and write to it.
 This works like Vim 'w!'."

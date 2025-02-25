@@ -177,7 +177,7 @@ output."
   
   :config
   (require 'webjump-plus)
-  (setq webjump-file (locate-user-data-file "webjump.el"))
+  (setq webjump-file (locate-local-data-file "webjump.el"))
   (webjump-setup))
 
 ;; ============================================================
