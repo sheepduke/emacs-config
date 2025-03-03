@@ -268,6 +268,7 @@
     ("Built-in"
      (("s" shell "shell")
       ("o" org-agenda "org agenda")
+      ("j" org-journal-new-entry "org journal")
       ("p" list-packages "packages"))
 
      "External"
