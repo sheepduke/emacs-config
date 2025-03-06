@@ -51,6 +51,8 @@
               ("M-q" . org-fill-paragraph)
               ("C-c C-," . org-promote-subtree)
               ("C-c C-." . org-demote-subtree)
+              ("C-c P" . org-move-subtree-up)
+              ("C-c N" . org-move-subtree-down)
               ("C-c C-l" . org-toggle-link-display)
               ("C-c C-i" . org-mark-ring-goto)
               ("C-<tab>" . org-force-cycle-archived))
