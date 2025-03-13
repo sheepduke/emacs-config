@@ -3,6 +3,7 @@
 ;; ============================================================
 
 (use-package web-mode
+  :ensure
   :mode "\\.html\\'"
   :mode "\\.css\\'"
   :mode "\\.jsp\\'"
@@ -34,6 +35,7 @@
 
 
 (use-package emmet-mode
+  :ensure
   :hook
   (web-mode . emmet-mode)
 
@@ -46,6 +48,7 @@
 ;; ============================================================
 
 (use-package js2-mode
+  :ensure
   :config
   (defun setup-js2-mode ()
     (when (equal major-mode 'js-mode)
@@ -61,12 +64,14 @@
 
 
 (use-package typescript-mode
+  :ensure
   :custom
   (typescript-indent-level 2))
 
 
 ;; IDE for JavaScript.
 (use-package tide
+  :ensure
   :disabled
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
@@ -76,6 +81,7 @@
 
 ;; REPL for JavaScript.
 (use-package js-comint
+  :ensure
   :bind (:map js-mode-map
               ("C-x C-e" . js-comint-send-last-sexp)
               ("C-c C-r" . js-comint-send-region)
@@ -89,6 +95,7 @@
 ;; REPL for TypeScript.
 ;; First install the REPL via ~npm install -g tsun~.
 (use-package ts-comint
+  :ensure
   :config
   (defun ts-comint-clear ()
     "Clear the TypeScript REPL buffer."

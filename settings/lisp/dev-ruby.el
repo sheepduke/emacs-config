@@ -1,4 +1,5 @@
 (use-package ruby-mode
+  :ensure
   :config
   (defun ruby-insert-end ()
     "Insert `end' accordingly."

@@ -1,4 +1,5 @@
 (use-package haskell-mode
+  :ensure
   :mode "\\.hs\\'"
 
   :init
@@ -31,6 +32,7 @@
         ("C-c C-r" . interactive-haskell-run-r)))
 
 (use-package ormolu
+  :ensure
   :after haskell-mode
 
   :bind

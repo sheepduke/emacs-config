@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: PropertyGroup
-# key: PropertyGroup
-# --
-<PropertyGroup>
-  $0
-</PropertyGroup>

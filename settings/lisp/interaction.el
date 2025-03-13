@@ -71,6 +71,7 @@
 
 ;; Show hot keys when prefix keys are pressed.
 (use-package which-key
+  :ensure
   :demand t
   :delight ""
 
@@ -86,6 +87,7 @@
 
 ;; Manage buffers and window layouts into dynamic workspaces.
 (use-package perspective
+  :ensure
   :demand t
 
   :preface
@@ -198,6 +200,7 @@
 
 ;; Fast switching windows.
 (use-package ace-window
+  :ensure
   :demand t
 
   :custom
@@ -205,6 +208,7 @@
 
 ;; Quickly move between windows like a agility snake.
 (use-package windmove
+  :ensure
   :demand t
   
   :custom
@@ -212,6 +216,7 @@
 
 ;; Force window behavior.
 (use-package shackle
+  :ensure
   :custom
   ;; one of below, above, left, right
   (shackle-default-alignment 'below)
@@ -248,11 +253,13 @@
 
 ;; Completion UI (vertical completions).
 (use-package vertico
+  :ensure
   :config
   (vertico-mode 1))
 
 ;; Filtering and sorting library.
 (use-package orderless
+  :ensure
   :custom
   (completion-ignore-case t)
   (completion-styles '(orderless basic))
@@ -260,6 +267,7 @@
 
 ;; Enable rich annotations.
 (use-package marginalia
+  :ensure
   :demand t
 
   :bind (:map minibuffer-local-map
@@ -270,6 +278,7 @@
 
 ;; Rich completion framework.
 (use-package consult
+  :ensure
   :demand t
   
   :init
@@ -302,6 +311,7 @@
 
 ;; Action menu for completions.
 (use-package embark
+  :ensure
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
    ("C-h b" . embark-bindings)) ;; alternative for `describe-bindings'
@@ -319,6 +329,7 @@
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
+  :ensure
   :after (embark consult)
   :demand t ; only necessary if you have the hook below
   ;; if you want to have consult previews as you move around an
@@ -331,6 +342,7 @@
 ;; ============================================================
 
 (use-package vertico-posframe
+  :ensure
   :after vertico
   :config
   (vertico-posframe-mode 1))

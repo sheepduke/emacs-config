@@ -1,4 +1,5 @@
 (use-package markdown-mode
+  :ensure
   :mode "\\.md\\'"
   
   :commands (w3m-reload-all-pages)
@@ -34,6 +35,7 @@
 
 
 (use-package poly-markdown
+  :ensure
   :after markdown-mode
 
   :config
@@ -41,12 +43,14 @@
 
 
 (use-package flymd
+  :ensure
   :after markdown-mode
 
   :custom
   (flymd-output-directory "/tmp/"))
 
 (use-package markdown-toc
+  :ensure
   :after markdown-mode
 
   :bind (:map markdown-mode-map

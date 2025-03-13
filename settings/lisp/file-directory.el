@@ -10,24 +10,18 @@
   ;; dired guesses the target directory
   (dired-dwim-target t)
 
-  :bind (:map dired-mode-map
-              ("," . dired-kill-subdir)))
-
-(use-package dired-x
-  :after dired
-  
-  :custom
   ;; Set omit regex in omit mode.
   (dired-omit-files "^\\.?#\\|^\\.")
 
   :bind (:map dired-mode-map
+              ("," . dired-kill-subdir)
               ("h" . dired-omit-mode)))
 
 ;; ============================================================
 ;;  Backup
 ;; ============================================================
 
-(use-package files
+(use-package emacs
   :custom
   ;; Control where to put backup files.
   (backup-directory-alist `(("." . ,(locate-user-emacs-file "backup/"))))

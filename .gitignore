@@ -11,8 +11,5 @@
 !data
 !data/.keep
 
-!elpa
-!elpa/**/*
-
 !tree-sitter
 !tree-sitter/**/*

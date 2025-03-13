@@ -1,8 +1,9 @@
-(use-package tuareg)
-
+(use-package tuareg
+  :ensure)
 
 ;;; Auto completion and more.
 (use-package merlin
+  :ensure
   :disabled
   :after tuareg
 
@@ -11,6 +12,7 @@
 
 ;; Consistent indentation.
 (use-package ocp-indent
+  :ensure
   :disabled
   :after tuareg
 
@@ -30,6 +32,7 @@
 
 ;;; Type tips.
 (use-package merlin-eldoc
+  :ensure
   :disabled
   :after merlin
 
@@ -37,10 +40,12 @@
 
 
 ;;; Build system.
-(use-package dune)
+(use-package dune
+  :ensure)
 
 
 (use-package utop
+  :ensure
   :disabled
   :after tuareg
 

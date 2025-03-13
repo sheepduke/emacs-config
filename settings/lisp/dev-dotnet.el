@@ -1,6 +1,7 @@
 ;; F# development support.
 ;; Key bindings in evil settings.
 (use-package fsharp-mode
+  :ensure
   :mode "\\.fs\\'"
 
   :preface
@@ -70,4 +71,5 @@
   (before-save . fsharp-format-buffer))
 
 (use-package csproj-mode
+  :ensure
   :mode "\\.csproj\\'")

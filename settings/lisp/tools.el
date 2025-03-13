@@ -27,6 +27,7 @@ output."
 
 ;; Replace the original doc-view for PDF files.
 (use-package pdf-tools
+  :ensure
   :defer nil
   :unless (windows?)
 
@@ -39,6 +40,7 @@ output."
 
 ;; Open epub files.
 (use-package nov
+  :ensure
   :mode ("\\.epub\\'" . nov-mode))
 
 ;; ============================================================
@@ -46,6 +48,7 @@ output."
 ;; ============================================================
 
 (use-package emms
+  :ensure
   :init
   (require 'emms-setup)
 
@@ -79,6 +82,7 @@ output."
 ;; ============================================================
 
 (use-package sdcv
+  :ensure
   :if (executable-find "sdcv"))
 
 ;; ============================================================
@@ -86,6 +90,7 @@ output."
 ;; ============================================================
 
 (use-package w3m
+  :ensure
   :if (executable-find "w3m")
 
   :preface
@@ -197,6 +202,7 @@ output."
 ;; ============================================================
 
 (use-package rime
+  :ensure
   :custom
   ;; Set Rime as the default input method.
   (default-input-method "rime")
@@ -214,6 +220,7 @@ output."
 ;; ============================================================
 
 (use-package calendar
+  :ensure
   :bind ((:map calendar-mode-map
                (("M-f" . calendar-forward-month)
                 ("M-b" . calendar-backward-month))))
@@ -276,15 +283,18 @@ output."
                        (holiday-solar-term "大雪" "大雪")
                        (holiday-solar-term "冬至" "冬至"))))
 
-(use-package calfw)
+(use-package calfw
+  :ensure)
 
-(use-package calfw-org)
+(use-package calfw-org
+  :ensure)
 
 ;; ============================================================
 ;;  REST Client
 ;; ============================================================
 
-(use-package restclient)
+(use-package restclient
+  :ensure)
 
 ;; ============================================================
 ;;  Tramp

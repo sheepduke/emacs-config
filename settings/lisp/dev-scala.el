@@ -28,6 +28,7 @@
   (local-set-key (kbd "<return>") 'scala-smart-newline))
 
 (use-package scala-ts-mode
+  :ensure
   :mode "\\.scala\\'"
   :mode "\\.sc\\'"
 
@@ -41,6 +42,7 @@
   (scala-ts-mode . scala-setup-buffer))
 
 (use-package scala-repl
+  :ensure
   :commands (scala-repl-run
              scala-repl-restart
              scala-repl-eval-buffer
@@ -50,6 +52,7 @@
              scala-repl-eval-main-function))
 
 (use-package sbt-mode
+  :ensure
   :after (scala-ts-mode)
   
   :bind (:map scala-ts-mode-map

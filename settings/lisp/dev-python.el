@@ -1,4 +1,5 @@
 (use-package python
+  :ensure
   :mode ("\\.py\\'" . python-ts-mode)
 
   :custom

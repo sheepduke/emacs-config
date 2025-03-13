@@ -2,7 +2,7 @@
 ;;  Time
 ;; ============================================================
 
-(use-package time
+(use-package emacs
   :custom
   ;; Set time format
   ;; (display-time-format "(%Y/%m/%d %H:%M:%S)")
@@ -77,6 +77,7 @@
 ;; ============================================================
 
 (use-package nerd-icons-dired
+  :ensure
   :hook
   (dired-mode . nerd-icons-dired-mode))
 
@@ -85,6 +86,7 @@
 ;; ============================================================
 
 (use-package delight
+  :ensure
   :config
   ;; Disable auto-fill mode line.
   (delight 'auto-fill-function "" t)

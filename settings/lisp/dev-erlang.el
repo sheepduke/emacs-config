@@ -1,4 +1,5 @@
 (use-package erlang
+  :ensure
   :config
   (require 'erlang-start)
 

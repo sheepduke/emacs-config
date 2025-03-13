@@ -34,6 +34,7 @@
 
 ;; Make undo like a tree.
 (use-package undo-tree
+  :ensure
   :delight
 
   :config
@@ -58,12 +59,15 @@
 ;; ============================================================
 
 (use-package multiple-cursors
+  :ensure
   :custom
   (mc/always-run-for-all t))
 
-(use-package avy)
+(use-package avy
+  :ensure)
 
 (use-package indent-guide
+  :ensure
   :demand t
   :delight ""
   

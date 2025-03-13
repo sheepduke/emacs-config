@@ -4,7 +4,8 @@
 
 ;; Contact database supporting Gnus contact completion.
 (use-package bbdb
-  :ensure t
+  :ensure
+  :ensure
 
   :init
   ;; set bbdb database location.
@@ -80,6 +81,7 @@ Returns a boolean value indicating the result."
 ;; ============================================================
 
 (use-package notmuch
+  :ensure
   :demand t
 
   :preface

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: OutputType
-# key: OutputType
-# --
-<OutputType>${1:$$(yas-completing-read "OutputType" '("Exe" "Library" "Module" "Winexe"))}</OutputType>

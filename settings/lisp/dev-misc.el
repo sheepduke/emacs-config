@@ -4,6 +4,7 @@
   :hook (nxml-mode . indent-guide-mode))
 
 (use-package yaml-mode
+  :ensure
   :mode "\\.yml\\'"
   :mode "\\.yaml\\'"
   :mode "\\.yml.j2\\'"
@@ -17,11 +18,13 @@
   :bind (:map conf-mode-map
               ("<return>" . smart-newline)))
 
-(use-package powershell)
+(use-package powershell
+  :ensure)
 
-(use-package systemd)
+(use-package systemd :ensure)
 
 (use-package ahk-mode
+  :ensure
   :mode "\\.ahk\\'")
 
 (use-package site-gentoo
@@ -34,7 +37,9 @@
   :mode "\\.unmask\\'")
 
 (use-package kotlin-mode
+  :ensure
   :mode "\\.kt\\'")
 
 (use-package dockerfile-mode
+  :ensure
   :mode "Dockerfile")

@@ -1,4 +1,5 @@
 (use-package rust-ts-mode
+  :ensure
   :mode "\\.rs\\'"
 
   :config
@@ -23,5 +24,6 @@
 
 
 (use-package cargo
+  :ensure
   :hook
   (rust-ts-mode . cargo-minor-mode))

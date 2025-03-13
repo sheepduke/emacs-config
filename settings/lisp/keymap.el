@@ -120,6 +120,7 @@
 ;; ============================================================
 
 (use-package pretty-hydra
+  :ensure
   :config
   (global-set-key (kbd "M-SPC") 'hydra-global/body)
 

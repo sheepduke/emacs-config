@@ -4,6 +4,7 @@
 
 ;; It's Magit! Git inside Emacs.
 (use-package magit
+  :ensure
   :demand t
   :hook (git-commit-mode . flyspell-mode)
   :bind ("C-c M-g" . nil))
@@ -13,6 +14,7 @@
 ;; ============================================================
 
 (use-package yasnippet
+  :ensure
   :demand t
 
   :config
@@ -33,9 +35,11 @@
   (yas-global-mode 1))
 
 (use-package consult-yasnippet
+  :ensure
   :after (consult yasnippet))
 
 (use-package dabbrev
+  :ensure
   :custom
   (dabbrev-case-fold-search nil))
 
@@ -44,6 +48,7 @@
 ;; ============================================================
 
 (use-package corfu
+  :ensure
   :config
   (global-corfu-mode)
 
@@ -74,6 +79,7 @@
   (corfu-popupinfo-delay '(0.5 . 0.2)))
 
 (use-package nerd-icons-corfu
+  :ensure
   :after corfu
 
   :init
@@ -92,6 +98,7 @@
 
 ;;; Highlight nested parens in different colors.
 (use-package rainbow-delimiters
+  :ensure
   :hook
   (prog-mode . rainbow-delimiters-mode))
 

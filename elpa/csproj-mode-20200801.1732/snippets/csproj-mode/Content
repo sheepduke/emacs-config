@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Content
-# key: Content
-# --
-<Content Include="$0" CopyToOutputDirectory="PreserveNewest" />

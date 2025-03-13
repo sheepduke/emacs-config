@@ -1,4 +1,5 @@
 (use-package elixir-mode
+  :ensure
   :mode "\\.ex\\'"
   :mode "\\.exs\\'"
 
@@ -18,6 +19,7 @@
   (elixir-mode . elixir-mode-setup-buffer))
 
 (use-package inf-elixir
+  :ensure
   :init
   (defun inf-elixir-smart-repl ()
     (interactive)

@@ -109,17 +109,21 @@
                  org-info)))
 
 ;; Bigger calendar.
-(use-package calfw)
+(use-package calfw
+  :ensure)
 
 ;; Display org items in calfw.
 (use-package calfw-org
+  :ensure
   :defer nil)
 
 ;; Chinese localization
-(use-package cal-china-x)
+(use-package cal-china-x
+  :ensure)
 
 ;; Show leading stars as bullets.
 (use-package org-bullets
+  :ensure
   :hook
   (org-mode . org-bullets-mode))
 
@@ -180,6 +184,7 @@ EXPORTER is provided by Org Mode."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-journal
+  :ensure
   :custom
   ;; Set root directory.
   (org-journal-dir (concat org-directory "journal/"))
@@ -269,8 +274,8 @@ EXPORTER is provided by Org Mode."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-pomodoro
+  :ensure
  
-
   :init
   ;; Length of pomodoro cycle.
   (setq org-pomodoro-length 25)
@@ -301,6 +306,7 @@ EXPORTER is provided by Org Mode."
 (setq org-agenda-todo-ignore-scheduled nil)
 
 (use-package org-super-agenda
+  :ensure
   :config
   (org-super-agenda-mode 1)
 
@@ -344,6 +350,7 @@ EXPORTER is provided by Org Mode."
 ;;  Table of Contents Generation
 ;; ============================================================
 
-(use-package toc-org)
+(use-package toc-org
+  :ensure)
 
 ;;; e1-org-mode.el ends here

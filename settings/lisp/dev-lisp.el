@@ -3,6 +3,7 @@
 ;; ============================================================
 
 (use-package paredit
+  :ensure
   :delight ""
   :bind (:map paredit-mode-map
               ("C-c" . nil)))
@@ -23,6 +24,7 @@
   (emacs-lisp-mode . paredit-mode))
 
 (use-package nameless
+  :ensure
   :hook
   (emacs-lisp-mode . nameless-mode)
 
@@ -35,6 +37,7 @@
   (nameless-private-prefix t))
 
 (use-package major-mode-hydra
+  :ensure
   :config
   (major-mode-hydra-define emacs-lisp-mode nil
     ("Eval"
@@ -67,6 +70,7 @@
   (lisp-mode . paredit-mode))
 
 (use-package sly
+  :ensure
   :after lisp-mode
 
   :config
@@ -106,6 +110,7 @@
 
 
 (use-package sly-repl-ansi-color
+  :ensure
   :after sly
 
   :config
@@ -126,6 +131,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package cider
+  :ensure
   :mode "\\.clj\\'"
   
   :config
