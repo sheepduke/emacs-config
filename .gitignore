@@ -8,8 +8,5 @@
 !settings
 !settings/**/*
 
-!data
-!data/.keep
-
 !tree-sitter
 !tree-sitter/**/*

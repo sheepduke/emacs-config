@@ -189,7 +189,7 @@
   (persp-sort 'name)
 
   ;; File used to load and save state file.
-  (persp-state-default-file (locate-local-data-file "perspective.dat"))
+  (persp-state-default-file (locate-user-emacs-file "perspective.dat"))
 
   :config
   (persp-mode 1))
