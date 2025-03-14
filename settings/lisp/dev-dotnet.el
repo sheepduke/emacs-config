@@ -70,6 +70,35 @@
   (fsharp-mode . lsp)
   (before-save . fsharp-format-buffer))
 
+(use-package csharp-mode
+  :init
+  (defun csharp-setup-buffer ()
+    (eglot-ensure)
+    (add-hook 'before-save-hook 'eglot-format-buffer nil t))
+
+  (defun csharp-newline-with-brackets ()
+    (interactive)
+    (smart-newline)
+    (insert "{}")
+    (c-indent-line-or-region)
+    (backward-char)
+    (smart-newline)
+    (save-excursion
+      (next-line)
+      (c-indent-line-or-region)))
+
+  :bind
+  (:map csharp-mode-map
+        ("C-<return>" . csharp-newline-with-brackets)
+        ("M-<return>" . eglot-code-actions))
+
+  :hook
+  (csharp-mode . csharp-setup-buffer))
+
 (use-package csproj-mode
   :ensure
   :mode "\\.csproj\\'")
+
+(major-mode-hydra-define csharp-mode nil
+  ("Dotnet"
+   (("k" recompile))))
