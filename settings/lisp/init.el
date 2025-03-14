@@ -1,16 +1,3 @@
-(require 'package)
-
-(setq package-archives
-      '(;; Choose whatever you like.
-        ;; --- Default
-        ;; ("gnu" . "https://elpa.gnu.org/packages/")
-        ;; ("melpa" . "https://melpa.org/packages/")
-        ;; --- TUNA mirror
-        ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-        ;; ---
-        ))
-
 ;; Set load path.
 (add-to-list 'load-path "~/.emacs.d/settings/site-lisp/")
 (add-to-list 'load-path "~/.emacs.d/settings/site-lisp/ebuild-mode/")
