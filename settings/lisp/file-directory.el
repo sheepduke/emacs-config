@@ -3,6 +3,32 @@
 ;; ============================================================
 
 (use-package dired
+  :init
+  (defconst dired-open-programs
+    '(("mp4" . "mpv")
+      ("mkv" . "mpv")
+      ("avi" . "mpv")
+      ("jpg" . "feh")
+      ("png" . "feh")))
+
+  (defun dired-get-program (file)
+    (let* ((ext (file-name-extension file)))
+      (cdr (assoc-string ext dired-open-programs))))
+
+  (defun dired-open-externally ()
+    (interactive)
+    (let* ((file (dired-get-file-for-visit))
+           (cmd (or (dired-get-program file)
+                    (error "No program defined"))))
+      (start-process "dired-open" nil cmd file)))
+
+  (defun dired-open-dwim ()
+    (interactive)
+    (let* ((file (dired-get-file-for-visit))
+           (cmd (dired-get-program file)))
+      (if cmd (dired-open-externally)
+        (dired-find-file))))
+
   :custom
   ;; Human readable size display
   (dired-listing-switches "-alh")
@@ -15,7 +41,9 @@
 
   :bind (:map dired-mode-map
               ("," . dired-kill-subdir)
-              ("h" . dired-omit-mode)))
+              ("h" . dired-omit-mode)
+              ("e" . dired-open-externally)
+              ("<return>" . dired-open-dwim)))
 
 ;; ============================================================
 ;;  Backup
