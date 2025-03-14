@@ -79,10 +79,13 @@
 ;; ============================================================
 
 (use-package flyspell
-  :config
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  :delight " FS"
 
-  :delight " FS")
+  :custom
+  (ispell-alternate-dictionary (expand-file-name (locate-user-data-file "hunspell/en_US.dic")))
+
+  :config
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 ;;; Windows specific settings.
 (use-package flyspell

@@ -15,8 +15,10 @@
   (getenv "DISPLAY"))
 
 (defun locate-user-data-file (new-name &optional old-name)
-  (locate-user-emacs-file (concat "settings/data/" new-name)
-                          (if old-name (concat "settings/data/" old-name) nil)))
+  (expand-file-name
+   (locate-user-emacs-file
+    (concat "settings/data/" new-name)
+    (if old-name (concat "settings/data/" old-name) nil))))
 
 (defun save-buffer-readonly ()
   "If buffer is read-only, temporally change its permission and write to it.
