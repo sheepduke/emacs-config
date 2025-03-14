@@ -30,6 +30,11 @@ This works like Vim 'w!'."
              (save-buffer)
              (set-file-modes filename original-file-modes)))))
 
+(defun kill-current-buffer ()
+  "Kill current buffer."
+  (interactive)
+  (kill-buffer (current-buffer)))
+
 (defun switch-to-other-buffer ()
   "Switch between 2 buffers."
   (interactive)

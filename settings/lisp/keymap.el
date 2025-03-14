@@ -7,7 +7,7 @@
   ;; Buffer.
   ("C-x b" . switch-to-buffer)
   ("C-x B" . persp-switch-to-scratch-buffer)
-  ("C-x k" . kill-this-buffer)
+  ("C-x k" . kill-current-buffer)
   ("C-x C-k" . bury-buffer)
   ("C-x C-b" . switch-to-other-buffer)
   ("C-x o" . switch-to-other-buffer)
@@ -213,7 +213,7 @@
       ("r" rename-buffer "rename buffer")
       ("s" save-buffer)
       ("q" bury-buffer "bury")
-      ("k" kill-this-buffer "kill"))))
+      ("k" kill-current-buffer "kill"))))
 
   (pretty-hydra-define hydra-project (:color blue)
     ("Project"
