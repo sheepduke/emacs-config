@@ -17,6 +17,7 @@
           "tools"
           "dev"
           "dev-elixir"
+          "dev-dotnet"
           "dev-haskell"
           "dev-lisp"
           "dev-markdown"
