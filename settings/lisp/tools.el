@@ -147,8 +147,6 @@ output."
   (w3m-bookmark-file (locate-user-data-file "w3m/bookmark.html"))
 
   ;; Set w3m as the default browser inside Emacs.
-  (browse-url-browser-function '(("HyperSpec" . w3m-goto-url-new-session)
-                                 (".*" . w3m-browse-url-in-browser)))
   (browse-url-handlers '(("HyperSpec" . w3m-goto-url-new-session)
                          (".*" . w3m-browse-url-in-browser)))
 
@@ -162,18 +160,11 @@ output."
   :defer t
   :custom
   (eww-download-directory "~/downloads/")
-  (eww-bookmarks-directory (locate-user-data-file "eww/"))
-  (browse-url-browser-function '((".*" . browse-url-default-browser))))
+  (eww-bookmarks-directory (locate-user-data-file "eww/")))
 
 (use-package eww-plus
   :defer t
-  :after eww
-
-  :init
-  ;; (setq browse-url-browser-function
-  ;;       `(("HyperSpec" . eww-browse-url-new-buffer)
-  ;;         (".*" . browse-url-default-browser)))
-  )
+  :after eww)
 
 (use-package webjump
   :defer t
