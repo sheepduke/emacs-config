@@ -1,22 +1,57 @@
+;; ============================================================
+;;  F#
+;; ============================================================
+
 ;; F# development support.
 ;; Key bindings in evil settings.
+(use-package eglot-fsharp
+  :ensure)
+
 (use-package fsharp-mode
   :ensure
+  :after eglot-fsharp
   :mode "\\.fs\\'"
 
   :preface
   (defun fsharp-setup ()
     (interactive)
-    (setq yas-indent-line 'fixed))
-  
-  (defun fsharp-eval-buffer ()
-    (interactive)
-    (fsharp-eval-region (point-min) (point-max)))
+    (setq yas-indent-line 'fixed)
+    (eglot-ensure)
+    (add-hook 'before-save-hook #'eglot-format-buffer))
 
-  (defun fsharp-format-buffer()
+  (defun fsharp-send-buffer ()
+    "Send the buffer to REPL."
     (interactive)
-    (when (equal major-mode 'fsharp-mode)
-      (lsp-format-buffer)))
+    (fsharp-send-snippet (buffer-string)))
+
+  (defun fsharp-send-region-or-line ()
+    "Send the active region or current line."
+    (interactive)
+    (if (region-active-p)
+        (fsharp-send-region)
+      (fsharp-send-line)))
+
+  (defun fsharp-send-region ()
+    "Send the region to REPL."
+    (interactive)
+    (fsharp-send-snippet (thing-at-point 'region)))
+
+  (defun fsharp-send-line ()
+    "Send the line to REPL."
+    (interactive)
+    (fsharp-send-snippet (thing-at-point 'line)))
+
+  (defun fsharp-send-snippet (snippet)
+    (fsharp-send-string snippet)
+    (fsharp-send-string ";;\n"))
+
+  (defun fsharp-send-string (raw)
+    (comint-send-string inferior-fsharp-buffer-name raw))
+
+  (defun fsharp-clear-repl-buffer ()
+    (interactive)
+    (with-current-buffer inferior-fsharp-buffer-name
+      (comint-clear-buffer)))
 
   (defun fsharp-smart-newline ()
     (interactive)
@@ -47,7 +82,7 @@
     (interactive)
     (smart-newline)
     (insert "    "))
- 
+  
   (defun fsharp-return-and-unindent ()
     (interactive)
     (smart-newline)
@@ -59,16 +94,27 @@
 
   :bind
   (:map fsharp-mode-map
-        ("<return>" . fsharp-smart-newline)
-        ("C-<return>" . fsharp-return-and-indent)
-        ("M-<return>" . fsharp-return-and-unindent)
+        ("C-c" . #'major-mode-hydra)
+        ("<return>" . #'fsharp-smart-newline)
+        ("C-<return>" . #'fsharp-return-and-indent)
+        ("M-<return>" . #'fsharp-return-and-unindent)
         ("C-<tab>" . #'fsharp-add-indent)
-        ("<backtab>" . #'indent-for-tab-command))
+        ("<backtab>" . #'indent-for-tab-command)
+        ("C-M-l" . #'fsharp-clear-repl-buffer))
 
   :hook
-  (fsharp-mode . fsharp-setup)
-  (fsharp-mode . lsp)
-  (before-save . fsharp-format-buffer))
+  (fsharp-mode . fsharp-setup))
+
+(major-mode-hydra-define fsharp-mode nil
+  ("Eval"
+   (("c" fsharp-send-region-or-line "region/line")
+    ("b" fsharp-send-buffer "buffer"))
+   "REPL"
+   (("l" fsharp-clear-repl-buffer "clear"))))
+
+;; ============================================================
+;;  C#
+;; ============================================================
 
 (use-package csharp-mode
   :init
