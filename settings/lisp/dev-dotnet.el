@@ -17,7 +17,7 @@
     (interactive)
     (setq yas-indent-line 'fixed)
     (eglot-ensure)
-    (add-hook 'before-save-hook #'eglot-format-buffer))
+    (add-hook 'before-save-hook #'eglot-format-buffer nil t))
 
   (defun fsharp-send-buffer ()
     "Send the buffer to REPL."
