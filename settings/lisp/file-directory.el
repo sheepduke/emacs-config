@@ -6,6 +6,7 @@
   :init
   (defconst dired-open-programs
     '(("mp4" . "mpv")
+      ("m4v" . "mpv")
       ("mkv" . "mpv")
       ("avi" . "mpv")
       ("jpg" . "feh")
