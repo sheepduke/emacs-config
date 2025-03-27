@@ -41,14 +41,6 @@
   :config
   (remove-hook 'markdown-mode-hook 'poly-markdown-mode))
 
-
-(use-package flymd
-  :ensure
-  :after markdown-mode
-
-  :custom
-  (flymd-output-directory "/tmp/"))
-
 (use-package markdown-toc
   :ensure
   :after markdown-mode
