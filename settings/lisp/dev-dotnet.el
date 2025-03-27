@@ -19,85 +19,20 @@
     (eglot-ensure)
     (add-hook 'before-save-hook #'eglot-format-buffer nil t))
 
-  (defun fsharp-send-buffer ()
-    "Send the buffer to REPL."
-    (interactive)
-    (fsharp-send-snippet (buffer-string)))
+  :init (require 'fsharp-plus)
 
-  (defun fsharp-send-region-or-line ()
-    "Send the active region or current line."
-    (interactive)
-    (if (region-active-p)
-        (fsharp-send-region)
-      (fsharp-send-line)))
-
-  (defun fsharp-send-region ()
-    "Send the region to REPL."
-    (interactive)
-    (fsharp-send-snippet (thing-at-point 'region)))
-
-  (defun fsharp-send-line ()
-    "Send the line to REPL."
-    (interactive)
-    (fsharp-send-snippet (thing-at-point 'line)))
-
-  (defun fsharp-send-snippet (snippet)
-    (fsharp-send-string snippet)
-    (fsharp-send-string ";;\n"))
-
-  (defun fsharp-send-string (raw)
-    (comint-send-string inferior-fsharp-buffer-name raw))
-
-  (defun fsharp-clear-repl-buffer ()
-    (interactive)
-    (with-current-buffer inferior-fsharp-buffer-name
-      (comint-clear-buffer)))
-
-  (defun fsharp-smart-newline ()
-    (interactive)
-    (let* ((line-content (thing-at-point 'line))
-           (line-length (length line-content))
-           (char-content (thing-at-point 'char t)))
-      (cond
-       ;; For an empty line, just indent it.
-       ((string-empty-p (string-trim line-content))
-        (insert "\n")
-        (insert (make-string (1- (length line-content)) ?\s)))
-       ;; When cursor is in {|}, create new line and indent corresponding lines.
-       ((or (and (string-match-p "\\{\\}" line-content)
-                 (string= char-content "}"))
-            (and (string-match-p "\\[\\]" line-content)
-                 (string= char-content "]")))
-        (delete-char 1)
-        (insert "\n")
-        (insert (make-string (+ line-length 2) ?\s))
-        (insert "\n")
-        (insert (make-string (- line-length 3) ?\s))
-        (insert char-content)
-        (previous-line)
-        (end-of-line))
-       (t (smart-newline)))))
-
-  (defun fsharp-return-and-indent ()
-    (interactive)
-    (smart-newline)
-    (insert "    "))
-  
-  (defun fsharp-return-and-unindent ()
-    (interactive)
-    (smart-newline)
-    (backward-delete-char 4))
-
-  (defun fsharp-add-indent ()
-    (interactive)
-    (insert "    "))
+  :custom
+  (fsharp-indent-offset 2)
+  (inferior-fsharp-program
+   (concat "dotnet fsi --compilertool:"
+           (expand-file-name "~/.dotnet/tools/.store/depman-fsproj/0.2.11/depman-fsproj/0.2.11/tools/net9.0/any")
+           " --readline-"))
 
   :bind
   (:map fsharp-mode-map
         ("C-c" . #'major-mode-hydra)
         ("<return>" . #'fsharp-smart-newline)
-        ("C-<return>" . #'fsharp-return-and-indent)
-        ("M-<return>" . #'fsharp-return-and-unindent)
+        ("M-<return>" . #'eglot-code-actions)
         ("C-<tab>" . #'fsharp-add-indent)
         ("<backtab>" . #'indent-for-tab-command)
         ("C-M-l" . #'fsharp-clear-repl-buffer))
@@ -109,8 +44,13 @@
   ("Eval"
    (("c" fsharp-send-region-or-line "region/line")
     ("b" fsharp-send-buffer "buffer"))
+   "Compile"
+   (("K" compile "compile")
+    ("k" recompile "recompile"))
    "REPL"
-   (("l" fsharp-clear-repl-buffer "clear"))))
+   (("p" run-fsharp-restart)
+    ("l" fsharp-load-buffer-file "load file")
+    ("L" fsharp-reload-repl "clear"))))
 
 ;; ============================================================
 ;;  C#
