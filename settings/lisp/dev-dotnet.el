@@ -143,7 +143,10 @@
 
 (use-package csproj-mode
   :ensure
-  :mode "\\.csproj\\'")
+  :mode "\\.csproj\\'"
+  :mode "\\.fsproj\\'"
+  :mode "\\Directory.Build.props\\'"
+  :mode "\\Directory.Packages.props\\'")
 
 (major-mode-hydra-define csharp-mode nil
   ("Dotnet"
