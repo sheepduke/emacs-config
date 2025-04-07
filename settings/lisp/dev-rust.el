@@ -6,7 +6,7 @@
   (defun rust-mode-setup ()
     "Setup rust mode."
     (set (make-local-variable 'compile-command)
-         "CARGO_INCREMENTAL=0 cargo test")
+         "cargo test")
     (add-hook 'before-save-hook 'eglot-format-buffer nil t)
     (eglot-ensure))
 
@@ -15,15 +15,33 @@
 
   :bind
   (:map rust-ts-mode-map
-        ("C-c C-b" . recompile)
-        ("C-c C-v" . compile))
+        ("C-c" . nil)
+        ("M-<return>" . eglot-code-actions))
 
   :custom
   ;; Format rust code before save.
   (rust-format-on-save t))
 
-
 (use-package cargo
-  :ensure
-  :hook
-  (rust-ts-mode . cargo-minor-mode))
+  :ensure)
+
+(major-mode-hydra-define rust-ts-mode nil
+  ("Common"
+   (("r" cargo-process-repeat "repeat")
+    ("w" cargo-process-watch "watch"))
+   
+   "Crate"
+   (("a" cargo-process-add "add")
+    ("m" cargo-process-rm "remove"))
+   
+   "Build"
+   (("b" cargo-process-build "build")
+    ("c" cargo-process-check "check"))
+   
+   "Test & Run"
+   (("u" cargo-process-run "run")
+    ("t" cargo-process-test "test"))
+   
+   "Document"
+   (("d" cargo-process-doc-open "open")
+    ("D" cargo-process-doc "build"))))

@@ -164,11 +164,6 @@
   (defun eglot-setup ()
     (eglot-inlay-hints-mode -1))
 
-  :bind
-  (:map eglot-mode-map
-        ("M-]" . eglot-inlay-hints-mode)
-        ("C-]" . eglot-code-actions))
-
   :hook
   (eglot-managed-mode . eglot-setup)
 
