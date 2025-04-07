@@ -5,10 +5,8 @@
   :config
   (defun rust-mode-setup ()
     "Setup rust mode."
-    (set (make-local-variable 'compile-command)
-         "cargo test")
-    (add-hook 'before-save-hook 'eglot-format-buffer nil t)
-    (eglot-ensure))
+    (eglot-ensure)
+    (add-hook 'before-save-hook 'eglot-format-buffer nil t))
 
   :hook
   (rust-ts-mode . rust-mode-setup)
@@ -27,7 +25,7 @@
 
 (major-mode-hydra-define rust-ts-mode nil
   ("Common"
-   (("r" cargo-process-repeat "repeat")
+   (("p" cargo-process-repeat "repeat")
     ("w" cargo-process-watch "watch"))
    
    "Crate"
@@ -39,7 +37,7 @@
     ("c" cargo-process-check "check"))
    
    "Test & Run"
-   (("u" cargo-process-run "run")
+   (("r" cargo-process-run "run")
     ("t" cargo-process-test "test"))
    
    "Document"
