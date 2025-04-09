@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: com
+# key: com
+# --
+<Compile Include="$0.fs" />

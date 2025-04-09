@@ -42,7 +42,8 @@
 
 (major-mode-hydra-define fsharp-mode nil
   ("Eval"
-   (("c" fsharp-send-region-or-line "region/line")
+   (("e" fsharp-eval-phrase)
+    ("c" fsharp-send-region-or-line "region/line")
     ("b" fsharp-send-buffer "buffer"))
    "Compile"
    (("K" compile "compile")

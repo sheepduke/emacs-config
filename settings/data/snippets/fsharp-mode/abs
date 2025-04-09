@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: abs
+# key: abs
+# --
+abstract member $0

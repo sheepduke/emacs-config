@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: proj
+# key: proj
+# --
+<ProjectReference Include="../$0.fsproj" />

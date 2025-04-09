@@ -1,4 +1,4 @@
-(defvar fsharp-repl-init-filename "Repl.fs"
+(defvar fsharp-repl-init-filename "Repl.fsx"
   "The name of REPL init file.")
 
 (defun run-fsharp-restart ()
