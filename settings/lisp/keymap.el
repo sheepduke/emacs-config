@@ -270,7 +270,12 @@
      (("s" shell "shell")
       ("o" org-agenda "org agenda")
       ("j" org-journal-new-entry "org journal")
-      ("p" list-packages "packages"))
+      ("p" list-packages "packages")
+      ("c" calculator "calculator"))
+
+     "Plugin"
+     (("a" cfw:open-org-calendar "calendar")
+      ("A" calendar "simple calendar"))
 
      "External"
      (("d" sdcv-search-input "dictionary")
