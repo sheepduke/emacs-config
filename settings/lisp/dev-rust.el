@@ -26,7 +26,9 @@
 (major-mode-hydra-define rust-ts-mode nil
   ("Common"
    (("p" cargo-process-repeat "repeat")
-    ("w" cargo-process-watch "watch"))
+    ("w" cargo-process-watch "watch")
+    ("e" eglot "eglot")
+    ("E" eglot-shutdown "eglot shutdown"))
    
    "Crate"
    (("a" cargo-process-add "add")
@@ -34,7 +36,8 @@
    
    "Build"
    (("b" cargo-process-build "build")
-    ("c" cargo-process-check "check"))
+    ("k" cargo-process-check "check")
+    ("c" cargo-process-clippy "clippy"))
    
    "Test & Run"
    (("r" cargo-process-run "run")
