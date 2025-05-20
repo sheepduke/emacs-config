@@ -274,8 +274,8 @@
       ("c" calculator "calculator"))
 
      "Plugin"
-     (("a" cfw:open-org-calendar "calendar")
-      ("A" calendar "simple calendar"))
+     (("l" cfw:open-org-calendar "calendar")
+      ("L" calendar "simple calendar"))
 
      "External"
      (("d" sdcv-search-input "dictionary")
