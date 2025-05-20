@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: fut
+# key: fut
+# --
+impl Future<Output = $0> + Send

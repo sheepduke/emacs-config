@@ -24,20 +24,23 @@
   :ensure)
 
 (major-mode-hydra-define rust-ts-mode nil
-  ("Common"
+  ("Eglot"
+   (("e" eglot "eglot")
+    ("E" eglot-shutdown "shutdown")
+    ("n" eglot-rename "rename"))
+
+   "Common"
    (("p" cargo-process-repeat "repeat")
-    ("w" cargo-process-watch "watch")
-    ("e" eglot "eglot")
-    ("E" eglot-shutdown "eglot shutdown"))
+    ("w" cargo-process-watch "watch"))
    
    "Crate"
    (("a" cargo-process-add "add")
     ("m" cargo-process-rm "remove"))
    
    "Build"
-   (("b" cargo-process-build "build")
-    ("k" cargo-process-check "check")
-    ("c" cargo-process-clippy "clippy"))
+   (("b" cargo-process-clippy "clippy")
+    ("c" cargo-process-check "check")
+    ("k" cargo-process-clean "clean"))
    
    "Test & Run"
    (("r" cargo-process-run "run")
