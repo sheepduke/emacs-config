@@ -38,7 +38,7 @@
     ("m" cargo-process-rm "remove"))
    
    "Build"
-   (("b" cargo-process-clippy "build")
+   (("b" cargo-process-build "build")
     ("c" cargo-process-clippy "clippy")
     ("k" cargo-process-clean "clean"))
    
