@@ -124,13 +124,13 @@
   :config
   (global-set-key (kbd "M-SPC") 'hydra-global/body)
 
-;; | color    | toggle                     |
-;; |----------+----------------------------|
-;; | red      |                            |
-;; | blue     | :exit t                    |
-;; | amaranth | :foreign-keys warn         |
-;; | teal     | :foreign-keys warn :exit t |
-;; | pink     | :foreign-keys run          |
+  ;; | color    | toggle                     |
+  ;; |----------+----------------------------|
+  ;; | red      |                            |
+  ;; | blue     | :exit t                    |
+  ;; | amaranth | :foreign-keys warn         |
+  ;; | teal     | :foreign-keys warn :exit t |
+  ;; | pink     | :foreign-keys run          |
   (pretty-hydra-define hydra-global (:color blue)
     ("Buffer management"
      (("k" hydra-workspace/body "workspace")
@@ -145,7 +145,7 @@
      (("p" hydra-project/body "project")
       ("s" silver-brain-hydra/body "silver brain")
       ("t" #'hydra-tool/body "other"))
-    
+     
      "Local"
      (("l" major-mode-hydra "local"))))
 
@@ -267,7 +267,8 @@
 
   (pretty-hydra-define hydra-tool (:color blue)
     ("Built-in"
-     (("s" shell "shell")
+     (("e" hydra-emms/body "emms")
+      ("s" shell "shell")
       ("o" org-agenda "org agenda")
       ("j" org-journal-new-entry "org journal")
       ("p" list-packages "packages")
@@ -280,7 +281,23 @@
      "External"
      (("d" sdcv-search-input "dictionary")
       ("v" magit "magit")
-      ("w" w3m "w3m")))))
+      ("w" w3m "w3m"))))
+
+  (pretty-hydra-define hydra-emms (:color blue)
+    ("Play"
+     (("d" emms-play-dired "dired")
+      ("f" emms-play-file "file")
+      ("g" emms-play-directory "directory"))
+
+     "Control"
+     (("SPC" emms-pause "pause")
+      ("t" emms-stop "stop")
+      ("n" emms-next "next")
+      ("p" emms-previous "previous"))
+
+     "Playlist"
+     (("s" emms-shuffle "shuffle")
+      ("l" emms-playlist-mode-go "show")))))
 
 (use-package hydra-posframe
   :after hydra
