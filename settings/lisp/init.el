@@ -8,7 +8,7 @@
                    markdown-toc multiple-cursors nameless
                    nerd-icons-corfu nerd-icons-dired notmuch nov
                    orderless org-bullets org-journal org-pomodoro
-                   org-super-agenda ormolu paredit pdf-tools perspective
+                   org-super-agenda paredit pdf-tools perspective
                    poly-markdown powershell rainbow-delimiters restclient
                    rime sbt-mode scala-repl scala-ts-mode sdcv shackle
                    sly-repl-ansi-color systemd toc-org ts-comint tuareg

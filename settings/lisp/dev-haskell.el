@@ -63,8 +63,5 @@
 
   :bind
   (:map interactive-haskell-mode
+        ("M-RET" . eglot-code-actions)
         ("C-M-l" . haskell-interactive-mode-clear)))
-
-(use-package ormolu
-  :ensure
-  :after haskell-mode)
