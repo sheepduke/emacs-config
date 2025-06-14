@@ -3,38 +3,68 @@
   :mode "\\.hs\\'"
 
   :init
-  (defun interactive-haskell-do-eval ()
-    "Evaluate the current expression in Haskell REPL."
+  (defun haskell-process-eval-string (string)
+    "Evaluate given string in REPL."
     (with-current-buffer (haskell-session-interactive-buffer (haskell-session))
+      (insert string)
       (haskell-interactive-handle-expr)))
-  
-  (defun interactive-haskell-eval-current-line ()
+
+  (defun haskell-process-eval-line ()
     "Evaluate current line."
     (interactive)
-    (haskell-interactive-copy-to-prompt)
-    (interactive-haskell-do-eval))
+    (haskell-process-eval-string 
+     (string-trim (thing-at-point 'line))))
 
-  (defun interactive-haskell-run-r ()
-    "Run the function defined as 'r'."
+  (defun haskell-process-eval-region ()
+    "Evaluate current active region."
     (interactive)
-    (with-current-buffer (haskell-session-interactive-buffer (haskell-session))
-      (insert "r\n")
-      (haskell-interactive-mode-return)))
+    (haskell-process-eval-string 
+     (string-trim (thing-at-point 'region))))
+
+  (defun haskell-process-eval-dwim ()
+    "Evaluate a region or the current line."
+    (interactive)
+    (if (region-active-p)
+        (haskell-process-eval-region)
+      (haskell-process-eval-line)))
+
+  (defun haskell-mode-setup ()
+    (interactive)
+    ;; Set up eglot.
+    (setq eglot-workspace-configuration
+          '(:haskell (:plugin (:stan (:globalOn t))
+                              :formattingProvider "ormolu")))
+    (eglot-ensure)
+    (add-hook 'before-save-hook #'eglot-format-buffer nil t)
+    (unbind-key (kbd "C-c") haskell-mode-map))
+
+  (remove-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
   :config
   (require 'haskell)
 
-  :bind
-  (:map interactive-haskell-mode-map
-        ("C-c C-b" . haskell-process-load-file)
-        ("C-c C-l" . haskell-process-reload)
-        ("C-c C-c" . interactive-haskell-eval-current-line)
-        ("C-c C-r" . interactive-haskell-run-r)))
+  (setq interactive-haskell-mode-map (make-sparse-keymap))
 
-(use-package ormolu
-  :ensure
-  :after haskell-mode
+  (major-mode-hydra-define haskell-mode nil
+    ("REPL"
+     (("c" haskell-process-eval-dwim "eval")
+      ("l" haskell-process-load-file "load"))
+
+     "Editing"
+     (("r" eglot-rename "rename")
+      ("f" haskell-mode-format-imports "format imports"))
+     
+     "Other"
+     (("a" haskell-process-cabal "cabal")
+      ("i" haskell-process-do-info "info"))))
+
+  :hook
+  (haskell-mode . haskell-mode-setup)
 
   :bind
   (:map interactive-haskell-mode
-        ("C-c C-f" . ormolu-format-buffer)))
+        ("C-M-l" . haskell-interactive-mode-clear)))
+
+(use-package ormolu
+  :ensure
+  :after haskell-mode)

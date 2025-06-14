@@ -168,7 +168,10 @@
   (eglot-managed-mode . eglot-setup)
 
   :custom
-  (eglot-confirm-server-initiated-edits nil))
+  (eglot-confirm-server-initiated-edits nil)
+
+  ;; Shut down the eglot server when last managed buffer is killed.
+  (eglot-autoshutdown t))
 
 ;; ============================================================
 ;;  Compilation
