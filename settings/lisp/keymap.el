@@ -304,3 +304,97 @@
   :demand t
   :config
   (hydra-posframe-mode 1))
+
+;; ============================================================
+;;  Evil
+;; ============================================================
+
+(use-package evil
+  :ensure t
+  :demand t
+
+  :init
+  ;; Required by evil-collection.
+  (setq evil-want-keybinding nil)
+  (setq evil-want-integration t)
+
+  :custom
+  (evil-undo-system 'undo-tree)
+  (evil-want-C-u-scroll t)
+  (evil-want-C-u-delete t)
+  (evil-disable-insert-state-bindings nil)
+  (evil-search-module 'evil-search)
+
+  :config
+  (evil-define-key 'normal 'global (kbd "M-u") 'universal-argument)
+  ;; (evil-define-key 'normal 'global (kbd "SPC") 'hydra-global/body)
+
+  ;; Key bindings.
+  ;; (evil-set-leader 'normal (kbd "SPC"))
+
+  ;; ;; File related.
+  ;; (evil-define-key 'normal 'global (kbd "<leader>ff") #'find-file)
+  ;; (evil-define-key 'normal 'global (kbd "<leader>fs") #'save-buffer)
+  ;; (evil-define-key 'normal 'global (kbd "<leader>wc") #'persp-create)
+  ;; (evil-define-key 'normal 'global (kbd "<leader>") #'persp-create)
+
+  (setq display-line-numbers-type 'relative)
+
+  (evil-mode 1))
+
+(use-package evil-collection
+  :ensure t
+  :after 'evil
+  :demand t
+
+  :config
+  (evil-collection-init))
+
+(use-package general
+  :ensure t
+  :after 'evil
+  :demand t
+
+  :config 
+  (general-create-definer evil-global-leader-def
+    :states '(normal)
+    :prefix "SPC")
+
+  (evil-global-leader-def
+    ;; Buffer.
+    "b" '(:ignore t :which-key "buffer")
+    "bb" '(switch-to-buffer :which-key "switch")
+    "bl" '(persp-list-buffers :which-key "list")
+    "bq" '(kill-current-buffer :which-key "kill")
+    "bs" '(persp-switch-to-scratch-buffer :which-key "scratch")
+    "bo" '(switch-to-other-buffer :which-key "scratch")
+
+    ;; File.
+    "f"  '(:ignore t :which-key "file")
+    "ff" '(find-file :which-key "find")
+    "fs" '(save-buffer :which-key "save")
+    "fd" '(delete-file-and-kill-buffer :which-key "delete")
+
+    ;; Workspace.
+    "w" '(:ignore t :which-key "workspace")
+    "wc" '(persp-create :which-key "create")
+    "wr" '(persp-rename :which-key "rename")
+    "wq" '(persp-kill-current :which-key "kill current")
+    "wh" '(persp-prev :which-key "switch to previous")
+    "wl" '(persp-next :which-key "switch to next")
+    "wH" '(persp-swap-previous :which-key "swap previous")
+    "wL" '(persp-swap-next :which-key "swap next")
+
+    ;; Project.
+    "p" '(:ignore t :which-key "project")
+    "pf" '(project-find-file :which-key "find file")
+    "pd" '(project-dired :which-key "project root")
+    "pp" '(project-switch-project :which-key "switch project")
+
+    ;; Jump.
+    "j" '(:ignore t :which-key "jump")
+    "jb" '(consult-bookmark :which-key "bookmark")
+    "jc" '(avy-goto-char-timer :which-key "char")
+    "jk" '(evil-ex-nohighlight :which-key "no highlight")
+    "jl" '(consult-line :which-key "line")
+    "jr" '(consult-ripgrep :which-key "ripgrep")))

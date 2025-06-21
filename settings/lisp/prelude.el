@@ -1,3 +1,7 @@
+;; ============================================================
+;;  Environment
+;; ============================================================
+
 (defun windows? ()
   "Return T if current OS is Windows."
   (equal system-type 'windows-nt))
@@ -19,6 +23,18 @@
    (locate-user-emacs-file
     (concat "settings/data/" new-name)
     (if old-name (concat "settings/data/" old-name) nil))))
+
+;; ============================================================
+;;  Buffer
+;; ============================================================
+
+(defun delete-file-and-kill-buffer ()
+  "Delete currently opened file and the buffer."
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (when (y-or-n-p "Delete this file? ")
+      (kill-current-buffer)
+      (delete-file file-name))))
 
 (defun save-buffer-readonly ()
   "If buffer is read-only, temporally change its permission and write to it.
@@ -42,6 +58,10 @@ This works like Vim 'w!'."
   (interactive)
   (switch-to-buffer (other-buffer)))
 
+;; ============================================================
+;;  Window
+;; ============================================================
+
 (defun toggle-window-dedicated ()
   "Toggle whether the current active window is dedicated or not.
 A dedicated window can't be switched or modified by some commands."
@@ -53,6 +73,21 @@ A dedicated window can't be switched or modified by some commands."
        "Window '%s' is dedicated"
      "Window '%s' is normal")
    (current-buffer)))
+
+;; ============================================================
+;;  Workspace
+;; ============================================================
+
+(defun persp-kill-current ()
+  "Kill current workspace."
+  (interactive)
+  (let ((name (persp-current-name)))
+    (persp-prev)
+    (persp-kill name)))
+
+;; ============================================================
+;;  Editing
+;; ============================================================
 
 (defun line-in-comment? ()
   "Return T if current line is commented."
