@@ -6,8 +6,7 @@
 (use-package magit
   :ensure
   :demand t
-  :hook (git-commit-mode . flyspell-mode)
-  :bind ("C-c M-g" . nil))
+  :hook (git-commit-mode . flyspell-mode))
 
 ;; ============================================================
 ;;  Code Snippet
@@ -159,7 +158,7 @@
 ;;  LSP
 ;; ============================================================
 
-(use-package eglog
+(use-package eglot
   :preface
   (defun eglot-setup ()
     (eglot-inlay-hints-mode -1))
