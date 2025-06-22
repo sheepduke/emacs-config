@@ -316,4 +316,8 @@ output."
 
   :custom
   (silver-brain-store-name "main")
-  (silver-brain-server-port 8080))
+  (silver-brain-server-port 8080)
+
+  :config
+  (evil-set-initial-state 'silver-brain-list-mode 'motion)
+  (evil-set-initial-state 'silver-brain-item-mode 'motion))

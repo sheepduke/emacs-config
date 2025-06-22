@@ -2,18 +2,19 @@
       '(ace-window ahk-mode bbdb cal-china-x calfw calfw-org cargo cider
                    consult-yasnippet corfu csproj-mode delight
                    dockerfile-mode dune eglot-fsharp elixir-mode
-                   embark-consult emmet-mode emms fsharp-mode
-                   haskell-mode indent-guide inf-elixir js-comint
-                   js2-mode kotlin-mode magit major-mode-hydra marginalia
-                   markdown-toc multiple-cursors nameless
-                   nerd-icons-corfu nerd-icons-dired notmuch nov
-                   orderless org-bullets org-journal org-pomodoro
-                   org-super-agenda paredit pdf-tools perspective
-                   poly-markdown powershell rainbow-delimiters restclient
-                   rime sbt-mode scala-repl scala-ts-mode sdcv shackle
-                   sly-repl-ansi-color systemd toc-org ts-comint tuareg
-                   typescript-mode undo-tree vertico-posframe w3m
-                   web-mode which-key yaml-mode))
+                   embark-consult emmet-mode emms evil evil-collection
+                   fsharp-mode general haskell-mode indent-guide
+                   inf-elixir js-comint js2-mode kotlin-mode magit
+                   marginalia markdown-toc
+                   multiple-cursors nameless nerd-icons-corfu
+                   nerd-icons-dired notmuch nov orderless org-bullets
+                   org-journal org-pomodoro org-super-agenda paredit
+                   pdf-tools perspective poly-markdown powershell
+                   rainbow-delimiters restclient rime sbt-mode scala-repl
+                   scala-ts-mode sdcv shackle sly-repl-ansi-color systemd
+                   toc-org ts-comint tuareg typescript-mode undo-tree
+                   vertico-posframe vterm w3m web-mode
+                   yaml-mode))
 
 ;; Set load path.
 (add-to-list 'load-path "~/.emacs.d/settings/site-lisp/")
@@ -30,6 +31,7 @@
           "editing"
           "file-directory"
           "interaction"
+          "keymap"
           "org-mode"
           "tools"
           "dev"
@@ -45,8 +47,7 @@
           "dev-rust"
           "dev-scala"
           "dev-web"
-          "email"
-          "keymap"))
+          "email"))
 
 ;; Start Emacs server.
 (server-start)

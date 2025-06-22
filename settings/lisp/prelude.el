@@ -99,6 +99,3 @@ A dedicated window can't be switched or modified by some commands."
   (if (line-in-comment?)
       (default-indent-new-line)
     (newline-and-indent)))
-
-(use-package major-mode-hydra
-  :ensure)
