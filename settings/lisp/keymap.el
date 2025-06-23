@@ -132,11 +132,11 @@
 
   (setq display-line-numbers-type 'relative)
   
-  (define-prefix-command 'my-leader-map)
-  (keymap-set evil-motion-state-map "SPC" 'my-leader-map)
-  (keymap-set evil-normal-state-map "SPC" 'my-leader-map)
+  (define-prefix-command 'evil-custom-global-leader-map)
+  (keymap-set evil-motion-state-map "SPC" 'evil-custom-global-leader-map)
+  (keymap-set evil-normal-state-map "SPC" 'evil-custom-global-leader-map)
 
-  (evil-define-key nil my-leader-map
+  (evil-define-key nil evil-custom-global-leader-map
     ;; Buffer.
     "bb" 'switch-to-buffer
     "bl" 'persp-list-buffers
