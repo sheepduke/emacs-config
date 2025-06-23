@@ -139,12 +139,12 @@
   (evil-define-key nil evil-custom-global-leader-map
     ;; Buffer.
     "bb" 'switch-to-buffer
+    "bk" 'kill-current-buffer
     "bl" 'persp-list-buffers
     "bo" 'switch-to-other-buffer
-    "bq" 'kill-current-buffer
+    "bq" 'bury-buffer
     "br" 'rename-buffer
     "bs" 'persp-switch-to-scratch-buffer
-    "by" 'bury-buffer
 
     ;; File.
     "ff" 'find-file

@@ -315,10 +315,28 @@ output."
   :demand t
   :load-path "~/projects/silver-brain/external/emacs/"
 
+  :init
+  (defun silver-brain-item-custom-setup ()
+    (interactive)
+    (evil-define-key '(motion) silver-brain-item-mode-map
+      "," 'silver-brain-item-menu))
+
+  (defun silver-brain-list-custom-setup ()
+    (interactive)
+    (evil-define-key '(motion) silver-brain-list-mode-map
+      "," 'silver-brain-list-menu))
+
   :custom
   (silver-brain-store-name "main")
   (silver-brain-server-port 8080)
 
   :config
   (evil-set-initial-state 'silver-brain-list-mode 'motion)
-  (evil-set-initial-state 'silver-brain-item-mode 'motion))
+  (evil-set-initial-state 'silver-brain-item-mode 'motion)
+
+  (evil-define-key nil evil-custom-global-leader-map
+    "sl" 'silver-brain-list-items
+    "so" 'silver-brain-search-and-open-item)
+
+  :hook
+  (silver-brain-item-mode . silver-brain-item-custom-setup))
