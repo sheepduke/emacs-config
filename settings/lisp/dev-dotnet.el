@@ -40,18 +40,18 @@
   :hook
   (fsharp-mode . fsharp-setup))
 
-(major-mode-hydra-define fsharp-mode nil
-  ("Eval"
-   (("e" fsharp-eval-phrase)
-    ("c" fsharp-send-region-or-line "region/line")
-    ("b" fsharp-send-buffer "buffer"))
-   "Compile"
-   (("K" compile "compile")
-    ("k" recompile "recompile"))
-   "REPL"
-   (("p" run-fsharp-restart)
-    ("l" fsharp-load-buffer-file "load file")
-    ("L" fsharp-reload-repl "clear"))))
+;; (major-mode-hydra-define fsharp-mode nil
+;;   ("Eval"
+;;    (("e" fsharp-eval-phrase)
+;;     ("c" fsharp-send-region-or-line "region/line")
+;;     ("b" fsharp-send-buffer "buffer"))
+;;    "Compile"
+;;    (("K" compile "compile")
+;;     ("k" recompile "recompile"))
+;;    "REPL"
+;;    (("p" run-fsharp-restart)
+;;     ("l" fsharp-load-buffer-file "load file")
+;;     ("L" fsharp-reload-repl "clear"))))
 
 ;; ============================================================
 ;;  C#
@@ -89,6 +89,6 @@
   :mode "\\Directory.Build.props\\'"
   :mode "\\Directory.Packages.props\\'")
 
-(major-mode-hydra-define csharp-mode nil
-  ("Dotnet"
-   (("k" recompile))))
+;; (major-mode-hydra-define csharp-mode nil
+;;   ("Dotnet"
+;;    (("k" recompile))))

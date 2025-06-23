@@ -45,18 +45,18 @@
 
   (setq interactive-haskell-mode-map (make-sparse-keymap))
 
-  (major-mode-hydra-define haskell-mode nil
-    ("REPL"
-     (("c" haskell-process-eval-dwim "eval")
-      ("l" haskell-process-load-file "load"))
+  ;; (major-mode-hydra-define haskell-mode nil
+  ;;   ("REPL"
+  ;;    (("c" haskell-process-eval-dwim "eval")
+  ;;     ("l" haskell-process-load-file "load"))
 
-     "Editing"
-     (("r" eglot-rename "rename")
-      ("f" haskell-mode-format-imports "format imports"))
+  ;;    "Editing"
+  ;;    (("r" eglot-rename "rename")
+  ;;     ("f" haskell-mode-format-imports "format imports"))
      
-     "Other"
-     (("a" haskell-process-cabal "cabal")
-      ("i" haskell-process-do-info "info"))))
+  ;;    "Other"
+  ;;    (("a" haskell-process-cabal "cabal")
+  ;;     ("i" haskell-process-do-info "info"))))
 
   :hook
   (haskell-mode . haskell-mode-setup)
