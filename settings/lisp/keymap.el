@@ -152,7 +152,7 @@
     "fD" 'delete-file-and-kill-buffer
 
     ;; Workspace.
-    "wc" 'persp-create
+    "wn" 'persp-create
     "wr" 'persp-rename
     "wq" 'persp-kill-current
     "wh" 'persp-prev
