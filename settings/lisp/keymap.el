@@ -210,6 +210,18 @@
     ;; Help.
     "hk" 'evil-collection-describe-bindings)
 
+  (which-key-add-key-based-replacements
+    "SPC b" "Buffer"
+    "SPC e" "Emms"
+    "SPC f" "File"
+    "SPC h" "Help"
+    "SPC j" "Jump"
+    "SPC p" "Project"
+    "SPC s" "Settings"
+    "SPC t" "Tools"
+    "SPC u" "Utilities"
+    "SPC w" "Workspace")
+
   (evil-mode 1)
   (global-undo-tree-mode 1))
 
