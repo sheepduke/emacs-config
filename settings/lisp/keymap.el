@@ -126,6 +126,10 @@
   :config
   (evil-define-key 'normal 'global (kbd "M-u") 'universal-argument)
 
+  ;; Use Corfu for completion, disabling these keys.
+  (evil-define-key 'insert 'global (kbd "C-n") nil)
+  (evil-define-key 'insert 'global (kbd "C-p") nil)
+
   (setq display-line-numbers-type 'relative)
   
   (define-prefix-command 'my-leader-map)
@@ -136,10 +140,11 @@
     ;; Buffer.
     "bb" 'switch-to-buffer
     "bl" 'persp-list-buffers
-    "bd" 'kill-current-buffer
-    "bq" 'bury-buffer
-    "bs" 'persp-switch-to-scratch-buffer
     "bo" 'switch-to-other-buffer
+    "bq" 'kill-current-buffer
+    "br" 'rename-buffer
+    "bs" 'persp-switch-to-scratch-buffer
+    "by" 'bury-buffer
 
     ;; File.
     "ff" 'find-file
@@ -205,7 +210,8 @@
     ;; Help.
     "hk" 'evil-collection-describe-bindings)
 
-  (evil-mode 1))
+  (evil-mode 1)
+  (global-undo-tree-mode 1))
 
 (use-package evil-collection
   :ensure t

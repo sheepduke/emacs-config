@@ -3,7 +3,7 @@
                    consult-yasnippet corfu csproj-mode delight
                    dockerfile-mode dune eglot-fsharp elixir-mode
                    embark-consult emmet-mode emms evil evil-collection
-                   fsharp-mode general haskell-mode indent-guide
+                   fsharp-mode haskell-mode indent-guide
                    inf-elixir js-comint js2-mode kotlin-mode magit
                    marginalia markdown-toc
                    multiple-cursors nameless nerd-icons-corfu

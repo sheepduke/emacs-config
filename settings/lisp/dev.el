@@ -48,8 +48,6 @@
 
 (use-package corfu
   :ensure
-  :config
-  (global-corfu-mode)
 
   :custom
   ;; Enable cycling for `corfu-next/previous'
@@ -62,7 +60,10 @@
   (corfu-auto-delay 0.1)
 
   ;; How many candidates to show.
-  (corfu-count 20))
+  (corfu-count 20)
+
+  :config
+  (global-corfu-mode))
 
 (use-package corfu-info
   :after corfu)
