@@ -227,7 +227,7 @@
 
 (use-package evil-collection
   :ensure t
-  :after 'evil
+  :after evil
   :demand t
 
   :custom
