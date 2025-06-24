@@ -9,6 +9,27 @@
   :hook (git-commit-mode . flyspell-mode))
 
 ;; ============================================================
+;;  Project
+;; ============================================================
+
+(use-package project
+  :init
+  (defun project-open-root-dir ()
+    "Open the root directory of the current project in Dired."
+    (interactive)
+    (let ((root (project-root (project-current t))))
+      (dired root)))
+
+  :custom
+  (project-switch-commands '((project-find-file "Find file" ?f)
+                             (project-open-root-dir "Open root directory" ?r)
+                             (project-find-dir "Find directory" ?d)
+                             (project-find-regexp "Find regexp" ?g)
+                             (project-eshell "Eshell" ?s)
+                             (magit-project-status "Magit" ?m)
+                             (project-any-command "Other" ?o))))
+
+;; ============================================================
 ;;  Code Snippet
 ;; ============================================================
 
