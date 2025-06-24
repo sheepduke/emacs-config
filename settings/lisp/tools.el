@@ -335,8 +335,8 @@ output."
   (evil-set-initial-state 'silver-brain-item-mode 'motion)
 
   (evil-define-key nil evil-custom-global-leader-map
-    "sl" 'silver-brain-list-items
-    "so" 'silver-brain-search-and-open-item)
+    "ts" 'silver-brain-list-items
+    "tS" 'silver-brain-search-and-open-item)
 
   :hook
   (silver-brain-item-mode . silver-brain-item-custom-setup))
