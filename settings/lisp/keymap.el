@@ -139,7 +139,7 @@
   (evil-define-key nil evil-custom-global-leader-map
     ;; Buffer.
     "bb" 'switch-to-buffer
-    "bk" 'kill-current-buffer
+    "bc" 'kill-current-buffer
     "bl" 'persp-list-buffers
     "bo" 'switch-to-other-buffer
     "bq" 'bury-buffer
@@ -169,7 +169,6 @@
     "jb" 'consult-bookmark
     "jc" 'avy-goto-char-timer
     "jf" 'consult-fd
-    "jk" 'evil-ex-nohighlight
     "jl" 'consult-line
     "jo" 'consult-outline
     "jr" 'consult-ripgrep
