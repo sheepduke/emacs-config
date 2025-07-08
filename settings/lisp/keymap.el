@@ -175,6 +175,7 @@
     "jr" 'consult-ripgrep
 
     ;; Utilities.
+    "uc" 'copy-buffer-content
     "ue" 'erase-buffer
     "um" 'mc/edit-lines
     "ur" 'evil-show-registers
