@@ -154,6 +154,7 @@
     ;; Workspace.
     "wn" 'persp-create
     "wr" 'persp-rename
+    "wc" 'persp-kill-current
     "wq" 'persp-kill-current
     "wh" 'persp-prev
     "wl" 'persp-next
