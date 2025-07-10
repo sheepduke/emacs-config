@@ -235,4 +235,7 @@
   (evil-collection-key-blacklist '("SPC"))
 
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+
+  (evil-define-key 'normal dired-mode-map
+    "gc" 'dired-kill-subdir))
