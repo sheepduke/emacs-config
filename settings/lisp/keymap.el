@@ -238,4 +238,5 @@
   (evil-collection-init)
 
   (evil-define-key 'normal dired-mode-map
-    "gc" 'dired-kill-subdir))
+    "O" 'dired-open-externally
+    "," 'dired-kill-subdir))

@@ -4,7 +4,7 @@
 
 (use-package dired
   :init
-  (defconst dired-open-programs
+  (defvar dired-open-programs
     '(("mp4" . "mpv")
       ("m4v" . "mpv")
       ("mkv" . "mpv")
@@ -23,13 +23,6 @@
                     (error "No program defined"))))
       (start-process "dired-open" nil cmd file)))
 
-  (defun dired-open-dwim ()
-    (interactive)
-    (let* ((file (dired-get-file-for-visit))
-           (cmd (dired-get-program file)))
-      (if cmd (dired-open-externally)
-        (dired-find-file))))
-
   :custom
   ;; Human readable size display
   (dired-listing-switches "-alh")
@@ -43,8 +36,8 @@
   :bind (:map dired-mode-map
               ("," . dired-kill-subdir)
               ("h" . dired-omit-mode)
-              ("e" . dired-open-externally)
-              ("<return>" . dired-open-dwim)))
+              ("O" . dired-open-externally)
+              ("<return>" . dired-find-file)))
 
 ;; ============================================================
 ;;  Backup
