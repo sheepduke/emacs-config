@@ -159,7 +159,7 @@
     "wh" 'persp-prev
     "wl" 'persp-next
     "wH" 'persp-swap-previous
-    "wL" 'rsp-swap-next
+    "wL" 'persp-swap-next
 
     ;; Project.
     "pd" 'project-dired
