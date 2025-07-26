@@ -61,7 +61,8 @@ This works like Vim 'w!'."
 (defun copy-buffer-content ()
   "Copy the whole content of this buffer."
   (interactive)
-  (kill-new (thing-at-point 'buffer)))
+  (kill-new (thing-at-point 'buffer))
+  (message "Buffer content copied"))
 
 ;; ============================================================
 ;;  Window

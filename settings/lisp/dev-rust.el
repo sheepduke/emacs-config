@@ -6,27 +6,30 @@
   (defun rust-mode-setup ()
     "Setup rust mode."
     (eglot-ensure)
+    (local-set-key (kbd "C-c") 'rust-mode-menu)
     (add-hook 'before-save-hook 'eglot-format-buffer nil t))
 
-  ;; (general-define-key :keymaps '(rust-ts-mode-map)
-  ;;                     :states '(normal visual)
-  ;;                     :prefix "SPC m"
+  (transient-define-prefix rust-mode-menu ()
+    [["Eglot"
+      ("e" "Start" eglot)
+      ("E" "Stop" eglot-shutdown)
+      ("n" "Rename" eglot-rename)]
 
-  ;;                     "e" '(eglot :which-key "eglot")
-  ;;                     "E" '(eglot-shutdown :which-key "eglot shutdown")
-  ;;                     "r" '(eglot-rename :which-key "rename")
+     ["Build and Run"
+       ("b" "Build" cargo-process-build)
+       ("c" "Clippy" cargo-process-clippy)
+       ("r" "Run" cargo-process-run)
+       ("t" "Test" cargo-process-test)]
 
-  ;;                     "D" '(cargo-process-doc :which-key "build")
-  ;;                     "a" '(cargo-process-add :which-key "add")
-  ;;                     "b" '(cargo-process-build :which-key "build")
-  ;;                     "c" '(cargo-process-clippy :which-key "clippy")
-  ;;                     "d" '(cargo-process-doc-open :which-key "open")
-  ;;                     "k" '(cargo-process-clean :which-key "clean")
-  ;;                     "m" '(cargo-process-rm :which-key "remove")
-  ;;                     "p" '(cargo-process-repeat "repeat")
-  ;;                     "r" '(cargo-process-run :which-key "run")
-  ;;                     "t" '(cargo-process-test :which-key "test")
-  ;;                     "w" '(cargo-process-watch :which-key "watch"))
+     ["Dependency"
+      ("a" "Add" cargo-process-add)
+      ("R" "Remove" cargo-process-rm)]
+
+     ["Misc"
+      ("p" "Repeat" cargo-process-repeat)
+      ("d" "Open Doc" cargo-process-doc-open)
+      ("D" "Build Doc" cargo-process-doc)]
+     ])
 
   :hook
   (rust-ts-mode . rust-mode-setup)
