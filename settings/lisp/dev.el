@@ -132,11 +132,6 @@
   (:map prog-mode-map
         ("<return>" . smart-newline)))
 
-(use-package emacs
-  :hook
-  (text-mode . display-line-numbers-mode)
-  (prog-mode . display-line-numbers-mode))
-
 ;; ============================================================
 ;;  Tree-sitter
 ;; ============================================================
