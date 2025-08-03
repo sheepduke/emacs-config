@@ -176,6 +176,7 @@
 
     ;; Utilities.
     "uc" 'copy-buffer-content
+    "ud" 'delete-duplicate-lines
     "ue" 'erase-buffer
     "um" 'mc/edit-lines
     "ur" 'evil-show-registers
@@ -209,6 +210,7 @@
     "et" 'emms-stop
 
     ;; Help.
+    "hc" 'describe-char
     "hk" 'evil-collection-describe-bindings)
 
   (which-key-add-key-based-replacements
