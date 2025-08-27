@@ -130,6 +130,10 @@
   (evil-define-key 'insert 'global (kbd "C-n") nil)
   (evil-define-key 'insert 'global (kbd "C-p") nil)
 
+  ;; Redefine C-s to save.
+  (evil-define-key 'normal 'global (kbd "C-s") 'save-buffer)
+  (evil-define-key 'insert 'global (kbd "C-s") 'save-buffer)
+
   (setq display-line-numbers-type 'relative)
   
   (define-prefix-command 'evil-custom-global-leader-map)
