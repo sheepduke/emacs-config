@@ -18,6 +18,7 @@
   ;; Bookmark.
   ("C-x r b" . consult-bookmark)
 
+  ("C-;" . avy-goto-line)
   ("C-'" . avy-goto-char-timer)
   ("C-x *" . toggle-window-split)
 
@@ -133,8 +134,6 @@
   ;; Redefine C-s to save.
   (evil-define-key 'normal 'global (kbd "C-s") 'save-buffer)
   (evil-define-key 'insert 'global (kbd "C-s") 'save-buffer)
-
-  (setq display-line-numbers-type 'relative)
   
   (define-prefix-command 'evil-custom-global-leader-map)
   (keymap-set evil-motion-state-map "SPC" 'evil-custom-global-leader-map)
@@ -174,9 +173,10 @@
     "jb" 'consult-bookmark
     "jc" 'avy-goto-char-timer
     "jf" 'consult-fd
-    "jl" 'consult-line
+    "jl" 'avy-goto-line
     "jo" 'consult-outline
     "jr" 'consult-ripgrep
+    "js" 'consult-line
 
     ;; Utilities.
     "uc" 'copy-buffer-content
