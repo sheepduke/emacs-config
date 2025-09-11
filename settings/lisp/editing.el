@@ -84,6 +84,10 @@
   :custom
   (ispell-alternate-dictionary (expand-file-name (locate-user-data-file "hunspell/en_US.dic")))
 
+  :bind
+  (:map flyspell-mode-map
+        ("C-;" . nil))
+
   :config
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
