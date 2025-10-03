@@ -35,6 +35,7 @@
           "org-mode"
           "tools"
           "dev"
+          "dev-clojure"
           "dev-elixir"
           "dev-dotnet"
           "dev-haskell"

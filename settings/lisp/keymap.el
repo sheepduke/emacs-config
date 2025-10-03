@@ -104,6 +104,8 @@
 (dolist (keymap (list flyspell-mode-map))
   (define-key keymap (kbd "C-c") nil))
 
+(global-unset-key (kbd "C-c"))
+
 ;; ============================================================
 ;;  Evil
 ;; ============================================================
