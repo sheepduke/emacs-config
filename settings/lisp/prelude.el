@@ -95,6 +95,10 @@ A dedicated window can't be switched or modified by some commands."
 ;;  Editing
 ;; ============================================================
 
+(defun indent-whole-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
 (defun line-in-comment? ()
   "Return T if current line is commented."
   (nth 4 (syntax-ppss)))

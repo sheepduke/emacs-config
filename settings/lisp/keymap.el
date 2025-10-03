@@ -185,6 +185,7 @@
     "um" 'mc/edit-lines
     "ur" 'evil-show-registers
     "us" 'sort-lines
+    "u=" 'indent-whole-buffer
 
     ;; Set.
     "sa" 'auto-fill-mode
