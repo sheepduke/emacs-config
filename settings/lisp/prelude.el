@@ -80,6 +80,24 @@ A dedicated window can't be switched or modified by some commands."
      "Window '%s' is normal")
    (current-buffer)))
 
+(defun split-window-below-balanced ()
+  "Split window horizontally and balance it."
+  (interactive)
+  (split-window-below)
+  (balance-windows))
+
+(defun split-window-right-balanced ()
+  "Split window vertically and balance it."
+  (interactive)
+  (split-window-right)
+  (balance-windows))
+
+(defun delete-window-balanced ()
+  "Delete current window and balance all the windows."
+  (interactive)
+  (delete-window)
+  (balance-windows))
+
 ;; ============================================================
 ;;  Workspace
 ;; ============================================================

@@ -1,14 +1,4 @@
 ;; ============================================================
-;;  Lisp
-;; ============================================================
-
-(use-package paredit
-  :ensure
-  :delight ""
-  :bind (:map paredit-mode-map
-              ("C-c" . nil)))
-
-;; ============================================================
 ;;  Emacs Lisp
 ;; ============================================================
 
@@ -18,10 +8,7 @@
   :bind
   (:map emacs-lisp-mode-map
         ("C-c C-r" . eval-region)
-        ("C-c C-b" . eval-buffer))
-
-  :hook
-  (emacs-lisp-mode . paredit-mode))
+        ("C-c C-b" . eval-buffer)))
 
 (use-package nameless
   :ensure
@@ -64,10 +51,7 @@
 ;; ============================================================
 
 (use-package lisp-mode
-  :mode "\\.lisp\\'"
-  
-  :hook
-  (lisp-mode . paredit-mode))
+  :mode "\\.lisp\\'")
 
 (use-package sly
   :ensure
