@@ -110,13 +110,13 @@ output."
       (browse-url-default-browser url)))
 
   :bind (:map w3m-mode-map
-         ("C-<return>" . w3m-view-this-url-new-session)
-         ("C-M-h" . w3m-previous-buffer)
-         ("C-M-l" . w3m-next-buffer)
-         ("H" . w3m-view-previous-page)
-         ("L" . w3m-view-next-page)
-         ("h" . w3m-db-history)
-         ("q" . w3m-bury-all-buffers))
+              ("C-<return>" . w3m-view-this-url-new-session)
+              ("C-M-h" . w3m-previous-buffer)
+              ("C-M-l" . w3m-next-buffer)
+              ("H" . w3m-view-previous-page)
+              ("L" . w3m-view-next-page)
+              ("h" . w3m-db-history)
+              ("q" . w3m-bury-all-buffers))
 
   :custom
   (w3m-home-page "about://bookmark/")
@@ -315,17 +315,6 @@ output."
   :demand t
   :load-path "~/projects/silver-brain/external/emacs/"
 
-  :init
-  (defun silver-brain-item-custom-setup ()
-    (interactive)
-    (evil-define-key '(motion) silver-brain-item-mode-map
-      "," 'silver-brain-item-menu))
-
-  (defun silver-brain-list-custom-setup ()
-    (interactive)
-    (evil-define-key '(motion) silver-brain-list-mode-map
-      "," 'silver-brain-list-menu))
-
   :custom
   (silver-brain-store-name "main")
   (silver-brain-server-port 8080)
@@ -334,9 +323,7 @@ output."
   (("C-c b b" . 'silver-brain-list-items)
    ("C-c b o" . 'silver-brain-search-and-open-item)
    ("C-c b c" . 'silver-brain-create-and-open-item)
-   
-   :map silver-brain-list-mode-map
-   ("SPC" . 'silver-brain-list-menu)
-   
    :map silver-brain-item-mode-map
-   ("SPC" . 'silver-brain-item-menu)))
+   ("SPC" . 'silver-brain-item-menu)
+   :map silver-brain-list-mode-map
+   ("SPC" . 'silver-brain-list-menu)))

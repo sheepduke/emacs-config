@@ -16,7 +16,7 @@
 (load "~/.emacs.d/settings/lisp/init.el")
 
 ;; You may change it to any theme you favorite theme.
-(load-theme 'leuven t)
+(load-theme 'modus-operandi t)
 
 ;; Change the text scale.
 (global-text-scale-adjust 0)
