@@ -48,6 +48,7 @@
 
   :bind (:map org-mode-map
               ("C-'" . nil)
+              ("M-h" . nil)
               ("M-q" . org-fill-paragraph)
               ("C-c C-," . org-promote-subtree)
               ("C-c C-." . org-demote-subtree)
