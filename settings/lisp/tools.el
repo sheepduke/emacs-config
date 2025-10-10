@@ -330,13 +330,13 @@ output."
   (silver-brain-store-name "main")
   (silver-brain-server-port 8080)
 
-  :config
-  (evil-set-initial-state 'silver-brain-list-mode 'motion)
-  (evil-set-initial-state 'silver-brain-item-mode 'motion)
-
-  (evil-define-key nil evil-custom-global-leader-map
-    "ts" 'silver-brain-list-items
-    "tS" 'silver-brain-search-and-open-item)
-
-  :hook
-  (silver-brain-item-mode . silver-brain-item-custom-setup))
+  :bind
+  (("C-c b b" . 'silver-brain-list-items)
+   ("C-c b o" . 'silver-brain-search-and-open-item)
+   ("C-c b c" . 'silver-brain-create-and-open-item)
+   
+   :map silver-brain-list-mode-map
+   ("SPC" . 'silver-brain-list-menu)
+   
+   :map silver-brain-item-mode-map
+   ("SPC" . 'silver-brain-item-menu)))
