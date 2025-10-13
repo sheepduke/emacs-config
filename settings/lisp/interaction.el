@@ -178,6 +178,14 @@
         ;; Rename temp to target
         (persp-switch temp-name)
         (persp-rename target-name))))
+
+  :bind
+  (:map perspective-map
+        ("n" . 'persp-create)
+        ("h" . 'persp-next)
+        ("l" . 'persp-prev)
+        ("H" . 'persp-swap-previous)
+        ("L" . 'persp-swap-next))
   
   :custom
   (persp-mode-prefix-key (kbd "C-z"))
