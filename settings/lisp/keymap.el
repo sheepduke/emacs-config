@@ -53,8 +53,8 @@
   ;;  Editing
   ;; ============================================================
 
-  ("C-;" . avy-goto-line)
   ("C-'" . avy-goto-char-2)
+  ("C-;" . avy-goto-line)
   ("C-x *" . toggle-window-split)
 
   ("C-c SPC" . consult-register-store)
