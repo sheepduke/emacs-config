@@ -19,7 +19,11 @@
               ("<return>" . smart-newline)))
 
 (use-package powershell
-  :ensure)
+  :ensure
+
+  :bind
+  (:map powershell-mode-map
+        ("C-'" . nil)))
 
 (use-package systemd :ensure)
 
