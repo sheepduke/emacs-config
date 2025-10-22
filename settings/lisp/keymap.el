@@ -84,6 +84,8 @@
   ("C-x v" . 'magit)
   ("C-c o" . 'cfw:open-org-calendar)
   ("C-c O" . 'calendar)
+  ("C-c d" . 'sdcv-search-input+)
+  ("C-c D" . 'sdcv-search-input)
 
   ;; ============================================================
   ;;  Toggle
