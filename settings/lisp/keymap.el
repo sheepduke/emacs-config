@@ -57,8 +57,8 @@
   ("C-;" . avy-goto-line)
   ("C-x *" . toggle-window-split)
 
-  ("C-c SPC" . consult-register-store)
-  ("C-c C-SPC" . consult-register-load)
+  ("C-c C-SPC" . consult-register-store)
+  ("C-c SPC" . consult-register-load)
 
   ("C-x r e" . mc/edit-lines)
   ("M-u" . upcase-initials-region)

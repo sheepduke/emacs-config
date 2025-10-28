@@ -26,7 +26,7 @@
                              (project-find-dir "Find directory" ?d)
                              (project-find-regexp "Find regexp" ?g)
                              (project-eshell "Eshell" ?s)
-                             (magit-project-status "Magit" ?m)
+                             (magit-project-status "Magit" ?v)
                              (project-any-command "Other" ?o))))
 
 ;; ============================================================
