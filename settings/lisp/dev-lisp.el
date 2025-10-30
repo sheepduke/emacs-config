@@ -108,29 +108,3 @@
               ("C-c x" . lisp-export-symbol-and-defpackage)
               ("C-c X" . lisp-export-class-and-defpackage)
               ("C-c 5" . lisp-toggle-5am-run-test-when-defined)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                          Clojure                             ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package cider
-  :ensure
-  :mode "\\.clj\\'"
-  
-  :config
-  (defun cider-eval-buffer-content ()
-    "Eval buffer content without having to save it."
-    (interactive)
-    (cider-eval-region (point-min) (point-max)))
-
-  :hook (clojure-mode . cider-mode)
-
-  :bind ((:map cider-mode-map
-               ("C-c C-b" . cider-eval-buffer-content)
-               ("C-c C-r" . cider-eval-region)
-               ("C-c C-l" . cider-eval-defun-at-point)
-               ("C-c C-k" . cider-interrupt)
-               ("C-M-l" . cider-find-and-clear-repl-output))
-         (:map cider-repl-mode-map
-               ("C-M-l" . cider-repl-clear-buffer))))
