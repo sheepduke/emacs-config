@@ -1,57 +1,4 @@
-;; ============================================================
-;;  Emacs Lisp
-;; ============================================================
-
-(use-package emacs-lisp-mode
-  :mode "\\.el\\'"
-  
-  :bind
-  (:map emacs-lisp-mode-map
-        ("C-c C-r" . eval-region)
-        ("C-c C-b" . eval-buffer)))
-
-(use-package nameless
-  :ensure
-  :hook
-  (emacs-lisp-mode . nameless-mode)
-
-  :bind ((:map nameless-mode-map
-               ("C-c" . nil)
-               ("_" . nameless-insert-name-or-self-insert)))
-  
-  :custom
-  (nameless-prefix "@")
-  (nameless-private-prefix t))
-
-;; (use-package major-mode-hydra
-;;   :ensure
-;;   :config
-;;   (major-mode-hydra-define emacs-lisp-mode nil
-;;     ("Eval"
-;;      (("b" eval-buffer "buffer")
-;;       ("e" eval-defun "defun")
-;;       ("r" eval-region "region"))
-     
-;;      "REPL"
-;;      (("I" ielm "ielm"))
-     
-;;      "Test"
-;;      (("t" ert "prompt")
-;;       ("T" (ert t) "all")
-;;       ("F" (ert :failed) "failed"))
-     
-;;      "Describe"
-;;      (("d" describe-foo-at-point "thing-at-pt")
-;;       ("f" describe-function "function")
-;;       ("v" describe-variable "variable")
-;;       ("i" info-lookup-symbol "info lookup")))))
-
-;; ============================================================
-;;  Common Lisp
-;; ============================================================
-
-(use-package lisp-mode
-  :mode "\\.lisp\\'")
+(use-package lisp-mode)
 
 (use-package sly
   :ensure
@@ -84,8 +31,8 @@
   :bind
   (:map sly-mode-map
         ("C-c D" . sly-delete-package)
-        ("C-c C-k" . sly-interrupt)
-        ("C-c C-b" . sly-eval-buffer)
+        ("C-c C-b" . sly-interrupt)
+        ("C-c C-k" . sly-eval-buffer)
         ("C-c C-l" . sly-eval-defun)
         ("C-c C-p" . sly-eval-print-last-expression)
         ("C-c X" . sly-export-class)
