@@ -127,3 +127,11 @@ A dedicated window can't be switched or modified by some commands."
   (if (line-in-comment?)
       (default-indent-new-line)
     (newline-and-indent)))
+
+;; ============================================================
+;;  Mode
+;; ============================================================
+
+(defun disable-display-line-numbers-mode ()
+  (interactive)
+  (display-line-numbers-mode 0))

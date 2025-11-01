@@ -32,7 +32,10 @@ output."
   :unless (windows?)
 
   :config
-  (pdf-tools-install))
+  (pdf-tools-install)
+
+  :hook
+  (pdf-view-mode . 'disable-display-line-numbers-mode))
 
 ;; ============================================================
 ;;  Book Reader

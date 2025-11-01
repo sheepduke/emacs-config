@@ -22,8 +22,8 @@
 (add-to-list 'load-path "~/.emacs.d/settings/lisp/")
 
 ;; Load settings.
-;; Always load prelude first.
-(load "prelude")
+;; Always load function first.
+(load "function")
 
 ;; Load other modules - order does not matter.
 (mapcar (lambda (module) (load module))
