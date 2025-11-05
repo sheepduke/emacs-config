@@ -18,4 +18,5 @@
 
   :bind
   ((:map cider-mode-map
-         ("C-c C-c" . 'cider-eval-dwim))))
+         ("C-c C-c" . 'cider-eval-dwim)
+         ("C-c C-l" . 'cider-ns-reload))))
