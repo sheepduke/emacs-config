@@ -1,4 +1,7 @@
-(use-package clojure-mode)
+(use-package clojure-mode
+  :bind
+  (:map clojure-mode-map
+        ("C-c SPC" . nil)))
 
 (use-package cider
   :ensure
@@ -17,6 +20,6 @@
   :hook (clojure-mode . cider-mode)
 
   :bind
-  ((:map cider-mode-map
-         ("C-c C-c" . 'cider-eval-dwim)
-         ("C-c C-l" . 'cider-ns-reload))))
+  (:map cider-mode-map
+        ("C-c C-c" . 'cider-eval-dwim)
+        ("C-c C-l" . 'cider-ns-reload)))
