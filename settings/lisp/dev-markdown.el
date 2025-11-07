@@ -29,6 +29,11 @@
   ;; Use w3m to preview markdown.
   (markdown-live-preview-window-function 'markdown-live-preview-window-w3m)
 
+  :bind
+  (:map markdown-mode-map
+        ("M-n" . nil)
+        ("M-p" . nil))
+
   :hook ((markdown-mode . flyspell-mode)
          (markdown-mode . toggle-word-wrap)
          (markdown-mode . markdown-mode-setup)))
