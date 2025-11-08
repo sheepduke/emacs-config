@@ -7,10 +7,12 @@
   :ensure
   
   :config
-  (defun cider-eval-buffer-content ()
-    "Eval buffer content without having to save it."
-    (interactive)
-    (cider-eval-region (point-min) (point-max)))
+  (defun cider-remove-ns (&optional prompt)
+    (interactive "P")
+    (when-let ((ns (if prompt
+                       (string-remove-prefix "'" (read-from-minibuffer "Namespace: " (cider-get-ns-name)))
+                     (cider-get-ns-name))))
+      (cider-interactive-eval (format "(remove-ns '%s)" ns))))
 
   :custom
   (cider-auto-mode nil)
@@ -20,6 +22,10 @@
   :hook (clojure-mode . cider-mode)
 
   :bind
-  (:map cider-mode-map
-        ("C-c C-c" . 'cider-eval-dwim)
-        ("C-c C-l" . 'cider-ns-reload)))
+  ((:map cider-mode-map
+         ("C-c C-c" . 'cider-eval-dwim)
+         ("C-c C-l" . 'cider-ns-reload)
+         ("C-c C-n" . 'cider-ns-map))
+   (:map cider-ns-map
+         ("k" . 'cider-remove-ns)
+         ("L" . 'cider-load-all-project-ns))))
