@@ -31,4 +31,4 @@
          ("C-c C-n" . 'cider-ns-map))
    (:map cider-ns-map
          ("k" . 'cider-remove-ns)
-         ("L" . 'cider-load-all-project-ns))))
+         ("p" . 'cider-load-all-project-ns))))
