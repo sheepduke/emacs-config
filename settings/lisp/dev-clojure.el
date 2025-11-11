@@ -1,7 +1,10 @@
 (use-package clojure-mode
   :bind
   (:map clojure-mode-map
-        ("C-c SPC" . nil)))
+        ("C-c SPC" . nil))
+
+  :config
+  (put-clojure-indent 'match 'defun))
 
 (use-package cider
   :ensure
