@@ -1,57 +1,59 @@
+;;; Setup
+;;; 1. Install roswell
+;;; 2. Run roswell install
+;;; 3. Run (ql:quickload "clhs")
+;;; 4. Run (ql:quickload "cl-project")
+
 (use-package lisp-mode)
 
 (use-package sly
   :ensure
-  :after lisp-mode
+
+  :init
+  (defun sly-mrepl-clear-repl-remotely ()
+    (interactive)
+    (with-current-buffer (sly-mrepl--find-buffer (sly-current-connection))
+      (sly-mrepl-clear-repl)))
+
+  (defun sly-mrepl-clear-recent-output-remotely ()
+    (interactive)
+    (with-current-buffer (sly-mrepl--find-buffer (sly-current-connection))
+      (sly-mrepl-clear-recent-output)))
 
   :config
-  (defun sly-repl-clear-buffer-anywhere ()
-    "Clear Sly buffer from anywhere."
-    (interactive)
-    (dolist (buffer (cl-remove-if-not (lambda (buffer)
-                                        (string-prefix-p "*sly-mrepl for"
-                                                         (buffer-name buffer)))
-                                      (buffer-list)))
-      (with-current-buffer buffer
-        (sly-mrepl-clear-repl)
-        (goto-char (point-max)))))
-
-  ;; Set the location of HyperSpec.
-  (load "~/.roswell/lisp/quicklisp/clhs-use-local.el" t)
+  ;; Requires (ql:quickload "clhs")
+  (load "~/.roswell/lisp/quicklisp/dists/quicklisp/software/clhs-0.6.3/clhs-use-local.el")
 
   :custom
-  ;; set common lisp REPL
   (inferior-lisp-program "ros run")
-
-  ;; Use classic completion style.
-  (sly-complete-symbol-function 'sly-flex-completions)
-
-  :hook (lisp-mode . sly-editing-mode)
 
   :bind
   (:map sly-mode-map
-        ("C-c D" . sly-delete-package)
-        ("C-c C-b" . sly-interrupt)
-        ("C-c C-k" . sly-eval-buffer)
-        ("C-c C-l" . sly-eval-defun)
-        ("C-c C-p" . sly-eval-print-last-expression)
-        ("C-c X" . sly-export-class)
-        ("C-c C-d d" . hyperspec-lookup)
-        ("C-M-l" . sly-repl-clear-buffer-anywhere)))
+        ("C-c C-o" . 'sly-mrepl-clear-repl-remotely)
+        ("C-c C-e" . nil)
+        ("C-c C-e e" . 'sly-export-symbol-at-point)
+        ("C-c C-e c" . 'sly-export-class))
+  
+  (:map sly-editing-mode-map
+        ("C-c C-k" . 'sly-eval-buffer)
+        ("C-c C-l" . 'sly-compile-and-load-file)))
 
+(use-package sly-quicklisp
+  :ensure
+  :after sly)
+
+(use-package sly-asdf
+  :ensure
+  :after sly
+
+  :bind
+  (:map sly-mode-map
+        ("C-c C-a l" . 'sly-asdf-load-system)
+        ("C-c C-a t" . 'sly-asdf-test-system)))
 
 (use-package sly-repl-ansi-color
   :ensure
   :after sly
 
   :config
-  (push 'sly-repl-ansi-color sly-contribs))
-
-(use-package cl-helper
-  :after lisp-mode
-
-  :bind (:map lisp-mode-map
-              ("C-c i" . lisp-import-symbol-and-defpackage)
-              ("C-c x" . lisp-export-symbol-and-defpackage)
-              ("C-c X" . lisp-export-class-and-defpackage)
-              ("C-c 5" . lisp-toggle-5am-run-test-when-defined)))
+  (add-to-list 'sly-contribs 'sly-repl-ansi-color 'append))
