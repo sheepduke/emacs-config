@@ -22,7 +22,8 @@
 
   :config
   ;; Requires (ql:quickload "clhs")
-  (load "~/.roswell/lisp/quicklisp/dists/quicklisp/software/clhs-0.6.3/clhs-use-local.el")
+  (setq common-lisp-hyperspec-root
+        "file:///home/sheep/.roswell/lisp/quicklisp/dists/quicklisp/software/clhs-0.6.3/HyperSpec/")
 
   :custom
   (inferior-lisp-program "ros run")
