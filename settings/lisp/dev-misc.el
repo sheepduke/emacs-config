@@ -2,7 +2,7 @@
   :mode "\\.xml\\'"
 
   :bind
-  (:map nxml-mode
+  (:map nxml-mode-map
         ("M-h" . nil))
   
   :hook (nxml-mode . indent-guide-mode))
