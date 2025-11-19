@@ -352,5 +352,22 @@
 (use-package vertico-posframe
   :ensure
   :after vertico
+
   :config
+  ;; Otherwise it does not show up.
+  (require 'face-remap)
   (vertico-posframe-mode 1))
+
+(use-package transient-posframe
+  :ensure
+  :after transient
+
+  :config
+  (transient-posframe-mode 1))
+
+(use-package which-key-posframe
+  :ensure
+  :after which-key
+
+  :config
+  (which-key-posframe-mode 1))
