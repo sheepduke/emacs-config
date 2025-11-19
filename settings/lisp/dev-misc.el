@@ -1,5 +1,9 @@
 (use-package nxml-mode
   :mode "\\.xml\\'"
+
+  :bind
+  (:map nxml-mode
+        ("M-h" . nil))
   
   :hook (nxml-mode . indent-guide-mode))
 
