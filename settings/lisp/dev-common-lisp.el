@@ -37,7 +37,9 @@
   
   (:map sly-editing-mode-map
         ("C-c C-k" . 'sly-eval-buffer)
-        ("C-c C-l" . 'sly-compile-and-load-file)))
+        ("C-c C-l" . 'sly-compile-and-load-file)
+        ("M-n" . nil)
+        ("M-p" . nil)))
 
 (use-package sly-quicklisp
   :ensure
