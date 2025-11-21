@@ -111,7 +111,19 @@
   ("C-c e SPC" . emms-pause)
   ("C-c e s" . emms-stop)
   ("C-c e n" . emms-next)
-  ("C-c e p" . emms-previous))
+  ("C-c e p" . emms-previous)
+
+  ;; ============================================================
+  ;;  Major Modes
+  ;; ============================================================
+
+  ("C-c m e" . 'emacs-lisp-mode)
+  ("C-c m m" . 'markdown-mode)
+  ("C-c m o" . 'org-mode)
+  ("C-c m j" . 'js-json-mode)
+  ("C-c m x" . 'xml-mode)
+  ("C-c m f" . 'fundamental-mode)
+  )
 
 (which-key-add-key-based-replacements
   "C-c e" "EMMS"
