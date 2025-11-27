@@ -20,6 +20,7 @@
 
 (use-package conf-mode
   :bind (:map conf-mode-map
+              ("C-c SPC" . nil)
               ("<return>" . smart-newline)))
 
 (use-package powershell
