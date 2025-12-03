@@ -82,6 +82,7 @@
 ;; ============================================================
 
 (use-package nerd-icons-dired
+  :ensure
   :hook
   (dired-mode . nerd-icons-dired-mode))
 
