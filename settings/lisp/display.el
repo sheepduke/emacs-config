@@ -81,6 +81,7 @@
 ;;  Icons
 ;; ============================================================
 
+;; Requires nerd fonts symbols package to properly display it.
 (use-package nerd-icons-dired
   :ensure
   :hook
