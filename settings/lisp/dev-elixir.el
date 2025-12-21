@@ -1,17 +1,30 @@
+;;; Put the language server in the PATH to let it auto configure.
+;;; 
+;;; Git repository:
+;;; https://github.com/elixir-lsp/elixir-ls.git
+;;;
+;;; git clonne https://github.com/elixir-lsp/elixir-ls.git
+;;; cd elixir-ls
+;;; mix deps.get
+;;; MIX_ENV=prod mix compile
+;;; MIX_ENV=prod mix elixir_ls.release -o ~/software/elixir_ls
+;;; ln -s ~/software/elixir_ls/language_server.sh ~/bin/
+;;;
+;;; And run the language_server program first.
+
+
 (use-package elixir-mode
   :ensure
-  :mode "\\.ex\\'"
-  :mode "\\.exs\\'"
 
-  :config
-  (require 'eglot)
-  (when (windows?)
-    (add-to-list 'eglot-server-programs '(elixir-mode "language_server.bat")))
-
+  :preface
   (defun elixir-mode-setup-buffer ()
     (message "Starting eglot")
     (eglot-ensure)
     (add-hook 'before-save-hook 'eglot-format-buffer nil t))
+
+  :config
+  (when (windows?)
+    (add-to-list 'eglot-server-programs '(elixir-mode "language_server.bat")))
 
   (require 'inf-elixir)
 
@@ -20,13 +33,22 @@
 
 (use-package inf-elixir
   :ensure
-  :init
+
+  :after elixir-mode
+
+  :preface
   (defun inf-elixir-smart-repl ()
     (interactive)
     (save-selected-window
       (if (inf-elixir--find-project-root)
           (inf-elixir-project)
         (inf-elixir))))
+
+  (defun inf-elixir-send-dwim ()
+    (interactive)
+    (if (region-active-p)
+        (inf-elixir-send-region)
+      (inf-elixir-send-line)))
 
   (defun inf-elixir-run-unit-tests ()
     (interactive)
@@ -45,16 +67,8 @@
 
   :bind (:map elixir-mode-map
               ("C-c C-p" . inf-elixir-smart-repl)
-              ("C-c C-c" . inf-elixir-send-line)
-              ("C-c C-r" . inf-elixir-send-region)
-              ("C-c C-b" . inf-elixir-send-buffer)
+              ("C-c C-c" . inf-elixir-send-dwim)
+              ("C-c C-k" . inf-elixir-send-buffer)
               ("C-c C-l" . inf-elixir-reload-module)
               ("C-c C-u" . inf-elixir-run-unit-tests)
               ("C-M-l" . inf-elixir-clear-repl-buffer)))
-
-;; Eglot configuration.
-;; git clonne https://github.com/elixir-lsp/elixir-ls.git
-;; cd elixir-ls
-;; mix deps.get
-;; MIX_ENV=prod mix compile
-;; MIX_ENV=prod mix elixir_ls.release -o ~/.local/bin
