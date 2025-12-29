@@ -71,4 +71,4 @@
               ("C-c C-k" . inf-elixir-send-buffer)
               ("C-c C-l" . inf-elixir-reload-module)
               ("C-c C-u" . inf-elixir-run-unit-tests)
-              ("C-M-l" . inf-elixir-clear-repl-buffer)))
+              ("C-c C-o" . inf-elixir-clear-repl-buffer)))
