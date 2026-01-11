@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: mm
+# key: mm
+# --
+%__MODULE__{}
