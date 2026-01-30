@@ -37,6 +37,18 @@
   :after elixir-mode
 
   :preface
+  (defun elixir-add-prefix-@ ()
+    (interactive)
+    (save-excursion
+      (backward-sexp)
+      (insert "@")))
+
+  (defun elixir-add-prefix-% ()
+    (interactive)
+    (save-excursion
+      (backward-sexp)
+      (insert "%")))
+
   (defun inf-elixir-smart-repl ()
     (interactive)
     (save-selected-window
@@ -49,6 +61,10 @@
     (if (region-active-p)
         (inf-elixir-send-region)
       (inf-elixir-send-line)))
+
+  (defun inf-elixir-recompile-project ()
+    (interactive)
+    (inf-elixir--send "recompile"))
 
   (defun inf-elixir-run-unit-tests ()
     (interactive)
@@ -66,9 +82,12 @@
   (inf-elixir-base-command (if (windows?) "iex.bat" "iex"))
 
   :bind (:map elixir-mode-map
+              ("C-2" . elixir-add-prefix-@)
+              ("C-5" . elixir-add-prefix-%)
               ("C-c C-p" . inf-elixir-smart-repl)
               ("C-c C-c" . inf-elixir-send-dwim)
-              ("C-c C-k" . inf-elixir-send-buffer)
-              ("C-c C-l" . inf-elixir-reload-module)
+              ("C-c C-i" . inf-elixir-send-buffer)
+              ("C-c C-k" . inf-elixir-reload-module)
+              ("C-c C-l" . inf-elixir-recompile-project)
               ("C-c C-u" . inf-elixir-run-unit-tests)
               ("C-c C-o" . inf-elixir-clear-repl-buffer)))
