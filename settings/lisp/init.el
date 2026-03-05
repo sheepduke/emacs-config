@@ -41,6 +41,7 @@
           "dev-emacs-lisp"
           "dev-dotnet"
           "dev-haskell"
+          "dev-kotlin"
           "dev-markdown"
           "dev-misc"
           "dev-ocaml"

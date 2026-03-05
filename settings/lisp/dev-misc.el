@@ -45,10 +45,6 @@
   :mode "\\.mask\\'"
   :mode "\\.unmask\\'")
 
-(use-package kotlin-mode
-  :ensure
-  :mode "\\.kt\\'")
-
 (use-package dockerfile-mode
   :ensure
   :mode "Dockerfile")
