@@ -287,11 +287,8 @@ output."
 ;;  REST Client
 ;; ============================================================
 
-(use-package verb
-  :ensure
-
-  :hook
-  (org-mode . verb-mode))
+(use-package restclient
+  :ensure)
 
 ;; ============================================================
 ;;  Tramp
