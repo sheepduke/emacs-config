@@ -50,6 +50,10 @@
   :after (scala-ts-mode)
 
   :preface
+  (defun sbt-send-block (string)
+    (comint-send-string (sbt:buffer-name)
+                        (format "{%s}\n" string)))
+
   (defun sbt-send-string (string)
     (comint-send-string (sbt:buffer-name)
                         (format "%s\n" string)))
@@ -69,26 +73,26 @@
   (defun sbt-send-line-or-region ()
     (interactive)
     (if (region-active-p)
-        (call-interactively #'sbt-send-region)
+        (sbt-send-block (thing-at-point 'region))
       (sbt-send-string (thing-at-point 'line))))
 
   (defun sbt-send-buffer ()
     (interactive)
-    (sbt-send-region (point-min) (point-max)))
+    (sbt-send-block (thing-at-point 'buffer)))
 
   :bind (:map scala-ts-mode-map
               ;; SBT management.
               ("C-c C-z" . #'sbt-start)
               ("C-c C-x" . #'sbt-reload)
               ("C-c C-o" . #'sbt-clear)
-              ("C-c C-r" . #'sbt-run)
 
               ;; SBT actions.
               ("C-c C-k" . #'sbt-do-compile)
+              ("C-c C-r" . #'sbt-do-run)
               ("C-c C-t" . #'sbt-do-test)
 
               ;; REPL.
               ("C-c C-p" . #'sbt-enter-repl)
               ("C-c C-q" . #'sbt-leave-repl)
               ("C-c C-c" . #'sbt-send-line-or-region)
-              ("C-c C-c" . #'sbt-send-buffer)))
+              ("C-c C-b" . #'sbt-send-buffer)))
