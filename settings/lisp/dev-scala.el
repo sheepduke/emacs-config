@@ -1,3 +1,7 @@
+;; ============================================================
+;;  Scala Mode
+;; ============================================================
+
 (defun scala-smart-newline ()
   (interactive)
   (let ((comment-start (and (line-in-comment?)
@@ -31,41 +35,60 @@
 
 (use-package scala-repl
   :ensure
-  :commands (scala-repl-run
-             scala-repl-restart
-             scala-repl-eval-buffer
-             scala-repl-eval-region-or-line
-             scala-repl-eval-region
-             scala-repl-eval-current-line
-             scala-repl-eval-main-function))
+
+  ;; Now use sbt-mode instead.
+  ;; :hook
+  ;; (scala-ts-mode . scala-repl-minor-mode)
+  )
+
+;; ============================================================
+;;  SBT
+;; ============================================================
 
 (use-package sbt-mode
   :ensure
   :after (scala-ts-mode)
-  
+
+  :preface
+  (defun sbt-send-string (string)
+    (comint-send-string (sbt:buffer-name)
+                        (format "%s\n" string)))
+
+  (defun sbt-enter-repl ()
+    (interactive)
+    (sbt-send-string "console"))
+
+  (defun sbt-leave-repl ()
+    (interactive)
+    (sbt-send-string ":q"))
+
+  (defun sbt-reload ()
+    (interactive)
+    (sbt-send-string "reload"))
+
+  (defun sbt-send-line-or-region ()
+    (interactive)
+    (if (region-active-p)
+        (call-interactively #'sbt-send-region)
+      (sbt-send-string (thing-at-point 'line))))
+
+  (defun sbt-send-buffer ()
+    (interactive)
+    (sbt-send-region (point-min) (point-max)))
+
   :bind (:map scala-ts-mode-map
-              ("C-M-l" . sbt-clear)))
+              ;; SBT management.
+              ("C-c C-z" . #'sbt-start)
+              ("C-c C-x" . #'sbt-reload)
+              ("C-c C-o" . #'sbt-clear)
+              ("C-c C-r" . #'sbt-run)
 
-(use-package sbt-plus
-  :after (scala-ts-mode))
+              ;; SBT actions.
+              ("C-c C-k" . #'sbt-do-compile)
+              ("C-c C-t" . #'sbt-do-test)
 
-;; (major-mode-hydra-define scala-ts-mode nil
-;;   ("SBT"
-;;    (("s" sbt-start "start")
-;;     ("S" sbt-plus-do-restart "restart")
-;;     ("l" sbt-plus-do-reload "reload"))
-
-;;    "REPL"
-;;    (("e" sbt-plus-enter-repl "enter")
-;;     ("E" sbt-plus-leave-repl "leave"))
-
-;;    "Send"
-;;    (("c" sbt-plus-send-line-or-region "line/region")
-;;     ("b" sbt-plus-send-buffer "buffer"))
-
-;;    "Action"
-;;    (("k" sbt-do-compile "compile")
-;;     ("r" sbt-do-run "run")
-;;     ("t" sbt-do-test "test")
-;;     ("C" sbt-do-clean "clean")
-;;     ("g" sbt-plus-do-stage "stage"))))
+              ;; REPL.
+              ("C-c C-p" . #'sbt-enter-repl)
+              ("C-c C-q" . #'sbt-leave-repl)
+              ("C-c C-c" . #'sbt-send-line-or-region)
+              ("C-c C-c" . #'sbt-send-buffer)))
