@@ -6,13 +6,13 @@
 
 (use-package nameless
   :ensure
-  :hook
-  (emacs-lisp-mode . nameless-mode)
 
   :bind ((:map nameless-mode-map
                ("C-c" . nil)
-               ("_" . nameless-insert-name-or-self-insert)))
+               ("_" . #'nameless-insert-name-or-self-insert))
+         (:map emacs-lisp-mode-map
+               ("_" . #'nameless-insert-name-or-self-insert)))
   
   :custom
-  (nameless-prefix "@")
+  (nameless-prefix ":")
   (nameless-private-prefix t))
