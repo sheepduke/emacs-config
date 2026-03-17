@@ -51,10 +51,12 @@
 
   :preface
   (defun sbt-send-block (string)
-    (comint-send-string (sbt:buffer-name)
-                        (format "{%s}\n" string)))
+    (sbt-send-string (format "{%s}" string)))
 
   (defun sbt-send-string (string)
+    (when (windows?)
+      (comint-send-string (sbt:buffer-name) "\n"))
+
     (comint-send-string (sbt:buffer-name)
                         (format "%s\n" string)))
 
