@@ -127,6 +127,16 @@
   ("C-c m j" . 'js-json-mode)
   ("C-c m x" . 'xml-mode)
   ("C-c m f" . 'fundamental-mode)
+
+  ;; ============================================================
+  ;;  Eglot
+  ;; ============================================================
+  ("M-RET" . #'eglot-code-actions)
+  ("C-c l a" . #'eglot-code-actions)
+  ("C-c l r" . #'eglot-rename)
+  ("C-c l s" . #'eglot-shutdown)
+  ("C-c l S" . #'eglot-shutdown-all)
+  ("C-c l l" . #'eglot)
   )
 
 (which-key-add-key-based-replacements
