@@ -106,3 +106,10 @@
              (yas-minor-mode "" yasnippet)
              ;; Dired
              (dired-async-mode "" dired-async))))
+
+;; ============================================================
+;;  Theme
+;; ============================================================
+
+(use-package kaolin-themes
+  :ensure)
