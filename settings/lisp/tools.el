@@ -321,6 +321,7 @@ output."
   :custom
   (silver-brain-store-name "main")
   (silver-brain-server-port 8080)
+  (silver-brain-default-content-type "text/markdown")
 
   :bind
   (("C-c b b" . 'silver-brain-list-items)
