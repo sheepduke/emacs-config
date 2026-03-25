@@ -11,7 +11,7 @@
   (require 'gradle)
 
   :hook
-  (kotlin-mode-hook . kotlin-mode-setup)
+  (kotlin-mode . kotlin-mode-setup)
 
   :bind
   (:map kotlin-mode-map
