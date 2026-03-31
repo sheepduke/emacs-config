@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: td
+# key: td
+# --
+@typedoc """
+    $0
+"""

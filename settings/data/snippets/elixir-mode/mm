@@ -2,4 +2,4 @@
 # name: mm
 # key: mm
 # --
-%__MODULE__{}
+%__MODULE__{$0}

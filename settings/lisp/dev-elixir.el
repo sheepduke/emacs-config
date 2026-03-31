@@ -1,17 +1,9 @@
 ;;; Put the language server in the PATH to let it auto configure.
 ;;; 
 ;;; Git repository:
-;;; https://github.com/elixir-lsp/elixir-ls.git
+;;; https://github.com/elixir-lang/expert
 ;;;
-;;; git clonne https://github.com/elixir-lsp/elixir-ls.git
-;;; cd elixir-ls
-;;; mix deps.get
-;;; MIX_ENV=prod mix compile
-;;; MIX_ENV=prod mix elixir_ls.release -o ~/software/elixir_ls
-;;; ln -s ~/software/elixir_ls/language_server.sh ~/bin/
-;;;
-;;; And run the language_server program first.
-
+;;; Download the LSP server and put it under PATH.
 
 (use-package elixir-mode
   :ensure
@@ -26,7 +18,18 @@
   (when (windows?)
     (add-to-list 'eglot-server-programs '(elixir-mode "language_server.bat")))
 
+  (defun elixir-mode-project-root (dir)
+    "Configure Elixir LSP to recognize nested modules."
+    (when-let ((root (locate-dominating-file dir "mix.exs")))
+      (cons 'transient root)))
+
+  (with-eval-after-load 'project
+    (add-hook 'project-find-functions #'elixir-mode-project-root))
+
   (require 'inf-elixir)
+
+  ;; Use Expert as LSP server.
+  (add-to-list 'eglot-server-programs '((elixir-mode) "expert" "--stdio"))
 
   :hook
   (elixir-mode . elixir-mode-setup-buffer))
@@ -68,6 +71,7 @@
 
   (defun inf-elixir-run-unit-tests ()
     (interactive)
+    (inf-elixir-send-buffer)
     (inf-elixir--send "ExUnit.run()\n"))
 
   (defun inf-elixir-clear-repl-buffer ()
@@ -86,7 +90,7 @@
               ("C-5" . elixir-add-prefix-%)
               ("C-c C-p" . inf-elixir-smart-repl)
               ("C-c C-c" . inf-elixir-send-dwim)
-              ("C-c C-i" . inf-elixir-send-buffer)
+              ("C-c C-b" . inf-elixir-send-buffer)
               ("C-c C-k" . inf-elixir-reload-module)
               ("C-c C-l" . inf-elixir-recompile-project)
               ("C-c C-u" . inf-elixir-run-unit-tests)
