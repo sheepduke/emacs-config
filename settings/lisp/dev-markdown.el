@@ -38,6 +38,11 @@
          (markdown-mode . toggle-word-wrap)
          (markdown-mode . markdown-mode-setup)))
 
+(use-package markdown-indent-mode
+  :ensure
+
+  :hook ((markdown-mode . markdown-indent-mode)))
+
 
 (use-package poly-markdown
   :ensure
