@@ -49,7 +49,7 @@
           "dev-ruby"
           "dev-rust"
           "dev-scala"
-          "dev-web"
+          "dev-typescript"
           "email"))
 
 ;; Start Emacs server.
