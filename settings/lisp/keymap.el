@@ -133,6 +133,7 @@
   ;; ============================================================
   ("M-RET" . #'eglot-code-actions)
   ("C-c l a" . #'eglot-code-actions)
+  ("C-c l f" . #'eglot-format-buffer)
   ("C-c l r" . #'eglot-rename)
   ("C-c l s" . #'eglot-shutdown)
   ("C-c l S" . #'eglot-shutdown-all)
