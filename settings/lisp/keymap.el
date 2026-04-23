@@ -127,6 +127,8 @@
   ("C-c m j" . 'js-json-mode)
   ("C-c m x" . 'xml-mode)
   ("C-c m f" . 'fundamental-mode)
+  ("C-c m v" . 'vterm)
+  ("C-c m s" . 'eshell)
 
   ;; ============================================================
   ;;  Eglot
