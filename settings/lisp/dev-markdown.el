@@ -6,7 +6,8 @@
   
   :config
   (defun markdown-mode-setup ()
-    (add-hook 'after-save-hook 'markdown-live-preview-w3m-reload))
+    (add-hook 'after-save-hook 'markdown-live-preview-w3m-reload)
+    (setup-ispell-strip-flags-completion-function))
 
   (defun markdown-live-preview-window-w3m (file)
     "Use w3m to preview Markdown buffer."

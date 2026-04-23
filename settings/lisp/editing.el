@@ -88,8 +88,35 @@
   (:map flyspell-mode-map
         ("C-;" . nil))
 
+  :hook
+  (text-mode . 'setup-ispell-strip-flags-completion-at-point-functions)
+
   :config
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+
+(use-package ispell
+  :preface
+  (defun ispell-strip-flags-completion-at-point ()
+    (let ((res (ispell-completion-at-point)))
+      (when res
+        (pcase-let ((`(,beg ,end ,cands . ,props) res))
+          (when (listp cands)
+            (setq cands
+                  (mapcar (lambda (cand)
+                            (if-let ((pos (string-match "/" cand)))
+                                (substring cand 0 pos)
+                              cand))
+                          cands)))
+          (append (list beg end cands) props)))))
+
+  (defun setup-ispell-strip-flags-completion-function ()
+    (setq completion-at-point-functions
+          (cons #'ispell-strip-flags-completion-at-point
+                (remove #'ispell-completion-at-point completion-at-point-functions))))
+
+  (defun setup-only-ispell-strip-flags-completion-function ()
+    (setq-local completion-at-point-functions
+                '(ispell-strip-flags-completion-at-point))))
 
 ;;; Windows specific settings.
 (use-package flyspell
