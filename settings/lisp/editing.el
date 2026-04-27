@@ -69,10 +69,7 @@
 (use-package indent-guide
   :ensure
   :demand t
-  :delight ""
-  
-  :hook
-  (prog-mode . indent-guide-mode))
+  :delight "")
 
 ;; ============================================================
 ;;  Spell Checking
