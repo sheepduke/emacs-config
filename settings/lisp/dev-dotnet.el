@@ -30,12 +30,14 @@
 
   :bind
   (:map fsharp-mode-map
-        ("C-c" . #'major-mode-hydra)
         ("<return>" . #'fsharp-smart-newline)
         ("M-<return>" . #'eglot-code-actions)
         ("C-<tab>" . #'fsharp-add-indent)
         ("<backtab>" . #'indent-for-tab-command)
-        ("C-M-l" . #'fsharp-clear-repl-buffer))
+        ("C-c C-p" . #'run-fsharp)
+        ("C-c C-o" . #'fsharp-clear-repl-buffer)
+        ("C-c C-c" . #'fsharp-eval-phrase)
+        ("C-c C-k" . #'fsharp-load-buffer-file))
 
   :hook
   (fsharp-mode . fsharp-setup))
