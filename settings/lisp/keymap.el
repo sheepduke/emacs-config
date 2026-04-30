@@ -133,13 +133,14 @@
   ;; ============================================================
   ;;  Eglot
   ;; ============================================================
-  ("M-RET" . #'eglot-code-actions)
-  ("C-c l a" . #'eglot-code-actions)
-  ("C-c l f" . #'eglot-format-buffer)
-  ("C-c l r" . #'eglot-rename)
+  ("C-c l l" . #'eglot)
   ("C-c l s" . #'eglot-shutdown)
   ("C-c l S" . #'eglot-shutdown-all)
-  ("C-c l l" . #'eglot)
+  ("C-c l a" . #'eglot-code-actions)
+  ("M-RET" . #'eglot-code-actions)
+  ("C-c l f" . #'eglot-format-buffer)
+  ("C-c l r" . #'eglot-rename)
+  ("C-c l h" . #'eglot-inlay-hints-mode)
   )
 
 (which-key-add-key-based-replacements

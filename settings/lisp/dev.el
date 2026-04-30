@@ -14,11 +14,13 @@
 
 (use-package project
   :init
+  (defun project-get-root-dir ()
+    (project-root (project-current t)))
+
   (defun project-open-root-dir ()
     "Open the root directory of the current project in Dired."
     (interactive)
-    (let ((root (project-root (project-current t))))
-      (dired root)))
+    (dired (project-root (project-current t))))
 
   :custom
   (project-switch-commands '((project-find-file "Find file" ?f)

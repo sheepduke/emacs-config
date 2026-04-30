@@ -22,6 +22,11 @@
           (fsharp-send-buffer))
       (error "No '%s' file found" fsharp-repl-init-filename))))
 
+(defun fsharp-reload-project ()
+  (interactive)
+  (fsharp-send-snippet (format "#r \"fsproj:%s\""
+                               (fsharp-mode/find-sln-or-fsproj (project-get-root-dir)))))
+
 (defun fsharp-send-buffer ()
   "Send the buffer to REPL."
   (interactive)
