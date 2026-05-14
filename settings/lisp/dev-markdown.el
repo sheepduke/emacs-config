@@ -57,4 +57,4 @@
   :ensure
 
   :hook
-  ((markdown-mode-hook . markdown-indent-mode)))
+  ((markdown-mode . markdown-indent-mode)))
