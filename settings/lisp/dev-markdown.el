@@ -52,3 +52,9 @@
 
   :bind (:map markdown-mode-map
               ("C-c =" . markdown-toc-generate-or-refresh-toc)))
+
+(use-package markdown-indent-mode
+  :ensure
+
+  :hook
+  ((markdown-mode-hook . markdown-indent-mode)))
