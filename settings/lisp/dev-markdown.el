@@ -33,7 +33,9 @@
   :bind
   (:map markdown-mode-map
         ("M-n" . nil)
-        ("M-p" . nil))
+        ("M-p" . nil)
+        ("C-c C-," . #'markdown-promote)
+        ("C-c C-." . #'markdown-demote))
 
   :hook ((markdown-mode . flyspell-mode)
          (markdown-mode . toggle-word-wrap)
