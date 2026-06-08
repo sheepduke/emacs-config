@@ -36,6 +36,7 @@
         ("C-c C-p" . #'run-fsharp)
         ("C-c C-o" . #'fsharp-clear-repl-buffer)
         ("C-c C-c" . #'fsharp-eval-phrase)
+        ("C-c C-b" . #'fsharp-send-buffer)
         ("C-c C-k" . #'fsharp-load-buffer-file)
         ("C-c C-l" . #'fsharp-reload-project))
 

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: am
+# name: am_abstract-member
 # key: am
 # --
 abstract member $0

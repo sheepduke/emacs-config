@@ -74,7 +74,7 @@
 
   (when (and (display-graphic-p) (linux?))
     (set-font 'latin "FiraCode Nerd Font Mono" "DejaVu Sans Mono")
-    (set-font 'han "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
+    ;; (set-font 'han "文泉驿等宽微米黑" "WenQuanYi Micro Hei")
     (set-font 'emoji "Noto Color Emoji")))
 
 ;; ============================================================

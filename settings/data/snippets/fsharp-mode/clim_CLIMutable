@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: CLIMutable
+# key: clim
+# --
+[<CLIMutable>]
+type $0

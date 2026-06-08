@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ns_namespace
+# key: ns
+# --
+namespace $0
