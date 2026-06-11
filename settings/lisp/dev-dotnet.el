@@ -35,7 +35,7 @@
         ("C-c C-p" . #'run-fsharp)
         ("C-c C-o" . #'fsharp-clear-repl-buffer)
         ("C-c C-e" . #'fsharp-eval-phrase)
-        ("C-c C-c" . #'fsharp-send-line)
+        ("C-c C-c" . #'fsharp-send-region-or-line)
         ("C-c C-b" . #'fsharp-send-buffer)
         ("C-c C-k" . #'fsharp-load-buffer-file)
         ("C-c C-l" . #'fsharp-reload-project))
@@ -43,18 +43,14 @@
   :hook
   (fsharp-mode . fsharp-setup))
 
-;; (major-mode-hydra-define fsharp-mode nil
-;;   ("Eval"
-;;    (("e" fsharp-eval-phrase)
-;;     ("c" fsharp-send-region-or-line "region/line")
-;;     ("b" fsharp-send-buffer "buffer"))
-;;    "Compile"
-;;    (("K" compile "compile")
-;;     ("k" recompile "recompile"))
-;;    "REPL"
-;;    (("p" run-fsharp-restart)
-;;     ("l" fsharp-load-buffer-file "load file")
-;;     ("L" fsharp-reload-repl "clear"))))
+(use-package dotnet
+  :ensure
+  :after fsharp-mode
+
+  :bind
+  (:map fsharp-mode-map
+        ("C-c C-r" . #'dotnet-run)
+        ("C-c C-t" . #'dotnet-test)))
 
 ;; ============================================================
 ;;  C#
