@@ -86,4 +86,12 @@
       (end-of-line))
      (t (smart-newline)))))
 
+(defun fsharp-inc-indent ()
+  (interactive)
+  (insert (make-string fsharp-indent-offset ?\s)))
+
+(defun fsharp-dec-indent ()
+  (interactive)
+  (backward-delete-char fsharp-indent-offset))
+
 (provide 'fsharp-plus)

@@ -22,7 +22,6 @@
   :init (require 'fsharp-plus)
 
   :custom
-  (fsharp-indent-offset 2)
   (inferior-fsharp-program
    (concat "dotnet fsi --compilertool:"
            (expand-file-name "~/.dotnet/tools/.store/depman-fsproj/0.2.11/depman-fsproj/0.2.11/tools/net9.0/any")
@@ -31,11 +30,12 @@
   :bind
   (:map fsharp-mode-map
         ("<return>" . #'fsharp-smart-newline)
-        ("C-<tab>" . #'fsharp-add-indent)
-        ("<backtab>" . #'indent-for-tab-command)
+        ("<C-tab>" . #'fsharp-dec-indent)
+        ("<backtab>" . #'fsharp-inc-indent)
         ("C-c C-p" . #'run-fsharp)
         ("C-c C-o" . #'fsharp-clear-repl-buffer)
-        ("C-c C-c" . #'fsharp-eval-phrase)
+        ("C-c C-e" . #'fsharp-eval-phrase)
+        ("C-c C-c" . #'fsharp-send-line)
         ("C-c C-b" . #'fsharp-send-buffer)
         ("C-c C-k" . #'fsharp-load-buffer-file)
         ("C-c C-l" . #'fsharp-reload-project))
