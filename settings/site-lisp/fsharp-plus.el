@@ -1,31 +1,8 @@
-(defvar fsharp-repl-init-filename "Repl.fsx"
-  "The name of REPL init file.")
+(require 'xml)
 
-(defun run-fsharp-restart ()
-  "Run fsi and restart it if needed."
-  (interactive)
-  (when (and (get-buffer inferior-fsharp-buffer-name)
-             (comint-check-proc inferior-fsharp-buffer-name)) 
-    (fsharp-send-snippet "#quit"))
-
-  (while (comint-check-proc inferior-fsharp-buffer-name)
-    (sleep-for 0.1))
-  
-  (fsharp-run-process-if-needed inferior-fsharp-program))
-
-(defun fsharp-reload-repl ()
-  (interactive)
-  (let ((dir (locate-dominating-file "." fsharp-repl-init-filename)))
-    (if dir
-        (with-temp-buffer
-          (insert-file-contents (expand-file-name fsharp-repl-init-filename dir))
-          (fsharp-send-buffer))
-      (error "No '%s' file found" fsharp-repl-init-filename))))
-
-(defun fsharp-reload-project ()
-  (interactive)
-  (fsharp-send-snippet (format "#r \"fsproj:%s\""
-                               (fsharp-mode/find-sln-or-fsproj (project-get-root-dir)))))
+;; ============================================================
+;;  Evaluation
+;; ============================================================
 
 (defun fsharp-send-buffer ()
   "Send the buffer to REPL."
@@ -61,6 +38,10 @@
   (with-current-buffer inferior-fsharp-buffer-name
     (comint-clear-buffer)))
 
+;; ============================================================
+;;  Editing
+;; ============================================================
+
 (defun fsharp-smart-newline ()
   (interactive)
   (let* ((line-content (thing-at-point 'line))
@@ -93,5 +74,49 @@
 (defun fsharp-dec-indent ()
   (interactive)
   (backward-delete-char fsharp-indent-offset))
+
+;; ============================================================
+;;  Fsproj Loading
+;; ============================================================
+
+(defun fsproj--map-elements (fsproj element f)
+  (with-temp-buffer
+    (insert-file-contents fsproj)
+    (let* ((project (car (xml-parse-region (point-min) (point-max))))
+           (groups (xml-get-children project 'ItemGroup))
+           (result ""))
+      (dolist (group groups result)
+        (dolist (node (xml-get-children group element))
+          (setq result
+                (concat result (funcall f node) "\n")))))))
+
+(defun fsharp-fsproj-packages (fsproj)
+  (fsproj--map-elements
+   fsproj
+   'PackageReference
+   (lambda (node)
+     (format "#r \"nuget:%s\""
+             (xml-get-attribute node 'Include)))))
+
+(defun fsharp-fsproj-files (fsproj)
+  (let ((base-dir (file-name-directory (expand-file-name fsproj))))
+    (fsproj--map-elements
+     fsproj
+     'Compile
+     (lambda (node)
+       (format "#load \"%s\""
+               (expand-file-name
+                (xml-get-attribute node 'Include)
+                base-dir))))))
+
+(defun fsharp-fsproj-load-packages ()
+  (interactive)
+  (let ((fsproj (fsharp-mode/find-sln-or-fsproj (project-get-root-dir))))
+    (fsharp-send-snippet (fsharp-fsproj-packages fsproj))))
+
+(defun fsharp-fsproj-load-files ()
+  (interactive)
+  (let ((fsproj (fsharp-mode/find-sln-or-fsproj (project-get-root-dir))))
+    (fsharp-send-snippet (fsharp-fsproj-files fsproj))))
 
 (provide 'fsharp-plus)

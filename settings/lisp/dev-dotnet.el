@@ -22,10 +22,7 @@
   :init (require 'fsharp-plus)
 
   :custom
-  (inferior-fsharp-program
-   (concat "dotnet fsi --compilertool:"
-           (expand-file-name "~/.dotnet/tools/.store/depman-fsproj/0.2.11/depman-fsproj/0.2.11/tools/net9.0/any")
-           " --readline-"))
+  (inferior-fsharp-program "dotnet fsi --readline-")
 
   :bind
   (:map fsharp-mode-map
@@ -38,7 +35,8 @@
         ("C-c C-c" . #'fsharp-send-region-or-line)
         ("C-c C-b" . #'fsharp-send-buffer)
         ("C-c C-k" . #'fsharp-load-buffer-file)
-        ("C-c C-l" . #'fsharp-reload-project))
+        ("C-c C-n" . #'fsharp-fsproj-load-packages)
+        ("C-c C-l" . #'fsharp-fsproj-load-files))
 
   :hook
   (fsharp-mode . fsharp-setup))
