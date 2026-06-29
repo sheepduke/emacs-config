@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: i_interface
+# key: i
+# --
+interface $0

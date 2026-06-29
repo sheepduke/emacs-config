@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: iw_interface-with
+# key: iw
+# --
+interface $0 with
