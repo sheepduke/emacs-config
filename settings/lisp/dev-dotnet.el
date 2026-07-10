@@ -27,8 +27,8 @@
   :bind
   (:map fsharp-mode-map
         ("<return>" . #'fsharp-smart-newline)
-        ("<C-tab>" . #'fsharp-dec-indent)
-        ("<backtab>" . #'fsharp-inc-indent)
+        ("<backtab>" . #'fsharp-dec-indent)
+        ("<C-tab>" . #'fsharp-inc-indent)
         ("C-c C-p" . #'run-fsharp)
         ("C-c C-o" . #'fsharp-clear-repl-buffer)
         ("C-c C-e" . #'fsharp-eval-phrase)

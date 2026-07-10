@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: er_EmbeddedResource
+# key: er
+# --
+<EmbeddedResource Include="$0" />
