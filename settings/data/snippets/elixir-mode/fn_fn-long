@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: fn
+# name: fn_fn-long
 # key: fn
 # --
 fn $1 ->

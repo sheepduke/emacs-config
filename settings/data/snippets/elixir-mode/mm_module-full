@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: mm
+# name: mm_module-full
 # key: mm
 # --
 %__MODULE__{$0}

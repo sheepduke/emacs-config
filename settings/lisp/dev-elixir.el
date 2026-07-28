@@ -15,8 +15,15 @@
     (add-hook 'before-save-hook 'eglot-format-buffer nil t))
 
   :config
-  (when (windows?)
-    (add-to-list 'eglot-server-programs '(elixir-mode "language_server.bat")))
+  (let ((elixir-lsp-program (if (windows?)
+                                (list (expand-file-name
+                                       "~/bin/elixir-ls/language_server.bat"))
+                              '("expert" "--stdio"))))
+    (add-to-list 'eglot-server-programs (append '(elixir-mode) elixir-lsp-program)))
+
+  ;; (setq eglot-server-programs
+  ;;       (remove '(elixir-mode "language_server.bat")
+  ;;               eglot-server-programs))
 
   (defun elixir-mode-project-root (dir)
     "Configure Elixir LSP to recognize nested modules."
@@ -27,9 +34,6 @@
     (add-hook 'project-find-functions #'elixir-mode-project-root))
 
   (require 'inf-elixir)
-
-  ;; Use Expert as LSP server.
-  (add-to-list 'eglot-server-programs '((elixir-mode) "expert" "--stdio"))
 
   :hook
   (elixir-mode . elixir-mode-setup-buffer))
