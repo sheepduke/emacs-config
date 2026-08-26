@@ -37,7 +37,7 @@
   ;;  Buffer
   ;; ============================================================
 
-  ("C-x b" . switch-to-buffer)
+  ("C-x b" . consult-buffer)
   ("C-x s" . persp-switch-to-scratch-buffer)
   ("C-x k" . kill-current-buffer)
   ("C-x C-k" . bury-buffer)

@@ -288,9 +288,11 @@
 (use-package consult
   :ensure
   :demand t
-  
-  :init
+
+  :config
   (setq register-preview-function #'consult-register-format)
+  (consult-customize consult-source-buffer :hidden t :default nil)
+  (add-to-list 'consult-buffer-sources persp-consult-source)
   
   :bind
   (;; Isearch integration
@@ -325,7 +327,7 @@
    ("C-h b" . embark-bindings)) ;; alternative for `describe-bindings'
   
   :init
-;; Optionally replace the key help with a completing-read interface
+  ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
 
   :config
@@ -344,30 +346,3 @@
   ;; auto-updating embark collect buffer
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
-
-;; ============================================================
-;;  Posframe
-;; ============================================================
-
-(use-package vertico-posframe
-  :ensure
-  :after vertico
-
-  :config
-  ;; Otherwise it does not show up.
-  (require 'face-remap)
-  (vertico-posframe-mode 1))
-
-(use-package transient-posframe
-  :ensure
-  :after transient
-
-  :config
-  (transient-posframe-mode 1))
-
-(use-package which-key-posframe
-  :ensure
-  :after which-key
-
-  :config
-  (which-key-posframe-mode 1))
