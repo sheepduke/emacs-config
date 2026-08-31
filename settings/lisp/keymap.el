@@ -64,16 +64,18 @@
   ("C-c C-SPC" . consult-register-store)
   ("C-c SPC" . consult-register-load)
 
-  ("C-x r e" . mc/edit-lines)
-  ("M-u" . upcase-initials-region)
-  ("M-q" . fill-paragraph)
-  ("M-y" . consult-yank-pop)
+  ("C-x r e" . #'mc/edit-lines)
+  ("M-u" . #'upcase-initials-region)
+  ("M-q" . #'fill-paragraph)
+  ("M-y" . #'consult-yank-pop)
 
-  ("C-S-s" . consult-line)
-  ("C-M-r" . replace-string)
-  ("C-M-S-r" . replace-regexp)
-  ("C-M-/" . consult-yasnippet)
-  ("C-M-q" . fill-region)
+  ("C-S-s" . #'consult-line)
+  ("C-M-r" . #'replace-string)
+  ("C-M-S-r" . #'replace-regexp)
+  ("C-M-/" . #'consult-yasnippet)
+  ("C-M-q" . #'fill-region)
+
+  ("C-c i k" . #'consult-keep-lines)
   
   ;; ("C-c j o" . org-journal-open-current-journal-file)
   ;; ("C-c j s" . org-journal-search)
@@ -85,50 +87,50 @@
   ;;  Tools
   ;; ============================================================
 
-  ("C-x v" . 'magit)
-  ("C-c o" . 'calfw-org-open-calendar)
-  ("C-c O" . 'calendar)
-  ("C-c d" . 'sdcv-search-input+)
-  ("C-c D" . 'sdcv-search-input)
+  ("C-x v" . #'magit)
+  ("C-c o" . #'calfw-org-open-calendar)
+  ("C-c O" . #'calendar)
+  ("C-c d" . #'sdcv-search-input+)
+  ("C-c D" . #'sdcv-search-input)
 
   ;; ============================================================
   ;;  Toggle
   ;; ============================================================
 
-  ("C-c t a" . 'auto-fill-mode)
-  ("C-c t d" . 'toggle-debug-on-error)
-  ("C-c t l" . 'display-line-numbers-mode)
-  ("C-c t t" . 'toggle-truncate-lines)
-  ("C-c t v" . 'visual-line-mode)
-  ("C-c t w" . 'toggle-word-wrap)
+  ("C-c t a" . #'auto-fill-mode)
+  ("C-c t d" . #'toggle-debug-on-error)
+  ("C-c t l" . #'display-line-numbers-mode)
+  ("C-c t t" . #'toggle-truncate-lines)
+  ("C-c t v" . #'visual-line-mode)
+  ("C-c t w" . #'toggle-word-wrap)
 
   ;; ============================================================
   ;;  Music
   ;; ============================================================
 
-  ("C-c e g" . emms-play-directory)
-  ("C-c e e" . emms-play-file)
-  ("C-c e d" . emms-play-dired)
-  ("C-c e f" . emms-shuffle)
-  ("C-c e l" . emms-playlist-mode-go)
-  ("C-c e x" . emms-start)
-  ("C-c e SPC" . emms-pause)
-  ("C-c e s" . emms-stop)
-  ("C-c e n" . emms-next)
-  ("C-c e p" . emms-previous)
+  ("C-c e g" . #'emms-play-directory)
+  ("C-c e e" . #'emms-play-file)
+  ("C-c e d" . #'emms-play-dired)
+  ("C-c e f" . #'emms-shuffle)
+  ("C-c e l" . #'emms-playlist-mode-go)
+  ("C-c e x" . #'emms-start)
+  ("C-c e SPC" . #'emms-pause)
+  ("C-c e s" . #'emms-stop)
+  ("C-c e n" . #'emms-next)
+  ("C-c e p" . #'emms-previous)
 
   ;; ============================================================
   ;;  Major Modes
   ;; ============================================================
 
-  ("C-c m e" . 'emacs-lisp-mode)
-  ("C-c m m" . 'markdown-mode)
-  ("C-c m o" . 'org-mode)
-  ("C-c m j" . 'js-json-mode)
-  ("C-c m x" . 'xml-mode)
-  ("C-c m f" . 'fundamental-mode)
-  ("C-c m v" . 'vterm)
-  ("C-c m s" . 'eshell)
+  ("C-c m e" . #'emacs-lisp-mode)
+  ("C-c m m" . #'markdown-mode)
+  ("C-c m o" . #'org-mode)
+  ("C-c m j" . #'js-json-mode)
+  ("C-c m x" . #'xml-mode)
+  ("C-c m f" . #'fundamental-mode)
+  ("C-c m v" . #'vterm)
+  ("C-c m s" . #'eshell)
 
   ;; ============================================================
   ;;  Eglot
@@ -144,6 +146,10 @@
   )
 
 (which-key-add-key-based-replacements
-  "C-c e" "EMMS"
-  "C-c g" "Goto"
-  "C-c t" "Toggle")
+  "C-c b" "buffer"
+  "C-c e" "emms"
+  "C-c i" "editing"
+  "C-c g" "goto"
+  "C-c l" "eglot"
+  "C-c m" "major modes"
+  "C-c t" "toggle")
