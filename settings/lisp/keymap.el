@@ -76,6 +76,8 @@
   ("C-M-q" . #'fill-region)
 
   ("C-c i k" . #'consult-keep-lines)
+  ("C-c i s" . #'sort-lines)
+  ("C-c i d" . #'delete-duplicate-lines)
   
   ;; ("C-c j o" . org-journal-open-current-journal-file)
   ;; ("C-c j s" . org-journal-search)
