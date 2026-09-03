@@ -4,13 +4,16 @@
 
 (use-package dired
   :init
-  (defvar dired-open-programs
-    '(("mp4" . "mpv")
-      ("m4v" . "mpv")
-      ("mkv" . "mpv")
-      ("avi" . "mpv")
-      ("jpg" . "feh")
-      ("png" . "feh")))
+  (defvar dired-open-programs)
+  (setq dired-open-programs
+    '(("mp4" "mpv")
+      ("m4v" "mpv")
+      ("mkv" "mpv")
+      ("mov" "mpv")
+      ("avi" "mpv")
+      ("jpg" "feh")
+      ("png" "feh")
+      ("zip" "7z" "x")))
 
   (defun dired-get-program (file)
     (let* ((ext (file-name-extension file)))
@@ -21,7 +24,7 @@
     (let* ((file (dired-get-file-for-visit))
            (cmd (or (dired-get-program file)
                     (error "No program defined"))))
-      (start-process "dired-open" nil cmd file)))
+      (apply #'start-process (append '("dired-open" nil) cmd (list file)))))
 
   :custom
   ;; Human readable size display

@@ -110,7 +110,7 @@
   ;;  Music
   ;; ============================================================
 
-  ("C-c e g" . #'emms-play-directory)
+  ("C-c e g" . #'emms-play-directory-tree)
   ("C-c e e" . #'emms-play-file)
   ("C-c e d" . #'emms-play-dired)
   ("C-c e f" . #'emms-shuffle)
