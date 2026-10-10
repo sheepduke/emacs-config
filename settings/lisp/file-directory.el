@@ -13,7 +13,9 @@
       ("avi" "mpv")
       ("jpg" "feh")
       ("png" "feh")
-      ("zip" "7z" "x")))
+      ("zip" "7z" "x")
+      ("doc" "libreoffice")
+      ("docx" "libreoffice")))
 
   (defun dired-get-program (file)
     (let* ((ext (file-name-extension file)))
