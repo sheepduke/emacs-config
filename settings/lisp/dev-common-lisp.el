@@ -36,7 +36,9 @@
         ("C-c C-e c" . 'sly-export-class))
   
   (:map sly-editing-mode-map
-        ("C-c C-k" . 'sly-eval-buffer)
+        ("C-c C-c" . 'sly-eval-defun)
+        ("C-c C-k" . 'sly-compile-defun)
+        ("C-c C-b" . 'sly-eval-buffer)
         ("C-c C-l" . 'sly-compile-and-load-file)
         ("M-n" . nil)
         ("M-p" . nil)))

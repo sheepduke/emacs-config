@@ -4,11 +4,10 @@
 # --
 (defsystem $1
   :version "0.1.0"
-  :description "$2"
+  :description ""
   :license "MIT"
-  :author "YUE Daian"
-  :depends-on (:alexandria
-               :serapeum)
+  :author ""
+  :depends-on (:alexandria)
   :serial t
   :components ((:module "src"
                 :components
@@ -18,13 +17,12 @@
 (defsystem $1-tests
   :version "0.1.0"
   :license "MIT"
-  :author "YUE Daian"
-  :depends-on (:$1
-               :fiveam)
+  :author ""
+  :depends-on (:fiveam)
   :serial t
   :components ((:module "test"
                 :components
                 ((:file "$1"))))
   :perform (test-op (op c)
                     (symbol-call :fiveam :run!
-                                 (find-symbol* :$1 :$1-tests))))
+                                 (find-symbol* :silver-brain :$1-tests))))

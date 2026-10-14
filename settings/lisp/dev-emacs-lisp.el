@@ -2,7 +2,7 @@
   :bind
   (:map emacs-lisp-mode-map
         ("C-c C-r" . eval-region)
-        ("C-c C-k" . eval-buffer)))
+        ("C-c C-b" . eval-buffer)))
 
 (use-package nameless
   :ensure
