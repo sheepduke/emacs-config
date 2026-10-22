@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: msr
+# key: msr_mito-slot-reader
+# --
+($1 :col-type :text
+    :initarg :$1
+    :reader $1)

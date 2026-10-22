@@ -7,7 +7,13 @@
   :description ""
   :license "MIT"
   :author ""
-  :depends-on (:alexandria)
+  :depends-on (:alexandria
+               :str
+               :local-time
+               :arrow-macros
+               :frugal-uuid
+               :filepaths
+               :mito)
   :serial t
   :components ((:module "src"
                 :components
@@ -25,4 +31,4 @@
                 ((:file "$1"))))
   :perform (test-op (op c)
                     (symbol-call :fiveam :run!
-                                 (find-symbol* :silver-brain :$1-tests))))
+                                 (find-symbol* :$1 :$1-tests))))

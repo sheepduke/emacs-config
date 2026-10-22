@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: mc_mito-class
+# key: mc
+# --
+(defclass $1 ()
+  ($0)
+  (:metaclass mito:dao-table-class)
+  (:auto-pk nil)
+  (:record-timestamps nil))

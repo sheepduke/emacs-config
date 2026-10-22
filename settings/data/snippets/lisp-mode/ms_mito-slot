@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ms_mito-slot
+# key: ms
+# --
+($1 :col-type :text
+    :initarg :$1
+    :accessor $1)
