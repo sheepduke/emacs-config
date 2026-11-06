@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: asb_assert-slot-boundp
+# key: asb
+# --
+(assert (slot-boundp obj $0))

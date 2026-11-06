@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: dc_defclass
+# key: dc
+# --
+(defclass $1 ()
+  ($0))
+
+(defmethod initialize-instance :after ((obj $1) &key)
+  )

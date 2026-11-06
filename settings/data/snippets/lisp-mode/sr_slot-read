@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: sr_slot-readonly
+# key: sr
+# --
+($1 :type $2
+    :initarg :$1
+    :initform nil
+    :reader $1
+    :documentation "$3")$0

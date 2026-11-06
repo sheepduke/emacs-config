@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: dmii_defmethod-initialize-instance
+# key: dmii
+# --
+(defmethod initialize-instance :after ((obj $1) &key)
+  $0)

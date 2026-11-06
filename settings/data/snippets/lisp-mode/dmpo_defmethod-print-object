@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: dmpo_defmethod-print-object
+# key: dmpo
+# --
+(defmethod print-object ((obj $1) stream)
+  (format stream "$0"))

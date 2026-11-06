@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: defsystem
-# key: defsystem
+# name: dsys_defsystem
+# key: dsys
 # --
 (defsystem $1
   :version "0.1.0"
