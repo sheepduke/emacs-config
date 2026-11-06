@@ -30,16 +30,18 @@
 
   :bind
   (:map sly-mode-map
+        ("C-c i" . nil)
+   :map sly-editing-mode-map
         ("C-c C-o" . 'sly-mrepl-clear-repl-remotely)
-        ("C-c C-e" . nil)
-        ("C-c C-e e" . 'sly-export-symbol-at-point)
-        ("C-c C-e c" . 'sly-export-class))
-  
-  (:map sly-editing-mode-map
         ("C-c C-c" . 'sly-eval-defun)
-        ("C-c C-k" . 'sly-compile-defun)
+        ("C-c C-k" . 'sly-compile-and-load-file)
         ("C-c C-b" . 'sly-eval-buffer)
-        ("C-c C-l" . 'sly-compile-and-load-file)
+        ("C-c l c" . 'sly-export-class)
+        ("C-c l e" . 'sly-export-symbol-at-point)
+        ("C-c l i". 'sly-import-symbol-at-point)
+        ("C-c l r" . 'sly-reset)
+        ("C-c l R" . 'sly-restart-inferior-lisp)
+        ("C-c l p" . 'sly-delete-package)
         ("M-n" . nil)
         ("M-p" . nil)))
 
